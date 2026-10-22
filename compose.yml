@@ -1,0 +1,6 @@
+
+services:
+  tividy:
+    build: .
+    container_name: tividy
+    command: ./tividy
