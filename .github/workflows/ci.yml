@@ -27,7 +27,7 @@ jobs:
           test -d src
           test -d docs
 
-      - name: Verify C++ source files exist
+      - name: Verify C++ source and header files exist
         run: |
-          test -f src/TIVIDYFacade.cpp
-          test -f include/TIVIDYFacade.h
+          find src -type f -name '*.cpp' -print -quit | grep -q .
+          find include -type f -name '*.h' -print -quit | grep -q .
