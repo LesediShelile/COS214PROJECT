@@ -1,4 +1,5 @@
 
+
 name: TIVIDY CI
 
 on:
@@ -27,7 +28,21 @@ jobs:
           test -d src
           test -d docs
 
-      - name: Verify C++ source and header files exist
+      - name: Verify C++ source and header files
+        shell: bash
         run: |
-          find src -type f -name '*.cpp' -print -quit | grep -q .
-          find include -type f -name '*.h' -print -quit | grep -q .
+          # Ensure src contains only .cpp files
+          if find src -type f ! -name '*.cpp' | grep -q .; then
+            echo "Error: src contains files that are not .cpp files"
+            find src -type f ! -name '*.cpp'
+            exit 1
+          fi
+
+          # Ensure include contains only .h files
+          if find include -type f ! -name '*.h' | grep -q .; then
+            echo "Error: include contains files that are not .h files"
+            find include -type f ! -name '*.h'
+            exit 1
+          fi
+
+          echo "All source and header structure checks passed."
