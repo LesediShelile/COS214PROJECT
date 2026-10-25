@@ -1,4 +1,4 @@
-#include "TIVIDYFacade.h"
+#include "../include/TIVIDYFacade.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -6,18 +6,18 @@
 #include <sstream>
 #include <stdexcept>
 
-#include "ApprovalHandler.h"
-#include "ApprovalRequest.h"
-#include "AssignCommand.h"
-#include "CompleteCommand.h"
-#include "EngineRouter.h"
-#include "EventPublisher.h"
-#include "Participant.h"
-#include "RejectCommand.h"
-#include "WorkItem.h"
-#include "WorkItemIterator.h"
-#include "WorkflowDefinition.h"
-#include "WorkflowInstance.h"
+#include "../include/ApprovalHandler.h"
+#include "../include/ApprovalRequest.h"
+#include "../include/AssignCommand.h"
+#include "../include/CompleteCommand.h"
+#include "../include/EngineRouter.h"
+#include "../include/EventPublisher.h"
+#include "../include/Participant.h"
+#include "../include/RejectCommand.h"
+#include "../include/WorkItem.h"
+#include "../include/WorkItemIterator.h"
+#include "../include/WorkflowDefinition.h"
+#include "../include/WorkflowInstance.h"
 
 //Kiara Ajodhaparsadh
 

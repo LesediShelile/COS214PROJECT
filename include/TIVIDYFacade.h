@@ -5,11 +5,11 @@
 #include <string>
 #include <vector>
 
-#include "ApprovalStatus.h"
-#include "AuditLogger.h"
-#include "CommandInvoker.h"
-#include "MetricsCollector.h"
-#include "Notifier.h"
+#include "../include/ApprovalStatus.h"
+#include "../include/AuditLogger.h"
+#include "../include/CommandInvoker.h"
+#include "../include/MetricsCollector.h"
+#include "../include/Notifier.h"
 
 class WorkflowDefinition;
 class WorkflowInstance;
