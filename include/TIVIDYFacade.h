@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "../include/ApprovalStatus.h"
+#include "../include/ApprovalRequest.h"
 #include "../include/AuditLogger.h"
 #include "../include/CommandInvoker.h"
 #include "../include/MetricsCollector.h"
