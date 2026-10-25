@@ -11,23 +11,23 @@ class Task;
 /**
  * Memento: a private snapshot of a Task taken before a command changes it.
  *
- * Only Task (the Originator) can create a memento or read its contents,
- * so nothing else can see or alter a task's internals. The memento owns its
- * TaskState, which must be a clone (see Task::createMemento). The assignee is a
- * non-owning pointer. A WorkflowCommand (the Caretaker) owns the memento.
+ * Only Task (originator) can create a memento or read its contents,
+ * so nothing else can see or alter a task's internal state. The memento owns its
+ * TaskState, which must be a clone. 
+   The assignee - non-owning pointer. WorkflowCommand (Caretaker) owns the memento.
  */
 class TaskMemento {
 public:
     ~TaskMemento();
 
-    // Owns a TaskState, so copying is disabled.
+    // Owns a TaskState, so no copying
     TaskMemento(const TaskMemento&) = delete;
     TaskMemento& operator=(const TaskMemento&) = delete;
 
 private:
     friend class Task;
 
-    // Takes ownership of 'state'.
+    //ownership of 'state'.
     TaskMemento(TaskState* state, Participant* assignee,
                 const std::map<std::string, std::string>& data);
 

@@ -16,7 +16,7 @@ void CommandInvoker::executeCommand(WorkflowCommand* command) {
     std::unique_ptr<WorkflowCommand> owned(command);
     owned->execute();            // if this throws, 'owned' deletes the command
     history.push(owned.get());   // history now owns it...
-    owned.release();             // ...so stop owning it here
+    owned.release();             // ...so stop owning it here - only 1 owner
 }
 
 bool CommandInvoker::undoLast() {
