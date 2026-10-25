@@ -18,27 +18,30 @@ class Participant;
 class EngineRouter;
 
 /**
- * Facade: the single entry point to TIVIDY.
+ * Facade: Our single entry point to TIVIDY
  *
  * Clients register definitions and participants, create and start instances,
- * and act on work items by ID. They never touch the builders, iterators,
+ * and act on work items by ID. 
+ * They never touch the builders, iterators,
  * commands, listeners or approval chain directly.
  *
- * Ownership (composition in the class diagram): the facade owns every
- * definition, instance, participant and router registered with or created by
- * it. Listeners (audit, notifier, metrics) are members, and instances only hold
+ * The facade owns every definition, instance, participant and router registered 
+ * with or created by it. 
+ * Listeners (audit, notifier, metrics) are members, and instances only hold
  * non-owning pointers to them.
  */
+
+
 class TIVIDYFacade {
 public:
     TIVIDYFacade();
     ~TIVIDYFacade();
 
-    // Owns resources, so copying is disabled (C++11).
+    
     TIVIDYFacade(const TIVIDYFacade&) = delete;
     TIVIDYFacade& operator=(const TIVIDYFacade&) = delete;
 
-    // Setup. The facade takes ownership on success; if an exception is thrown,
+    // The facade takes ownership on success; if an exception is thrown,
     // the caller keeps ownership of the pointer.
     void registerDefinition(WorkflowDefinition* definition);
     void registerParticipant(Participant* participant);
