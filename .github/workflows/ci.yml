@@ -1,0 +1,33 @@
+
+name: TIVIDY CI
+
+on:
+  push:
+    branches:
+      - main
+      - development
+      - chore/ci-pipeline
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  repository-check:
+    name: Check repository structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify project directories
+        run: |
+          test -d include
+          test -d src
+          test -d docs
+
+      - name: Verify C++ source files exist
+        run: |
+          test -f src/TIVIDYFacade.cpp
+          test -f include/TIVIDYFacade.h
