@@ -8,6 +8,8 @@ using namespace std;
 
 //classes
 #include "WorkflowBuilder.h"
+#include "Stub.h"
+#include "DefnitionBuilder.h"
 
 //forward declarations
 class Role;
@@ -20,7 +22,7 @@ class EmergencyAdmissionDirector
 {
     public:
         EmergencyAdmissionDirector();
-        void construct(ExternalConnector* ambulance, ExternalConnector* records, EventPublisher publisher);
+        void construct(string name, ExternalConnector* ambulance, ExternalConnector* records, EventPublisher* publisher, bool includeCleaner);
         vector<Role*> getRoles();
         ~EmergencyAdmissionDirector();
     private:

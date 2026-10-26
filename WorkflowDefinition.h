@@ -5,6 +5,8 @@
 #include <string>
 using namespace std;
 
+#include "Stub.h"
+
 //Forward declarations
 class WorkItem;
 class ApprovalHandler;
@@ -19,11 +21,13 @@ class WorkflowDefinition
         string getName();
         int getVersion();
         void setRoot(WorkItem* root);
-        ApprovalHandler* setApprovalChain();
+        ApprovalHandler* getApprovalChain();
+        void setApprovalChain(ApprovalHandler* approvalChain);
         void freeze();
         bool isFrozen();
-        WorkInstance* createInstance(string instanceID);
-        virtual ~WorkflowDefinition();
+        WorkflowInstance* createInstance(string instanceID);
+        void requestApproval(ApprovalRequest* request);
+        virtual ~WorkflowDefinition() = default;
     private:
         WorkItem* root;
         string name;

@@ -17,19 +17,19 @@
     class WorkflowBuilder
     {
         public:
-            WorkflowBuilder();
+            WorkflowBuilder() = default;
             virtual WorkflowDefinition* getResult() = 0;
             virtual void reset(string, int) = 0;
             virtual void beginSequentialStage(string) = 0;
             virtual void beginParallelStage(string) = 0;
             virtual void addTask(string, Role*, AssignmentStrategy*) = 0;
-            virtual void addExternalTask(string, ExternalConnector*, string) = 0;
+            virtual void addExternalTask(string, Role*, AssignmentStrategy*, ExternalConnector*, string) = 0;
             virtual void withAudit(EventPublisher*) = 0;
             virtual void withValidation(vector<string>) = 0;
             virtual void withPriority(int) = 0;
-            virtual void setApprovalChain(ApprovalHandler*) = 0;
-            virtual void endStage();
-            virtual ~WorkflowBuilder();
+            virtual void endStage() = 0;
+            virtual void commitPendingTask() = 0;
+            virtual ~WorkflowBuilder() = default;
     };
 
     #endif //WORKFLOWBUILDER
