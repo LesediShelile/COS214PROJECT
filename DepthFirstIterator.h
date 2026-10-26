@@ -6,6 +6,7 @@
 using namespace std;
 
 #include "WorkItemIterator.h"
+#include "Stub.h" // <--- delete and replace
 
 class DepthFirstIterator : public WorkItemIterator
 {

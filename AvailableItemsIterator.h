@@ -6,6 +6,7 @@ using namespace std;
 
 #include "WorkItemIterator.h"
 #include "DepthFirstIterator.h"
+#include "Stub.h"
 
 class AvailableItemsIterator : public WorkItemIterator
 {
@@ -16,7 +17,7 @@ class AvailableItemsIterator : public WorkItemIterator
         bool isDone() override;
         WorkItem* current() override;
         void skipToAvailable();
-        virtual ~AvailableItemsIterator();
+        virtual ~AvailableItemsIterator(){};
     private:
         DepthFirstIterator* inner;
 };
