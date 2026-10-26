@@ -7,7 +7,7 @@
 #define EXTERNALTASK_H
 
 #include <string>
-
+#include "Task.h"
 class WorkItem;
 class Role;
 class AssignmentStrategy;
@@ -19,7 +19,7 @@ class ExternalConnector;
  *
  * Uses an ExternalConnector to execute requests and store responses.
  */
-class ExternalTask {
+class ExternalTask :public Task{
 private:
     /** Connector used to communicate with the external service. */
     ExternalConnector* connector;
