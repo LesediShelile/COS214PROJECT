@@ -5,20 +5,17 @@
 
 class APIOne;
 
-
 class AdapterOne : public ExternalConnector {
+private:
+    APIOne* adaptee;
 
-    private:
-        APIOne* adaptee;
-    
-    public:
+public:
+    AdapterOne(APIOne* adaptee);
 
-        void request(std::string operation, std::string payload);
-        std::string getName();
-        ~AdapterOne();
-    
+    void request(std::string* operation, std::string* payload) override;
+    std::string getName() override;
 
+    ~AdapterOne();
 };
 
-
-#endif //ADAPTERONE_H
+#endif // ADAPTERONE_H
