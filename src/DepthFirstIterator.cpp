@@ -1,37 +1,65 @@
 #include "DepthFirstIterator.h"
-#include "WorkItem.h"
+using namespace std;
 
 DepthFirstIterator::DepthFirstIterator(WorkItem* root)
-    : root_(root), currentItem_(0) {
+{
+    this->root = root;
+    this->currentItem = nullptr;
     first();
 }
 
-DepthFirstIterator::~DepthFirstIterator() {}
+void DepthFirstIterator::first()
+{
+    //clear stack first
+    while(!this->pending.empty())
+    {
+        this->pending.pop();
+    }
+    
+    if(this->root != nullptr)
+    {
+        this->pending.push(this->root);
+        this->currentItem = this->root;
+    }
+    else
+    {
+        this->currentItem = nullptr;
+    }
 
-void DepthFirstIterator::first() {
-    while (!pending_.empty()) pending_.pop();
-    currentItem_ = 0;
-    if (root_) pending_.push(root_);
-    advance();
 }
 
-void DepthFirstIterator::next() { advance(); }
-
-bool DepthFirstIterator::isDone() const { return currentItem_ == 0; }
-
-WorkItem* DepthFirstIterator::current() const { return currentItem_; }
-
-void DepthFirstIterator::advance() {
-    if (pending_.empty()) {
-        currentItem_ = 0;
+void DepthFirstIterator::next()
+{
+    if(this->pending.empty())
+    {
         return;
     }
-    currentItem_ = pending_.top();
-    pending_.pop();
-    // push children in reverse so the first child is visited first
-    std::vector<WorkItem*> kids = currentItem_->getChildren();
-    for (std::vector<WorkItem*>::reverse_iterator it = kids.rbegin();
-         it != kids.rend(); ++it) {
-        pending_.push(*it);
+
+    WorkItem* current = this->pending.top();
+    this->pending.pop();
+
+    vector<WorkItem*> children = current->getChildren();
+    int size = children.size();
+
+    for(int i = size - 1; i >= 0; i--)
+    {
+        this->pending.push(children[i]);
     }
+
+    if(!this->pending.empty())
+        this->currentItem = this->pending.top();
+    else
+        this->currentItem = nullptr;
+
+}
+
+bool DepthFirstIterator::isDone()
+{
+    return this->pending.empty();
+
+}
+
+WorkItem* DepthFirstIterator::current()
+{
+    return this->currentItem;
 }

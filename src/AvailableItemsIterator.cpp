@@ -1,30 +1,36 @@
 #include "AvailableItemsIterator.h"
-#include "WorkItem.h"
 
-AvailableItemsIterator::AvailableItemsIterator(WorkItem* root) : inner_(root) {
-    skipToAvailable();
+AvailableItemsIterator::AvailableItemsIterator(WorkItem* root)
+{
+    this->inner = new DepthFirstIterator(root);
 }
 
-AvailableItemsIterator::~AvailableItemsIterator() {}
-
-void AvailableItemsIterator::first() {
-    inner_.first();
-    skipToAvailable();
-}
-
-void AvailableItemsIterator::next() {
-    inner_.next();
-    skipToAvailable();
-}
-
-bool AvailableItemsIterator::isDone() const { return inner_.isDone(); }
-
-WorkItem* AvailableItemsIterator::current() const { return inner_.current(); }
-
-void AvailableItemsIterator::skipToAvailable() {
-    while (!inner_.isDone()) {
-        WorkItem* item = inner_.current();
-        if (item->isAvailable() && item->getChildren().empty()) return;
-        inner_.next();
+void AvailableItemsIterator::skipToAvailable()
+{
+    while(!inner->isDone() && !inner->current()->isAvailable())
+    {
+        inner->next();
     }
+}
+
+void AvailableItemsIterator::first()
+{
+    this->inner->first();
+    skipToAvailable();
+}
+
+void AvailableItemsIterator::next()
+{
+    this->inner->next();
+    skipToAvailable();
+}
+
+bool AvailableItemsIterator::isDone()
+{
+    return this->inner->isDone();
+}
+
+WorkItem* AvailableItemsIterator::current()
+{
+    return this->inner->current();
 }
