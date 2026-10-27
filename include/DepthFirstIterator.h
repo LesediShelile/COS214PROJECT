@@ -1,28 +1,26 @@
-#ifndef DEPTHFIRSTITERATOR_H
-#define DEPTHFIRSTITERATOR_H
+#ifndef DEPTH_FIRST_ITERATOR_H
+#define DEPTH_FIRST_ITERATOR_H
 
+#include <iostream>
 #include <stack>
+using namespace std;
+
 #include "WorkItemIterator.h"
+#include "Stub.h" // <--- delete and replace
 
-/**
- * @brief Concrete iterator: pre-order depth-first walk (parent before its
- *        children, children in the order they were added).
- */
-class DepthFirstIterator : public WorkItemIterator {
-public:
-    explicit DepthFirstIterator(WorkItem* root);
-    virtual ~DepthFirstIterator();
-
-    virtual void first();
-    virtual void next();
-    virtual bool isDone() const;
-    virtual WorkItem* current() const;
-
-private:
-    WorkItem* root_;
-    std::stack<WorkItem*> pending_;
-    WorkItem* currentItem_;
-    void advance();
+class DepthFirstIterator : public WorkItemIterator
+{
+    public:
+        DepthFirstIterator(WorkItem* root);
+        void first() override;
+        void next() override;
+        bool isDone() override;
+        WorkItem* current() override;
+        virtual ~DepthFirstIterator();
+    private:
+        WorkItem* root;
+        stack<WorkItem*> pending;
+        WorkItem* currentItem;
 };
 
-#endif
+#endif //DEPTH_FIRST_ITERATOR_H
