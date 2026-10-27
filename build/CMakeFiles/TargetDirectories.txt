@@ -1,0 +1,5 @@
+/home/lesedi/2026/COS214PROJECT/build/CMakeFiles/tividy_core.dir
+/home/lesedi/2026/COS214PROJECT/build/CMakeFiles/tividy_tests.dir
+/home/lesedi/2026/COS214PROJECT/build/CMakeFiles/test.dir
+/home/lesedi/2026/COS214PROJECT/build/CMakeFiles/edit_cache.dir
+/home/lesedi/2026/COS214PROJECT/build/CMakeFiles/rebuild_cache.dir
