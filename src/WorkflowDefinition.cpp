@@ -1,78 +1,71 @@
-#include "../include/WorkflowDefinition.h"
+#include "WorkflowDefinition.h"
 
-#include <stdexcept>
-
-#include "../include/ApprovalHandler.h"
-#include "../include/WorkItem.h"
-#include "../include/WorkflowInstance.h"
-
-WorkflowDefinition::WorkflowDefinition(const std::string& name, int version)
-    : name(name), version(version), root(nullptr), approvalChain(nullptr), frozen(false) {}
-
-WorkflowDefinition::~WorkflowDefinition() {
-    delete root;
-
-    // Deleting the head also deletes the rest of the chain, because each ApprovalHandler owns its successor.
-  
-    delete approvalChain;
+WorkflowDefinition::WorkflowDefinition(string name, int version)
+{
+    this->name = name;
+    this->version = version;
+    this->approvalChain = nullptr;
+    this->root = nullptr;
+    this->frozen = false;
 }
 
-std::string WorkflowDefinition::getName() const {
-    return name;
+WorkItem* WorkflowDefinition::getRoot()
+{
+    return this->root;
 }
 
-int WorkflowDefinition::getVersion() const {
-    return version;
-}
-
-WorkItem* WorkflowDefinition::getRoot() const {
-    return root;
-}
-
-ApprovalHandler* WorkflowDefinition::getApprovalChain() const {
-    return approvalChain;
-}
-
-void WorkflowDefinition::setRoot(WorkItem* newRoot) {
-    if (frozen) {
-        throw std::logic_error("setRoot: definition '" + name + "' is frozen");
-    }
-    if (newRoot == nullptr) {
-        throw std::invalid_argument("setRoot: root is null");
-    }
-    if (newRoot == root) {
+void WorkflowDefinition::start()
+{
+    if(this->root == nullptr)
+    {
+        std::cout << "Error: Workflow definition is empty\n";
         return;
     }
-    delete root;
-    root = newRoot;
+    freeze();
+    std::cout << "workflow definition: " << this->name <<  "v" << this->version << " started and frozen\n";
 }
 
-void WorkflowDefinition::setApprovalChain(ApprovalHandler* handler) {
-    if (frozen) {
-        throw std::logic_error("setApprovalChain: definition '" + name + "' is frozen");
-    }
-    if (handler == approvalChain) {
-        return;
-    }
-    delete approvalChain;
-    approvalChain = handler;
+string WorkflowDefinition::getName()
+{
+    return this->name;
 }
 
-void WorkflowDefinition::freeze() {
-    if (root == nullptr) {
-        throw std::logic_error("freeze: definition '" + name + "' has no root work item");
-    }
-    frozen = true;
+int WorkflowDefinition::getVersion()
+{
+    return this->version;
 }
 
-bool WorkflowDefinition::isFrozen() const {
-    return frozen;
+void WorkflowDefinition::setRoot(WorkItem* root)
+{
+    this->root = root;
 }
 
-WorkflowInstance* WorkflowDefinition::createInstance(const std::string& instanceID) {
-    if (!frozen) {
-        throw std::logic_error("createInstance: definition '" + name + "' must be frozen first");
-    }
-    // clones the tree (Prototype).
+ApprovalHandler* WorkflowDefinition::getApprovalChain()
+{
+    return this->approvalChain;
+}
+
+void WorkflowDefinition::setApprovalChain(ApprovalHandler* approvalChain)
+{
+    this->approvalChain = approvalChain;
+}
+
+void WorkflowDefinition::freeze()
+{
+    this->frozen = true;
+}
+
+bool WorkflowDefinition::isFrozen()
+{
+    return this->frozen;
+}
+
+WorkflowInstance* WorkflowDefinition::createInstance(string instanceID)
+{
     return new WorkflowInstance(instanceID, this);
+}
+
+void WorkflowDefinition::requestApproval(ApprovalRequest* request)
+{
+    this->approvalChain->handle(request);
 }
