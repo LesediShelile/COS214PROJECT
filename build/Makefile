@@ -152,6 +152,19 @@ tividy_tests/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tividy_tests.dir/build.make CMakeFiles/tividy_tests.dir/build
 .PHONY : tividy_tests/fast
 
+#=============================================================================
+# Target rules for targets named tividy_desktop
+
+# Build rule for target.
+tividy_desktop: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tividy_desktop
+.PHONY : tividy_desktop
+
+# fast build rule for target.
+tividy_desktop/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tividy_desktop.dir/build.make CMakeFiles/tividy_desktop.dir/build
+.PHONY : tividy_desktop/fast
+
 src/AvailableItemsIterator.o: src/AvailableItemsIterator.cpp.o
 .PHONY : src/AvailableItemsIterator.o
 
@@ -271,6 +284,30 @@ src/Stage.s: src/Stage.cpp.s
 src/Stage.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tividy_core.dir/build.make CMakeFiles/tividy_core.dir/src/Stage.cpp.s
 .PHONY : src/Stage.cpp.s
+
+src/TIVIDYDesktop.o: src/TIVIDYDesktop.cpp.o
+.PHONY : src/TIVIDYDesktop.o
+
+# target to build an object file
+src/TIVIDYDesktop.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tividy_desktop.dir/build.make CMakeFiles/tividy_desktop.dir/src/TIVIDYDesktop.cpp.o
+.PHONY : src/TIVIDYDesktop.cpp.o
+
+src/TIVIDYDesktop.i: src/TIVIDYDesktop.cpp.i
+.PHONY : src/TIVIDYDesktop.i
+
+# target to preprocess a source file
+src/TIVIDYDesktop.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tividy_desktop.dir/build.make CMakeFiles/tividy_desktop.dir/src/TIVIDYDesktop.cpp.i
+.PHONY : src/TIVIDYDesktop.cpp.i
+
+src/TIVIDYDesktop.s: src/TIVIDYDesktop.cpp.s
+.PHONY : src/TIVIDYDesktop.s
+
+# target to generate assembly for a file
+src/TIVIDYDesktop.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tividy_desktop.dir/build.make CMakeFiles/tividy_desktop.dir/src/TIVIDYDesktop.cpp.s
+.PHONY : src/TIVIDYDesktop.cpp.s
 
 src/Task.o: src/Task.cpp.o
 .PHONY : src/Task.o
@@ -426,6 +463,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... tividy_core"
+	@echo "... tividy_desktop"
 	@echo "... tividy_tests"
 	@echo "... src/AvailableItemsIterator.o"
 	@echo "... src/AvailableItemsIterator.i"
@@ -442,6 +480,9 @@ help:
 	@echo "... src/Stage.o"
 	@echo "... src/Stage.i"
 	@echo "... src/Stage.s"
+	@echo "... src/TIVIDYDesktop.o"
+	@echo "... src/TIVIDYDesktop.i"
+	@echo "... src/TIVIDYDesktop.s"
 	@echo "... src/Task.o"
 	@echo "... src/Task.i"
 	@echo "... src/Task.s"
