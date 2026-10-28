@@ -21,6 +21,7 @@
 #include "../include/EventPublisher.h"
 #include "../include/Participant.h"
 #include "../include/RejectCommand.h"
+#include "../include/StartCommand.h"
 #include "../include/WorkItem.h"
 #include "../include/WorkItemIterator.h"
 #include "../include/WorkflowDefinition.h"
@@ -292,3 +293,17 @@ Participant* TIVIDYFacade::findParticipant(const std::string& participantID) {
     }
     return found->second;
 }
+
+/**
+ * @brief Creates and executes a StartCommand for a work item.
+ * @param[in] instanceID Target workflow instance ID.
+ * @param[in] taskID Target task work item ID.
+ */
+void TIVIDYFacade::startTask(const std::string& instanceID, const std::string& taskID) {
+    WorkItem* item = findItem(instanceID, taskID);
+    invoker.executeCommand(new StartCommand(item));
+}
+
+/**
+  * @brief Creates and executes a CompleteCommand for a work item.
+  * @param[in] instanceID Target workflow instance ID.
