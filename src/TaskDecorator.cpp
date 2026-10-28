@@ -41,3 +41,5 @@ TaskMemento* TaskDecorator::createMemento() { return task_->createMemento(); }
 void TaskDecorator::restoreMemento(TaskMemento* m) { task_->restoreMemento(m); }
 
 WorkItem* TaskDecorator::getWrapped() const { return task_; }
+
+void TaskDecorator::setPublisher(EventPublisher* publisher) { task_->setPublisher(publisher); }
