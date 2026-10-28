@@ -36,6 +36,9 @@ public:
     virtual std::vector<WorkItem*> getChildren() const;
     virtual void activateChildren();
 
+    /** @brief Forwards the publisher to the wrapped item. */
+    virtual void setPublisher(EventPublisher* publisher);
+
     virtual TaskMemento* createMemento();
     virtual void restoreMemento(TaskMemento* memento);
 

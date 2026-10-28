@@ -35,6 +35,7 @@ std::string TaskDecorator::getStateName() const { return task_->getStateName(); 
 
 std::vector<WorkItem*> TaskDecorator::getChildren() const { return task_->getChildren(); }
 void TaskDecorator::activateChildren() { task_->activateChildren(); }
+void TaskDecorator::setPublisher(EventPublisher* p) { task_->setPublisher(p); }
 
 TaskMemento* TaskDecorator::createMemento() { return task_->createMemento(); }
 void TaskDecorator::restoreMemento(TaskMemento* m) { task_->restoreMemento(m); }
