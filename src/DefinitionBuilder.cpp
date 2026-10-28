@@ -49,7 +49,7 @@ void DefinitionBuilder::reset(string name, int version)
 
 void DefinitionBuilder::beginSequentialStage(string name)
 {
-    Stage* newStage = new SequentialStage(name, to_string(this->nextItemID));
+    Stage* newStage = new SequentialStage(to_string(this->nextItemID), name);
     this->nextItemID++;
 
     if(this->stageStack.empty())
@@ -62,7 +62,7 @@ void DefinitionBuilder::beginSequentialStage(string name)
     }
     else
     {
-        this->stageStack.top()->addChild(newStage);
+        this->stageStack.top()->add(newStage);
     }
     this->stageStack.push(newStage);
 
@@ -70,7 +70,7 @@ void DefinitionBuilder::beginSequentialStage(string name)
 
 void DefinitionBuilder::beginParallelStage(string name)
 {
-    Stage* newStage = new ParallelStage(name, to_string(this->nextItemID));
+    Stage* newStage = new ParallelStage(to_string(this->nextItemID), name);
     this->nextItemID++;
 
     if(this->stageStack.empty())
@@ -83,7 +83,7 @@ void DefinitionBuilder::beginParallelStage(string name)
     }
     else
     {
-        this->stageStack.top()->addChild(newStage);
+        this->stageStack.top()->add(newStage);
     }
     this->stageStack.push(newStage);
 
@@ -156,7 +156,7 @@ void DefinitionBuilder::commitPendingTask()
 {
     if(!this->stageStack.empty())
     {
-        this->stageStack.top()->addChild(pendingTask);
+        this->stageStack.top()->add(pendingTask);
     }
     this->pendingTask = nullptr;
 }
