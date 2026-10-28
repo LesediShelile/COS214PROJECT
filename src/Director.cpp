@@ -1,4 +1,9 @@
 #include "Director.h"
+#include "Role.h"
+#include "RoleBasedAssignment.h"
+#include "WorkloadAssignment.h"
+#include "ExternalConnector.h"
+#include "EventPublisher.h"
 
 Director::Director()
 {

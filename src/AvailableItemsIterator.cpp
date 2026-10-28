@@ -1,8 +1,10 @@
 #include "AvailableItemsIterator.h"
+#include "WorkItem.h"
 
 AvailableItemsIterator::AvailableItemsIterator(WorkItem* root)
 {
     this->inner = new DepthFirstIterator(root);
+    first();
 }
 
 void AvailableItemsIterator::skipToAvailable()
@@ -10,6 +12,7 @@ void AvailableItemsIterator::skipToAvailable()
     while(!inner->isDone() && !inner->current()->isAvailable())
     {
         inner->next();
+
     }
 }
 
@@ -33,4 +36,9 @@ bool AvailableItemsIterator::isDone()
 WorkItem* AvailableItemsIterator::current()
 {
     return this->inner->current();
+}
+
+AvailableItemsIterator::~AvailableItemsIterator()
+{
+    delete this->inner;   // the iterator owns the traversal it filters
 }

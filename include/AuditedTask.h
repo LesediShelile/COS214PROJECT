@@ -28,6 +28,9 @@ public:
     virtual void reject(const std::string& reason);
     virtual void cancel();
 
+    /** @brief Replaces this decorator's publisher and the wrapped item's. */
+    virtual void setPublisher(EventPublisher* publisher);
+
     virtual WorkItem* clone() const;
 
 private:

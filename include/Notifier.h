@@ -1,25 +1,31 @@
-
 #ifndef NOTIFIER_H
 #define NOTIFIER_H
 
-#include "TaskState.h"
+#include "WorkflowListener.h"
+#include <string>
+#include <vector>
 
 /**
- * @brief Handles notifications related to task states.
+ * @brief Handles notifications for workflow events (Observer pattern).
+ *
+ * A concrete WorkflowListener, so it can be attached to an EventPublisher
+ * alongside the AuditLogger and MetricsCollector.
  */
-class Notifier {
+class Notifier : public WorkflowListener {
 public:
     /** @brief Constructs a Notifier. */
     Notifier();
 
     /**
-     * @brief Updates the notifier with a task state.
-     * @param state Pointer to the task state.
+     * @brief Receives a published workflow event.
+     * @param event Pointer to the workflow event.
      */
-    void update(TaskState* state);
+    void update(WorkflowEvent* event) override;
+
+
 
     /** @brief Destroys the Notifier. */
-    ~Notifier();
+    ~Notifier() override;
 };
 
 #endif // NOTIFIER_H

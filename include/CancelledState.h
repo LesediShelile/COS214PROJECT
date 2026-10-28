@@ -27,6 +27,12 @@ class CancelledState : public TaskState{
          * @return A new CancelledState.
          */
         TaskState* clone() const override;
+
+        /**
+         * @brief Cancelled is an end state.
+         * @return true.
+         */
+        bool isFinal() const override { return true; }
 };
 
 #endif

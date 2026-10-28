@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "../include/ApprovalRequest.h"
+#include "../include/ApprovalStatus.h"
 #include "../include/AuditLogger.h"
 #include "../include/CommandInvoker.h"
 #include "../include/MetricsCollector.h"
@@ -133,14 +134,18 @@ public:
     bool undoLastAction();
 
     /**
-     * @brief Initiates an approval evaluation for a specific task using the approval chain.
+     * @brief Starts an assigned task within an instance (Assigned -> Started).
++    * @details Executed as a Command via CommandInvoker to support undo functionality.
      * @param[in] instanceID The unique identifier of the workflow instance.
      * @param[in] taskID The unique identifier of the task requiring approval.
      * @return ApprovalStatus The final decision status after propagating through the chain.
      * @throws std::invalid_argument If instanceID or taskID is not found.
-     * @throws std::runtime_error If the workflow definition does not have an approval chain configured.
+     * @throws std::logic_error If the workflow definition does not have an approval chain configured.
      */
-    ApprovalRequest requestApproval(const std::string& instanceID,
+
+     void startTask(const std::string& instanceID, const std::string& taskID);
+
+    ApprovalStatus requestApproval(const std::string& instanceID,
                                    const std::string& taskID);
 
     /**
