@@ -28,8 +28,9 @@ WorkflowDefinition* DefinitionBuilder::getResult()
     {
         cout << "Warning: returning workflow definition with unclosed changes on the stack.\n";
     }
-    WorkflowDefinition* result = this->definition;
 
+    WorkflowDefinition* result = this->definition;
+    this->definition = nullptr; 
     return result;
 }
 
