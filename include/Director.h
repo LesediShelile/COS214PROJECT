@@ -35,4 +35,4 @@ class Director
         RoleBasedAssignment* roleBased;
         WorkloadAssignment* workload;
 };
-#endif //EMERGENCY_ADMISSION_DIRECRTOR_H
+#endif //DIRECRTOR_H
