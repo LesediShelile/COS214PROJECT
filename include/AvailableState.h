@@ -46,5 +46,11 @@ class AvailableState  : public TaskState {
          * @return A new AvailableState.
          */
         TaskState* clone() const override;
+
+        /**
+         * @brief An Available task is ready to be assigned.
+         * @return true.
+         */
+        bool isAvailable() const override { return true; }
 };
 #endif

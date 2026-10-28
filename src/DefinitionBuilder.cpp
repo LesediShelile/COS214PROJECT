@@ -1,4 +1,19 @@
-#include "DefnitionBuilder.h"
+#include "DefinitionBuilder.h"
+#include <vector>
+#include "WorkItem.h"
+#include "Stage.h"
+#include "SequentialStage.h"
+#include "ParallelStage.h"
+#include "Task.h"
+#include "ExternalTask.h"
+#include "AuditedTask.h"
+#include "ValidatedTask.h"
+#include "PriorityTask.h"
+#include "Role.h"
+#include "AssignmentStrategy.h"
+#include "ExternalConnector.h"
+#include "EventPublisher.h"
+#include "ApprovalHandler.h"
 
 DefinitionBuilder::DefinitionBuilder()
 {
@@ -13,8 +28,9 @@ WorkflowDefinition* DefinitionBuilder::getResult()
     {
         cout << "Warning: returning workflow definition with unclosed changes on the stack.\n";
     }
-    WorkflowDefinition* result = this->definition;
 
+    WorkflowDefinition* result = this->definition;
+    this->definition = nullptr; 
     return result;
 }
 
@@ -34,7 +50,7 @@ void DefinitionBuilder::reset(string name, int version)
 
 void DefinitionBuilder::beginSequentialStage(string name)
 {
-    Stage* newStage = new SequentialStage(name, to_string(this->nextItemID));
+    Stage* newStage = new SequentialStage(to_string(this->nextItemID), name);
     this->nextItemID++;
 
     if(this->stageStack.empty())
@@ -47,7 +63,7 @@ void DefinitionBuilder::beginSequentialStage(string name)
     }
     else
     {
-        this->stageStack.top()->addChild(newStage);
+        this->stageStack.top()->add(newStage);
     }
     this->stageStack.push(newStage);
 
@@ -55,7 +71,7 @@ void DefinitionBuilder::beginSequentialStage(string name)
 
 void DefinitionBuilder::beginParallelStage(string name)
 {
-    Stage* newStage = new ParallelStage(name, to_string(this->nextItemID));
+    Stage* newStage = new ParallelStage(to_string(this->nextItemID), name);
     this->nextItemID++;
 
     if(this->stageStack.empty())
@@ -68,7 +84,7 @@ void DefinitionBuilder::beginParallelStage(string name)
     }
     else
     {
-        this->stageStack.top()->addChild(newStage);
+        this->stageStack.top()->add(newStage);
     }
     this->stageStack.push(newStage);
 
@@ -141,7 +157,7 @@ void DefinitionBuilder::commitPendingTask()
 {
     if(!this->stageStack.empty())
     {
-        this->stageStack.top()->addChild(pendingTask);
+        this->stageStack.top()->add(pendingTask);
     }
     this->pendingTask = nullptr;
 }

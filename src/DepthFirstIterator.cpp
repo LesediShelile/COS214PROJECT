@@ -1,4 +1,7 @@
 #include "DepthFirstIterator.h"
+
+#include <vector>
+#include "WorkItem.h"
 using namespace std;
 
 DepthFirstIterator::DepthFirstIterator(WorkItem* root)
@@ -62,4 +65,8 @@ bool DepthFirstIterator::isDone()
 WorkItem* DepthFirstIterator::current()
 {
     return this->currentItem;
+}
+
+DepthFirstIterator::~DepthFirstIterator(){
+    //Nothing to free
 }

@@ -7,7 +7,7 @@
  * @brief Assigns a task to the first participant with the required role (Strategy pattern).
  */
 class RoleBasedAssignment :public AssignmentStrategy {
-
+public: 
     /**
      * @brief Chooses the first participant who has the task's required role.
      * @param task The task that needs to be assigned.

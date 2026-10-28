@@ -41,4 +41,9 @@ void AuditedTask::reject(const std::string& reason) {
 }
 void AuditedTask::cancel() { TaskDecorator::cancel(); audit("was cancelled"); }
 
+void AuditedTask::setPublisher(EventPublisher* p) {
+    publisher_ = p;
+    TaskDecorator::setPublisher(p);
+}
+
 WorkItem* AuditedTask::clone() const { return new AuditedTask(*this); }

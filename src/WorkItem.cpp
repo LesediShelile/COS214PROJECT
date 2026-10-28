@@ -32,6 +32,8 @@ std::vector<WorkItem*> WorkItem::getChildren() const {
 
 void WorkItem::activateChildren() {}
 
+void WorkItem::setPublisher(EventPublisher*) {}
+
 WorkItemIterator* WorkItem::createIterator() {
     return new DepthFirstIterator(this);
 }

@@ -16,26 +16,35 @@
  * @param request Request to send to the external service.
  */
 ExternalTask::ExternalTask(
-    const std::string* ItemID,
-    const std::string* name,
+    const std::string& ItemID,
+    const std::string& name,
     Role* role,
     AssignmentStrategy* strategy,
     ExternalConnector* connector,
-    const std::string* request)
+    const std::string& request)
     : Task(ItemID, name, role, strategy),
       connector(connector),
-      request(request != nullptr ? *request : ""),
+      request(request),
       response("") {
+}
+
+/**
+ * @brief Creates a copy of this task (Prototype pattern).
+ *
+ * The copy gets its own state object (via Task's copy constructor) and the
+ * same request and response text. The connector is shared, not owned.
+ * @return A new ExternalTask as a WorkItem pointer.
+ */
+WorkItem* ExternalTask::clone() const {
+    return new ExternalTask(*this);
 }
 
 /**
  * @brief Updates the request.
  * @param request New request.
  */
-void ExternalTask::setRequest(const std::string* request) {
-    if (request != nullptr) {
-        this->request = *request;
-    }
+void ExternalTask::setRequest(const std::string& request) {
+    this->request = request;
 }
 
 /**
