@@ -1,4 +1,5 @@
 #include "AvailableItemsIterator.h"
+#include "WorkItem.h"
 
 AvailableItemsIterator::AvailableItemsIterator(WorkItem* root)
 {

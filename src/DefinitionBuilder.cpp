@@ -1,4 +1,19 @@
-#include "DefnitionBuilder.h"
+#include "DefinitionBuilder.h"
+#include <vector>
+#include "WorkItem.h"
+#include "Stage.h"
+#include "SequentialStage.h"
+#include "ParallelStage.h"
+#include "Task.h"
+#include "ExternalTask.h"
+#include "AuditedTask.h"
+#include "ValidatedTask.h"
+#include "PriorityTask.h"
+#include "Role.h"
+#include "AssignmentStrategy.h"
+#include "ExternalConnector.h"
+#include "EventPublisher.h"
+#include "ApprovalHandler.h"
 
 DefinitionBuilder::DefinitionBuilder()
 {

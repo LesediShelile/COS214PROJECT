@@ -5,11 +5,8 @@
 #include <string>
 #include <vector>
 using namespace std;
-
-//classes
 #include "WorkflowBuilder.h"
-#include "Stub.h"
-#include "DefnitionBuilder.h"
+#include "DefinitionBuilder.h"
 
 //forward declarations
 class Role;

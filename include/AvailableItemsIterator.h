@@ -6,7 +6,6 @@ using namespace std;
 
 #include "WorkItemIterator.h"
 #include "DepthFirstIterator.h"
-#include "Stub.h"
 
 class AvailableItemsIterator : public WorkItemIterator
 {

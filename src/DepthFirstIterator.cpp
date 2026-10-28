@@ -1,4 +1,6 @@
 #include "DepthFirstIterator.h"
+#include <vector>
+#include "WorkItem.h"
 using namespace std;
 
 DepthFirstIterator::DepthFirstIterator(WorkItem* root)
