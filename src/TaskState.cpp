@@ -43,5 +43,4 @@ void TaskState::makeAvailable(Task* task) {
               throw std::logic_error("Cannot make task '" + task->getName() + "' available while it is " + getName());
 }
 
-bool TaskState::isFinal() const { return false; }
-bool TaskState::isAvailable() const { return false; }
+

@@ -16,7 +16,7 @@ class AvailableItemsIterator : public WorkItemIterator
         bool isDone() override;
         WorkItem* current() override;
         void skipToAvailable();
-        virtual ~AvailableItemsIterator(){};
+        virtual ~AvailableItemsIterator();
     private:
         DepthFirstIterator* inner;
 };
