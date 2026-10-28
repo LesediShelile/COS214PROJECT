@@ -1,6 +1,6 @@
-#include "EmergencyAdmissionDirector.h"
+#include "Director.h"
 
-EmergencyAdmissionDirector::EmergencyAdmissionDirector()
+Director::Director()
 {
     this->doctorRole = new Role("doctor", 3);
     this->cleanerRole = new Role("cleaner", 1);
@@ -12,7 +12,7 @@ EmergencyAdmissionDirector::EmergencyAdmissionDirector()
     this->roleBased = new RoleBasedAssignment();
 }
 
-void EmergencyAdmissionDirector::construct(string name, ExternalConnector* ambulance, ExternalConnector* records, EventPublisher* publisher, bool includeCleaner)
+void Director::construct(string name, ExternalConnector* ambulance, ExternalConnector* records, EventPublisher* publisher, bool includeCleaner)
 {
     machine->reset(name, 1);
 
@@ -30,13 +30,13 @@ void EmergencyAdmissionDirector::construct(string name, ExternalConnector* ambul
     }
 }
 
-vector<Role*> EmergencyAdmissionDirector::getRoles()
+vector<Role*> Director::getRoles()
 {
     vector<Role *> roles = {doctorRole, nurseRole, paramedicRole, cleanerRole, secretaryRole};
     return roles;
 }
 
-EmergencyAdmissionDirector::~EmergencyAdmissionDirector()
+Director::~Director()
 {
     delete this->doctorRole;
     delete this->cleanerRole;

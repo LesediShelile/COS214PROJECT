@@ -1,5 +1,5 @@
-#ifndef EMERGENCY_ADMISSION_DIRECTOR_H
-#define EMERGENY_ADMISSION_DIRECTOR_H
+#ifndef DIRECTOR_H
+#define DIRECTOR_H
 
 #include <iostream>
 #include <string>
@@ -18,13 +18,13 @@ class WorkloadAssignment;
 class ExternalConnector;
 class EventPublisher;
 
-class EmergencyAdmissionDirector
+class Director
 {
     public:
-        EmergencyAdmissionDirector();
+        Director();
         void construct(string name, ExternalConnector* ambulance, ExternalConnector* records, EventPublisher* publisher, bool includeCleaner);
         vector<Role*> getRoles();
-        ~EmergencyAdmissionDirector();
+        ~Director();
     private:
         WorkflowBuilder* machine;
         Role* paramedicRole;
