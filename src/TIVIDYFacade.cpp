@@ -307,3 +307,4 @@ void TIVIDYFacade::startTask(const std::string& instanceID, const std::string& t
 /**
   * @brief Creates and executes a CompleteCommand for a work item.
   * @param[in] instanceID Target workflow instance ID.
+  */
