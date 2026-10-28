@@ -1,44 +1,57 @@
 /**
- * @file AdapterOne.cpp
- * @brief Implements the adapter for APIOne.
+ * @file AdapterOne.h
+ * @brief Declares the AdapterOne class.
  */
 
-#include "AdapterOne.h"
-#include "APIOne.h"
+#ifndef ADAPTERONE_H
+#define ADAPTERONE_H
+
+#include "ExternalConnector.h"
+#include <string>
 
 /**
- * @brief Constructs an AdapterOne.
- * @param adaptee API object to adapt.
+ * @class APIOne
+ * @brief Forward declaration of the external API class.
  */
-AdapterOne::AdapterOne(APIOne* adaptee) : adaptee(adaptee) {}
+class APIOne;
 
 /**
- * @brief Translates a generic request into an APIOne operation.
- * @param operation Operation to perform.
- * @param payload Data for the operation.
+ * @class AdapterOne
+ * @brief Adapts APIOne to the ExternalConnector interface.
+ *
+ * Allows clients to interact with APIOne through the
+ * ExternalConnector interface.
  */
-void AdapterOne::request(const std::string* operation,
-                         const std::string* payload) {
-    if (adaptee == nullptr || operation == nullptr || payload == nullptr) {
-        return;
-    }
+class AdapterOne : public ExternalConnector {
+private:
+    /** Pointer to the external API being adapted. */
+    APIOne* adaptee;
 
-    if (*operation == "add") {
-        adaptee->addEntry(*payload, *payload);
-    } else if (*operation == "remove") {
-        adaptee->removeEntry(*payload);
-    }
-}
+public:
+    /**
+     * @brief Constructs an AdapterOne object.
+     * @param adaptee Pointer to the API object being adapted.
+     */
+    AdapterOne(APIOne* adaptee);
 
-/**
- * @brief Returns the name of the adapted API.
- * @return Name of the API.
- */
-std::string AdapterOne::getName() {
-    return "API One";
-}
+    /**
+     * @brief Executes an operation through the external API.
+     * @param operation Operation to perform.
+     * @param payload Data required for the operation.
+     */
+    void request(const std::string* operation,
+                 const std::string* payload) override;
 
-/**
- * @brief Destroys the AdapterOne.
- */
-AdapterOne::~AdapterOne() {}
+    /**
+     * @brief Returns the name of the external API.
+     * @return Name of the API.
+     */
+    std::string getName() override;
+
+    /**
+     * @brief Destroys the AdapterOne object.
+     */
+    ~AdapterOne();
+};
+
+#endif // ADAPTERONE_H

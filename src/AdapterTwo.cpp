@@ -1,49 +1,56 @@
 /**
- * @file AdapterTwo.cpp
- * @brief Implements the adapter for APITwo.
+ * @file AdapterTwo.h
+ * @brief Declares the AdapterTwo class.
  */
 
-#include "AdapterTwo.h"
-#include "APITwo.h"
+#ifndef ADAPTERTWO_H
+#define ADAPTERTWO_H
+
+#include "ExternalConnector.h"
+#include <string>
 
 /**
- * @brief Constructs an AdapterTwo and its API object.
+ * @class APITwo
+ * @brief Forward declaration of the external API class.
  */
-AdapterTwo::AdapterTwo() : adaptee(new APITwo()) {}
+class APITwo;
 
 /**
- * @brief Translates a generic request into an APITwo operation.
- * @param operation Operation to perform.
- * @param payload Data for the operation.
+ * @class AdapterTwo
+ * @brief Adapts APITwo to the ExternalConnector interface.
+ *
+ * Allows clients to interact with APITwo through the
+ * ExternalConnector interface.
  */
-void AdapterTwo::request(const std::string* operation,
-                         const std::string* payload) {
-    if (adaptee == nullptr || operation == nullptr || payload == nullptr) {
-        return;
-    }
+class AdapterTwo : public ExternalConnector {
+private:
+    /** Pointer to the external API being adapted. */
+    APITwo* adaptee;
 
-    adaptee->setInfo(*operation, *payload);
+public:
+    /**
+     * @brief Constructs an AdapterTwo object.
+     */
+    AdapterTwo();
 
-    if (*operation == "add") {
-        adaptee->add();
-    } else if (*operation == "alert") {
-        adaptee->alert();
-    } else if (*operation == "dispatch") {
-        adaptee->dispatch();
-    }
-}
+    /**
+     * @brief Executes an operation through the external API.
+     * @param operation Operation to perform.
+     * @param payload Data required for the operation.
+     */
+    void request(const std::string* operation,
+                 const std::string* payload) override;
 
-/**
- * @brief Returns the name of the adapted API.
- * @return Name of the API.
- */
-std::string AdapterTwo::getName() {
-    return "API Two";
-}
+    /**
+     * @brief Returns the name of the external API.
+     * @return Name of the API.
+     */
+    std::string getName() override;
 
-/**
- * @brief Destroys the AdapterTwo and its API object.
- */
-AdapterTwo::~AdapterTwo() {
-    delete adaptee;
-}
+    /**
+     * @brief Destroys the AdapterTwo object.
+     */
+    ~AdapterTwo();
+};
+
+#endif // ADAPTERTWO_H
