@@ -8,7 +8,7 @@
  * metrics collector, notifier, engine router) can decide what to react to.
  */
 enum class EventType {
-    /** An item moved to a new lifecycle state (details = new state name). */
+   /**/ /** An item moved to a new lifecycle state (details = new state name).*/ 
     ITEM_STATE_CHANGED,
 
     /** An item reached the Completed state. The engine uses this to activate
@@ -18,11 +18,14 @@ enum class EventType {
     /** Something was done to a task and recorded by AuditedTask. */
     TASK_ACTION,
 
+    EXTERNAL_EVENT,       ///< something outside TIVIDY happened
+
     /** An approval request ran out of time before it was answered. */
     TIMEOUT,
 
     /** The whole workflow instance finished (details = outcome). */
     WORKFLOW_FINISHED
+
 };
 
 #endif // EVENTTYPE_H
