@@ -8,7 +8,7 @@
 /**
  * @brief Constructs an APITwo object.
  */
-APITwo::APITwo() : param(""), address("") {}
+APITwo::APITwo() : description(""), address("") {}
 
 /**
  * @brief Adds information to the external service.
