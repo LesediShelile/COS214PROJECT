@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "../include/ApprovalRequest.h"
+#include "../include/ApprovalStatus.h"
 #include "../include/AuditLogger.h"
 #include "../include/CommandInvoker.h"
 #include "../include/MetricsCollector.h"
@@ -140,7 +141,7 @@ public:
      * @throws std::invalid_argument If instanceID or taskID is not found.
      * @throws std::runtime_error If the workflow definition does not have an approval chain configured.
      */
-    ApprovalRequest requestApproval(const std::string& instanceID,
+    ApprovalStatus requestApproval(const std::string& instanceID,
                                    const std::string& taskID);
 
     /**
