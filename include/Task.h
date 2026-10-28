@@ -70,7 +70,7 @@ public:
     void setDeadline(std::time_t deadline);
     std::time_t getDeadline() const;
 
-    void setPublisher(EventPublisher* publisher);
+    virtual void setPublisher(EventPublisher* publisher);
     EventPublisher* getPublisher() const;
 
 private:
