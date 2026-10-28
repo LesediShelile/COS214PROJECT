@@ -26,6 +26,12 @@ class CompletedState : public TaskState{
          * @return A new CompletedState.
          */
         TaskState* clone() const override;
+
+        /**
+         * @brief Completed is an end state.
+         * @return true.
+         */
+        bool isFinal() const override { return true; }
         
 };
 
