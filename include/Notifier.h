@@ -1,6 +1,9 @@
 #ifndef NOTIFIER_H
 #define NOTIFIER_H
+
 #include "WorkflowListener.h"
+#include <string>
+#include <vector>
 
 /**
  * @brief Handles notifications for workflow events (Observer pattern).
@@ -18,6 +21,8 @@ public:
      * @param event Pointer to the workflow event.
      */
     void update(WorkflowEvent* event) override;
+
+
 
     /** @brief Destroys the Notifier. */
     ~Notifier() override;
