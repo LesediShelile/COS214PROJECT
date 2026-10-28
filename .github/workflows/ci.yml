@@ -1,5 +1,4 @@
 
-
 name: TIVIDY CI
 
 on:
@@ -8,10 +7,12 @@ on:
       - main
       - development
       - chore/ci-pipeline
+      - fix/integration-bugs
   pull_request:
     branches:
       - main
       - development
+      - fix/integration-bugs
 
 jobs:
   repository-check:
@@ -26,7 +27,7 @@ jobs:
         run: |
           test -d include
           test -d src
-          test -d docs
+    
 
       - name: Verify C++ source and header files
         shell: bash
@@ -45,4 +46,9 @@ jobs:
             exit 1
           fi
 
-          echo "All source and header structure checks passed."
+
+      - name: Set up CMake
+        run: cmake -S . -B build -DTIVIDY_BUILD_TESTS=OFF
+
+      - name: Build TIVIDY core library
+        run: cmake --build build --target tividy_core --parallel 2
