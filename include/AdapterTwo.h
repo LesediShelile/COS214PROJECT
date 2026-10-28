@@ -38,7 +38,7 @@ public:
      * @param operation Operation to perform.
      * @param payload Data required for the operation.
      */
-    void request(std::string* operation, std::string* payload) override;
+    void request(const std::string* operation, std::string* payload) override;
 
     /**
      * @brief Returns the name of the external API.
