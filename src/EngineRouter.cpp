@@ -13,15 +13,19 @@ EngineRouter::EngineRouter(WorkflowInstance* instance,
 
 /**
  * @brief Processes a workflow event.
+ *
+ * When an item completes, asks the instance to move the workflow on
+ * (release the next eligible items, or finish if everything is done).
+ * Other event types are ignored for now.
  * @param event Pointer to the workflow event.
  */
 void EngineRouter::update(WorkflowEvent* event) {
-    if (event == nullptr) {
+    if (event == nullptr || instance == nullptr) {
         return;
     }
 
-    if (approvalChain != nullptr) {
-        approvalChain->handleRequest(event);
+    if (event->getType() == EventType::ITEM_COMPLETED) {
+        instance->activateNext();
     }
 }
 

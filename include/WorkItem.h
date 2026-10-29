@@ -8,6 +8,7 @@
 class Participant;
 class TaskMemento;
 class WorkItemIterator;
+class EventPublisher;
 
 /**
  * @brief Component of the Composite pattern (also Component of Decorator,
@@ -75,6 +76,12 @@ public:
     /** @brief Re-evaluate which children should become available next.
      *  Default does nothing (a leaf has no children). Stages override it. */
     virtual void activateChildren();
+
+    /** @brief Gives this item the publisher it reports events through
+     *  (Observer). WorkflowInstance calls it on every item of a cloned tree.
+     *  Default does nothing; Task stores it, TaskDecorator forwards it and
+     *  AuditedTask also replaces its own. The publisher is shared, not owned. */
+    virtual void setPublisher(EventPublisher* publisher);
 
     /** @brief Iterator over this item and all descendants, depth first.
      *  @return a new iterator, the caller deletes it. */

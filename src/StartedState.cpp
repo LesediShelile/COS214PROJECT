@@ -27,7 +27,7 @@ void StartedState :: cancel (Task* task) { //moves the task to cancelled(end sta
 
 std::string StartedState :: getName() const{
 
-    return "started";
+    return "Started";
 
 }
 TaskState* StartedState :: clone() const{

@@ -40,24 +40,24 @@ public:
      * @param connector External service connector.
      * @param request Request to send to the external service.
      */
-    ExternalTask(const std::string* ItemID,
-                 const std::string* name,
+    ExternalTask(const std::string& ItemID,
+                 const std::string& name,
                  Role* role,
                  AssignmentStrategy* strategy,
                  ExternalConnector* connector,
-                 const std::string* request);
+                 const std::string& request);
 
     /**
      * @brief Creates a copy of this task.
      * @return Pointer to the cloned WorkItem.
      */
-    WorkItem* clone();
+    WorkItem* clone() const override;
 
     /**
      * @brief Updates the request sent to the external service.
      * @param request New request.
      */
-    void setRequest(const std::string* request);
+    void setRequest(const std::string& request);
 
     /**
      * @brief Executes the external request.

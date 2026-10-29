@@ -9,7 +9,6 @@ using namespace std;
 //classes included
 #include "WorkflowBuilder.h"
 #include "WorkflowDefinition.h"
-#include "Stub.h"
 
 //Forward declarations
 class WorkflowDefinition;

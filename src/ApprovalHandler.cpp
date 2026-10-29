@@ -2,7 +2,12 @@
 #include "ApprovalRequest.h"
 #include <iostream>
 
-ApprovalHandler::~ApprovalHandler() {}
+ApprovalHandler::~ApprovalHandler() {
+  /**
+  * @brief each handler owns its successor, so deleting the head deletes the chain
+  */
+       delete next;
+}
 
 void ApprovalHandler::setNext(ApprovalHandler* handler) {
 
