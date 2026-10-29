@@ -35,4 +35,25 @@ if(TIVIDY_BUILD_TESTS)
   target_include_directories(tividy_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests/third_party)
   target_link_libraries(tividy_tests tividy_core)
   add_test(NAME tividy_tests COMMAND tividy_tests)
+  
 endif()
+
+# ---- Optional native desktop GUI (Qt 6 Widgets) ------------------------------
+option(TIVIDY_BUILD_DESKTOP "Build the TIVIDY desktop workflow theatre" OFF)
+
+if(TIVIDY_BUILD_DESKTOP)
+    find_package(Qt6 REQUIRED COMPONENTS Widgets)
+
+    add_executable(tividy_desktop
+        desktop/TIVIDYDesktop.cpp
+    )
+
+    target_link_libraries(tividy_desktop
+        PRIVATE tividy_core Qt6::Widgets
+    )
+
+    target_include_directories(tividy_desktop
+        PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include
+    )
+endif()
+
