@@ -1,100 +1,187 @@
 
-#ifndef SECUREWORKFLOWPROXY_H
-#define SECUREWORKFLOWPROXY_H
+#include "../include/SecureWorkflowProxy.h"
 
-#include <string>
+#include "../include/TIVIDYFacade.h"
+#include "../include/Participant.h"
+#include "../include/Role.h"
 
-#include "IWorkflowService.h"
-
-class TIVIDYFacade;
+#include <stdexcept>
 
 /**
- * @brief Protection Proxy that controls access to TIVIDY workflow operations.
- *
- * Checks participant permissions and task ownership before forwarding
- * requests to the actual TIVIDYFacade.
- *
- * The facade is not owned by this class.
+ * @brief Creates the security proxy.
+ * @param service The actual TIVIDY workflow facade.
  */
-class SecureWorkflowProxy : public IWorkflowService {
+SecureWorkflowProxy::SecureWorkflowProxy(TIVIDYFacade* service)
+    : realService(service) {
 
-private:
+    if (realService == nullptr) {
+        throw std::invalid_argument(
+            "SecureWorkflowProxy: service cannot be null");
+    }
+}
 
-    /** @brief The actual workflow service receiving authorised requests. */
-    TIVIDYFacade* realService;
+/**
+ * @brief Destructor.
+ *
+ * The proxy does not own the facade.
+ */
+SecureWorkflowProxy::~SecureWorkflowProxy() {}
 
-    /**
-     * @brief Checks whether a participant has a specific permission.
-     * @return true if the participant has the permission.
-     */
-    bool hasPermission(
-        const std::string& userID,
-        const std::string& permission);
+/**
+ * @brief Checks whether a participant has a specific permission.
+ */
+bool SecureWorkflowProxy::hasPermission(
+    const std::string& userID,
+    const std::string& permission) {
 
-    /**
-     * @brief Checks whether a participant is assigned to a task.
-     * @return true if the participant owns the assignment.
-     */
-    bool ownsTask(
-        const std::string& instanceID,
-        const std::string& taskID,
-        const std::string& userID);
+    try {
 
-    /**
-     * @brief Rejects an operation if the participant lacks permission.
-     */
-    void requirePermission(
-        const std::string& userID,
-        const std::string& permission);
+        const Participant* user =
+            realService->getParticipant(userID);
 
-    /**
-     * @brief Rejects an operation if the participant is not assigned to the task.
-     */
-    void requireOwnership(
-        const std::string& instanceID,
-        const std::string& taskID,
-        const std::string& userID);
+        if (user == nullptr || user->getRole() == nullptr) {
+            return false;
+        }
 
-public:
+        return user->getRole()->hasPermission(permission);
 
-    /**
-     * @brief Creates a security proxy around the actual workflow service.
-     * @param service Pointer to the existing TIVIDYFacade.
-     */
-    explicit SecureWorkflowProxy(TIVIDYFacade* service);
+    }
+    catch (const std::invalid_argument&) {
 
-    virtual ~SecureWorkflowProxy();
+        return false;
 
-    virtual void startInstance(
-        const std::string& instanceID,
-        const std::string& userID);
+    }
+}
 
-    virtual void assignTask(
-        const std::string& instanceID,
-        const std::string& taskID,
-        const std::string& participantID,
-        const std::string& userID);
+/**
+ * @brief Checks whether a participant owns a particular task.
+ */
+bool SecureWorkflowProxy::ownsTask(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& userID) {
 
-    virtual void startTask(
-        const std::string& instanceID,
-        const std::string& taskID,
-        const std::string& userID);
+    return realService->isTaskAssignedTo(
+        instanceID, taskID, userID);
+}
 
-    virtual void completeTask(
-        const std::string& instanceID,
-        const std::string& taskID,
-        const std::string& userID);
+/**
+ * @brief Checks permission and rejects unauthorised operations.
+ */
+void SecureWorkflowProxy::requirePermission(
+    const std::string& userID,
+    const std::string& permission) {
 
-    virtual void rejectTask(
-        const std::string& instanceID,
-        const std::string& taskID,
-        const std::string& reason,
-        const std::string& userID);
+    if (!hasPermission(userID, permission)) {
 
-    virtual ApprovalStatus requestApproval(
-        const std::string& instanceID,
-        const std::string& taskID,
-        const std::string& userID);
-};
+        throw std::runtime_error(
+            "Access denied: User '" + userID +
+            "' does not have permission '" + permission + "'");
 
-#endif
+    }
+}
+
+/**
+ * @brief Checks task ownership.
+ */
+void SecureWorkflowProxy::requireOwnership(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& userID) {
+
+    if (!ownsTask(instanceID, taskID, userID)) {
+
+        throw std::runtime_error(
+            "Access denied: User '" + userID +
+            "' is not assigned to task '" + taskID + "'");
+
+    }
+}
+
+/**
+ * @brief Starts a workflow instance after checking permission.
+ */
+void SecureWorkflowProxy::startInstance(
+    const std::string& instanceID,
+    const std::string& userID) {
+
+    requirePermission(userID, "workflow.start");
+
+    realService->startInstance(instanceID);
+}
+
+/**
+ * @brief Assigns a task after checking permission.
+ */
+void SecureWorkflowProxy::assignTask(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& participantID,
+    const std::string& userID) {
+
+    requirePermission(userID, "task.assign");
+
+    realService->assignTask(
+        instanceID, taskID, participantID);
+}
+
+/**
+ * @brief Starts a task after checking permission and ownership.
+ */
+void SecureWorkflowProxy::startTask(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& userID) {
+
+    requirePermission(userID, "task.start");
+
+    requireOwnership(instanceID, taskID, userID);
+
+    realService->startTask(instanceID, taskID);
+}
+
+/**
+ * @brief Completes a task after checking permission and ownership.
+ */
+void SecureWorkflowProxy::completeTask(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& userID) {
+
+    requirePermission(userID, "task.complete");
+
+    requireOwnership(instanceID, taskID, userID);
+
+    realService->completeTask(instanceID, taskID);
+}
+
+/**
+ * @brief Rejects a task after checking permission and ownership.
+ */
+void SecureWorkflowProxy::rejectTask(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& reason,
+    const std::string& userID) {
+
+    requirePermission(userID, "task.reject");
+
+    requireOwnership(instanceID, taskID, userID);
+
+    realService->rejectTask(instanceID, taskID, reason);
+}
+
+/**
+ * @brief Requests approval after checking permission and ownership.
+ */
+ApprovalStatus SecureWorkflowProxy::requestApproval(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& userID) {
+
+    requirePermission(userID, "approval.request");
+
+    requireOwnership(instanceID, taskID, userID);
+
+    return realService->requestApproval(instanceID, taskID);
+}
