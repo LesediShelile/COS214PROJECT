@@ -7,10 +7,8 @@
 //   Part A - Hospital admission workflow
 //   Part B - Legal case workflow
 
-#include <QApplication>
 #include <string>
 #include <vector>
-
 #include "include/ui/Desktop.h"
 #include "WorkItem.h"
 #include "Task.h"
