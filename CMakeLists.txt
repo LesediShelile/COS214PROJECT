@@ -6,33 +6,69 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  set(CMAKE_BUILD_TYPE Debug)
+    set(CMAKE_BUILD_TYPE Debug)
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-  add_compile_options(-Wall -Wextra -pedantic)
+    add_compile_options(-Wall -Wextra -pedantic)
 endif()
 
-# ---- Engine library: every .cpp in src/ except an optional main.cpp ----------
-file(GLOB TIVIDY_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+# Engine library
+file(GLOB TIVIDY_SOURCES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+)
+
 list(FILTER TIVIDY_SOURCES EXCLUDE REGEX ".*/main\\.cpp$")
 
 add_library(tividy_core STATIC ${TIVIDY_SOURCES})
-target_include_directories(tividy_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-# ---- Application: built only once src/main.cpp exists ------------------------
+target_include_directories(tividy_core PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+# Main application
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
-  add_executable(tividy src/main.cpp)
-  target_link_libraries(tividy tividy_core)
+    add_executable(tividy src/main.cpp)
+    target_link_libraries(tividy tividy_core)
 endif()
 
-# ---- Tests (doctest) ----------------------------------------------------------
+# Tests
 option(TIVIDY_BUILD_TESTS "Build the doctest suite" ON)
+
 if(TIVIDY_BUILD_TESTS)
-  enable_testing()
-  file(GLOB TIVIDY_TEST_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
-  add_executable(tividy_tests ${TIVIDY_TEST_SOURCES})
-  target_include_directories(tividy_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/tests/third_party)
-  target_link_libraries(tividy_tests tividy_core)
-  add_test(NAME tividy_tests COMMAND tividy_tests)
+    enable_testing()
+
+    file(GLOB TIVIDY_TEST_SOURCES CONFIGURE_DEPENDS
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp
+    )
+
+    add_executable(tividy_tests ${TIVIDY_TEST_SOURCES})
+
+    target_include_directories(tividy_tests PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/tests/third_party
+    )
+
+    target_link_libraries(tividy_tests tividy_core)
+
+    add_test(NAME tividy_tests COMMAND tividy_tests)
+endif()
+
+# Optional desktop GUI
+option(TIVIDY_BUILD_DESKTOP "Build the TIVIDY desktop workflow theatre" OFF)
+
+if(TIVIDY_BUILD_DESKTOP)
+    find_package(Qt6 REQUIRED COMPONENTS Widgets)
+
+   add_executable(tividy_desktop
+    main.cpp
+    include/ui/Desktop.h
+)
+
+    target_link_libraries(tividy_desktop
+        PRIVATE tividy_core Qt6::Widgets
+    )
+
+    target_include_directories(tividy_desktop PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+    )
 endif()
