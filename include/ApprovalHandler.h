@@ -13,7 +13,7 @@ class ApprovalHandler {
 
     private:
 
-        /** @brief The next handler in the chain (not owned). */
+        /** @brief The next handler in the chain. Owned: deleted when this handler is deleted */
         ApprovalHandler* next = nullptr;
     
     public:
