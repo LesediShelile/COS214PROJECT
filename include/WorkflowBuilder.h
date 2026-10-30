@@ -78,7 +78,7 @@
              * @param connector Sets the connector for the Adaptee classes to become External Tasks
              * @param request Sets the request that is attached to the External Task
              */
-            virtual void addExternalTask(std::string name, Role* role, AssignmentStrategy* strategy, ExternalConnector* connector, string request) = 0;
+            virtual void addExternalTask(std::string name, Role* role, AssignmentStrategy* strategy, ExternalConnector* connector, std::string request) = 0;
 
             /**
              * @brief Uses the decorator to wrap a the pending task with an Audited label

@@ -1,48 +1,42 @@
 #ifndef DIRECTOR_H
 #define DIRECTOR_H
 
-#include <iostream>
+#include <functional>
 #include <string>
-#include <vector>
-using namespace std;
-#include "WorkflowBuilder.h"
-#include "DefinitionBuilder.h"
 
-//forward declarations
-class Role;
-class RoleBasedAssignment;
-class WorkloadAssignment;
-class ExternalConnector;
-class EventPublisher;
+#include "WorkflowBuilder.h"
+
+class WorkflowDefinition;
 
 /**
- * @brief Builder Pattern: Director 
- * Directs the construction of a predefined workflow
- * 
- * Uses a workflow builder to create the workflow's stages
- * and tasks
- * Provides the roles when assigning those tasks
+ * @brief Builder-pattern Director that coordinates construction without
+ *        prescribing any particular workflow scenario.
+ *
+ * The client supplies a construction recipe. The Director resets the supplied
+ * builder, executes that recipe, and returns the resulting definition.
+ * The builder is non-owning and must outlive the Director.
  */
+class Director {
+public:
+    explicit Director(WorkflowBuilder& builder);
 
-class Director
-{
-    public:
+    /**
+     * @brief Builds a workflow using a client-supplied recipe.
+     * @param name Workflow definition name.
+     * @param version Workflow definition version.
+     * @param recipe Operations used to construct the workflow.
+     * @return Newly created definition; ownership transfers to the caller.
+     * @throws std::invalid_argument if the name is empty or recipe is empty.
+     * @throws Any exception raised by the builder or recipe.
+     */
+    WorkflowDefinition* construct(
+        const std::string& name,
+        int version,
+        const std::function<void(WorkflowBuilder&)>& recipe
+    );
 
-        /**
-         * @brief initialises roles, strategies and builder
-         */
-        Director();
-        void construct(string name, ExternalConnector* ambulance, ExternalConnector* records, EventPublisher* publisher, bool includeCleaner);
-        vector<Role*> getRoles();
-        ~Director();
-    private:
-        WorkflowBuilder* machine;
-        Role* paramedicRole;
-        Role* nurseRole;
-        Role* doctorRole;
-        Role* secretaryRole;
-        Role* cleanerRole;
-        RoleBasedAssignment* roleBased;
-        WorkloadAssignment* workload;
+private:
+    WorkflowBuilder& builder; // non-owning; caller controls its lifetime
 };
-#endif //DIRECRTOR_H
+
+#endif // DIRECTOR_H

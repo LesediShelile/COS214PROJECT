@@ -1,54 +1,27 @@
+
 #include "Director.h"
-#include "Role.h"
-#include "RoleBasedAssignment.h"
-#include "WorkloadAssignment.h"
-#include "ExternalConnector.h"
-#include "EventPublisher.h"
 
-Director::Director()
-{
-    this->doctorRole = new Role("doctor", 3);
-    this->cleanerRole = new Role("cleaner", 1);
-    this->machine = new DefinitionBuilder();
-    this->nurseRole = new Role("nurse", 2);
-    this->paramedicRole = new Role("paramedic", 3);
-    this->secretaryRole = new Role("secretary", 1);
-    this->workload = nullptr;
-    this->roleBased = new RoleBasedAssignment();
-}
+#include <stdexcept>
 
-void Director::construct(string name, ExternalConnector* ambulance, ExternalConnector* records, EventPublisher* publisher, bool includeCleaner)
-{
-    machine->reset(name, 1);
+#include "WorkflowDefinition.h"
 
-    machine->beginSequentialStage("Triage");
-    machine->addTask("Initial Assessment", nurseRole, roleBased);
-    machine->commitPendingTask();
-    machine->endStage();
+Director::Director(WorkflowBuilder& builder)
+    : builder(builder) {}
 
-    if(includeCleaner)
-    {
-        machine->beginSequentialStage("Sanitation Stage");
-        machine->addTask("Deep Clean room", cleanerRole, roleBased);
-        machine->commitPendingTask();
-        machine->endStage();
+WorkflowDefinition* Director::construct(
+    const std::string& name,
+    int version,
+    const std::function<void(WorkflowBuilder&)>& recipe
+) {
+    if (name.empty()) {
+        throw std::invalid_argument("Workflow name cannot be empty");
     }
+    if (!recipe) {
+        throw std::invalid_argument("Workflow construction recipe cannot be empty");
+    }
+
+    builder.reset(name, version);
+    recipe(builder);
+    return builder.getResult();
 }
 
-vector<Role*> Director::getRoles()
-{
-    vector<Role *> roles = {doctorRole, nurseRole, paramedicRole, cleanerRole, secretaryRole};
-    return roles;
-}
-
-Director::~Director()
-{
-    delete this->doctorRole;
-    delete this->cleanerRole;
-    delete this->machine;
-    delete this->nurseRole;
-    delete this->paramedicRole;
-    delete this->secretaryRole;
-    delete this->workload;
-    delete this->roleBased;
-}
