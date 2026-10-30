@@ -60,6 +60,13 @@ public:
     virtual std::string getStateName() const = 0;
 
     /**
+    * @brief Gets the participant assigned to this work item.
+    * @return Participant assigned to the item, or nullptr if none.
+    */
+    virtual Participant* getAssignee() const;
+
+
+    /**
      * @brief Prototype operation: deep copy of this item and everything it owns.
      * @return a new, independent item. The caller owns it.
      * Shared configuration (roles, strategies, publisher) is NOT copied, only
@@ -72,6 +79,7 @@ public:
      * Lets iterators walk any WorkItem without type checks or dynamic_cast.
      */
     virtual std::vector<WorkItem*> getChildren() const;
+
 
     /** @brief Re-evaluate which children should become available next.
      *  Default does nothing (a leaf has no children). Stages override it. */

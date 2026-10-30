@@ -40,6 +40,16 @@ public:
      */
     bool equals(Role* other) const;
 
+     /**
+     * @brief Adds a permission to this role.
+     */
+    void addPermission(const std::string& permission);
+
+    /**
+     * @brief Checks whether this role has a permission.
+     */
+    bool hasPermission(const std::string& permission) const;
+
 private:
 
     /** @brief The name of the role. */
@@ -47,6 +57,9 @@ private:
     
     /** @brief How much approval authority the role has. */
     int authorityLevel;
+
+     /** @brief Operations this role is allowed to perform. */
+    std::vector<std::string> permissions;
 };
 
 #endif

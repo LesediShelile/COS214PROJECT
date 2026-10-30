@@ -26,3 +26,26 @@ bool Role::equals(Role* other) const {
     }
     return name == other->name;
 }
+
+// Adds a permission if it has not already been added.
+void Role::addPermission(const std::string& permission) {
+
+    if (!hasPermission(permission)) {
+        permissions.push_back(permission);
+    }
+
+}
+
+// Checks whether this role contains a permission.
+bool Role::hasPermission(const std::string& permission) const {
+
+    for (std::size_t i = 0; i < permissions.size(); i++) {
+
+        if (permissions[i] == permission) {
+            return true;
+        }
+
+    }
+
+    return false;
+}

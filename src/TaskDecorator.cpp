@@ -33,6 +33,12 @@ bool TaskDecorator::isFinished() const { return task_->isFinished(); }
 bool TaskDecorator::isAvailable() const { return task_->isAvailable(); }
 std::string TaskDecorator::getStateName() const { return task_->getStateName(); }
 
+Participant* TaskDecorator::getAssignee() const {
+
+    return task_->getAssignee();
+
+}
+
 std::vector<WorkItem*> TaskDecorator::getChildren() const { return task_->getChildren(); }
 void TaskDecorator::activateChildren() { task_->activateChildren(); }
 void TaskDecorator::setPublisher(EventPublisher* p) { task_->setPublisher(p); }

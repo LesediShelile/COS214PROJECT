@@ -57,7 +57,7 @@ public:
     virtual TaskMemento* createMemento();
     virtual void restoreMemento(TaskMemento* memento);
 
-    Participant* getAssignee() const;
+    virtual Participant* getAssignee() const override;
     void setAssignee(Participant* participant);
     Role* getRequiredRole() const;
 

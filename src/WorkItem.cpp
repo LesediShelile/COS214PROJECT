@@ -13,6 +13,12 @@ WorkItem::~WorkItem() {}
 std::string WorkItem::getItemID() const { return itemID_; }
 std::string WorkItem::getName() const { return name_; }
 
+Participant* WorkItem::getAssignee() const {
+
+    return nullptr;
+
+}
+
 void WorkItem::setData(const std::string& key, const std::string& value) {
     data_[key] = value;
 }

@@ -111,6 +111,51 @@ void TIVIDYFacade::registerParticipant(Participant* participant) {
     participants[id] = participant;
 }
 
+
+/**
+ * @brief Retrieves a participant using their unique ID.
+ * @param participantID The participant's ID.
+ * @return Pointer to the registered participant.
+ * @throws std::invalid_argument If the participant is not registered.
+ */
+const Participant* TIVIDYFacade::getParticipant(
+    const std::string& participantID) const {
+
+    std::map<std::string, Participant*>::const_iterator found =
+        participants.find(participantID);
+
+    if (found == participants.end()) {
+        throw std::invalid_argument(
+            "getParticipant: unknown participant '" + participantID + "'");
+    }
+
+    return found->second;
+}
+
+/**
+ * @brief Checks whether a participant is assigned to a specific task.
+ * @param instanceID The workflow instance ID.
+ * @param taskID The work item ID.
+ * @param participantID The participant ID.
+ * @return true if the participant is assigned to the task.
+ */
+bool TIVIDYFacade::isTaskAssignedTo(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& participantID) {
+
+    WorkItem* item = findItem(instanceID, taskID);
+
+    Participant* assignee = item->getAssignee();
+
+    if (assignee == nullptr) {
+        return false;
+    }
+
+    return assignee->getParticipantID() == participantID;
+}
+
+
 /**
  * @brief Creates a cloned workflow instance using the prototype pattern.
  * @param[in] definitionName Name of the template workflow definition.

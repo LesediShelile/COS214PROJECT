@@ -33,6 +33,8 @@ public:
     virtual bool isAvailable() const;
     virtual std::string getStateName() const;
 
+    virtual Participant* getAssignee() const override;
+
     virtual std::vector<WorkItem*> getChildren() const;
     virtual void activateChildren();
 

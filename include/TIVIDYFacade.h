@@ -82,6 +82,27 @@ public:
     void registerParticipant(Participant* participant);
 
     /**
+ * @brief Retrieves a registered participant by ID.
+ * @param participantID Unique participant ID.
+ * @return Pointer to the participant.
+ * @throws std::invalid_argument If the participant does not exist.
+ */
+const Participant* getParticipant(
+    const std::string& participantID) const;
+
+/**
+ * @brief Checks whether a participant is assigned to a particular task.
+ * @param instanceID Workflow instance ID.
+ * @param taskID Work item ID.
+ * @param participantID Participant ID.
+ * @return true if the participant is assigned to the task.
+ */
+bool isTaskAssignedTo(
+    const std::string& instanceID,
+    const std::string& taskID,
+    const std::string& participantID);
+
+    /**
      * @brief Instantiates a new workflow from a registered definition.
      * @details Clones the prototype workflow definition hierarchy and wires all
      * default observers (AuditLogger, Notifier, MetricsCollector, and EngineRouter).
