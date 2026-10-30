@@ -1,57 +1,54 @@
-/**
- * @file AdapterOne.h
- * @brief Declares the AdapterOne class.
- */
 
-#ifndef ADAPTERONE_H
-#define ADAPTERONE_H
+#include "AdapterOne.h"
+#include "APIOne.h"
 
-#include "ExternalConnector.h"
-#include <string>
+#include <stdexcept>
 
-/**
- * @class APIOne
- * @brief Forward declaration of the external API class.
- */
-class APIOne;
+AdapterOne::AdapterOne(APIOne* adaptee)
+    : adaptee(adaptee) {
+    if (this->adaptee == nullptr) {
+        throw std::invalid_argument(
+            "AdapterOne requires a valid APIOne object."
+        );
+    }
+}
 
-/**
- * @class AdapterOne
- * @brief Adapts APIOne to the ExternalConnector interface.
- *
- * Allows clients to interact with APIOne through the
- * ExternalConnector interface.
- */
-class AdapterOne : public ExternalConnector {
-private:
-    /** Pointer to the external API being adapted. */
-    APIOne* adaptee;
+void AdapterOne::request(
+    const std::string* operation,
+    const std::string* payload) {
 
-public:
-    /**
-     * @brief Constructs an AdapterOne object.
-     * @param adaptee Pointer to the API object being adapted.
-     */
-    AdapterOne(APIOne* adaptee);
+    if (operation == nullptr || payload == nullptr) {
+        throw std::invalid_argument(
+            "Operation and payload cannot be null."
+        );
+    }
 
-    /**
-     * @brief Executes an operation through the external API.
-     * @param operation Operation to perform.
-     * @param payload Data required for the operation.
-     */
-    void request(const std::string* operation,
-                 const std::string* payload) override;
+    if (*operation == "add") {
+        const std::size_t separator = payload->find('=');
 
-    /**
-     * @brief Returns the name of the external API.
-     * @return Name of the API.
-     */
-    std::string getName() override;
+        if (separator == std::string::npos) {
+            throw std::invalid_argument(
+                "Add payload must use key=value format."
+            );
+        }
 
-    /**
-     * @brief Destroys the AdapterOne object.
-     */
-    ~AdapterOne();
-};
+        adaptee->addEntry(
+            payload->substr(0, separator),
+            payload->substr(separator + 1)
+        );
+    }
+    else if (*operation == "remove") {
+        adaptee->removeEntry(*payload);
+    }
+    else {
+        throw std::invalid_argument(
+            "Unsupported APIOne operation."
+        );
+    }
+}
 
-#endif // ADAPTERONE_H
+std::string AdapterOne::getName() {
+    return "API One";
+}
+
+AdapterOne::~AdapterOne() = default;

@@ -13,19 +13,19 @@ void TaskState::complete(Task*) { invalid("complete"); }
 void TaskState::reject(Task*, const std::string&) { invalid("reject"); }
 void TaskState::cancel(Task*) { invalid("cancel"); }
 
-void CreatedState::makeAvailable(Task* t) { t->handleChange(new AvailableState()); }
-void CreatedState::cancel(Task* t) { t->handleChange(new CancelledState()); }
+void Created::makeAvailable(Task* t) { t->handleChange(new Available()); }
+void Created::cancel(Task* t) { t->handleChange(new Cancelled()); }
 
-void AvailableState::assign(Task* t, Participant* p) { t->setAssignee(p); t->handleChange(new AssignedState()); }
-void AvailableState::cancel(Task* t) { t->handleChange(new CancelledState()); }
+void Available::assign(Task* t, Participant* p) { t->setAssignee(p); t->handleChange(new Assigned()); }
+void Available::cancel(Task* t) { t->handleChange(new Cancelled()); }
 
-void AssignedState::start(Task* t) { t->handleChange(new StartedState()); }
-void AssignedState::reject(Task* t, const std::string&) { t->setAssignee(0); t->handleChange(new RejectedState()); }
-void AssignedState::cancel(Task* t) { t->handleChange(new CancelledState()); }
+void Assigned::start(Task* t) { t->handleChange(new StartedState()); }
+void Assigned::reject(Task* t, const std::string&) { t->setAssignee(0); t->handleChange(new RejectedState()); }
+void Assigned::cancel(Task* t) { t->handleChange(new Cancelled()); }
 
-void StartedState::complete(Task* t) { t->handleChange(new CompletedState()); }
+void StartedState::complete(Task* t) { t->handleChange(new Completed()); }
 void StartedState::reject(Task* t, const std::string&) { t->setAssignee(0); t->handleChange(new RejectedState()); }
-void StartedState::cancel(Task* t) { t->handleChange(new CancelledState()); }
+void StartedState::cancel(Task* t) { t->handleChange(new Cancelled()); }
 
-void RejectedState::makeAvailable(Task* t) { t->handleChange(new AvailableState()); }
-void RejectedState::cancel(Task* t) { t->handleChange(new CancelledState()); }
+void RejectedState::makeAvailable(Task* t) { t->handleChange(new Available()); }
+void RejectedState::cancel(Task* t) { t->handleChange(new Cancelled()); }

@@ -1,5 +1,5 @@
-#ifndef AVAILABLESTATE_H
-#define AVAILABLESTATE_H
+#ifndef Available_H
+#define Available_H
 
 #include <iostream>
 #include <string>
@@ -11,12 +11,12 @@
  *
  * From here the task can be assigned, rejected or cancelled.
  */
-class AvailableState  : public TaskState {
+class Available  : public TaskState {
 
     public: 
 
         /**
-         * @brief Assigns a participant and moves the task to AssignedState.
+         * @brief Assigns a participant and moves the task to Assigned.
          * @param task The task this state belongs to.
          * @param participant The participant to assign. If nullptr, the task stays Available.
          */
@@ -30,7 +30,7 @@ class AvailableState  : public TaskState {
         void reject (Task* task, std::string reason) override;
 
         /**
-         * @brief Cancels the task and moves it to CancelledState.
+         * @brief Cancels the task and moves it to Cancelled.
          * @param task The task this state belongs to.
          */
         void cancel (Task* task) override;
@@ -43,7 +43,7 @@ class AvailableState  : public TaskState {
 
         /**
          * @brief Creates a copy of this state (Prototype pattern).
-         * @return A new AvailableState.
+         * @return A new Available.
          */
         TaskState* clone() const override;
 

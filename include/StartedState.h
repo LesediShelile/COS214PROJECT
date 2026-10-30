@@ -17,7 +17,7 @@ class StartedState : public TaskState{
     public:
 
         /**
-         * @brief Completes the task and moves it to CompletedState.
+         * @brief Completes the task and moves it to Completed.
          * @param task The task this state belongs to.
          */
         void complete (Task* task);
@@ -30,7 +30,7 @@ class StartedState : public TaskState{
         void reject (Task* task, std::string reason) override;
 
         /**
-         * @brief Cancels the task and moves it to CancelledState.
+         * @brief Cancels the task and moves it to Cancelled.
          * @param task The task this state belongs to.
          */
         void cancel (Task* task);

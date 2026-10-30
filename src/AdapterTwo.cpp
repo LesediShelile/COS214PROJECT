@@ -1,56 +1,48 @@
-/**
- * @file AdapterTwo.h
- * @brief Declares the AdapterTwo class.
- */
 
-#ifndef ADAPTERTWO_H
-#define ADAPTERTWO_H
+#include "AdapterTwo.h"
+#include "APITwo.h"
 
-#include "ExternalConnector.h"
-#include <string>
+#include <stdexcept>
 
-/**
- * @class APITwo
- * @brief Forward declaration of the external API class.
- */
-class APITwo;
+AdapterTwo::AdapterTwo(APITwo* adaptee)
+    : adaptee(adaptee) {
+    if (this->adaptee == nullptr) {
+        throw std::invalid_argument(
+            "AdapterTwo requires a valid APITwo object."
+        );
+    }
+}
 
-/**
- * @class AdapterTwo
- * @brief Adapts APITwo to the ExternalConnector interface.
- *
- * Allows clients to interact with APITwo through the
- * ExternalConnector interface.
- */
-class AdapterTwo : public ExternalConnector {
-private:
-    /** Pointer to the external API being adapted. */
-    APITwo* adaptee;
+void AdapterTwo::request(
+    const std::string* operation,
+    const std::string* payload) {
 
-public:
-    /**
-     * @brief Constructs an AdapterTwo object.
-     */
-    AdapterTwo();
+    if (operation == nullptr || payload == nullptr) {
+        throw std::invalid_argument(
+            "Operation and payload cannot be null."
+        );
+    }
 
-    /**
-     * @brief Executes an operation through the external API.
-     * @param operation Operation to perform.
-     * @param payload Data required for the operation.
-     */
-    void request(const std::string* operation,
-                 const std::string* payload) override;
+    adaptee->setInfo(*payload, "");
 
-    /**
-     * @brief Returns the name of the external API.
-     * @return Name of the API.
-     */
-    std::string getName() override;
+    if (*operation == "add") {
+        adaptee->add();
+    }
+    else if (*operation == "alert") {
+        adaptee->alert();
+    }
+    else if (*operation == "dispatch") {
+        adaptee->dispatch();
+    }
+    else {
+        throw std::invalid_argument(
+            "Unsupported APITwo operation."
+        );
+    }
+}
 
-    /**
-     * @brief Destroys the AdapterTwo object.
-     */
-    ~AdapterTwo();
-};
+std::string AdapterTwo::getName() {
+    return "API Two";
+}
 
-#endif // ADAPTERTWO_H
+AdapterTwo::~AdapterTwo() = default;

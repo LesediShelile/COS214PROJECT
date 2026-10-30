@@ -16,13 +16,13 @@ class RejectedState : public TaskState{
     public:
 
         /**
-         * @brief Cancels the task and moves it to CancelledState.
+         * @brief Cancels the task and moves it to Cancelled.
          * @param task The task this state belongs to.
          */
         void cancel (Task* task) override;
 
         /**
-         * @brief Clears the rejection reason and moves the task back to AvailableState.
+         * @brief Clears the rejection reason and moves the task back to Available.
          * @param task The task this state belongs to.
          */
         void makeAvailable (Task* task) override;

@@ -6,7 +6,7 @@
 
 void StartedState :: complete (Task* task){ //Makes a new complete state object 
     
-    task -> handleChange(new CompletedState()); 
+    task -> handleChange(new Completed()); 
 
 }
 
@@ -22,7 +22,7 @@ void StartedState :: reject (Task* task, std::string reason){ //Makes a new reje
 
 void StartedState :: cancel (Task* task) { //moves the task to cancelled(end state)
 
-    task -> handleChange(new CancelledState());
+    task -> handleChange(new Cancelled());
 }
 
 std::string StartedState :: getName() const{

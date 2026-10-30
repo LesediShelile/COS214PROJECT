@@ -63,13 +63,13 @@ class TaskState {
 
     /**
      * @brief Tells whether this is an end state (no further actions are possible).
-     * @return true for CompletedState and CancelledState, false otherwise.
+     * @return true for Completed and Cancelled, false otherwise.
      */
     virtual bool isFinal() const { return false; }
 
     /**
      * @brief Tells whether a task in this state is ready to be assigned.
-     * @return true only for AvailableState, false otherwise.
+     * @return true only for Available, false otherwise.
      */
     virtual bool isAvailable() const { return false; }
 

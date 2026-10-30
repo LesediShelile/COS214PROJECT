@@ -5,7 +5,7 @@
 #include "CancelledState.h"
 #include <iostream>
 
-void AvailableState :: assign (Task* task, Participant* participant){
+void Available :: assign (Task* task, Participant* participant){
 
     if (participant == nullptr){
         std::cout << "Cannot assign: no participant given" << std::endl;
@@ -15,11 +15,11 @@ void AvailableState :: assign (Task* task, Participant* participant){
 
     task -> setAssignee (participant);
 
-    task -> handleChange (new AssignedState());
+    task -> handleChange (new Assigned());
 
 }
 
-void AvailableState :: reject (Task* task, const std::string reason) {
+void Available :: reject (Task* task, const std::string reason) {
 
     task -> setData ("rejectionReason", reason);
 
@@ -27,21 +27,21 @@ void AvailableState :: reject (Task* task, const std::string reason) {
 
 }
 
-void AvailableState :: cancel (Task* task) {
+void Available :: cancel (Task* task) {
 
-    task -> handleChange (new CancelledState());
+    task -> handleChange (new Cancelled());
 
 }
 
-std::string AvailableState :: getName() const {
+std::string Available :: getName() const {
 
     return "Available";
 
 }
 
-TaskState* AvailableState :: clone() const{
+TaskState* Available :: clone() const{
 
-    return new AvailableState (*this);
+    return new Available (*this);
 
 }
 

@@ -1,5 +1,5 @@
-#ifndef COMPLETEDSTATE_H
-#define COMPLETEDSTATE_H
+#ifndef Completed_H
+#define Completed_H
 
 #include <iostream>
 #include <string>
@@ -12,7 +12,7 @@
  * No further actions are allowed. Any action falls back to TaskState,
  * which reports that it cannot be done.
  */
-class CompletedState : public TaskState{
+class Completed : public TaskState{
 
     public:
         /**
@@ -23,7 +23,7 @@ class CompletedState : public TaskState{
 
         /**
          * @brief Creates a copy of this state (Prototype pattern).
-         * @return A new CompletedState.
+         * @return A new Completed.
          */
         TaskState* clone() const override;
 
