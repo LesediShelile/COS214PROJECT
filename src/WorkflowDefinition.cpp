@@ -126,6 +126,7 @@ bool WorkflowDefinition::isFrozen() const {
  * @throws std::logic_error If called before freezing the definition.
  */
 WorkflowInstance* WorkflowDefinition::createInstance(const std::string& instanceID) {
+    
     if (!frozen) {
         throw std::logic_error("createInstance: definition '" + name + "' must be frozen first");
     }

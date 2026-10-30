@@ -1,4 +1,4 @@
-#include <QApplication>
+/*#include <QApplication>
 #include <QMainWindow>
 #include <QWidget>
 #include <QLabel>
@@ -337,3 +337,4 @@ int main(int argc, char *argv[]) {
     window.show();
     return app.exec();
 }
+*/

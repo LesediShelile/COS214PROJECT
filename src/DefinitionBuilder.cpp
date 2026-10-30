@@ -24,11 +24,23 @@ DefinitionBuilder::DefinitionBuilder()
 
 WorkflowDefinition* DefinitionBuilder::getResult()
 {
+    if(this->definition == nullptr)
+    {
+        throw std::logic_error("getResult: There is no definition to return");
+    }
+    
     if(!stageStack.empty())
     {
-        cout << "Warning: returning workflow definition with unclosed changes on the stack.\n";
+        throw std::logic_error("getResult: Please end any open stages before returning definition");
     }
-
+    if(this->pendingTask != nullptr)
+    {
+        throw std::logic_error("getResult: Please commit the pending task before returning definiton");
+    }
+    if(this->definition->getRoot() == nullptr)
+    {
+        throw std::logic_error("getResult: Cannot return empty definition");
+    }
     WorkflowDefinition* result = this->definition;
     this->definition = nullptr; 
     return result;
@@ -44,12 +56,26 @@ void DefinitionBuilder::reset(string name, int version)
         this->stageStack.pop();
     }
 
+    delete this->pendingTask;
     this->pendingTask = nullptr;
     this->nextItemID = 0;
 }
 
 void DefinitionBuilder::beginSequentialStage(string name)
 {
+    if(this->definition == nullptr)
+    {
+        throw std::logic_error("beginSequentialStage: call reset before building a workflow");
+    }
+    
+    if (stageStack.empty() && definition->getRoot() != nullptr) 
+    {
+         throw std::logic_error( "beginSequentialStage: workflow already has a root stage");
+    }   
+    if(this->pendingTask != nullptr)
+    {
+        throw std::logic_error("beginSequentialStage: Please commit the pending task before opening a new Stage");
+    } 
     Stage* newStage = new SequentialStage(to_string(this->nextItemID), name);
     this->nextItemID++;
 
@@ -71,6 +97,20 @@ void DefinitionBuilder::beginSequentialStage(string name)
 
 void DefinitionBuilder::beginParallelStage(string name)
 {
+    if(this->definition == nullptr)
+    {
+        throw std::logic_error("beginParallelStage: call reset before building a workflow");
+    }
+
+    if (stageStack.empty() && definition->getRoot() != nullptr) 
+    {
+         throw std::logic_error( "beginParallelStage: workflow already has a root stage");
+    } 
+    if(this->pendingTask != nullptr)
+    {
+        throw std::logic_error("beginParallelStage: Please commit the pending task before opening a new Stage");
+    } 
+    
     Stage* newStage = new ParallelStage(to_string(this->nextItemID), name);
     this->nextItemID++;
 
@@ -92,6 +132,20 @@ void DefinitionBuilder::beginParallelStage(string name)
 
 void DefinitionBuilder::addTask(string name, Role* role, AssignmentStrategy* strategy)
 {
+    if(this->definition == nullptr)
+    {
+        throw std::logic_error("addTask: call reset before building a workflow");
+    }
+    
+    if(this->pendingTask != nullptr)
+    {
+        throw std::logic_error("addTask: commit the current pending task before adding a new task");
+    }
+    
+    if(this->stageStack.empty())
+    {
+        throw std::logic_error("addTask: the stage stack is empty, task cannot be added");
+    }
     WorkItem* newTask = new Task(to_string(this->nextItemID), name, role, strategy);
     this->nextItemID++;
 
@@ -100,6 +154,20 @@ void DefinitionBuilder::addTask(string name, Role* role, AssignmentStrategy* str
 
 void DefinitionBuilder::addExternalTask(string name, Role* role, AssignmentStrategy* strategy, ExternalConnector* connector, string request)
 {
+   
+    if(this->definition == nullptr)
+    {
+        throw std::logic_error("addExternalTask: call reset before building a workflow");
+    }
+    
+    if(this->pendingTask != nullptr)
+    {
+        throw std::logic_error("addExternalTask: commit the current pending task before adding a new task");
+    }
+    if(this->stageStack.empty())
+    {
+        throw std::logic_error("addExternalTask: the stage stack is empty, task cannot be added");
+    }
     WorkItem* newExternalTask = new ExternalTask(to_string(this->nextItemID), name, role, strategy, connector, request);
     this->nextItemID++;
 
@@ -108,62 +176,79 @@ void DefinitionBuilder::addExternalTask(string name, Role* role, AssignmentStrat
 
 void DefinitionBuilder::withAudit(EventPublisher* publisher)
 {
-    if(this->pendingTask == nullptr){return;}
+    if(this->pendingTask == nullptr)
+    {
+        throw std::logic_error("withAudit: there is no pending task to decorate");
+    }
     
     WorkItem* auditTask =  new AuditedTask(this->pendingTask, publisher);
     
-
-    //NB. Swap out the old task if needed
-    //check how composite stores tasks
-
     this->pendingTask = auditTask;
 }
 
 void DefinitionBuilder::withValidation(vector<string> fields)
 {
-    if(this->pendingTask == nullptr){return;}
+    if(this->pendingTask == nullptr)
+    {
+        throw std::logic_error("withValidation: there is no pending task to decorate");
+    }
     
     WorkItem* VTask =  new ValidatedTask(this->pendingTask, fields);
     
-
-    //NB. Swap out the old task if needed
-    //check how composite stores tasks
 
     this->pendingTask = VTask;
 }
 
 void DefinitionBuilder::withPriority(int level)
 {
-    if(this->pendingTask == nullptr){return;}
+    if(this->pendingTask == nullptr)
+    {
+        throw std::logic_error("withPriority: there is no pending task to decorate");
+    }
     
     WorkItem* PTask =  new PriorityTask(this->pendingTask, level);
     
-
-    //NB. Swap out the old task if needed
-    //check how composite stores tasks
 
     this->pendingTask = PTask;
 }
 
 void DefinitionBuilder::endStage()
 {
+    if(this->pendingTask != nullptr)
+    {
+        throw std::logic_error("endStage: Commit any pending tasks before ending a stage");
+    }
     if(!this->stageStack.empty())
     {
         this->stageStack.pop();
+    }
+    else
+    {
+        throw std::logic_error("endStage: The stage stack is currently empty");
     }
 }
 
 void DefinitionBuilder::commitPendingTask()
 {
+    if(this->pendingTask == nullptr)
+    {
+        throw std::logic_error("commitPendingTask: There is no current pending task to commit");
+    }
+    
     if(!this->stageStack.empty())
     {
         this->stageStack.top()->add(pendingTask);
+        this->pendingTask = nullptr;
     }
-    this->pendingTask = nullptr;
+    else
+    {
+        throw std::logic_error("commitPendingTask: The stage stack is empty");
+    }
+
 }
 
 DefinitionBuilder::~DefinitionBuilder()
 {
     delete this->definition;
-
+    delete this->pendingTask;
 }
