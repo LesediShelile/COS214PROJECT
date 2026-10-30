@@ -1,13 +1,14 @@
-#include "include/TIVIDYFacade.h"
-#include "include/SequentialStage.h"
-#include "include/ParallelStage.h"
-#include "include/DepthFirstIterator.h"
-#include "include/AvailableItemsIterator.h"
-#include "include/Task.h"
+#include "include/DefinitionBuilder.h"
+#include "include/Participant.h"
+#include "include/WorkItem.h"
+#include "include/WorkItemIterator.h"
+#include "include/WorkflowDefinition.h"
+#include "include/WorkflowInstance.h"
+
+#include <iostream>
 
 
 int main()
 {
-    std::cout << "creating work tree\n";
-    
+    std::cout << "Testing Builder\n";
 }

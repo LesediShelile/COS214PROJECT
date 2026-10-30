@@ -10,6 +10,8 @@ using namespace std;
 class AvailableItemsIterator : public WorkItemIterator
 {
     public:
+        AvailableItemsIterator(const AvailableItemsIterator&) = delete; //copy constructor disabled
+        AvailableItemsIterator& operator=(const AvailableItemsIterator&) = delete; //assignment operator disabled
         AvailableItemsIterator(WorkItem* root);
         void first() override;
         void next() override;

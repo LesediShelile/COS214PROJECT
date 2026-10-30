@@ -9,10 +9,11 @@ AvailableItemsIterator::AvailableItemsIterator(WorkItem* root)
 
 void AvailableItemsIterator::skipToAvailable()
 {
-    while(!inner->isDone() && !inner->current()->isAvailable())
+    while (!inner->isDone() &&
+        (!inner->current()->isAvailable() ||
+            !inner->current()->getChildren().empty()))
     {
         inner->next();
-
     }
 }
 
