@@ -1,79 +1,123 @@
-#include "../include/MetricsCollector.h"
-#include <sstream>
 
-/**
- * @brief Constructs a MetricsCollector.
- */
-MetricsCollector::MetricsCollector() {
+#include "../include/MetricsCollector.h"
+#include "../include/WorkflowEvent.h"
+#include "../include/EventType.h"
+
+#include <sstream>
+#include <ctime>
+#include <cstdio>
+
+namespace {
+
+bool parseTimestamp(const std::string& timestamp, std::time_t& result) {
+    int year, month, day, hour, minute, second;
+
+    if (std::sscanf(timestamp.c_str(), "%d-%d-%d %d:%d:%d",
+        &year, &month, &day, &hour, &minute, &second) == 6) {
+
+        std::tm info = {};
+        info.tm_year = year - 1900;
+        info.tm_mon = month - 1;
+        info.tm_mday = day;
+        info.tm_hour = hour;
+        info.tm_min = minute;
+        info.tm_sec = second;
+        info.tm_isdst = -1;
+
+        result = std::mktime(&info);
+        return result != static_cast<std::time_t>(-1);
+    }
+
+    if (std::sscanf(timestamp.c_str(), "%d:%d:%d",
+        &hour, &minute, &second) == 3) {
+        result = hour * 3600 + minute * 60 + second;
+        return true;
+    }
+
+    if (std::sscanf(timestamp.c_str(), "%d:%d",
+        &hour, &minute) == 2) {
+        result = hour * 3600 + minute * 60;
+        return true;
+    }
+
+    return false;
 }
 
-/**
- * @brief Updates metrics using a workflow event.
- * @param event The workflow event received.
- */
+}
+
+MetricsCollector::MetricsCollector() {}
+
 void MetricsCollector::update(WorkflowEvent* event) {
-    if (event == 0) {
+    if (event == nullptr ||
+        event->getType() != EventType::ITEM_STATE_CHANGED) {
         return;
     }
 
     std::string state = event->getDetails();
+    std::string source = event->getSourceID();
+    std::string timestamp = event->getTimestamp();
+
+    if (state.empty() || source.empty()) return;
+
+    std::time_t currentTime;
+
+    if (!parseTimestamp(timestamp, currentTime)) return;
+
+    if (stateEntryTime.count(source)) {
+        std::time_t previousTime;
+
+        if (parseTimestamp(stateEntryTime[source], previousTime)) {
+            double elapsed = std::difftime(currentTime, previousTime);
+
+            if (elapsed < 0 &&
+                previousTime < 86400 &&
+                currentTime < 86400) {
+                elapsed += 86400;
+            }
+
+            if (elapsed >= 0 && currentState.count(source)) {
+                std::string previousState = currentState[source];
+
+                totalTimeInState[previousState] += elapsed;
+                completedIntervals[previousState]++;
+            }
+        }
+    }
+
+    stateEntryTime[source] = timestamp;
+    currentState[source] = state;
     transitionCounts[state]++;
-
-    stateEntryTime[state] = event->getTimestamp();
 }
 
-/**
- * @brief Returns the number of transitions recorded for a state.
- * @param state The state to check.
- * @return The transition count, or 0 if the state is not recorded.
- */
 int MetricsCollector::getTransitionCount(std::string state) {
-    if (transitionCounts.find(state) != transitionCounts.end()) {
-        return transitionCounts[state];
-    }
-
-    return 0;
+    return transitionCounts[state];
 }
 
-/**
- * @brief Returns the average time spent in a state.
- * @param state The state to check.
- * @return The average time, or 0.0f if no time has been recorded.
- */
 float MetricsCollector::getAverageTimeInState(std::string state) {
-    if (totalTimeInState.find(state) != totalTimeInState.end()) {
-        return totalTimeInState[state];
+    if (completedIntervals[state] == 0) {
+        return 0.0f;
     }
 
-    return 0.0f;
+    return static_cast<float>(
+        totalTimeInState[state] / completedIntervals[state]
+    );
 }
 
-/**
- * @brief Creates a summary of the collected metrics.
- * @return A string containing the metrics summary.
- */
 std::string MetricsCollector::getSummary() {
     std::ostringstream summary;
 
     for (std::map<std::string, int>::iterator it =
-             transitionCounts.begin();
-         it != transitionCounts.end(); ++it) {
-        summary << "State: " << it->first
-                << ", Transitions: " << it->second << "\n";
-    }
+        transitionCounts.begin();
+        it != transitionCounts.end(); ++it) {
 
-    for (std::map<std::string, float>::iterator it =
-             totalTimeInState.begin();
-         it != totalTimeInState.end(); ++it) {
         summary << "State: " << it->first
-                << ", Total time: " << it->second << "\n";
+                << ", Transitions: " << it->second
+                << ", Average time: "
+                << getAverageTimeInState(it->first)
+                << " seconds\n";
     }
 
     return summary.str();
 }
 
-/**
- * @brief Destroys the MetricsCollector.
- */
-MetricsCollector::~MetricsCollector() {
-}
+MetricsCollector::~MetricsCollector() {}

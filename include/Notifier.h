@@ -1,3 +1,4 @@
+
 #ifndef NOTIFIER_H
 #define NOTIFIER_H
 
@@ -5,27 +6,22 @@
 #include <string>
 #include <vector>
 
-/**
- * @brief Handles notifications for workflow events (Observer pattern).
- *
- * A concrete WorkflowListener, so it can be attached to an EventPublisher
- * alongside the AuditLogger and MetricsCollector.
- */
 class Notifier : public WorkflowListener {
+private:
+    std::vector<std::string> notifications;
+
 public:
-    /** @brief Constructs a Notifier. */
     Notifier();
 
-    /**
-     * @brief Receives a published workflow event.
-     * @param event Pointer to the workflow event.
-     */
     void update(WorkflowEvent* event) override;
 
+    std::vector<std::string> getNotifications() const;
 
+    int getNotificationCount() const;
 
-    /** @brief Destroys the Notifier. */
+    void clearNotifications();
+
     ~Notifier() override;
 };
 
-#endif // NOTIFIER_H
+#endif
