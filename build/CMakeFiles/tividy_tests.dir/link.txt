@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/tividy_tests.dir/tests/test_work_items.cpp.o -o tividy_tests  libtividy_core.a 
