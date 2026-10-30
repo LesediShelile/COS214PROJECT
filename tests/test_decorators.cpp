@@ -1,21 +1,21 @@
 // Tests for the concrete Decorators: ValidatedTask, AuditedTask, PriorityTask.
 
-#include "doctest.h"
+#include "third_party/doctest.h"
 
 #include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
-#include "AuditedTask.h"
-#include "EventPublisher.h"
-#include "Participant.h"
-#include "PriorityTask.h"
-#include "Role.h"
-#include "Task.h"
-#include "ValidatedTask.h"
-#include "WorkflowEvent.h"
-#include "WorkflowListener.h"
+#include "../include/AuditedTask.h"
+#include "../include/EventPublisher.h"
+#include "../include/Participant.h"
+#include "../include/PriorityTask.h"
+#include "../include/Role.h"
+#include "../include/Task.h"
+#include "../include/ValidatedTask.h"
+#include "../include/WorkflowEvent.h"
+#include "../include/WorkflowListener.h"
 
 namespace {
 

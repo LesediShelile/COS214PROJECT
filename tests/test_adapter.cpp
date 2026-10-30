@@ -1,11 +1,11 @@
 
-#include "doctest.h"
+#include "third_party/doctest.h"
 
-#include "AdapterOne.h"
-#include "AdapterTwo.h"
-#include "APIOne.h"
-#include "APITwo.h"
-#include "ExternalConnector.h"
+#include "../include/AdapterOne.h"
+#include "../include/AdapterTwo.h"
+#include "../include/APIOne.h"
+#include "../include/APITwo.h"
+#include "../include/ExternalConnector.h"
 
 #include <stdexcept>
 #include <string>
