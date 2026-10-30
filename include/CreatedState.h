@@ -1,5 +1,5 @@
-#ifndef CREATEDSTATE_H
-#define CREATEDSTATE_H
+#ifndef Created_H
+#define Created_H
 
 #include <iostream>
 #include <string>
@@ -11,12 +11,12 @@
  *
  * From here the task can be made available or cancelled.
  */
-class CreatedState : public TaskState {
+class Created : public TaskState {
 
     public:
 
         /**
-         * @brief Makes the task ready to be assigned and moves it to AvailableState.
+         * @brief Makes the task ready to be assigned and moves it to Available.
          * @param task The task this state belongs to.
          */
         void makeAvailable (Task* task) override;
@@ -29,12 +29,12 @@ class CreatedState : public TaskState {
 
         /**
          * @brief Creates a copy of this state (Prototype pattern).
-         * @return A new CreatedState.
+         * @return A new Created.
          */
         TaskState* clone() const override;
 
         /**
-         * @brief Cancels the task and moves it to CancelledState.
+         * @brief Cancels the task and moves it to Cancelled.
          * @param task The task this state belongs to.
          */
         void cancel (Task* task) override;

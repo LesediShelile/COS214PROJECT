@@ -7,7 +7,7 @@
 
 Task::Task(const std::string& itemID, const std::string& name,
            Role* requiredRole, AssignmentStrategy* strategy)
-    : WorkItem(itemID, name), currentState_(new CreatedState()),
+    : WorkItem(itemID, name), currentState_(new Created()),
       assignee_(0), requiredRole_(requiredRole), strategy_(strategy),
       deadline_(0), publisher_(0) {}
 

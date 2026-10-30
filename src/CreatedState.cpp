@@ -3,27 +3,27 @@
 #include "AvailableState.h"
 #include "CancelledState.h"
 
-void CreatedState :: makeAvailable (Task* task){
+void Created :: makeAvailable (Task* task){
 
-    task -> handleChange (new AvailableState());
+    task -> handleChange (new Available());
 
 }
 
-std::string CreatedState :: getName() const{
+std::string Created :: getName() const{
 
     return "Created";
 
 } 
 
-TaskState * CreatedState :: clone() const {
+TaskState * Created :: clone() const {
 
-    return new CreatedState (*this);
+    return new Created (*this);
 
 }
 
-void CreatedState :: cancel (Task* task) {
+void Created :: cancel (Task* task) {
 
-    task -> handleChange (new CancelledState());
+    task -> handleChange (new Cancelled());
 
 }
 

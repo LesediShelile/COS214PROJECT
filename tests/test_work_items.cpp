@@ -64,7 +64,7 @@ TEST_CASE("Task starts Created and follows its lifecycle through the state objec
     Role role("Doctor", 2);
     Participant p("p1", "Dr Who", &role);
 
-    CHECK(t->getStateName() == "CreatedState");
+    CHECK(t->getStateName() == "Created");
     CHECK_FALSE(t->isAvailable());
 
     t->makeAvailable();
@@ -77,7 +77,7 @@ TEST_CASE("Task starts Created and follows its lifecycle through the state objec
     t->complete();
 
     CHECK(t->isFinished());
-    CHECK(t->getStateName() == "CompletedState");
+    CHECK(t->getStateName() == "Completed");
 }
 
 TEST_CASE("Invalid operations are rejected, not silently ignored") {
@@ -158,7 +158,7 @@ TEST_CASE("SequentialStage releases children one at a time, in order") {
 
     s.activateChildren(); // Calling again must not re-activate b.
 
-    CHECK(b->getStateName() == "AvailableState");
+    CHECK(b->getStateName() == "Available");
 
     finish(b, &p);
     s.activateChildren();
@@ -238,8 +238,8 @@ TEST_CASE("Stage::cancel cancels every unfinished child and leaves finished ones
     finish(a, &p);
     s.cancel();
 
-    CHECK(a->getStateName() == "CompletedState");
-    CHECK(b->getStateName() == "CancelledState");
+    CHECK(a->getStateName() == "Completed");
+    CHECK(b->getStateName() == "Cancelled");
     CHECK(s.isFinished());
 }
 
@@ -295,15 +295,15 @@ TEST_CASE("Prototype: cloning a Task copies its state object, not the pointer") 
 
     std::unique_ptr<WorkItem> c(t->clone());
 
-    CHECK(c->getStateName() == "AvailableState");
+    CHECK(c->getStateName() == "Available");
 
     Role role("General", 1);
     Participant p("p", "p", &role);
 
     c->assign(&p); // Moves only the clone.
 
-    CHECK(c->getStateName() == "AssignedState");
-    CHECK(t->getStateName() == "AvailableState");
+    CHECK(c->getStateName() == "Assigned");
+    CHECK(t->getStateName() == "Available");
 }
 
 TEST_CASE("Decorator forwards to the wrapped task and clones it deeply") {
@@ -331,8 +331,8 @@ TEST_CASE("Decorator forwards to the wrapped task and clones it deeply") {
 
     copy->assign(&p);
 
-    CHECK(copy->getStateName() == "AssignedState");
-    CHECK(dec->getStateName() == "AvailableState"); // Original unaffected.
+    CHECK(copy->getStateName() == "Assigned");
+    CHECK(dec->getStateName() == "Available"); // Original unaffected.
 
     CHECK_THROWS_AS(TagDecorator(0), std::invalid_argument);
 }
@@ -447,7 +447,7 @@ TEST_CASE("Memento round trip restores state, assignee and data") {
 
     t->restoreMemento(m.get());
 
-    CHECK(t->getStateName() == "AvailableState");
+    CHECK(t->getStateName() == "Available");
     CHECK(t->getAssignee() == static_cast<Participant*>(0));
     CHECK(t->getData("k") == "before");
 }

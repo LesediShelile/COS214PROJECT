@@ -31,12 +31,12 @@ public: \
     EXTRA \
 };
 
-TIVIDY_STUB_STATE(CreatedState,   virtual void makeAvailable(Task*); virtual void cancel(Task*);)
-TIVIDY_STUB_STATE(AvailableState, virtual void assign(Task*, Participant*); virtual void cancel(Task*); virtual bool isAvailable() const { return true; })
-TIVIDY_STUB_STATE(AssignedState,  virtual void start(Task*); virtual void reject(Task*, const std::string&); virtual void cancel(Task*);)
+TIVIDY_STUB_STATE(Created,   virtual void makeAvailable(Task*); virtual void cancel(Task*);)
+TIVIDY_STUB_STATE(Available, virtual void assign(Task*, Participant*); virtual void cancel(Task*); virtual bool isAvailable() const { return true; })
+TIVIDY_STUB_STATE(Assigned,  virtual void start(Task*); virtual void reject(Task*, const std::string&); virtual void cancel(Task*);)
 TIVIDY_STUB_STATE(StartedState,   virtual void complete(Task*); virtual void reject(Task*, const std::string&); virtual void cancel(Task*);)
 TIVIDY_STUB_STATE(RejectedState,  virtual void makeAvailable(Task*); virtual void cancel(Task*);)
-TIVIDY_STUB_STATE(CompletedState, virtual bool isFinal() const { return true; })
-TIVIDY_STUB_STATE(CancelledState, virtual bool isFinal() const { return true; })
+TIVIDY_STUB_STATE(Completed, virtual bool isFinal() const { return true; })
+TIVIDY_STUB_STATE(Cancelled, virtual bool isFinal() const { return true; })
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef ASSIGNEDSTATE_H
-#define ASSIGNEDSTATE_H
+#ifndef Assigned_H
+#define Assigned_H
 
 #include <iostream>
 #include <string>
@@ -11,7 +11,7 @@
  *
  * From here the task can be started, rejected or cancelled.
  */
-class AssignedState  : public TaskState {
+class Assigned  : public TaskState {
 
     public:
 
@@ -29,7 +29,7 @@ class AssignedState  : public TaskState {
         void reject(Task* task, std::string reason) override;
 
         /**
-         * @brief Cancels the task and moves it to CancelledState.
+         * @brief Cancels the task and moves it to Cancelled.
          * @param task The task this state belongs to.
          */
         void cancel (Task* task)  override;
@@ -42,7 +42,7 @@ class AssignedState  : public TaskState {
 
         /**
          * @brief Creates a copy of this state (Prototype pattern).
-         * @return A new AssignedState.
+         * @return A new Assigned.
          */
         TaskState* clone() const override;
 };

@@ -83,7 +83,7 @@ diff --git a/include/AvailableState.h b/include/AvailableState.h
 index e57c346..974237a 100644
 --- a/include/AvailableState.h
 +++ b/include/AvailableState.h
-@@ -39,6 +39,7 @@ class AvailableState  : public TaskState {
+@@ -39,6 +39,7 @@ class Available  : public TaskState {
           * @brief Gets the name of this state.
           * @return "Available".
           */
@@ -91,7 +91,7 @@ index e57c346..974237a 100644
           std::string getName() const override;
  
           /**
-@@ -47,4 +48,4 @@ class AvailableState  : public TaskState {
+@@ -47,4 +48,4 @@ class Available  : public TaskState {
            */
           TaskState* clone() const override;
  };
@@ -103,7 +103,7 @@ diff --git a/include/CancelledState.h b/include/CancelledState.h
 index bec569d..bcad367 100644
 --- a/include/CancelledState.h
 +++ b/include/CancelledState.h
-@@ -20,6 +20,7 @@ class CancelledState : public TaskState{
+@@ -20,6 +20,7 @@ class Cancelled : public TaskState{
           * @brief Gets the name of this state.
           * @return "Cancelled".
           */
@@ -111,7 +111,7 @@ index bec569d..bcad367 100644
           std::string getName() const override;
  
           /**
-@@ -29,4 +30,4 @@ class CancelledState : public TaskState{
+@@ -29,4 +30,4 @@ class Cancelled : public TaskState{
           TaskState* clone() const override;
  };
  
@@ -123,7 +123,7 @@ diff --git a/include/CompletedState.h b/include/CompletedState.h
 index 374b8a6..ba95e79 100644
 --- a/include/CompletedState.h
 +++ b/include/CompletedState.h
-@@ -19,6 +19,7 @@ class CompletedState : public TaskState{
+@@ -19,6 +19,7 @@ class Completed : public TaskState{
           * @brief Gets the name of this state.
           * @return "Completed".
           */
@@ -131,7 +131,7 @@ index 374b8a6..ba95e79 100644
           std::string getName() const override;
  
           /**
-@@ -29,4 +30,4 @@ class CompletedState : public TaskState{
+@@ -29,4 +30,4 @@ class Completed : public TaskState{
           
  };
  
@@ -221,7 +221,7 @@ index 0000000..92ef07a
 +/** The kinds of event TIVIDY publishes. */
 +enum class EventType {
 +    ITEM_STATE_CHANGED,   ///< a Task moved to a new state
-+    ITEM_COMPLETED,       ///< a Task reached CompletedState (EngineRouter reacts)
++    ITEM_COMPLETED,       ///< a Task reached Completed (EngineRouter reacts)
 +    TASK_ACTION,          ///< an AuditedTask recorded an action
 +    EXTERNAL_EVENT,       ///< something outside TIVIDY happened
 +    TIMEOUT,              ///< a deadline passed
@@ -530,36 +530,36 @@ index fb596ab..de74cf0 100644
 +{
 +    delete this->inner;   // the iterator owns the traversal it filters
 +}
-diff --git a/src/AvailableState.cpp b/src/AvailableState.cpp
+diff --git a/src/Available.cpp b/src/Available.cpp
 index ecdb47b..56554b1 100644
---- a/src/AvailableState.cpp
-+++ b/src/AvailableState.cpp
-@@ -46,3 +46,5 @@ TaskState* AvailableState :: clone() const{
+--- a/src/Available.cpp
++++ b/src/Available.cpp
+@@ -46,3 +46,5 @@ TaskState* Available :: clone() const{
  }
  
  
 +
-+bool AvailableState::isAvailable() const { return true; }
-diff --git a/src/CancelledState.cpp b/src/CancelledState.cpp
++bool Available::isAvailable() const { return true; }
+diff --git a/src/Cancelled.cpp b/src/Cancelled.cpp
 index b99b04f..65f233c 100644
---- a/src/CancelledState.cpp
-+++ b/src/CancelledState.cpp
-@@ -13,3 +13,5 @@ TaskState* CancelledState :: clone() const {
+--- a/src/Cancelled.cpp
++++ b/src/Cancelled.cpp
+@@ -13,3 +13,5 @@ TaskState* Cancelled :: clone() const {
  }
  
  
 +
-+bool CancelledState::isFinal() const { return true; }
-diff --git a/src/CompletedState.cpp b/src/CompletedState.cpp
++bool Cancelled::isFinal() const { return true; }
+diff --git a/src/Completed.cpp b/src/Completed.cpp
 index b94131e..9d3ea74 100644
---- a/src/CompletedState.cpp
-+++ b/src/CompletedState.cpp
-@@ -12,3 +12,5 @@ TaskState* CompletedState :: clone() const{
+--- a/src/Completed.cpp
++++ b/src/Completed.cpp
+@@ -12,3 +12,5 @@ TaskState* Completed :: clone() const{
  
  } 
  
 +
-+bool CompletedState::isFinal() const { return true; }
++bool Completed::isFinal() const { return true; }
 diff --git a/src/DefinitionBuilder.cpp b/src/DefinitionBuilder.cpp
 index 71d558b..d76fa11 100644
 --- a/src/DefinitionBuilder.cpp
@@ -956,7 +956,7 @@ index fe7ce53..a3c6241 100644
  TEST_CASE("Task starts Created and follows its lifecycle through the state object") {
      std::unique_ptr<Task> t(newTask("t1"));
 -    Participant p("p1", "Dr Who");
--    CHECK(t->getStateName() == "CreatedState");
+-    CHECK(t->getStateName() == "Created");
 +    Participant p("p1", "Dr Who", nullptr);
 +    CHECK(t->getStateName() == "Created");
      CHECK_FALSE(t->isAvailable());
@@ -966,7 +966,7 @@ index fe7ce53..a3c6241 100644
      t->start();
      t->complete();
      CHECK(t->isFinished());
--    CHECK(t->getStateName() == "CompletedState");
+-    CHECK(t->getStateName() == "Completed");
 +    CHECK(t->getStateName() == "Completed");
  }
  
@@ -1004,7 +1004,7 @@ index fe7ce53..a3c6241 100644
      CHECK_FALSE(c->isAvailable());
  
      s.activateChildren();             // calling again must not re-activate b
--    CHECK(b->getStateName() == "AvailableState");
+-    CHECK(b->getStateName() == "Available");
 +    CHECK(b->getStateName() == "Available");
  
      finish(b, &p);
@@ -1027,8 +1027,8 @@ index fe7ce53..a3c6241 100644
      s.makeAvailable();
      finish(a, &p);
      s.cancel();
--    CHECK(a->getStateName() == "CompletedState");
--    CHECK(b->getStateName() == "CancelledState");
+-    CHECK(a->getStateName() == "Completed");
+-    CHECK(b->getStateName() == "Cancelled");
 +    CHECK(a->getStateName() == "Completed");
 +    CHECK(b->getStateName() == "Cancelled");
      CHECK(s.isFinished());
@@ -1047,13 +1047,13 @@ index fe7ce53..a3c6241 100644
      std::unique_ptr<Task> t(newTask("t"));
      t->makeAvailable();
      std::unique_ptr<WorkItem> c(t->clone());
--    CHECK(c->getStateName() == "AvailableState");
+-    CHECK(c->getStateName() == "Available");
 -    Participant p("p", "p");
 +    CHECK(c->getStateName() == "Available");
 +    Participant p("p", "p", nullptr);
      c->assign(&p);                                    // moves only the clone
--    CHECK(c->getStateName() == "AssignedState");
--    CHECK(t->getStateName() == "AvailableState");
+-    CHECK(c->getStateName() == "Assigned");
+-    CHECK(t->getStateName() == "Available");
 +    CHECK(c->getStateName() == "Assigned");
 +    CHECK(t->getStateName() == "Available");
  }
@@ -1066,8 +1066,8 @@ index fe7ce53..a3c6241 100644
 -    Participant p("p", "p");
 +    Participant p("p", "p", nullptr);
      copy->assign(&p);
--    CHECK(copy->getStateName() == "AssignedState");
--    CHECK(dec->getStateName() == "AvailableState");   // original unaffected
+-    CHECK(copy->getStateName() == "Assigned");
+-    CHECK(dec->getStateName() == "Available");   // original unaffected
 +    CHECK(copy->getStateName() == "Assigned");
 +    CHECK(dec->getStateName() == "Available");   // original unaffected
      CHECK_THROWS_AS(TagDecorator(0), std::invalid_argument);
@@ -1091,7 +1091,7 @@ index fe7ce53..a3c6241 100644
      t->assign(&p);
      t->setData("k", "after");
      t->restoreMemento(m.get());
--    CHECK(t->getStateName() == "AvailableState");
+-    CHECK(t->getStateName() == "Available");
 +    CHECK(t->getStateName() == "Available");
      CHECK(t->getAssignee() == static_cast<Participant*>(0));
      CHECK(t->getData("k") == "before");

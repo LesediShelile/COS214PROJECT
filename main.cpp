@@ -24,13 +24,13 @@ std::string state(WorkItem *w) { return w->getStateName(); }
 QString qs(const std::string &s) { return QString::fromStdString(s); }
 
 // "Released" = the parent stage has let this item start (available or beyond).
-bool released(WorkItem *w) { return w->isAvailable() || state(w) != "CreatedState"; }
+bool released(WorkItem *w) { return w->isAvailable() || state(w) != "Created"; }
 
 // Push a task through its whole lifecycle.
 void drive(WorkItem *w, Participant *who) {
-    if (state(w) == "CreatedState") w->makeAvailable();
-    if (state(w) == "AvailableState") w->assign(who);
-    if (state(w) == "AssignedState") w->start();
+    if (state(w) == "Created") w->makeAvailable();
+    if (state(w) == "Available") w->assign(who);
+    if (state(w) == "Assigned") w->start();
     if (state(w) == "StartedState") w->complete();
 }
 
@@ -53,7 +53,7 @@ void runToCompletion(Desktop &theatre, Stage *root, Participant *who) {
     theatre.say(QString("%1 tasks driven").arg(leaves.size()));
     Desktop::check(root->isFinished(), "root stage did not finish");
     for (std::size_t i = 0; i < leaves.size(); ++i)
-        Desktop::check(state(leaves[i]) == "CompletedState",
+        Desktop::check(state(leaves[i]) == "Completed",
                            "task not completed: " + qs(leaves[i]->getItemID()));
 }
 
@@ -147,9 +147,9 @@ void addHospitalScenario(Desktop &theatre, HospitalCtx &c) {
     // ------------------------------------------------------------------
     theatre.section("Hospital 2. Initial state and sequential gating");
 
-    theatre.step("Tasks start in CreatedState", "Nothing is released before the workflow starts", [&] {
-        check(state(c.reg) == "CreatedState", "register should be CreatedState, was " + qs(state(c.reg)));
-        check(state(c.triage) == "CreatedState", "triage should be CreatedState");
+    theatre.step("Tasks start in Created", "Nothing is released before the workflow starts", [&] {
+        check(state(c.reg) == "Created", "register should be Created, was " + qs(state(c.reg)));
+        check(state(c.triage) == "Created", "triage should be Created");
     });
 
     theatre.step("Start the workflow", "makeAvailable() + activateChildren() releases only the first task", [&] {
@@ -164,9 +164,9 @@ void addHospitalScenario(Desktop &theatre, HospitalCtx &c) {
     theatre.section("Hospital 3. Task lifecycle");
 
     theatre.step("Assign", "Available -> Assigned", [&] {
-        if (state(c.reg) == "CreatedState") c.reg->makeAvailable();
+        if (state(c.reg) == "Created") c.reg->makeAvailable();
         c.reg->assign(&c.who);
-        check(state(c.reg) == "AssignedState", "expected AssignedState, was " + qs(state(c.reg)));
+        check(state(c.reg) == "Assigned", "expected Assigned, was " + qs(state(c.reg)));
     });
 
     theatre.step("Start", "Assigned -> Started", [&] {
@@ -176,7 +176,7 @@ void addHospitalScenario(Desktop &theatre, HospitalCtx &c) {
 
     theatre.step("Complete", "Started -> Completed", [&] {
         c.reg->complete();
-        check(state(c.reg) == "CompletedState", "expected CompletedState, was " + qs(state(c.reg)));
+        check(state(c.reg) == "Completed", "expected Completed, was " + qs(state(c.reg)));
         check(c.reg->isFinished(), "a completed task should report isFinished()");
     });
 
@@ -225,18 +225,18 @@ void addHospitalScenario(Desktop &theatre, HospitalCtx &c) {
     });
 
     theatre.step("Reject an assigned task", "reject(reason) on 'approval'", [&] {
-        if (state(c.approval) == "CreatedState") c.approval->makeAvailable();
-        if (state(c.approval) == "AvailableState") c.approval->assign(&c.who);
+        if (state(c.approval) == "Created") c.approval->makeAvailable();
+        if (state(c.approval) == "Available") c.approval->assign(&c.who);
         c.approval->reject("Rejected by test");
         const std::string s = state(c.approval);
         theatre.say("approval is now " + qs(s));
-        check(s == "RejectedState" || s == "AvailableState",
+        check(s == "RejectedState" || s == "Available",
               "expected RejectedState (or back to Available), was " + qs(s));
     });
 
     theatre.step("Cancel a task", "cancel() on 'treatment'", [&] {
         c.treatment->cancel();
-        check(state(c.treatment) == "CancelledState", "expected CancelledState, was " + qs(state(c.treatment)));
+        check(state(c.treatment) == "Cancelled", "expected Cancelled, was " + qs(state(c.treatment)));
     });
 
     // ------------------------------------------------------------------
@@ -343,9 +343,9 @@ void addLegalScenario(Desktop &theatre, LegalCtx &c) {
     // ------------------------------------------------------------------
     theatre.section("Legal 2. Initial state and sequential gating");
 
-    theatre.step("Tasks start in CreatedState", "Nothing is released before the case is opened", [&] {
-        check(state(c.client) == "CreatedState", "client intake should be CreatedState, was " + qs(state(c.client)));
-        check(state(c.conflict) == "CreatedState", "conflict check should be CreatedState");
+    theatre.step("Tasks start in Created", "Nothing is released before the case is opened", [&] {
+        check(state(c.client) == "Created", "client intake should be Created, was " + qs(state(c.client)));
+        check(state(c.conflict) == "Created", "conflict check should be Created");
     });
 
     theatre.step("Open the case", "makeAvailable() + activateChildren() releases only client intake", [&] {
@@ -360,9 +360,9 @@ void addLegalScenario(Desktop &theatre, LegalCtx &c) {
     theatre.section("Legal 3. Task lifecycle");
 
     theatre.step("Assign", "Available -> Assigned", [&] {
-        if (state(c.client) == "CreatedState") c.client->makeAvailable();
+        if (state(c.client) == "Created") c.client->makeAvailable();
         c.client->assign(&c.who);
-        check(state(c.client) == "AssignedState", "expected AssignedState, was " + qs(state(c.client)));
+        check(state(c.client) == "Assigned", "expected Assigned, was " + qs(state(c.client)));
     });
 
     theatre.step("Start", "Assigned -> Started", [&] {
@@ -372,7 +372,7 @@ void addLegalScenario(Desktop &theatre, LegalCtx &c) {
 
     theatre.step("Complete", "Started -> Completed", [&] {
         c.client->complete();
-        check(state(c.client) == "CompletedState", "expected CompletedState, was " + qs(state(c.client)));
+        check(state(c.client) == "Completed", "expected Completed, was " + qs(state(c.client)));
         check(c.client->isFinished(), "a completed task should report isFinished()");
     });
 
@@ -424,18 +424,18 @@ void addLegalScenario(Desktop &theatre, LegalCtx &c) {
         drive(c.draft, &c.who);
         c.root->activateChildren();
         check(c.draft->isFinished(), "draft should be finished before review");
-        if (state(c.review) == "CreatedState") c.review->makeAvailable();
-        if (state(c.review) == "AvailableState") c.review->assign(&c.who);
+        if (state(c.review) == "Created") c.review->makeAvailable();
+        if (state(c.review) == "Available") c.review->assign(&c.who);
         c.review->reject("Pleadings need revision");
         const std::string s = state(c.review);
         theatre.say("review is now " + qs(s));
-        check(s == "RejectedState" || s == "AvailableState",
+        check(s == "RejectedState" || s == "Available",
               "expected RejectedState (or back to Available), was " + qs(s));
     });
 
     theatre.step("Cancel a task", "cancel() on 'filing' - the client withdrew", [&] {
         c.filing->cancel();
-        check(state(c.filing) == "CancelledState", "expected CancelledState, was " + qs(state(c.filing)));
+        check(state(c.filing) == "Cancelled", "expected Cancelled, was " + qs(state(c.filing)));
     });
 
     // ------------------------------------------------------------------

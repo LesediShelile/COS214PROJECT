@@ -4,13 +4,13 @@
 #include "RejectedState.h"
 #include "CancelledState.h"
 
-void AssignedState :: start (Task* task){
+void Assigned :: start (Task* task){
 
     task -> handleChange(new StartedState());
 
 }
 
-void AssignedState :: reject (Task* task, std::string reason){
+void Assigned :: reject (Task* task, std::string reason){
 
     task -> setData ("rejectionReason", reason);
 
@@ -20,20 +20,20 @@ void AssignedState :: reject (Task* task, std::string reason){
 
 }
 
-void AssignedState :: cancel (Task* task) {
+void Assigned :: cancel (Task* task) {
 
-    task -> handleChange (new CancelledState());
+    task -> handleChange (new Cancelled());
 
 }
 
-std::string AssignedState :: getName() const{
+std::string Assigned :: getName() const{
 
     return "Assigned";
 
 }
 
-TaskState* AssignedState :: clone() const {
+TaskState* Assigned :: clone() const {
 
-    return new AssignedState (*this);
+    return new Assigned (*this);
     
 }

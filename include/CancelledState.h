@@ -1,5 +1,5 @@
-#ifndef CANCELLEDSTATE_H
-#define CANCELLEDSTATE_H
+#ifndef Cancelled_H
+#define Cancelled_H
 
 #include <iostream>
 #include <string>
@@ -12,7 +12,7 @@
  * No further actions are allowed. Any action falls back to TaskState,
  * which reports that it cannot be done.
  */
-class CancelledState : public TaskState{
+class Cancelled : public TaskState{
 
     public:
 
@@ -24,7 +24,7 @@ class CancelledState : public TaskState{
 
         /**
          * @brief Creates a copy of this state (Prototype pattern).
-         * @return A new CancelledState.
+         * @return A new Cancelled.
          */
         TaskState* clone() const override;
 

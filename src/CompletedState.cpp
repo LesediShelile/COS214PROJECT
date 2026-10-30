@@ -1,14 +1,14 @@
 #include "CompletedState.h"
 
-std::string CompletedState :: getName() const{
+std::string Completed :: getName() const{
     
     return "Completed";
 
 }
 
-TaskState* CompletedState :: clone() const{
+TaskState* Completed :: clone() const{
 
-    return new CompletedState (*this);
+    return new Completed (*this);
 
 } 
 

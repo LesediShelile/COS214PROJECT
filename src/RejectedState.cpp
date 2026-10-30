@@ -5,7 +5,7 @@
 
 void RejectedState :: cancel (Task* task){
 
-    task -> handleChange (new CancelledState());
+    task -> handleChange (new Cancelled());
 
 }
 
@@ -13,7 +13,7 @@ void RejectedState :: makeAvailable (Task* task){
 
     task -> setData ("rejectionReason", "");
 
-    task -> handleChange (new AvailableState());
+    task -> handleChange (new Available());
 
 }
 

@@ -1,14 +1,14 @@
 #include "CancelledState.h"
 
-std::string CancelledState :: getName() const {
+std::string Cancelled :: getName() const {
 
     return "Cancelled";
 
 }
 
-TaskState* CancelledState :: clone() const {
+TaskState* Cancelled :: clone() const {
 
-    return new CancelledState (*this);
+    return new Cancelled (*this);
 
 }
 
