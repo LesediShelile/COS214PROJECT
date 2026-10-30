@@ -2,7 +2,7 @@
 #define ROLE_H
 
 #include <string>
-
+#include <vector>
 /**
  * @brief A job role with an authority level, e.g. Nurse (1) or Doctor (2).
  *
