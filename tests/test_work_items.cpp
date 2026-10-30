@@ -2,25 +2,24 @@
 // Tests for Composite, Prototype and Iterator (work-item core).
 // Build and run: see README.md (cmake --build build && ctest --test-dir build).
 
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+#include "third_party/doctest.h"
 
 #include <memory>
 #include <stdexcept>
 #include <string>
 #include <vector>
 
-#include "AvailableItemsIterator.h"
-#include "DepthFirstIterator.h"
-#include "ParallelStage.h"
-#include "SequentialStage.h"
-#include "Stage.h"
-#include "Task.h"
-#include "TaskDecorator.h"
-#include "Participant.h"
-#include "Role.h"
-#include "TaskMemento.h"
-#include "TaskState.h"
+#include "../include/AvailableItemsIterator.h"
+#include "../include/DepthFirstIterator.h"
+#include "../include/ParallelStage.h"
+#include "../include/SequentialStage.h"
+#include "../include/Stage.h"
+#include "../include/Task.h"
+#include "../include/TaskDecorator.h"
+#include "../include/Participant.h"
+#include "../include/Role.h"
+#include "../include/TaskMemento.h"
+#include "../include/TaskState.h"
 
 namespace {
 

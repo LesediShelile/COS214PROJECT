@@ -1,19 +1,19 @@
 // Tests for the generic Builder-pattern Director.
 
-#include "doctest.h"
+#include "third_party/doctest.h"
 
 #include <memory>
 #include <stdexcept>
 #include <string>
 
-#include "DefinitionBuilder.h"
-#include "Director.h"
-#include "ParallelStage.h"
-#include "Role.h"
-#include "RoleBasedAssignment.h"
-#include "SequentialStage.h"
-#include "Stage.h"
-#include "WorkflowDefinition.h"
+#include "../include/DefinitionBuilder.h"
+#include "../include/Director.h"
+#include "../include/ParallelStage.h"
+#include "../include/Role.h"
+#include "../include/RoleBasedAssignment.h"
+#include "../include/SequentialStage.h"
+#include "../include/Stage.h"
+#include "../include/WorkflowDefinition.h"
 
 TEST_CASE("Director constructs a workflow from a client supplied recipe") {
     DefinitionBuilder builder;

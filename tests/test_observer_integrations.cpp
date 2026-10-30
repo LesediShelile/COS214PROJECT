@@ -1,16 +1,16 @@
 
-#include "doctest.h"
+#include "third_party/doctest.h"
 
-#include "WorkflowEvent.h"
-#include "EventPublisher.h"
-#include "WorkflowListener.h"
-#include "AuditLogger.h"
-#include "MetricsCollector.h"
-#include "Notifier.h"
-#include "EngineRouter.h"
-#include "WorkflowDefinition.h"
-#include "WorkflowInstance.h"
-#include "SequentialStage.h"
+#include "../include/WorkflowEvent.h"
+#include "../include/EventPublisher.h"
+#include "../include/WorkflowListener.h"
+#include "../include/AuditLogger.h"
+#include "../include/MetricsCollector.h"
+#include "../include/Notifier.h"
+#include "../include/EngineRouter.h"
+#include "../include/WorkflowDefinition.h"
+#include "../include/WorkflowInstance.h"
+#include "../include/SequentialStage.h"
 
 #include <string>
 #include <vector>
