@@ -59,9 +59,10 @@ option(TIVIDY_BUILD_DESKTOP "Build the TIVIDY desktop workflow theatre" OFF)
 if(TIVIDY_BUILD_DESKTOP)
     find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-    add_executable(tividy_desktop
-        src/TIVIDYDesktop.cpp
-    )
+   add_executable(tividy_desktop
+    main.cpp
+    include/ui/Desktop.h
+)
 
     target_link_libraries(tividy_desktop
         PRIVATE tividy_core Qt6::Widgets

@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#include "TestTheatre.h"
+#include "include/ui/Desktop.h"
 #include "WorkItem.h"
 #include "Task.h"
 #include "SequentialStage.h"
@@ -43,7 +43,7 @@ void collectLeaves(WorkItem *w, std::vector<WorkItem*> &out) {
 }
 
 // Drives every leaf task of a tree until the root reports finished.
-void runToCompletion(TestTheatre &theatre, Stage *root, Participant *who) {
+void runToCompletion(Desktop &theatre, Stage *root, Participant *who) {
     root->makeAvailable();
     std::vector<WorkItem*> leaves;
     collectLeaves(root, leaves);
@@ -53,9 +53,9 @@ void runToCompletion(TestTheatre &theatre, Stage *root, Participant *who) {
             if (!leaves[i]->isFinished() && released(leaves[i])) drive(leaves[i], who);
     }
     theatre.say(QString("%1 tasks driven").arg(leaves.size()));
-    TestTheatre::check(root->isFinished(), "root stage did not finish");
+    Desktop::check(root->isFinished(), "root stage did not finish");
     for (std::size_t i = 0; i < leaves.size(); ++i)
-        TestTheatre::check(state(leaves[i]) == "CompletedState",
+        Desktop::check(state(leaves[i]) == "CompletedState",
                            "task not completed: " + qs(leaves[i]->getItemID()));
 }
 
@@ -101,9 +101,9 @@ void buildHospitalFull(HospitalCtx &c) {
     c.root->add(closeout);
 }
 
-void addHospitalScenario(TestTheatre &theatre, HospitalCtx &c) {
-    auto &check = TestTheatre::check;
-    auto &expectThrows = TestTheatre::expectThrows;
+void addHospitalScenario(Desktop &theatre, HospitalCtx &c) {
+    auto &check = Desktop::check;
+    auto &expectThrows = Desktop::expectThrows;
 
     // ------------------------------------------------------------------
     theatre.section("Hospital 1. Build the workflow (Composite)");
@@ -294,9 +294,9 @@ void buildLegalFull(LegalCtx &c) {
     c.root->add(closure);
 }
 
-void addLegalScenario(TestTheatre &theatre, LegalCtx &c) {
-    auto &check = TestTheatre::check;
-    auto &expectThrows = TestTheatre::expectThrows;
+void addLegalScenario(Desktop &theatre, LegalCtx &c) {
+    auto &check = Desktop::check;
+    auto &expectThrows = Desktop::expectThrows;
 
     // ------------------------------------------------------------------
     theatre.section("Legal 1. Build the workflow (Composite)");
@@ -455,7 +455,7 @@ void addLegalScenario(TestTheatre &theatre, LegalCtx &c) {
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    TestTheatre theatre("TIVIDY | Workflow tests");
+    Desktop theatre("TIVIDY | Workflow tests");
     HospitalCtx hospital;
     LegalCtx legal;
 

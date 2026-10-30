@@ -1,5 +1,5 @@
 #pragma once
-// TestTheatre.h - a tiny, header-only Qt window that shows a test run as a
+// Desktop.h - a tiny, header-only Qt window that shows a test run as a
 // UML-style activity diagram and highlights the step that is executing.
 //
 //   (●) START ──▶ [ step ] ──▶ [ step ] ──▶ ... ──▶ (◉) END
@@ -463,12 +463,12 @@ private:
 // ---------------------------------------------------------------------------
 // The window: toolbar, progress bar, scrolling diagram and log.
 // ---------------------------------------------------------------------------
-class TestTheatre : public QWidget {
+class Desktop : public QWidget {
 public:
     typedef std::function<void()> Body;
     enum Status { Pending = TS_Pending, Running = TS_Running, Passed = TS_Passed, Failed = TS_Failed };
 
-    explicit TestTheatre(const QString &title = "Workflow tests") : QWidget(0), title_(title) {
+    explicit Desktop(const QString &title = "Workflow tests") : QWidget(0), title_(title) {
         setWindowTitle(title);
         resize(640, 900);
         setStyleSheet(
