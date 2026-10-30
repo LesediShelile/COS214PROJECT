@@ -1,2 +1,0 @@
-/usr/bin/ar qc libtividy_core.a CMakeFiles/tividy_core.dir/src/WorkItem.cpp.o CMakeFiles/tividy_core.dir/src/Task.cpp.o CMakeFiles/tividy_core.dir/src/Stage.cpp.o CMakeFiles/tividy_core.dir/src/SequentialStage.cpp.o CMakeFiles/tividy_core.dir/src/ParallelStage.cpp.o CMakeFiles/tividy_core.dir/src/TaskDecorator.cpp.o CMakeFiles/tividy_core.dir/src/DepthFirstIterator.cpp.o CMakeFiles/tividy_core.dir/src/AvailableItemsIterator.cpp.o CMakeFiles/tividy_core.dir/stubs/TaskStates.cpp.o CMakeFiles/tividy_core.dir/stubs/TaskMemento.cpp.o
-/usr/bin/ranlib libtividy_core.a
