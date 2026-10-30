@@ -5,48 +5,35 @@
 #include <string>
 #include "EventType.h"
 
-/**
- * @brief Represents an event occurring in a workflow.
- */
+class ApprovalRequest;
+
 class WorkflowEvent {
 private:
-    /** @brief Type of event. */
     EventType type;
-
-    /** @brief ID of the event source. */
     std::string sourceID;
-
-    /** @brief Timestamp of the event. */
     std::string timestamp;
-
-    /** @brief Additional event details. */
     std::string details;
 
+    // Non-owning pointer: the event does not manage the request.
+    ApprovalRequest* approvalRequest;
+
 public:
-    /**
-     * @brief Constructs a workflow event.
-     * @param type Type of event.
-     * @param sourceID ID of the event source.
-     * @param timestamp Timestamp of the event.
-     * @param details Additional event details.
-     */
-    WorkflowEvent(EventType type, std::string sourceID,
-                  std::string timestamp, std::string details);
+    WorkflowEvent(
+        EventType type,
+        std::string sourceID,
+        std::string timestamp,
+        std::string details,
+        ApprovalRequest* approvalRequest = nullptr
+    );
 
-    /** @brief Gets the event type. */
     EventType getType();
-
-    /** @brief Gets the source ID. */
     std::string getSourceID();
-
-    /** @brief Gets the event timestamp. */
     std::string getTimestamp();
-
-    /** @brief Gets the event details. */
     std::string getDetails();
 
-    /** @brief Destroys the workflow event. */
+    ApprovalRequest* getApprovalRequest();
+
     ~WorkflowEvent();
 };
 
-#endif // WORKFLOWEVENT_H
+#endif

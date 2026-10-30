@@ -1,36 +1,41 @@
-#include "../include/EngineRouter.h"
 
-/**
- * @brief Constructs an EngineRouter.
- * @param instance Pointer to the workflow instance.
- * @param approvalChain Pointer to the approval handler chain.
- */
-EngineRouter::EngineRouter(WorkflowInstance* instance,
-                           ApprovalHandler* approvalChain) {
+#include "../include/EngineRouter.h"
+#include "../include/ApprovalRequest.h"
+#include "../include/EventType.h"
+
+EngineRouter::EngineRouter(
+    WorkflowInstance* instance,
+    ApprovalHandler* approvalChain
+) {
     this->instance = instance;
     this->approvalChain = approvalChain;
 }
 
-/**
- * @brief Processes a workflow event.
- *
- * When an item completes, asks the instance to move the workflow on
- * (release the next eligible items, or finish if everything is done).
- * Other event types are ignored for now.
- * @param event Pointer to the workflow event.
- */
 void EngineRouter::update(WorkflowEvent* event) {
-    if (event == nullptr || instance == nullptr) {
+    if (event == nullptr) {
         return;
     }
 
+    // Handle approval timeout events.
+    if (event->getType() == EventType::TIMEOUT) {
+        ApprovalRequest* request = event->getApprovalRequest();
+
+        if (request != nullptr && approvalChain != nullptr) {
+            approvalChain->handle(request);
+        }
+
+        return;
+    }
+
+    // Ignore events if there is no active workflow instance.
+    if (instance == nullptr) {
+        return;
+    }
+
+    // Advance the workflow after an item completes.
     if (event->getType() == EventType::ITEM_COMPLETED) {
         instance->activateNext();
     }
 }
 
-/**
- * @brief Destroys the EngineRouter.
- */
-EngineRouter::~EngineRouter() {
-}
+EngineRouter::~EngineRouter() {}
