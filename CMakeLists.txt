@@ -45,7 +45,7 @@ if(TIVIDY_BUILD_DESKTOP)
     find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
     add_executable(tividy_desktop
-        desktop/TIVIDYDesktop.cpp
+        main.cpp
     )
 
     target_link_libraries(tividy_desktop
