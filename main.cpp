@@ -457,8 +457,11 @@ int main(int argc, char *argv[]) {
     HospitalCtx hospital;
     LegalCtx legal;
 
-    addHospitalScenario(theatre, hospital);   // Part A
-    addLegalScenario(theatre, legal);         // Part B
+    theatre.tab("Hospital admission");        // Part A
+    addHospitalScenario(theatre, hospital);
+
+    theatre.tab("Legal case");                // Part B
+    addLegalScenario(theatre, legal);
 
     theatre.run();
     return app.exec();
