@@ -172,7 +172,7 @@ void addHospitalScenario(Desktop &theatre, HospitalCtx &c) {
 
     theatre.step("Start", "Assigned -> Started", [&] {
         c.reg->start();
-        check(state(c.reg) == "StartedState", "expected StartedState, was " + qs(state(c.reg)));
+        check(state(c.reg) == "Started", "expected Started, was " + qs(state(c.reg)));
     });
 
     theatre.step("Complete", "Started -> Completed", [&] {
@@ -231,8 +231,8 @@ void addHospitalScenario(Desktop &theatre, HospitalCtx &c) {
         c.approval->reject("Rejected by test");
         const std::string s = state(c.approval);
         theatre.say("approval is now " + qs(s));
-        check(s == "RejectedState" || s == "Available",
-              "expected RejectedState (or back to Available), was " + qs(s));
+        check(s == "Rejected" || s == "Available",
+              "expected Rejected (or back to Available), was " + qs(s));
     });
 
     theatre.step("Cancel a task", "cancel() on 'treatment'", [&] {
@@ -368,7 +368,7 @@ void addLegalScenario(Desktop &theatre, LegalCtx &c) {
 
     theatre.step("Start", "Assigned -> Started", [&] {
         c.client->start();
-        check(state(c.client) == "StartedState", "expected StartedState, was " + qs(state(c.client)));
+        check(state(c.client) == "Started", "expected Started, was " + qs(state(c.client)));
     });
 
     theatre.step("Complete", "Started -> Completed", [&] {
@@ -430,8 +430,8 @@ void addLegalScenario(Desktop &theatre, LegalCtx &c) {
         c.review->reject("Pleadings need revision");
         const std::string s = state(c.review);
         theatre.say("review is now " + qs(s));
-        check(s == "RejectedState" || s == "Available",
-              "expected RejectedState (or back to Available), was " + qs(s));
+        check(s == "Rejected" || s == "Available",
+              "expected Rejected (or back to Available), was " + qs(s));
     });
 
     theatre.step("Cancel a task", "cancel() on 'filing' - the client withdrew", [&] {
