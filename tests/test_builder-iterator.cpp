@@ -1,3 +1,5 @@
+#include "third_party/doctest.h"
+
 #include "../include/AvailableItemsIterator.h"
 #include "../include/DefinitionBuilder.h"
 #include "../include/DepthFirstIterator.h"
@@ -298,15 +300,4 @@ namespace
         check(emptyAvailableIterator.current() == nullptr,
               "null-root available iterator has no current item");
     }
-}
-
-int main()
-{
-    testBuilderValidation();
-    testBuilderTreeAndDepthFirstIterator();
-    testAvailableItemsIterator();
-
-    std::cout << "Builder and iterator checks: " << checks
-              << ", failures: " << failures << '\n';
-    return failures == 0 ? 0 : 1;
 }
