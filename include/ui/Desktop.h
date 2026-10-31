@@ -42,6 +42,7 @@
 #include <functional>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 class TestFailure : public std::runtime_error {
@@ -651,6 +652,9 @@ public:
     /** Start a new group inside the current tab. */
     void section(const QString &name) { section_ = name; }
 
+    /** Add a ready-made widget (e.g. the interactive Playground) as an extra tab at the end. */
+    void addTab(const QString &name, QWidget *w) { extras_.push_back(std::make_pair(name, w)); }
+
     /** Register a step. The body runs when the step becomes the highlighted one. */
     void step(const QString &title, const QString &detail, Body body) {
         if (pages_.empty()) tab(title_);          // no tab() called: one default tab
@@ -693,11 +697,14 @@ public:
                 tabs_->setTabText(tabs_->indexOf(pg), label);
             };
         }
+        for (std::size_t i = 0; i < extras_.size(); ++i)
+            tabs_->addTab(extras_[i].second, extras_[i].first);
         show();
     }
 
 private:
     QString title_, section_;
     std::vector<ScenarioPage *> pages_;
+    std::vector<std::pair<QString, QWidget *> > extras_;
     QTabWidget *tabs_ = 0;
 };

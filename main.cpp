@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include "include/ui/Desktop.h"
+#include "include/ui/Playground.h"
 #include "WorkItem.h"
 #include "Task.h"
 #include "SequentialStage.h"
@@ -31,7 +32,7 @@ void drive(WorkItem *w, Participant *who) {
     if (state(w) == "Created") w->makeAvailable();
     if (state(w) == "Available") w->assign(who);
     if (state(w) == "Assigned") w->start();
-    if (state(w) == "StartedState") w->complete();
+    if (state(w) == "Started") w->complete();
 }
 
 void collectLeaves(WorkItem *w, std::vector<WorkItem*> &out) {
@@ -462,6 +463,9 @@ int main(int argc, char *argv[]) {
 
     theatre.tab("Legal case");                // Part B
     addLegalScenario(theatre, legal);
+
+    Playground playground;                    // must be declared after theatre
+    theatre.addTab("Playground", &playground);
 
     theatre.run();
     return app.exec();
