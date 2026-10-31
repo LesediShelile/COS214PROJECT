@@ -15,7 +15,7 @@ TESTS    := $(wildcard tests/*.cpp)
 TEST_OBJ := $(TESTS:tests/%.cpp=$(BUILD)/obj/tests/%.o)
 TEST_BIN := $(BUILD)/tividy_tests
 
-HAS_MAIN := $(wildcard src/main.cpp)
+HAS_MAIN := $(wildcard main.cpp)
 APP_BIN  := $(BUILD)/tividy
 
 all: $(LIB) $(if $(HAS_MAIN),$(APP_BIN))
@@ -41,9 +41,12 @@ $(TEST_BIN): $(TEST_OBJ) $(LIB)
 test: $(TEST_BIN)
 	./$(TEST_BIN)
 
+run: $(APP_BIN)
+	./$(APP_BIN)
+
 clean:
 	rm -rf $(BUILD)
 
-.PHONY: all test clean
+.PHONY: all test clean run
 
 -include $(OBJ:.o=.d) $(TEST_OBJ:.o=.d) $(BUILD)/obj/main.d
