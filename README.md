@@ -156,7 +156,7 @@ Design documents and diagrams are in [`docs/`](docs/):
 
 ## The team
 
-Group Council, COS 214, University of Pretoria:
+Group Council of 5, COS 214, University of Pretoria:
 
 - Kiara Ajodhaparsadh
 - Cameron Ambraal

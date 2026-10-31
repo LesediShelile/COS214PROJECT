@@ -144,6 +144,7 @@ TEST_CASE("State: only makeAvailable() makes a task available") {
     CHECK_FALSE(second.isAvailable());
 }
 
+
 // ---------------- Strategy pattern ----------------
 
 TEST_CASE("Strategy: assignment strategies") {
