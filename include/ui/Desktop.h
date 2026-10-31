@@ -1,19 +1,24 @@
 #pragma once
 // Desktop.h - a small header-only Qt window that shows main() as activity
-// diagrams, ONE TAB PER SCENARIO:
+// diagrams, ONE TAB PER SCENARIO, with a VS Code style terminal under each one:
 //
-//   [ Hospital admission ] [ Legal case ]
+//   [ Hospital admission ] [ Legal case ] [ Playground ]
 //
 //   (●) START ──▶ [ step ] ──▶ [ step ] ──▶ ... ──▶ (◉) END
+//   ┌ PROBLEMS  OUTPUT  DEBUG CONSOLE  TERMINAL ───────────────────────────┐
+//   │ PS C:\tividy\build> .\workflow_tests.exe --scenario "Legal case"      │
+//   └───────────────────────────────────────────────────────────────────────┘
 //
 // Every theatre.step(...) is one node, in main's exact words. The running step
 // glows blue, then turns green (passed) or red (failed, with the reason).
 // Anything theatre.say(...) prints appears as a grey note inside the step that
-// said it. Each tab has its own Run / Step / Restart controls, so scenarios run
-// independently. A tab title gets a tick or cross once its scenario finishes.
+// said it AND as a line in the terminal. Each tab has its own Run / Step /
+// Restart controls, so scenarios run independently. A tab title gets a tick or
+// a cross once its scenario finishes.
 //
 // API:  tab(name)  - start a new scenario tab; following step()s belong to it
-//       section(name), step(title, detail, body), say(msg), check(), expectThrows(), run()
+//       section(name), step(title, detail, body), say(msg), log(msg),
+//       check(), expectThrows(), run()
 // No Q_OBJECT / moc needed.
 
 #include <QApplication>
@@ -29,6 +34,10 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QProgressBar>
+#include <QSplitter>
+#include <QTextEdit>
+#include <QTextCursor>
+#include <QTextCharFormat>
 #include <QTimer>
 #include <QElapsedTimer>
 #include <QPainter>
@@ -56,6 +65,7 @@ struct TheatreStep {
     QString section, title, detail, message, note;
     std::function<void()> body;
     int state = TS_Pending;
+    int group = 0;                     // index of the section box (for colours)
     QRectF rect;                       // filled in by the layout
     double titleH = 0, detailH = 0, noteH = 0, msgH = 0;
 };
@@ -97,8 +107,15 @@ protected:
 
         QLinearGradient bg(0, 0, 0, height());
         bg.setColorAt(0, QColor("#f8faff"));
-        bg.setColorAt(1, QColor("#eaf0fa"));
+        bg.setColorAt(1, QColor("#e9effb"));
         p.fillRect(rect(), bg);
+
+        // faint dot grid, like a design canvas
+        p.setPen(Qt::NoPen);
+        p.setBrush(QColor(120, 140, 185, 38));
+        for (int gy = 12; gy < height(); gy += 26)
+            for (int gx = 12; gx < width(); gx += 26)
+                p.drawEllipse(QPointF(gx, gy), 1.1, 1.1);
 
         const double t = clock_.elapsed() / 1000.0;
         const int n = static_cast<int>(steps_->size());
@@ -124,8 +141,8 @@ private:
     }
 
     static QColor accent(int i) {
-        static const char *pal[] = {"#0a84ff", "#7a5af8", "#0e9f8e", "#f08c00", "#d6336c"};
-        return QColor(pal[i % 5]);
+        static const char *pal[] = {"#0a84ff", "#7a5af8", "#0e9f8e", "#f08c00", "#d6336c", "#3a9ad9"};
+        return QColor(pal[i % 6]);
     }
 
     int hitTest(const QPoint &pt) const {
@@ -165,6 +182,7 @@ private:
             if (boxed) y += 38;
             for (int k = i; k <= j; ++k) {
                 TheatreStep &s = (*steps_)[static_cast<std::size_t>(k)];
+                s.group = g.color;
                 auto textH = [&](const QString &str, double w) {
                     return str.isEmpty() ? 0.0
                         : dm.boundingRect(QRectF(0, 0, w, 10000), Qt::TextWordWrap, str).height();
@@ -205,10 +223,17 @@ private:
             const Group &g = groups_[gi];
             if (g.name.isEmpty()) continue;
             const QColor acc = accent(g.color);
+
+            QLinearGradient fillg(g.rect.topLeft(), g.rect.bottomLeft());
+            QColor f1 = acc, f2 = acc;
+            f1.setAlpha(26);
+            f2.setAlpha(6);
+            fillg.setColorAt(0, f1);
+            fillg.setColorAt(1, f2);
             QColor edge = acc;
-            edge.setAlpha(110);
+            edge.setAlpha(120);
             p.setPen(QPen(edge, 1.4, Qt::DashLine));
-            p.setBrush(QColor(255, 255, 255, 150));
+            p.setBrush(fillg);
             p.drawRoundedRect(g.rect, 20, 20);
 
             p.setPen(Qt::NoPen);
@@ -317,15 +342,23 @@ private:
         const TheatreStep &s = (*steps_)[static_cast<std::size_t>(i)];
         const QRectF r = s.rect;
         const bool hovered = (hover_ == i);
+        const QColor acc = accent(s.group);
 
-        QColor border("#cfd6e6"), fill("#ffffff"), badge("#8793a5");
+        QColor border("#d3daea"), fill("#ffffff"), badge = acc.lighter(125);
         QString word = "WAITING";
         double bw = 1.5;
         switch (s.state) {
         case TS_Running: border = QColor("#0a84ff"); fill = QColor("#eef6ff"); badge = border; word = "RUNNING"; bw = 2.5; break;
         case TS_Passed:  border = QColor("#159957"); fill = QColor("#f0faf5"); badge = border; word = "PASSED"; break;
         case TS_Failed:  border = QColor("#d94353"); fill = QColor("#fff3f4"); badge = border; word = "FAILED"; break;
-        default: if (hovered) border = QColor("#8fb8ee"); break;
+        default: if (hovered) border = acc.lighter(130); break;
+        }
+
+        // soft drop shadow
+        p.setPen(Qt::NoPen);
+        for (int k = 3; k >= 1; --k) {
+            p.setBrush(QColor(30, 50, 110, 7 + (hovered ? 3 : 0)));
+            p.drawRoundedRect(r.adjusted(-k, 2 - k, k, 4 + k), 14 + k, 14 + k);
         }
 
         if (s.state == TS_Running) {
@@ -340,6 +373,18 @@ private:
         p.setPen(QPen(border, bw));
         p.setBrush(fill);
         p.drawRoundedRect(r, 14, 14);
+
+        // coloured edge that matches the section box
+        {
+            QPainterPath clip;
+            clip.addRoundedRect(r, 14, 14);
+            p.save();
+            p.setClipPath(clip);
+            p.setPen(Qt::NoPen);
+            p.setBrush(s.state == TS_Pending ? acc : border);
+            p.drawRect(QRectF(r.left(), r.top(), 5, r.height()));
+            p.restore();
+        }
 
         // badge: step number, spinner, tick or cross
         const QPointF c(r.left() + 30, r.top() + std::min(r.height() / 2, 28.0));
@@ -406,8 +451,8 @@ private:
 };
 
 // ---------------------------------------------------------------------------
-// One tab: header, progress bar, Run / Step / Restart and the diagram.
-// Each page runs on its own, independent of the other tabs.
+// One tab: header, progress bar, Run / Step / Restart, the diagram, and a
+// VS Code style terminal underneath. Each page runs on its own.
 // ---------------------------------------------------------------------------
 class ScenarioPage : public QWidget {
 public:
@@ -434,11 +479,16 @@ public:
         steps_.push_back(s);
     }
 
+    // grey note in the diagram node + a line in the terminal
     void say(const QString &msg) {
         if (index_ < 0 || index_ >= total()) return;
         QString &n = steps_[static_cast<std::size_t>(index_)].note;
         n += (n.isEmpty() ? "" : "\n") + msg;
+        line("      │ " + msg, "#9cdcfe");
     }
+
+    // terminal only
+    void log(const QString &msg) { line("      › " + msg, "#d7ba7d"); }
 
     void build() {
         QVBoxLayout *page = new QVBoxLayout(this);
@@ -447,7 +497,7 @@ public:
 
         QHBoxLayout *head = new QHBoxLayout;
         QLabel *t = new QLabel(name_);
-        t->setStyleSheet("font-size:18px;font-weight:800;color:#0878d1;");
+        t->setStyleSheet("font-size:19px;font-weight:800;color:#0a6fd1;background:transparent;");
         summary_ = new QLabel;
         head->addWidget(t);
         head->addStretch();
@@ -461,18 +511,27 @@ public:
 
         QHBoxLayout *bar = new QHBoxLayout;
         runBtn_ = new QPushButton("▶ Run all");
+        runBtn_->setStyleSheet(
+            "QPushButton{background:#0a84ff;color:white;border:0;border-radius:7px;padding:6px 14px;font-weight:700;}"
+            "QPushButton:hover{background:#0a6fd8;color:white;}");
         stepBtn_ = new QPushButton("Step ▶");
         restartBtn_ = new QPushButton("⏮ Restart");
+        termBtn_ = new QPushButton("▣ Terminal");
+        termBtn_->setCheckable(true);
+        termBtn_->setChecked(true);
         speed_ = new QComboBox;
         speed_->addItem("Slow", 1600);
         speed_->addItem("Normal", 800);
         speed_->addItem("Fast", 300);
         speed_->setCurrentIndex(1);
+        QLabel *sp = new QLabel("Speed");
+        sp->setStyleSheet("background:transparent;color:#69758f;");
         bar->addWidget(runBtn_);
         bar->addWidget(stepBtn_);
         bar->addWidget(restartBtn_);
+        bar->addWidget(termBtn_);
         bar->addStretch();
-        bar->addWidget(new QLabel("Speed"));
+        bar->addWidget(sp);
         bar->addWidget(speed_);
         page->addLayout(bar);
 
@@ -481,13 +540,27 @@ public:
         scroll_->setWidgetResizable(true);
         scroll_->setFrameShape(QFrame::NoFrame);
         scroll_->setStyleSheet(
-            "QScrollArea{border:1px solid #dce3ef;background:#f8faff;}"
+            "QScrollArea{border:1px solid #dce3ef;border-radius:10px;background:#f8faff;}"
             "QScrollBar:vertical{background:transparent;width:10px;margin:2px;}"
             "QScrollBar::handle:vertical{background:#c3cde0;border-radius:4px;min-height:30px;}"
             "QScrollBar::add-line:vertical,QScrollBar::sub-line:vertical{height:0;}"
             "QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical{background:transparent;}");
         scroll_->setWidget(canvas_);
-        page->addWidget(scroll_, 1);
+
+        buildTerminal();
+
+        split_ = new QSplitter(Qt::Vertical);
+        split_->setChildrenCollapsible(false);
+        split_->setHandleWidth(6);
+        split_->setStyleSheet("QSplitter::handle{background:transparent;}");
+        split_->addWidget(scroll_);
+        split_->addWidget(termPanel_);
+        split_->setStretchFactor(0, 3);
+        split_->setStretchFactor(1, 2);
+        split_->setSizes(QList<int>() << 560 << 280);
+        page->addWidget(split_, 1);
+
+        connect(termBtn_, &QPushButton::toggled, this, [this](bool on) { termPanel_->setVisible(on); });
 
         connect(runBtn_, &QPushButton::clicked, this, [this] {
             if (auto_) {
@@ -519,6 +592,148 @@ private:
         return n;
     }
 
+    // ---- terminal ---------------------------------------------------------
+    void buildTerminal() {
+        termPanel_ = new QWidget;
+        termPanel_->setObjectName("termPanel");
+        termPanel_->setStyleSheet(
+            "#termPanel{background:#1e1e1e;}"
+            "#termHead{background:#252526;}"
+            "#termPanel QLabel{background:transparent;color:#8b8b8b;font-family:'Segoe UI';font-size:11px;font-weight:600;letter-spacing:1px;}"
+            "#termPanel QLabel#activeTab{color:#e7e7e7;border-bottom:1px solid #e7e7e7;}"
+            "#termPanel QLabel#shell{color:#cccccc;font-family:Consolas;font-weight:400;letter-spacing:0;}"
+            "#termPanel QPushButton{background:transparent;border:0;border-radius:4px;color:#cccccc;padding:2px 8px;}"
+            "#termPanel QPushButton:hover{background:#3c3c3c;color:white;}"
+            "#termPanel QTextEdit{background:#1e1e1e;color:#cccccc;border:0;padding:6px 10px;"
+            "selection-background-color:#264f78;}"
+            "#termPanel QScrollBar:vertical{background:#1e1e1e;width:12px;margin:0;}"
+            "#termPanel QScrollBar::handle:vertical{background:#424242;min-height:30px;}"
+            "#termPanel QScrollBar::handle:vertical:hover{background:#4f4f4f;}"
+            "#termPanel QScrollBar::add-line:vertical,#termPanel QScrollBar::sub-line:vertical{height:0;}"
+            "#termPanel QScrollBar::add-page:vertical,#termPanel QScrollBar::sub-page:vertical{background:transparent;}");
+
+        QVBoxLayout *v = new QVBoxLayout(termPanel_);
+        v->setContentsMargins(0, 0, 0, 0);
+        v->setSpacing(0);
+
+        QWidget *hd = new QWidget;
+        hd->setObjectName("termHead");
+        hd->setFixedHeight(34);
+        QHBoxLayout *h = new QHBoxLayout(hd);
+        h->setContentsMargins(14, 0, 8, 0);
+        h->setSpacing(18);
+        const char *tabs[] = {"PROBLEMS", "OUTPUT", "DEBUG CONSOLE", "TERMINAL"};
+        for (int i = 0; i < 4; ++i) {
+            QLabel *l = new QLabel(tabs[i]);
+            if (i == 3) l->setObjectName("activeTab");
+            h->addWidget(l);
+        }
+        h->addStretch();
+        QLabel *shell = new QLabel("⌁ powershell");
+        shell->setObjectName("shell");
+        h->addWidget(shell);
+        QPushButton *clr = new QPushButton("⌫ Clear");
+        h->addWidget(clr);
+        v->addWidget(hd);
+
+        term_ = new QTextEdit;
+        term_->setReadOnly(true);
+        term_->setFrameShape(QFrame::NoFrame);
+        term_->setLineWrapMode(QTextEdit::WidgetWidth);
+        QFont f("Consolas");
+        f.setStyleHint(QFont::Monospace);
+        f.setPixelSize(12);
+        term_->setFont(f);
+        v->addWidget(term_, 1);
+
+        connect(clr, &QPushButton::clicked, this, [this] { term_->clear(); idlePrompt(); });
+    }
+
+    void put(const QString &s, const QString &col, bool bold = false) {
+        QTextCursor c(term_->document());
+        c.movePosition(QTextCursor::End);
+        QTextCharFormat f;
+        f.setForeground(QColor(col));
+        f.setFontWeight(bold ? QFont::Bold : QFont::Normal);
+        c.insertText(s, f);
+    }
+    void line(const QString &s, const QString &col, bool bold = false) {
+        put(s + "\n", col, bold);
+        flush();
+    }
+    void flush() { term_->verticalScrollBar()->setValue(term_->verticalScrollBar()->maximum()); }
+
+    void prompt() { put("PS ", "#cccccc"); put("C:\\tividy\\build", "#29b8db"); put("> ", "#cccccc"); }
+    void idlePrompt() { prompt(); put("█", "#cccccc"); flush(); }
+
+    void beginRun() {
+        term_->clear();
+        prompt();
+        put(".\\workflow_tests.exe", "#dcdcaa");
+        put(QString(" --scenario \"%1\"\n").arg(name_), "#ce9178");
+        line("", "#cccccc");
+        line(QString("  Running %1 steps ...").arg(total()), "#8b8b8b");
+        runClock_.start();
+        lastSection_.clear();
+        sectionNo_ = 0;
+    }
+
+    void termStart(int idx) {
+        const TheatreStep &s = steps_[static_cast<std::size_t>(idx)];
+        if (s.section != lastSection_) {
+            lastSection_ = s.section;
+            line("", "#cccccc");
+            if (!s.section.isEmpty()) {
+                line("  ━━ " + s.section.toUpper() + " ━━", "#569cd6", true);
+            }
+        }
+        put(QString("  ▶ [%1/%2] ").arg(idx + 1, 2, 10, QChar('0')).arg(total()), "#3b8eea", true);
+        line(s.title, "#e7e7e7", true);
+        if (!s.detail.isEmpty()) line("      " + s.detail, "#6a9955");
+    }
+
+    void termResult(bool ok, const QString &err, double ms) {
+        if (ok) {
+            put("      ✔ ", "#23d18b", true);
+            put("PASSED", "#23d18b", true);
+            line(QString("  (%1 ms)").arg(ms, 0, 'f', 1), "#6a6a6a");
+        } else {
+            put("      ✘ ", "#f14c4c", true);
+            put("FAILED", "#f14c4c", true);
+            line(QString("  (%1 ms)").arg(ms, 0, 'f', 1), "#6a6a6a");
+            line("        " + err, "#f48771");
+        }
+    }
+
+    void termSummary() {
+        const int pass = passed(), fail = failed();
+        line("", "#cccccc");
+        const QString rule = "  " + QString(58, QChar(0x2500));
+        line(rule, "#3c3c3c");
+        if (fail) {
+            line("  Failures:", "#f14c4c", true);
+            for (std::size_t i = 0; i < steps_.size(); ++i)
+                if (steps_[i].state == TS_Failed) {
+                    line(QString("   ✘ %1. %2").arg(i + 1).arg(steps_[i].title), "#f48771");
+                    line("       " + steps_[i].message, "#8b8b8b");
+                }
+            line("", "#cccccc");
+        }
+        put("  Steps:   ", "#cccccc", true);
+        if (pass) put(QString("%1 passed").arg(pass), "#23d18b", true);
+        if (pass && fail) put(", ", "#cccccc");
+        if (fail) put(QString("%1 failed").arg(fail), "#f14c4c", true);
+        line(QString(", %1 total").arg(total()), "#cccccc");
+        put("  Time:    ", "#cccccc", true);
+        line(QString("%1 s").arg(runClock_.elapsed() / 1000.0, 0, 'f', 2), "#cccccc");
+        put("  Status:  ", "#cccccc", true);
+        line(fail ? "FAILED" : "ALL PASSED", fail ? "#f14c4c" : "#23d18b", true);
+        line(rule, "#3c3c3c");
+        line("", "#cccccc");
+        idlePrompt();
+    }
+
+    // ---- stepping ---------------------------------------------------------
     void setStatus(std::size_t i, TheatreState st, const QString &msg) {
         steps_[i].state = st;
         steps_[i].message = msg;
@@ -530,9 +745,11 @@ private:
     void startStep() {
         if (index_ >= total()) { finish(); return; }
         busy_ = true;
+        if (index_ == 0) beginRun();
         const std::size_t i = static_cast<std::size_t>(index_);
         setStatus(i, TS_Running, QString());
         canvas_->setRunning(index_);
+        termStart(index_);
         const QRectF r = canvas_->nodeRect(index_);
         scroll_->ensureVisible(static_cast<int>(r.center().x()), static_cast<int>(r.center().y()), 0,
                                static_cast<int>(r.height() / 2 + 110));
@@ -544,6 +761,8 @@ private:
         const std::size_t i = static_cast<std::size_t>(index_);
         bool ok = true;
         QString err;
+        QElapsedTimer sc;
+        sc.start();
         executing() = this;
         try {
             steps_[i].body();
@@ -555,8 +774,10 @@ private:
             err = "Unknown exception";
         }
         executing() = 0;
+        const double ms = sc.nsecsElapsed() / 1.0e6;
         canvas_->setRunning(-1);
         setStatus(i, ok ? TS_Passed : TS_Failed, err);
+        termResult(ok, err, ms);
         ++index_;
         busy_ = false;
         updateSummary();
@@ -573,6 +794,7 @@ private:
         canvas_->setRunning(-1);
         runBtn_->setText("▶ Run all");
         updateSummary();
+        termSummary();
         scroll_->ensureVisible(canvas_->width() / 2, canvas_->height(), 0, 40);
     }
 
@@ -591,12 +813,15 @@ private:
         canvas_->relayout();
         updateSummary();
         scroll_->verticalScrollBar()->setValue(0);
+        term_->clear();
+        idlePrompt();
     }
 
     void updateSummary() {
         const int pass = passed(), fail = failed();
         summary_->setText(QString("%1 passed · %2 failed · %3 total").arg(pass).arg(fail).arg(total()));
-        summary_->setStyleSheet(fail ? "color:#d94353;font-weight:700;" : "color:#69758f;font-weight:700;");
+        summary_->setStyleSheet(fail ? "color:#d94353;font-weight:700;background:transparent;"
+                                     : "color:#69758f;font-weight:700;background:transparent;");
 
         progress_->setRange(0, std::max(1, total()));
         progress_->setValue(pass + fail);
@@ -611,10 +836,16 @@ private:
     std::vector<TheatreStep> steps_;
     QLabel *summary_ = 0;
     QProgressBar *progress_ = 0;
-    QPushButton *runBtn_ = 0, *stepBtn_ = 0, *restartBtn_ = 0;
+    QPushButton *runBtn_ = 0, *stepBtn_ = 0, *restartBtn_ = 0, *termBtn_ = 0;
     QComboBox *speed_ = 0;
     QScrollArea *scroll_ = 0;
     TheatreCanvas *canvas_ = 0;
+    QSplitter *split_ = 0;
+    QWidget *termPanel_ = 0;
+    QTextEdit *term_ = 0;
+    QElapsedTimer runClock_;
+    QString lastSection_;
+    int sectionNo_ = 0;
     int index_ = 0;
     int gen_ = 0;
     bool busy_ = false;
@@ -631,15 +862,17 @@ public:
 
     explicit Desktop(const QString &title = "Workflow tests") : QWidget(0), title_(title) {
         setWindowTitle(title);
-        resize(680, 900);
+        resize(780, 1000);
         setStyleSheet(
             "QWidget{background:#f3f5fa;color:#1b2333;font-family:'Segoe UI';font-size:13px;}"
             "QPushButton,QComboBox{background:white;border:1px solid #cfd6e6;border-radius:7px;padding:6px 12px;}"
             "QPushButton:hover{border-color:#0a84ff;color:#0a84ff;}"
+            "QPushButton:checked{background:#e8f2ff;border-color:#0a84ff;color:#0a84ff;}"
             "QTabWidget::pane{border:0;}"
-            "QTabBar::tab{background:white;border:1px solid #cfd6e6;border-radius:8px;"
-            "padding:8px 20px;margin-right:6px;font-weight:600;}"
-            "QTabBar::tab:selected{color:#0a84ff;border-color:#0a84ff;}");
+            "QTabBar::tab{background:white;border:1px solid #cfd6e6;border-radius:9px;"
+            "padding:8px 22px;margin-right:6px;font-weight:600;color:#55617a;}"
+            "QTabBar::tab:hover{border-color:#8fb8ee;}"
+            "QTabBar::tab:selected{background:#0a84ff;color:white;border-color:#0a84ff;}");
     }
 
     // ---- API used by main() ----------------------------------------------------
@@ -661,9 +894,14 @@ public:
         pages_.back()->add(section_, title, detail, body);
     }
 
-    /** Show a short note inside the step that is running. */
+    /** Show a short note inside the step that is running (and in the terminal). */
     void say(const QString &msg) {
         if (ScenarioPage::executing()) ScenarioPage::executing()->say(msg);
+    }
+
+    /** Print a line to the terminal only (not into the diagram node). */
+    static void log(const QString &msg) {
+        if (ScenarioPage::executing()) ScenarioPage::executing()->log(msg);
     }
 
     /** Fail the current step if the condition is false. */
