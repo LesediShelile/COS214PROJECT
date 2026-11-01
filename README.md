@@ -12,6 +12,7 @@
 ![Tests](https://img.shields.io/badge/tests-295%20passing-brightgreen)
 ![Patterns](https://img.shields.io/badge/GoF%20patterns-14-orange)
 ![Docker](https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white)
+![Doxygen Documentation](#-doxygen-documentation)
 
 COS 214 final project · University of Pretoria
 
@@ -211,8 +212,95 @@ Only the definitions, the adapters and their APIs know about an industry. The en
 
 ## 🐳 Docker and CI
 
-- **Docker.** The `Dockerfile` starts from Ubuntu 24.04, installs the compiler, CMake and Qt 6, builds only the desktop target and launches `tividy_desktop` with the `xcb` display platform. Tests are not part of the image.
-- **CI.** The GitHub Actions workflow in `.github/workflows/ci.yml` runs on every push and pull request to `development` and `main`. It starts from a clean Ubuntu 24.04 machine, installs the dependencies, configures the project and builds the desktop application.
+### Docker
+
+TIVIDY can be built and run inside a Docker container.
+
+**1. Build the Docker image**
+
+```bash
+docker build -t tividy .
+```
+
+**2. Run the container**
+
+```bash
+docker run --rm -it tividy
+```
+
+The `-it` flags enable interactive terminal input and output, allowing users to navigate the TIVIDY menu-driven interface. The `--rm` flag automatically removes the container when the application exits.
+
+**Useful Docker commands**
+
+| Command | Description |
+|---|---|
+| `docker images` | List available Docker images |
+| `docker ps` | List running containers |
+| `docker ps -a` | List all containers, including stopped ones |
+| `docker stop <container_id>` | Stop a running container |
+
+### Continuous Integration (CI)
+
+The GitHub Actions workflow in `.github/workflows/ci.yml` runs on every push and pull request to `development` and `main`.
+
+It starts from a clean Ubuntu 24.04 environment, installs the required dependencies, configures the project and builds the application.
+
+## 📚 Doxygen Documentation
+
+TIVIDY uses [Doxygen](https://www.doxygen.nl/) to generate HTML documentation from the project's source code, header files and Markdown documentation.
+
+### Generating the documentation
+
+**1. Install Doxygen and Graphviz**
+
+On Ubuntu/WSL:
+
+```bash
+sudo apt update
+sudo apt install doxygen graphviz
+```
+
+**2. Generate the documentation**
+
+From the project root directory:
+
+```bash
+doxygen Doxyfile
+```
+
+**3. Open the generated documentation**
+
+The HTML documentation is generated in `docs/generated/html/`.
+
+On Windows with WSL:
+
+```bash
+explorer.exe docs/generated/html/index.html
+```
+
+Alternatively, open `docs/generated/html/index.html` directly in a browser.
+
+### Documentation structure
+
+| File / Directory | Description |
+|---|---|
+| `Doxyfile` | Doxygen configuration |
+| `docs/mainpage.md` | Main documentation landing page |
+| `docs/generated/html/` | Generated HTML documentation |
+| `docs/generated/html/index.html` | Main documentation entry point |
+
+### Features
+
+The generated documentation includes:
+
+- Class and inheritance documentation.
+- Member functions, attributes and interfaces.
+- Source code browsing.
+- Include and dependency graphs.
+- UML-style class diagrams and relationships.
+- Cross-referenced classes and files.
+
+To regenerate the documentation after modifying the source code or comments, run `doxygen Doxyfile` again.
 
 ## 📚 Documentation
 
