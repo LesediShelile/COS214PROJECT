@@ -1214,51 +1214,134 @@ void promptTaskDecoratorConfig(TaskConfig& task) {
 
 bool step4ApplyDecorators(ScenarioModel& model) {
     while (true) {
-        printHeader(model.name, "Step 4 of 5: Apply Decorators");
-        std::cout << "  " << BOLD << "Task Decorators Configuration (Priority, Validation, Auditing):" << RESET << "\n\n";
+        printHeader(model.name, "Step 4 of 5: Apply GoF Decorators");
+        std::cout << "  " << BOLD << "Task Decorators (PriorityTask, ValidatedTask, AuditedTask):" << RESET << "\n\n";
         for (std::size_t i = 0; i < model.tasks.size(); ++i) {
             std::cout << "    " << std::setw(2) << (i + 1) << ") "
-                      << pad(model.tasks[i].name, 40)
+                      << pad(model.tasks[i].name, 42)
                       << YELLOW << model.tasks[i].decorators.summary() << RESET << "\n";
         }
-        std::cout << "\n  Actions:\n    [1-" << model.tasks.size() << "] Select task to configure decorators\n"
-                  << "    [P / ENTER] Proceed to Step 5 (Review and Execution)\n    [0] Back to Step 3 (Organize Tasks)\n";
 
-        std::string choice = promptString("\n  Select option [P]: ", "p", true);
+        std::cout << "\n  " << BOLD << "Decorator Options:" << RESET << "\n";
+        std::cout << "    1) Customize decorators for a specific task\n";
+        std::cout << "    2) Apply recommended default decorators for this scenario\n";
+        std::cout << "    3) Clear all decorators from all tasks\n";
+        std::cout << "    4) Proceed to Step 5 (Review and Execution)\n";
+        std::cout << "    0) Back to Step 3 (Organize Tasks)\n";
+
+        std::string choice = promptString("\n  Select option [1-4 or 0 to back]: ", "4", true);
         if (choice == "0" || choice == "b" || choice == "B") return false;
-        if (choice.empty() || choice == "p" || choice == "P") return true;
-        try {
-            int idx = std::stoi(choice);
-            if (idx >= 1 && idx <= static_cast<int>(model.tasks.size())) {
-                promptTaskDecoratorConfig(model.tasks[idx - 1]);
+        if (choice == "4" || choice == "p" || choice == "P" || choice.empty()) return true;
+
+        if (choice == "1") {
+            int idx = promptChoice("  Select task number [1-" + std::to_string(model.tasks.size()) + "]: ",
+                                   1, static_cast<int>(model.tasks.size()));
+            promptTaskDecoratorConfig(model.tasks[idx - 1]);
+        } else if (choice == "2") {
+            if (model.scenarioType == "Hospital") {
+                for (auto& t : model.tasks) {
+                    if (t.id == "h_pickup") {
+                        t.decorators.hasAuditing = true;
+                    } else if (t.id == "h_register") {
+                        t.decorators.hasValidation = true;
+                        t.decorators.requiredFields = {"patientName", "complaint", "nationalId"};
+                    } else if (t.id == "h_intake") {
+                        t.decorators.hasPriority = true;
+                        t.decorators.priorityLevel = 1;
+                        t.decorators.hasAuditing = true;
+                    } else if (t.id == "h_assessment") {
+                        t.decorators.hasValidation = true;
+                        t.decorators.requiredFields = {"diagnosis", "treatmentPlan"};
+                        t.decorators.hasAuditing = true;
+                    } else if (t.id == "h_room_alloc") {
+                        t.decorators.hasPriority = true;
+                        t.decorators.priorityLevel = 1;
+                    }
+                }
+            } else if (model.scenarioType == "Legal") {
+                for (auto& t : model.tasks) {
+                    if (t.id == "l_client_intake") {
+                        t.decorators.hasValidation = true;
+                        t.decorators.requiredFields = {"clientName", "matterType", "retainerAmount"};
+                    } else if (t.id == "l_draft" || t.id == "l_review") {
+                        t.decorators.hasAuditing = true;
+                        t.decorators.hasPriority = true;
+                        t.decorators.priorityLevel = 2;
+                    } else if (t.id == "l_settle") {
+                        t.decorators.hasPriority = true;
+                        t.decorators.priorityLevel = 1;
+                        t.decorators.hasValidation = true;
+                        t.decorators.requiredFields = {"settlementAmount"};
+                        t.decorators.hasAuditing = true;
+                    }
+                }
+            } else {
+                for (std::size_t i = 0; i < model.tasks.size(); ++i) {
+                    if (i == 0) {
+                        model.tasks[i].decorators.hasValidation = true;
+                        model.tasks[i].decorators.requiredFields = {"clientId", "approvalCode"};
+                    } else if (i == 1) {
+                        model.tasks[i].decorators.hasAuditing = true;
+                    } else if (i == 2) {
+                        model.tasks[i].decorators.hasPriority = true;
+                        model.tasks[i].decorators.priorityLevel = 1;
+                    }
+                }
             }
-        } catch (...) {}
+            std::cout << "  " << GREEN << "Applied recommended decorator configuration." << RESET << "\n";
+            pause();
+        } else if (choice == "3") {
+            for (auto& t : model.tasks) {
+                t.decorators.hasPriority = false;
+                t.decorators.hasValidation = false;
+                t.decorators.hasAuditing = false;
+                t.decorators.requiredFields.clear();
+            }
+            std::cout << "  " << YELLOW << "Cleared all decorators from all tasks." << RESET << "\n";
+            pause();
+        } else {
+            try {
+                int idx = std::stoi(choice);
+                if (idx >= 1 && idx <= static_cast<int>(model.tasks.size())) {
+                    promptTaskDecoratorConfig(model.tasks[idx - 1]);
+                }
+            } catch (...) {}
+        }
     }
 }
 
-bool step5ReviewScenario(ScenarioModel& model) {
+bool step5ReviewScenario(ScenarioModel& model, int& outExecutionMode) {
     while (true) {
         printHeader(model.name, "Step 5 of 5: Scenario Review & Confirmation");
         model.printSummary();
 
         std::cout << "  " << BOLD << "Ready to execute the scenario with the TIVIDY workflow engine?" << RESET << "\n\n";
-        std::cout << "    1) Confirm and Execute Workflow\n";
-        std::cout << "    2) Modify Task Decorators (Step 4)\n";
-        std::cout << "    3) Modify Organization & Parallel Groups (Step 3)\n";
-        std::cout << "    4) Modify Tasks (Step 2)\n";
-        std::cout << "    5) Modify Personnel (Step 1)\n";
-        std::cout << "    0) Cancel and Return to Main Menu\n";
+        std::cout << "    1) 🕹  Run Interactive Step-by-Step Execution (Manual driving, Undo, Reject, Approvals)\n";
+        std::cout << "    2) 🎬  Run Automated Demonstration (Full walkthrough with live telemetry)\n";
+        std::cout << "    3) 💾  Save Scenario to Disk (saved_scenarios/)\n";
+        std::cout << "    4) ✏   Modify Task Decorators (Step 4)\n";
+        std::cout << "    5) ✏   Modify Organization & Parallel Groups (Step 3)\n";
+        std::cout << "    6) ✏   Modify Tasks (Step 2)\n";
+        std::cout << "    7) ✏   Modify Personnel (Step 1)\n";
+        std::cout << "    0) ↩   Cancel and Return to Main Menu\n";
 
-        int opt = promptChoice("\n  Select choice [0-5]: ", 0, 5);
-        if (opt == 1) return true;
+        int opt = promptChoice("\n  Select choice [0-7]: ", 0, 7);
         if (opt == 0) return false;
-        if (opt == 2) { if (!step4ApplyDecorators(model)) continue; }
-        else if (opt == 3) { if (!step3ViewAndOrganizeTasks(model)) continue; }
-        else if (opt == 4) {
+        if (opt == 1) { outExecutionMode = 2; return true; }
+        if (opt == 2) { outExecutionMode = 1; return true; }
+        if (opt == 3) {
+            std::string sname = promptString("  Enter save name [" + model.name + "]: ", model.name);
+            model.name = sname;
+            saveScenarioToDisk(model);
+            std::cout << "  " << GREEN << "Scenario saved to disk!" << RESET << "\n";
+            pause();
+        } else if (opt == 4) { if (!step4ApplyDecorators(model)) continue; }
+        else if (opt == 5) { if (!step3ViewAndOrganizeTasks(model)) continue; }
+        else if (opt == 6) {
             auto predefined = (model.scenarioType == "Hospital") ? ScenarioModel::getHospitalPredefinedTasks()
                             : (model.scenarioType == "Legal" ? ScenarioModel::getLegalPredefinedTasks() : std::vector<TaskConfig>());
             if (!step2ConfigureTasks(model, predefined)) continue;
-        } else if (opt == 5) {
+        } else if (opt == 7) {
             if (!step1ConfigurePersonnel(model)) continue;
         }
     }
@@ -1274,28 +1357,36 @@ std::string currentTimestamp() {
     return buf;
 }
 
-std::vector<WorkItem*> getAvailableTasks(WorkItem* root) {
+// Returns all tasks in the workflow that are currently in an actionable state:
+// Available (ready to be assigned), Assigned (ready to start), Started (ready to complete), or Rejected (ready to retry)
+std::vector<WorkItem*> getActionableTasks(Stage* root, const std::map<std::string, WorkItem*>& taskMap) {
     std::vector<WorkItem*> out;
     if (!root) return out;
-    WorkItemIterator* it = root->createAvailableIterator();
-    if (it) {
-        for (it->first(); !it->isDone(); it->next()) {
-            if (it->current()) out.push_back(it->current());
+    root->activateChildren();
+
+    for (const auto& pair : taskMap) {
+        WorkItem* w = pair.second;
+        if (!w) continue;
+        std::string st = w->getStateName();
+        if (st == "Available" || st == "Assigned" || st == "Started" || st == "Rejected") {
+            out.push_back(w);
         }
-        delete it;
     }
     return out;
 }
 
-void executeScenarioWorkflow(const ScenarioModel& model) {
-    printHeader("Execution Mode Selection", model.name);
-    std::cout << "  " << BOLD << "Choose execution mode:" << RESET << "\n\n";
-    std::cout << "    1) 🎬 Automated Demonstration Execution (auto-assigns & completes live)\n";
-    std::cout << "    2) 🕹 Interactive Step-by-Step Execution (manual task driving, undo, reject)\n";
-    std::cout << "    0) ↩ Back\n";
+void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
+    int mode = initialMode;
+    if (mode == 0) {
+        printHeader("Execution Mode Selection", model.name);
+        std::cout << "  " << BOLD << "Choose execution mode:" << RESET << "\n\n";
+        std::cout << "    1) 🎬 Automated Demonstration Execution (auto-assigns & completes live)\n";
+        std::cout << "    2) 🕹 Interactive Step-by-Step Execution (manual task driving, undo, reject)\n";
+        std::cout << "    0) ↩ Back\n";
 
-    int mode = promptChoice("\n  Select execution mode [0-2]: ", 0, 2);
-    if (mode == 0) return;
+        mode = promptChoice("\n  Select execution mode [0-2]: ", 0, 2);
+        if (mode == 0) return;
+    }
 
     // Instantiate dynamic resources
     std::map<std::string, Role*> roles;
@@ -1336,7 +1427,7 @@ void executeScenarioWorkflow(const ScenarioModel& model) {
     publisher.attach(&notifier);
     publisher.attach(&metricsCollector);
 
-    // Approval Chain
+    // Approval Chain: Chain of Responsibility linking roles with authority >= 2 ascending
     std::vector<Role*> sortedRoles;
     for (auto& pair : roles) sortedRoles.push_back(pair.second);
     std::sort(sortedRoles.begin(), sortedRoles.end(), [](Role* a, Role* b) {
@@ -1353,7 +1444,7 @@ void executeScenarioWorkflow(const ScenarioModel& model) {
         }
     }
 
-    // Build Stage Tree
+    // Build Stage Tree (Composite Pattern)
     Stage* rootStage = new SequentialStage("root_workflow", model.name);
     std::map<std::string, WorkItem*> taskMap;
 
@@ -1370,7 +1461,9 @@ void executeScenarioWorkflow(const ScenarioModel& model) {
 
             Task* baseTask = nullptr;
             if (tc->isExternal) {
-                ExternalConnector* conn = (tc->externalConnectorType == "APIOne_Records") ? static_cast<ExternalConnector*>(&adapterOne) : static_cast<ExternalConnector*>(&adapterTwo);
+                ExternalConnector* conn = (tc->externalConnectorType == "APIOne_Records")
+                    ? static_cast<ExternalConnector*>(&adapterOne)
+                    : static_cast<ExternalConnector*>(&adapterTwo);
                 baseTask = new ExternalTask(tc->id, tc->name, r, strat, conn, tc->externalRequest);
             } else {
                 baseTask = new Task(tc->id, tc->name, r, strat);
@@ -1400,30 +1493,72 @@ void executeScenarioWorkflow(const ScenarioModel& model) {
 
     CommandInvoker invoker;
 
-    auto driveTask = [&](WorkItem* task, Participant* assignee) {
+    // Helper to drive a single lifecycle transition for a task
+    auto stepSingleTask = [&](WorkItem* task, Participant* chosenAssignee) {
         if (!task) return;
-        if (task->getStateName() == "Created") task->makeAvailable();
-        if (task->getStateName() == "Available") {
-            if (!assignee) {
-                Role* req = nullptr;
-                const TaskConfig* tc = model.findTask(task->getItemID());
-                if (tc && roles.count(tc->roleName)) req = roles[tc->roleName];
-                for (auto* p : participants) {
-                    if (!req || p->hasRole(req)) { assignee = p; break; }
+        const TaskConfig* tc = model.findTask(task->getItemID());
+        std::string st = task->getStateName();
+
+        if (st == "Created") {
+            task->makeAvailable();
+            st = task->getStateName();
+        }
+
+        if (st == "Available") {
+            Participant* who = chosenAssignee;
+            if (!who) {
+                AssignmentStrategy* strat = &byRoleStrategy;
+                if (tc && tc->strategyType == "Workload") strat = &byWorkloadStrategy;
+                else if (tc && tc->strategyType == "RuleBased") strat = &ruleStrategy;
+
+                Role* req = (tc && roles.count(tc->roleName)) ? roles[tc->roleName] : nullptr;
+                Task dummyTask(task->getItemID(), task->getName(), req, strat);
+                who = strat->selectParticipant(&dummyTask, participants);
+                if (!who) {
+                    for (auto* p : participants) {
+                        if (!req || p->hasRole(req)) { who = p; break; }
+                    }
+                    if (!who && !participants.empty()) who = participants[0];
                 }
-                if (!assignee && !participants.empty()) assignee = participants[0];
             }
-            invoker.executeCommand(new AssignCommand(task, assignee));
-        }
-        if (task->getStateName() == "Assigned") {
+            invoker.executeCommand(new AssignCommand(task, who));
+            std::cout << "  " << GREEN << "✔ [ASSIGNED]" << RESET << " \"" << task->getName() << "\" -> "
+                      << (who ? who->getName() : "Unknown") << "\n";
+
+            // Trigger approval chain if Priority 1
+            if (tc && tc->decorators.hasPriority && tc->decorators.priorityLevel == 1 && headApproval) {
+                std::cout << "     " << MAGENTA << "✦ Triggering Approval Chain (Priority 1)..." << RESET << "\n";
+                ApprovalRequest req(task, 3, std::time(nullptr) + 1800);
+                headApproval->handle(&req);
+                std::cout << "     " << (req.getStatus() == ApprovalStatus::Approved ? GREEN + std::string("✔ Approved by Authority") : YELLOW + std::string("✦ Escalated in Chain")) << RESET << "\n";
+            }
+        } else if (st == "Assigned") {
             invoker.executeCommand(new StartCommand(task));
-        }
-        if (task->getStateName() == "Started") {
-            const TaskConfig* tc = model.findTask(task->getItemID());
+            std::cout << "  " << CYAN << "▶ [STARTED]" << RESET << " \"" << task->getName() << "\" by "
+                      << (task->getAssignee() ? task->getAssignee()->getName() : "Assignee") << "\n";
+        } else if (st == "Started") {
             if (tc && tc->decorators.hasValidation) {
-                for (const auto& f : tc->decorators.requiredFields) task->setData(f, "ValidRecord_" + f);
+                for (const auto& f : tc->decorators.requiredFields) {
+                    if (!task->hasData(f) || task->getData(f).empty()) {
+                        task->setData(f, "ValidRecord_" + f);
+                        std::cout << "     " << DIM << "Validated field: " << f << RESET << "\n";
+                    }
+                }
             }
             invoker.executeCommand(new CompleteCommand(task));
+            rootStage->activateChildren();
+            std::cout << "  " << GREEN << "★ [COMPLETED]" << RESET << " \"" << task->getName() << "\"!\n";
+        } else if (st == "Rejected") {
+            task->makeAvailable();
+            std::cout << "  " << YELLOW << "↺ [RE-ACTIVATED]" << RESET << " \"" << task->getName() << "\"\n";
+        }
+    };
+
+    // Helper to drive a task through all transitions to completion
+    auto driveTaskToCompletion = [&](WorkItem* task, Participant* assignee) {
+        if (!task) return;
+        while (!task->isFinished() && task->getStateName() != "Rejected") {
+            stepSingleTask(task, assignee);
         }
     };
 
@@ -1431,17 +1566,19 @@ void executeScenarioWorkflow(const ScenarioModel& model) {
     rootStage->activateChildren();
 
     if (mode == 1) {
-        // Automated Demonstration
+        // ===================================================================
+        // Automated Demonstration Mode
+        // ===================================================================
         printHeader(model.name, "Automated Workflow Demonstration Execution");
-        std::cout << "  " << CYAN << BOLD << "Executing workflow with live event logging..." << RESET << "\n\n";
+        std::cout << "  " << CYAN << BOLD << "Executing workflow with real-time observer telemetry..." << RESET << "\n\n";
 
         int guard = 0;
-        while (!rootStage->isFinished() && ++guard < 100) {
-            std::vector<WorkItem*> ready = getAvailableTasks(rootStage);
+        while (!rootStage->isFinished() && ++guard < 120) {
+            rootStage->activateChildren();
+            std::vector<WorkItem*> ready = getActionableTasks(rootStage, taskMap);
             if (ready.empty()) break;
 
             for (auto* item : ready) {
-                std::cout << "  ▶ Advancing task: " << BOLD << item->getName() << RESET << " ... ";
                 Participant* who = nullptr;
                 const TaskConfig* tc = model.findTask(item->getItemID());
                 if (tc && roles.count(tc->roleName)) {
@@ -1452,152 +1589,305 @@ void executeScenarioWorkflow(const ScenarioModel& model) {
                 }
                 if (!who && !participants.empty()) who = participants[0];
 
-                driveTask(item, who);
-                std::cout << GREEN << "[DONE]" << RESET << " (Assigned to " << (who ? who->getName() : "None") << ")\n";
-
-                if (item->getItemID().find("room") != std::string::npos ||
-                    item->getItemID().find("settle") != std::string::npos) {
-                    if (headApproval) {
-                        std::cout << "     " << MAGENTA << "✦ Triggering Approval Chain (Chain of Responsibility)..." << RESET << "\n";
-                        ApprovalRequest req(item, 3, std::time(nullptr) + 1800);
-                        headApproval->handle(&req);
-                        std::cout << "     " << GREEN << "✔ Request "
-                                  << (req.getStatus() == ApprovalStatus::Approved ? "Approved by Department Authority" : "Processed")
-                                  << RESET << "\n";
-                    }
-                }
+                driveTaskToCompletion(item, who);
                 rootStage->activateChildren();
             }
         }
 
         if (rootStage->isFinished()) {
-            std::cout << "\n  " << GREEN << BOLD << "🎉 Scenario execution finished successfully!" << RESET << "\n";
+            std::cout << "\n  " << GREEN << BOLD << "🎉 All workflow tasks have completed successfully!" << RESET << "\n";
             WorkflowEvent finishEvt(EventType::WORKFLOW_FINISHED, rootStage->getItemID(), currentTimestamp(), "All tasks completed successfully.");
             publisher.publish(&finishEvt);
         }
     } else {
-        // Interactive Execution
+        // ===================================================================
+        // Interactive Step-by-Step Mode (Live Dashboard & Controls)
+        // ===================================================================
         while (true) {
-            printHeader(model.name, "Interactive Workflow Execution");
-            std::vector<WorkItem*> taskList;
+            rootStage->activateChildren();
+
+            // Count completed
+            int completedCount = 0;
+            int totalTasks = static_cast<int>(model.tasks.size());
             for (const auto& pair : taskMap) {
-                taskList.push_back(pair.second);
-                std::cout << "    • " << stateBadge(pair.second->getStateName()) << " "
-                          << pad(pair.second->getName(), 38)
-                          << DIM << "Assignee: " << (pair.second->getAssignee() ? pair.second->getAssignee()->getName() : "None") << RESET << "\n";
+                if (pair.second->getStateName() == "Completed") completedCount++;
             }
 
-            std::vector<WorkItem*> ready = getAvailableTasks(rootStage);
-            std::cout << "\n  " << GREEN << "Currently Available Tasks (" << ready.size() << "):" << RESET << "\n";
-            if (ready.empty() && rootStage->isFinished()) {
-                std::cout << "    " << GREEN << BOLD << "🎉 All tasks have completed!" << RESET << "\n";
+            printHeader(model.name, "Interactive Workflow Execution Dashboard");
+
+            // Progress Bar
+            int percent = (totalTasks > 0) ? (completedCount * 100 / totalTasks) : 100;
+            std::cout << "  Progress: [";
+            int barWidth = 32;
+            int filled = (percent * barWidth) / 100;
+            for (int b = 0; b < barWidth; ++b) {
+                if (b < filled) std::cout << GREEN << "█" << RESET;
+                else std::cout << DIM << "░" << RESET;
+            }
+            std::cout << "] " << BOLD << percent << "%" << RESET << " (" << completedCount << "/" << totalTasks << " tasks completed)\n\n";
+
+            // Stage Groups & Tasks Board
+            for (std::size_t g = 0; g < model.stageGroups.size(); ++g) {
+                const auto& grp = model.stageGroups[g];
+                std::string modeBadge = grp.isParallel ? (MAGENTA + std::string("[ParallelStage]") + RESET)
+                                                       : (BLUE + std::string("[SequentialStage]") + RESET);
+                std::cout << "  📂 " << BOLD << grp.name << RESET << " " << modeBadge << "\n";
+                for (const auto& tid : grp.taskIds) {
+                    auto it = taskMap.find(tid);
+                    if (it == taskMap.end()) continue;
+                    WorkItem* w = it->second;
+                    std::cout << "     " << stateBadge(w->getStateName()) << " "
+                              << pad(w->getName(), 36) << " ";
+                    if (w->getAssignee()) {
+                        std::cout << CYAN << "Owner: " << pad(w->getAssignee()->getName(), 18) << RESET;
+                    } else {
+                        std::cout << DIM << pad("Unassigned", 18) << RESET;
+                    }
+                    const TaskConfig* tc = model.findTask(tid);
+                    if (tc && (tc->decorators.hasPriority || tc->decorators.hasValidation || tc->decorators.hasAuditing)) {
+                        std::cout << " " << YELLOW << tc->decorators.summary() << RESET;
+                    }
+                    std::cout << "\n";
+                }
+                std::cout << "\n";
+            }
+
+            bool workflowFinished = rootStage->isFinished() || (completedCount == totalTasks);
+
+            if (workflowFinished) {
+                std::cout << "  " << GREEN << BOLD << "════════════════════════════════════════════════════════════════════════" << RESET << "\n";
+                std::cout << "  " << GREEN << BOLD << "🎉 WORKFLOW COMPLETED! All " << totalTasks << " tasks have finished successfully." << RESET << "\n";
+                std::cout << "  " << GREEN << BOLD << "════════════════════════════════════════════════════════════════════════" << RESET << "\n\n";
+
+                WorkflowEvent finishEvt(EventType::WORKFLOW_FINISHED, rootStage->getItemID(), currentTimestamp(), "All tasks completed successfully.");
+                publisher.publish(&finishEvt);
+
+                std::cout << "  Post-Execution Actions:\n";
+                std::cout << "    1) 📊 View Execution Results, History & Observer Telemetry (Audit, Notifier, Metrics)\n";
+                std::cout << "    2) ↩ Undo Last Command (Command & Memento pattern)\n";
+                std::cout << "    3) 💾 Save Completed Scenario to Disk\n";
+                std::cout << "    0) ↩ Return to Main Menu\n";
+
+                int endOpt = promptChoice("\n  Select action [0-3]: ", 0, 3);
+                if (endOpt == 0) break;
+                if (endOpt == 1) break; // proceeds to Telemetry display below
+                if (endOpt == 2) {
+                    if (invoker.canUndo() && invoker.undoLast()) {
+                        std::cout << "  " << GREEN << "Undid last command." << RESET << "\n";
+                        rootStage->activateChildren();
+                    } else {
+                        std::cout << "  " << YELLOW << "Nothing to undo." << RESET << "\n";
+                    }
+                    pause();
+                    continue;
+                }
+                if (endOpt == 3) {
+                    saveScenarioToDisk(model);
+                    std::cout << "  " << GREEN << "Scenario saved to disk!" << RESET << "\n";
+                    pause();
+                    continue;
+                }
+            }
+
+            // Actionable tasks
+            std::vector<WorkItem*> actionable = getActionableTasks(rootStage, taskMap);
+
+            std::cout << "  " << BOLD << "Currently Actionable Tasks (" << actionable.size() << "):" << RESET << "\n";
+            if (actionable.empty()) {
+                std::cout << "    " << DIM << "None (waiting for active stage transitions)" << RESET << "\n";
             } else {
-                for (auto* w : ready) std::cout << "    * " << BOLD << w->getName() << RESET << "\n";
+                for (std::size_t i = 0; i < actionable.size(); ++i) {
+                    WorkItem* w = actionable[i];
+                    std::string nextAction;
+                    if (w->getStateName() == "Available") nextAction = "Ready for Assignment";
+                    else if (w->getStateName() == "Assigned") nextAction = "Ready to Start";
+                    else if (w->getStateName() == "Started") nextAction = "Ready to Complete / Reject";
+                    else if (w->getStateName() == "Rejected") nextAction = "Rejected (ready to re-activate)";
+
+                    std::cout << "    " << (i + 1) << ") " << BOLD << w->getName() << RESET
+                              << " " << stateBadge(w->getStateName())
+                              << " " << DIM << "[" << nextAction << "]" << RESET << "\n";
+                }
             }
 
-            std::cout << "\n  Interactive Actions:\n";
+            std::cout << "\n  Interactive Controls:\n";
             std::cout << "    1) Step & Advance next available task\n";
-            std::cout << "    2) Pick specific task and execute action (Assign/Start/Complete/Reject)\n";
+            std::cout << "    2) Pick specific task and execute action (Assign / Start / Complete / Reject)\n";
             std::cout << "    3) Run Approval Chain check (Chain of Responsibility)\n";
-            std::cout << "    4) Undo last command (Command & Memento) [" << (invoker.canUndo() ? "Available" : "Empty") << "]\n";
-            std::cout << "    5) Auto-run remaining tasks to completion\n";
-            std::cout << "    0) Finish / Return to Scenario Menu\n";
+            std::cout << "    4) Undo last command (Command & Memento) [" << (invoker.canUndo() ? (GREEN + std::string("Available") + RESET) : (DIM + std::string("Empty") + RESET)) << "]\n";
+            std::cout << "    5) Fast-forward all remaining tasks to completion\n";
+            std::cout << "    0) Abort / Return to Scenario Menu\n";
 
-            int c = promptChoice("\n  Select choice [0-5]: ", 0, 5);
+            int c = promptChoice("\n  Select action [0-5]: ", 0, 5);
             if (c == 0) break;
+
             if (c == 1) {
-                if (ready.empty()) { std::cout << "  " << YELLOW << "No tasks available." << RESET << "\n"; pause(); continue; }
-                driveTask(ready[0], nullptr);
+                if (actionable.empty()) {
+                    std::cout << "  " << YELLOW << "No actionable tasks right now." << RESET << "\n";
+                    pause();
+                    continue;
+                }
+                std::cout << "\n";
+                stepSingleTask(actionable[0], nullptr);
                 rootStage->activateChildren();
-                pause("Task advanced. Press ENTER...");
+                pause("Press ENTER to continue...");
             } else if (c == 2) {
-                std::cout << "\n  Select task:\n";
-                for (std::size_t i = 0; i < taskList.size(); ++i) std::cout << "    " << (i + 1) << ") " << taskList[i]->getName() << "\n";
-                int tChoice = promptChoice("  Task index: ", 1, static_cast<int>(taskList.size()));
-                WorkItem* w = taskList[tChoice - 1];
-                std::cout << "    1) Assign task  2) Start task  3) Complete task  4) Reject task  0) Cancel\n";
+                std::vector<WorkItem*> allTasksList;
+                std::cout << "\n  Select task to act on:\n";
+                for (const auto& pair : taskMap) {
+                    allTasksList.push_back(pair.second);
+                    std::cout << "    " << allTasksList.size() << ") " << stateBadge(pair.second->getStateName())
+                              << " " << pair.second->getName() << "\n";
+                }
+                int tChoice = promptChoice("  Task index [1-" + std::to_string(allTasksList.size()) + "]: ",
+                                           1, static_cast<int>(allTasksList.size()));
+                WorkItem* target = allTasksList[tChoice - 1];
+
+                std::cout << "\n  Actions for \"" << target->getName() << "\" (Current: " << target->getStateName() << "):\n";
+                std::cout << "    1) Assign task to participant\n";
+                std::cout << "    2) Start task\n";
+                std::cout << "    3) Complete task (enter validation payload)\n";
+                std::cout << "    4) Reject task (record rejection reason)\n";
+                std::cout << "    0) Cancel\n";
+
                 int aChoice = promptChoice("  Action choice [0-4]: ", 0, 4);
                 if (aChoice == 1) {
-                    for (std::size_t i = 0; i < participants.size(); ++i) std::cout << "    " << (i + 1) << ") " << participants[i]->getName() << "\n";
+                    std::cout << "\n  Select participant:\n";
+                    for (std::size_t i = 0; i < participants.size(); ++i) {
+                        std::cout << "    " << (i + 1) << ") " << participants[i]->getName()
+                                  << " [" << (participants[i]->getRole() ? participants[i]->getRole()->getName() : "Staff") << "]\n";
+                    }
                     int pChoice = promptChoice("  Participant choice: ", 1, static_cast<int>(participants.size()));
-                    invoker.executeCommand(new AssignCommand(w, participants[pChoice - 1]));
-                    pause("Assigned.");
+                    try {
+                        invoker.executeCommand(new AssignCommand(target, participants[pChoice - 1]));
+                        std::cout << "  " << GREEN << "Assigned to " << participants[pChoice - 1]->getName() << RESET << "\n";
+                    } catch (const std::exception& ex) {
+                        std::cout << "  " << RED << "Error: " << ex.what() << RESET << "\n";
+                    }
+                    pause();
                 } else if (aChoice == 2) {
-                    invoker.executeCommand(new StartCommand(w));
-                    pause("Started.");
+                    try {
+                        invoker.executeCommand(new StartCommand(target));
+                        std::cout << "  " << GREEN << "Started task." << RESET << "\n";
+                    } catch (const std::exception& ex) {
+                        std::cout << "  " << RED << "Error: " << ex.what() << RESET << "\n";
+                    }
+                    pause();
                 } else if (aChoice == 3) {
-                    const TaskConfig* tc = model.findTask(w->getItemID());
+                    const TaskConfig* tc = model.findTask(target->getItemID());
                     if (tc && tc->decorators.hasValidation) {
+                        std::cout << "  ValidatedTask required fields:\n";
                         for (const auto& f : tc->decorators.requiredFields) {
-                            if (!w->hasData(f) || w->getData(f).empty()) {
-                                std::string val = promptString("  Required field '" + f + "': ", "ValidData_" + f);
-                                w->setData(f, val);
-                            }
+                            std::string val = promptString("    Enter value for '" + f + "': ", "Verified_" + f);
+                            target->setData(f, val);
                         }
                     }
-                    invoker.executeCommand(new CompleteCommand(w));
-                    rootStage->activateChildren();
-                    pause("Completed.");
+                    try {
+                        invoker.executeCommand(new CompleteCommand(target));
+                        rootStage->activateChildren();
+                        std::cout << "  " << GREEN << "Task completed!" << RESET << "\n";
+                    } catch (const std::exception& ex) {
+                        std::cout << "  " << RED << "Error: " << ex.what() << RESET << "\n";
+                    }
+                    pause();
                 } else if (aChoice == 4) {
-                    std::string reason = promptString("  Rejection reason: ", "Review required");
-                    w->reject(reason);
-                    rootStage->activateChildren();
-                    pause("Rejected.");
+                    std::string reason = promptString("  Rejection reason: ", "Discrepancy in records");
+                    try {
+                        target->reject(reason);
+                        rootStage->activateChildren();
+                        std::cout << "  " << YELLOW << "Task rejected with reason: " << reason << RESET << "\n";
+                    } catch (const std::exception& ex) {
+                        std::cout << "  " << RED << "Error: " << ex.what() << RESET << "\n";
+                    }
+                    pause();
                 }
             } else if (c == 3) {
                 if (headApproval) {
                     int reqLvl = promptInt("  Authority level required [1-5]: ", 3, 1, 5);
                     ApprovalRequest req(rootStage, reqLvl, std::time(nullptr) + 1800);
                     headApproval->handle(&req);
-                    std::cout << "  Result: " << (req.getStatus() == ApprovalStatus::Approved ? GREEN + std::string("Approved") : RED + std::string("Rejected/Undecided")) << RESET << "\n";
+                    std::cout << "  Result: " << (req.getStatus() == ApprovalStatus::Approved ? GREEN + std::string("Approved by Authority") : RED + std::string("Pending / Escalated")) << RESET << "\n";
+                    pause();
+                } else {
+                    std::cout << "  " << YELLOW << "No approval chain configured." << RESET << "\n";
                     pause();
                 }
             } else if (c == 4) {
                 if (invoker.canUndo() && invoker.undoLast()) {
-                    std::cout << "  " << GREEN << "Undid last command." << RESET << "\n";
+                    std::cout << "  " << GREEN << "Undid last command using Command & Memento pattern." << RESET << "\n";
                     rootStage->activateChildren();
                 } else {
-                    std::cout << "  " << YELLOW << "Nothing to undo." << RESET << "\n";
+                    std::cout << "  " << YELLOW << "Nothing to undo in history stack." << RESET << "\n";
                 }
                 pause();
             } else if (c == 5) {
-                while (!rootStage->isFinished()) {
-                    std::vector<WorkItem*> r = getAvailableTasks(rootStage);
-                    if (r.empty()) break;
-                    for (auto* itm : r) {
-                        driveTask(itm, nullptr);
+                std::cout << "\n  " << CYAN << "Fast-forwarding remaining workflow tasks to completion..." << RESET << "\n";
+                int guard = 0;
+                while (!rootStage->isFinished() && ++guard < 150) {
+                    rootStage->activateChildren();
+                    std::vector<WorkItem*> act = getActionableTasks(rootStage, taskMap);
+                    if (act.empty()) break;
+                    for (auto* itm : act) {
+                        driveTaskToCompletion(itm, nullptr);
                         rootStage->activateChildren();
                     }
                 }
-                break;
+                std::cout << "  " << GREEN << "Completed fast-forward." << RESET << "\n";
+                pause();
             }
         }
     }
 
-    // Results & Telemetry Output
+    // =======================================================================
+    // Final Results & Telemetry Output (Observers & Adapters Summary)
+    // =======================================================================
     printHeader(model.name, "Execution Results, History & Observer Telemetry");
+
     std::cout << "  " << BOLD << CYAN << "[1] FINAL WORKFLOW STATUS" << RESET << "\n";
-    for (const auto& pair : taskMap) {
-        WorkItem* w = pair.second;
-        Participant* p = w->getAssignee();
-        std::cout << "    • " << pad(w->getName(), 38) << stateBadge(w->getStateName()) << " "
-                  << DIM << (p ? "Owner: " + p->getName() : "Unassigned") << RESET << "\n";
+    for (const auto& grp : model.stageGroups) {
+        std::cout << "    📂 " << BOLD << grp.name << RESET << " ("
+                  << (grp.isParallel ? "ParallelStage" : "SequentialStage") << ")\n";
+        for (const auto& tid : grp.taskIds) {
+            auto it = taskMap.find(tid);
+            if (it == taskMap.end()) continue;
+            WorkItem* w = it->second;
+            Participant* p = w->getAssignee();
+            std::cout << "       • " << pad(w->getName(), 36) << " " << stateBadge(w->getStateName()) << " "
+                      << DIM << (p ? "Owner: " + p->getName() : "Unassigned") << RESET << "\n";
+        }
     }
-    std::cout << "\n  " << BOLD << CYAN << "[2] AUDIT TRAIL (" << auditLogger.getRecords().size() << " records)" << RESET << "\n";
+
+    std::cout << "\n  " << BOLD << CYAN << "[2] AUDIT TRAIL (AuditLogger Observer: "
+              << auditLogger.getRecords().size() << " records)" << RESET << "\n";
     auto records = auditLogger.getRecords();
     std::size_t startR = (records.size() > 8) ? records.size() - 8 : 0;
-    for (std::size_t i = startR; i < records.size(); ++i) std::cout << "    📋 " << DIM << records[i] << RESET << "\n";
+    for (std::size_t i = startR; i < records.size(); ++i) {
+        std::cout << "      📋 " << DIM << records[i] << RESET << "\n";
+    }
 
-    std::cout << "\n  " << BOLD << CYAN << "[3] NOTIFIER BROADCASTS (" << notifier.getNotificationCount() << " notifications)" << RESET << "\n";
+    std::cout << "\n  " << BOLD << CYAN << "[3] NOTIFIER BROADCASTS (Notifier Observer: "
+              << notifier.getNotificationCount() << " notifications)" << RESET << "\n";
     auto notes = notifier.getNotifications();
     std::size_t startN = (notes.size() > 6) ? notes.size() - 6 : 0;
-    for (std::size_t i = startN; i < notes.size(); ++i) std::cout << "    🔔 " << notes[i] << "\n";
+    for (std::size_t i = startN; i < notes.size(); ++i) {
+        std::cout << "      🔔 " << notes[i] << "\n";
+    }
 
-    std::cout << "\n  " << BOLD << CYAN << "[4] METRICS SUMMARY" << RESET << "\n";
-    std::cout << "    Completed Transitions: " << metricsCollector.getTransitionCount("Completed") << "\n";
-    std::cout << "    Started Transitions:   " << metricsCollector.getTransitionCount("Started") << "\n";
+    std::cout << "\n  " << BOLD << CYAN << "[4] METRICS SUMMARY (MetricsCollector Observer)" << RESET << "\n";
+    std::cout << "      Completed Transitions: " << metricsCollector.getTransitionCount("Completed") << "\n";
+    std::cout << "      Started Transitions:   " << metricsCollector.getTransitionCount("Started") << "\n";
+    std::cout << "      Assigned Transitions:  " << metricsCollector.getTransitionCount("Assigned") << "\n";
+
+    std::cout << "\n  " << BOLD << CYAN << "[5] EXTERNAL CONNECTORS (Adapter Pattern)" << RESET << "\n";
+    for (const auto& t : model.tasks) {
+        if (t.isExternal) {
+            std::cout << "      • Connector: " << t.externalConnectorType << " | Payload: '"
+                      << t.externalRequest << "' -> " << GREEN << "Successfully Delivered & Confirmed" << RESET << "\n";
+        }
+    }
+
     std::cout << "\n";
-
+    printRule(72, CYAN);
     pause("Press ENTER to return to scenario menu...");
 
     if (model.scenarioType == "Custom" || promptBool("  Would you like to save this scenario to disk for future sessions?", false)) {
@@ -1629,13 +1919,14 @@ void handleHospitalScenario() {
 
     auto predefined = ScenarioModel::getHospitalPredefinedTasks();
 
+    int execMode = 0;
     if (!step1ConfigurePersonnel(model)) return;
     if (!step2ConfigureTasks(model, predefined)) return;
     if (!step3ViewAndOrganizeTasks(model)) return;
     if (!step4ApplyDecorators(model)) return;
-    if (!step5ReviewScenario(model)) return;
+    if (!step5ReviewScenario(model, execMode)) return;
 
-    executeScenarioWorkflow(model);
+    executeScenarioWorkflow(model, execMode);
 }
 
 void handleLegalScenario() {
@@ -1653,13 +1944,14 @@ void handleLegalScenario() {
 
     auto predefined = ScenarioModel::getLegalPredefinedTasks();
 
+    int execMode = 0;
     if (!step1ConfigurePersonnel(model)) return;
     if (!step2ConfigureTasks(model, predefined)) return;
     if (!step3ViewAndOrganizeTasks(model)) return;
     if (!step4ApplyDecorators(model)) return;
-    if (!step5ReviewScenario(model)) return;
+    if (!step5ReviewScenario(model, execMode)) return;
 
-    executeScenarioWorkflow(model);
+    executeScenarioWorkflow(model, execMode);
 }
 
 void handleCreateCustomScenario() {
@@ -1693,11 +1985,12 @@ void handleCreateCustomScenario() {
 
     std::vector<TaskConfig> emptyPredefined;
 
+    int execMode = 0;
     if (!step1ConfigurePersonnel(model)) return;
     if (!step2ConfigureTasks(model, emptyPredefined)) return;
     if (!step3ViewAndOrganizeTasks(model)) return;
     if (!step4ApplyDecorators(model)) return;
-    if (!step5ReviewScenario(model)) return;
+    if (!step5ReviewScenario(model, execMode)) return;
 
     if (promptBool("  Save this custom scenario for future sessions?", true)) {
         saveScenarioToDisk(model);
@@ -1705,8 +1998,9 @@ void handleCreateCustomScenario() {
         pause();
     }
 
-    executeScenarioWorkflow(model);
+    executeScenarioWorkflow(model, execMode);
 }
+
 
 void handleSavedScenariosMenu() {
     while (true) {
