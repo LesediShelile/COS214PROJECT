@@ -1134,847 +1134,244 @@ Stage *buildLegalCase(LegalWorld &w, LegalPieces &p) {
 }
 
 struct LegalCtx {
-    // original small case (Legal 1 to 5)
     Participant who;
-    Stage *root = 0, *intake = 0, *discovery = 0, *litigation = 0;
-    Task *client = 0, *conflict = 0, *evidence = 0, *research = 0, *draft = 0, *review = 0, *filing = 0;
+    Stage *root, *intake, *discovery, *litigation;
+    Task *client, *conflict, *evidence, *research, *witness,
+         *draft, *review, *filing, *hearing, *judgment, *invoice, *archive;
 
-    // full litigation matter (Legal 6 onward)
-    LegalWorld *w = 0;
-    Stage *full = 0;           // matter A, the case we walk through step by step
-    WorkItem *matterB = 0;     // a second matter cloned from the same definition
-    LegalPieces p;
+    LegalCtx() : who("lawyer", "Test Attorney", 0),
+        root(0), intake(0), discovery(0), litigation(0),
+        client(0), conflict(0), evidence(0), research(0), witness(0),
+        draft(0), review(0), filing(0), hearing(0), judgment(0),
+        invoice(0), archive(0) {}
 
-    LegalCtx() : who("lawyer", "Test Attorney", 0) {}
-
-    void resetSmall() {
+    void reset() {
         delete root;
         root = intake = discovery = litigation = 0;
-        client = conflict = evidence = research = draft = review = filing = 0;
+        client = conflict = evidence = research = witness = 0;
+        draft = review = filing = hearing = judgment = invoice = archive = 0;
     }
-    // The tree is always deleted before the world it points into.
-    void resetFirm() {
-        delete matterB;
-        delete full;
-        delete w;
-        matterB = 0;
-        full = 0;
-        w = 0;
-        p = LegalPieces();
-    }
-    void reset() { resetFirm(); resetSmall(); }
     ~LegalCtx() { reset(); }
 };
 
-// Full legal case tree in one go, used by the original end-to-end step.
+// Build exactly the workflow described in the legal demonstration:
+// intake (sequential) -> discovery (parallel) -> litigation (sequential).
 void buildLegalFull(LegalCtx &c) {
     c.reset();
-    c.root = new SequentialStage("legal-full-root", "Legal case workflow");
-    Stage *intake = new SequentialStage("intake-stage", "Client intake and conflict check");
-    intake->add(new Task("client", "Client intake interview", 0, 0));
-    intake->add(new Task("conflict", "Conflict of interest check", 0, 0));
-    Stage *discovery = new ParallelStage("discovery-stage", "Investigate the case in parallel");
-    discovery->add(new Task("evidence", "Gather evidence", 0, 0));
-    discovery->add(new Task("research", "Legal research and precedents", 0, 0));
-    discovery->add(new Task("witness", "Interview witnesses", 0, 0));
-    intake->add(discovery);
-    c.root->add(intake);
-    Stage *litigation = new SequentialStage("litigation-stage", "Pleadings and court");
-    litigation->add(new Task("draft", "Draft pleadings", 0, 0));
-    litigation->add(new Task("review", "Partner review and sign-off", 0, 0));
-    litigation->add(new Task("filing", "File with the court", 0, 0));
-    litigation->add(new Task("hearing", "Attend hearing", 0, 0));
-    c.root->add(litigation);
-    Stage *closure = new SequentialStage("closure-stage", "Judgment and closure");
-    closure->add(new Task("judgment", "Record judgment or settlement", 0, 0));
-    closure->add(new Task("invoice", "Invoice the client", 0, 0));
-    closure->add(new Task("archive-case", "Archive the case file", 0, 0));
-    c.root->add(closure);
+    c.root = new SequentialStage("legal-case", "Legal Case Workflow");
+
+    c.intake = new SequentialStage("intake-stage", "Client intake");
+    c.client = new Task("client", "Paralegal conducts the client's intake interview", 0, 0);
+    c.conflict = new Task("conflict", "Associate checks the firm for conflicts involving the opposing party", 0, 0);
+    c.intake->add(c.client);
+    c.intake->add(c.conflict);
+
+    c.discovery = new ParallelStage("discovery-stage", "Parallel discovery");
+    c.evidence = new Task("evidence", "Paralegal gathers documents and evidence for the client's case", 0, 0);
+    c.research = new Task("research", "Associate researches the law and precedents relevant to the client's case", 0, 0);
+    c.witness = new Task("witness", "Paralegal interviews witnesses connected to the client and the opposing party", 0, 0);
+    c.discovery->add(c.evidence);
+    c.discovery->add(c.research);
+    c.discovery->add(c.witness);
+
+    c.litigation = new SequentialStage("litigation-stage", "Litigation");
+    c.draft = new Task("draft", "Associate drafts court pleadings for the client's case against the opposing party", 0, 0);
+    c.review = new Task("review", "Partner reviews the client's pleadings and decides whether to approve them", 0, 0);
+    c.filing = new Task("filing", "Paralegal files the approved pleadings with the court", 0, 0);
+    c.hearing = new Task("hearing", "Legal representative attends the hearing for the client's case", 0, 0);
+    c.judgment = new Task("judgment", "Senior attorney records the court's judgment in the client's case", 0, 0);
+    c.invoice = new Task("invoice", "Finance clerk invoices the client for the legal work", 0, 0);
+    c.archive = new Task("archive", "Paralegal archives the completed legal case file", 0, 0);
+    c.litigation->add(c.draft);
+    c.litigation->add(c.review);
+    c.litigation->add(c.filing);
+    c.litigation->add(c.hearing);
+    c.litigation->add(c.judgment);
+    c.litigation->add(c.invoice);
+    c.litigation->add(c.archive);
+
+    c.root->add(c.intake);
+    c.root->add(c.discovery);
+    c.root->add(c.litigation);
 }
 
 void addLegalScenario(Desktop &theatre, LegalCtx &c) {
     auto &check = Desktop::check;
     auto &expectThrows = Desktop::expectThrows;
 
-    // ==================================================================
-    // ORIGINAL STEPS (unchanged)
-    // ==================================================================
-
     // ------------------------------------------------------------------
-    theatre.section("Legal 1. Build the workflow (Composite)");
+    theatre.section("Legal 1. Build the legal case workflow (Composite)");
 
-    theatre.step("Create the root stage", "Empty SequentialStage for a new legal case", [&] {
+    theatre.step("Open the legal case", "Create the root SequentialStage for the Legal Case Workflow", [&] {
         c.reset();
-        c.root = new SequentialStage("legal-root", "Legal case workflow");
-        check(c.root->getChildren().empty(), "A new stage should have no children");
-        theatre.say("legal root created");
+        c.root = new SequentialStage("legal-case", "Legal Case Workflow");
+        check(c.root->getChildren().empty(), "the new root should be empty");
+        theatre.say("Legal case opened | Root: Legal Case Workflow");
     });
 
-    theatre.step("Add tasks to a sequential stage", "client intake + conflict check inside 'intake'", [&] {
-        c.intake = new SequentialStage("intake", "Client intake and conflict check");
-        c.client = new Task("client", "Client intake interview", 0, 0);
-        c.conflict = new Task("conflict", "Conflict of interest check", 0, 0);
+    theatre.step("Add the client's intake and conflict check", "Sequential: paralegal interviews the client -> associate checks for conflicts involving the opposing party", [&] {
+        c.intake = new SequentialStage("intake-stage", "Client intake");
+        c.client = new Task("client", "Paralegal conducts the client's intake interview", 0, 0);
+        c.conflict = new Task("conflict", "Associate checks the firm for conflicts involving the opposing party", 0, 0);
         c.intake->add(c.client);
         c.intake->add(c.conflict);
-        check(c.intake->getChildren().size() == 2, "intake should have 2 children");
+        c.root->add(c.intake);
+        check(c.intake->getChildren().size() == 2, "intake should contain two tasks");
+        theatre.say("Legal Case Workflow\n  Sequential: client intake and conflict check\n    1. Paralegal interviews the client and records the matter details\n    2. Associate checks whether the firm has a conflict involving the opposing party");
     });
 
-    theatre.step("Nest a parallel stage", "evidence + research run side by side inside 'intake'", [&] {
-        c.discovery = new ParallelStage("discovery", "Investigate the case");
-        c.evidence = new Task("evidence", "Gather evidence", 0, 0);
-        c.research = new Task("research", "Legal research and precedents", 0, 0);
+    theatre.step("Add the parallel investigation into the client's case", "Three branches run together: collect case evidence || research relevant law and precedents || interview witnesses", [&] {
+        c.discovery = new ParallelStage("discovery-stage", "Parallel discovery");
+        c.evidence = new Task("evidence", "Paralegal gathers documents and evidence for the client's case", 0, 0);
+        c.research = new Task("research", "Associate researches the law and precedents relevant to the client's case", 0, 0);
+        c.witness = new Task("witness", "Paralegal interviews witnesses connected to the client and the opposing party", 0, 0);
         c.discovery->add(c.evidence);
         c.discovery->add(c.research);
-        c.intake->add(c.discovery);
-        c.root->add(c.intake);
-        check(c.intake->getChildren().size() == 3, "intake should now have 3 children");
-        check(c.root->getChildren().size() == 1, "root should have 1 child");
+        c.discovery->add(c.witness);
+        c.root->add(c.discovery);
+        check(c.discovery->getChildren().size() == 3, "discovery should contain three parallel tasks");
+        theatre.say("  Parallel investigation into the client's case\n    - Gather documents and supporting evidence\n    - Research applicable law and court precedents\n    - Interview witnesses connected to the dispute");
     });
 
-    theatre.step("Add a second sequential stage", "draft -> review -> filing inside 'litigation'", [&] {
-        c.litigation = new SequentialStage("litigation", "Pleadings and court");
-        c.draft = new Task("draft", "Draft pleadings", 0, 0);
-        c.review = new Task("review", "Partner review and sign-off", 0, 0);
-        c.filing = new Task("filing", "File with the court", 0, 0);
+    theatre.step("Add pleadings, court and case closeout", "Sequential: associate drafts the client's pleadings -> partner reviews -> file with court -> hearing -> judgment -> invoice the client -> archive case", [&] {
+        c.litigation = new SequentialStage("litigation-stage", "Litigation");
+        c.draft = new Task("draft", "Associate drafts court pleadings for the client's case against the opposing party", 0, 0);
+        c.review = new Task("review", "Partner reviews the client's pleadings and decides whether to approve them", 0, 0);
+        c.filing = new Task("filing", "Paralegal files the approved pleadings with the court", 0, 0);
+        c.hearing = new Task("hearing", "Legal representative attends the hearing for the client's case", 0, 0);
+        c.judgment = new Task("judgment", "Senior attorney records the court's judgment in the client's case", 0, 0);
+        c.invoice = new Task("invoice", "Finance clerk invoices the client for the legal work", 0, 0);
+        c.archive = new Task("archive", "Paralegal archives the completed legal case file", 0, 0);
         c.litigation->add(c.draft);
         c.litigation->add(c.review);
         c.litigation->add(c.filing);
+        c.litigation->add(c.hearing);
+        c.litigation->add(c.judgment);
+        c.litigation->add(c.invoice);
+        c.litigation->add(c.archive);
         c.root->add(c.litigation);
-        check(c.litigation->getChildren().size() == 3, "litigation should have 3 children");
-        check(c.root->getChildren().size() == 2, "root should have 2 stages");
+        check(c.root->getChildren().size() == 3, "root should contain intake, discovery and litigation");
+        check(c.litigation->getChildren().size() == 7, "litigation should contain seven sequential tasks");
+        theatre.say("Legal case structure complete: 3 main stages, 12 tasks");
     });
 
     // ------------------------------------------------------------------
-    theatre.section("Legal 2. Initial state and sequential gating");
+    theatre.section("Legal 2. Legal case: initial state and sequential gating");
 
-    theatre.step("Tasks start in Created", "Nothing is released before the case is opened", [&] {
-        check(state(c.client) == "Created", "client intake should be Created, was " + qs(state(c.client)));
-        check(state(c.conflict) == "Created", "conflict check should be Created");
+    theatre.step("All work on the client's case starts as Created", "The intake, investigation and court tasks are waiting; none can begin before the case is opened", [&] {
+        check(state(c.client) == "Created", "client interview should start Created");
+        check(state(c.conflict) == "Created", "conflict check should start Created");
+        check(state(c.evidence) == "Created", "evidence should start Created");
+        check(state(c.draft) == "Created", "drafting should start Created");
+        theatre.say("Legal case: all 12 tasks are Created");
     });
 
-    theatre.step("Open the case", "makeAvailable() + activateChildren() releases only client intake", [&] {
+    theatre.step("Open the client's case file", "Only the paralegal's intake interview with the client is released; the conflict check waits", [&] {
         c.root->makeAvailable();
         c.root->activateChildren();
-        check(released(c.client), "client intake should be released first");
-        check(!released(c.conflict), "conflict check must wait for client intake (sequential)");
-        check(!released(c.draft), "drafting must wait for the intake stage");
+        check(released(c.client), "client intake should be released");
+        check(!released(c.conflict), "conflict check must wait for intake");
+        check(!released(c.evidence), "discovery must wait for intake");
+        check(!released(c.draft), "drafting must wait for discovery");
+        sayAvailable(theatre, c.root);
     });
 
     // ------------------------------------------------------------------
-    theatre.section("Legal 3. Task lifecycle");
+    theatre.section("Legal 3. Client intake interview: task lifecycle (State)");
 
-    theatre.step("Assign", "Available -> Assigned", [&] {
-        if (state(c.client) == "Created") c.client->makeAvailable();
+    theatre.step("Assign the client's intake interview", "The available client interview is assigned to the attorney handling the client's matter: Available -> Assigned", [&] {
         c.client->assign(&c.who);
-        check(state(c.client) == "Assigned", "expected Assigned, was " + qs(state(c.client)));
+        check(state(c.client) == "Assigned", "client interview should be Assigned");
     });
 
-    theatre.step("Start", "Assigned -> Started", [&] {
+    theatre.step("Begin the interview with the client", "The assigned attorney starts recording the client's instructions: Assigned -> Started", [&] {
         c.client->start();
-        check(state(c.client) == "Started", "expected Started, was " + qs(state(c.client)));
+        check(state(c.client) == "Started", "client interview should be Started");
     });
 
-    theatre.step("Complete", "Started -> Completed", [&] {
+    theatre.step("Finish the client's intake interview", "Started -> Completed; the associate can now run the conflict check involving the opposing party", [&] {
         c.client->complete();
-        check(state(c.client) == "Completed", "expected Completed, was " + qs(state(c.client)));
-        check(c.client->isFinished(), "a completed task should report isFinished()");
-    });
-
-    theatre.step("Next task is released", "Finishing client intake opens the conflict check", [&] {
+        check(state(c.client) == "Completed", "client interview should be Completed");
         c.root->activateChildren();
-        check(released(c.conflict), "conflict check should be released after intake completes");
+        check(released(c.conflict), "conflict check should be released after intake interview");
+        sayAvailable(theatre, c.root);
     });
 
-    theatre.step("Illegal transition is refused", "Starting a task that is already completed must throw", [&] {
-        expectThrows([&] { c.client->start(); }, "start() on a completed task");
+    theatre.step("Prevent the completed interview from being restarted", "the client's completed intake interview cannot move back to Started", [&] {
+        expectThrows([&] { c.client->start(); }, "start() on a completed client interview");
+        check(state(c.client) == "Completed", "the task must remain Completed");
     });
 
     // ------------------------------------------------------------------
-    theatre.section("Legal 4. Parallel discovery");
+    theatre.section("Legal 4. Investigate the client's case in parallel");
 
-    theatre.step("Clear the conflict check", "Opens the parallel discovery stage", [&] {
+    theatre.step("Clear the conflict check involving the opposing party", "Once the associate confirms the firm can act, evidence gathering, legal research and witness interviews all open together", [&] {
         drive(c.conflict, &c.who);
         c.root->activateChildren();
-        check(c.conflict->isFinished(), "conflict check should be finished");
-    });
-
-    theatre.step("Both discovery tasks open together", "evidence and research are released at the same time", [&] {
-        check(released(c.evidence), "evidence gathering should be released");
-        check(released(c.research), "legal research should be released");
+        check(released(c.evidence), "evidence should be released");
+        check(released(c.research), "research should be released");
+        check(released(c.witness), "witness interviews should be released");
+        check(availableNow(c.root).size() == 3, "all three discovery tasks should be available");
         sayAvailable(theatre, c.root);
-        check(availableNow(c.root).size() == 2, "the iterator should find evidence and research");
     });
 
-    theatre.step("One discovery task done, stage not done", "Stage waits for every child", [&] {
+    theatre.step("Collect the client's supporting evidence", "The evidence branch completes, but the investigation stays open while legal research and witness interviews continue", [&] {
         drive(c.evidence, &c.who);
         c.root->activateChildren();
-        check(c.evidence->isFinished(), "evidence gathering should be finished");
-        check(!c.discovery->isFinished(), "discovery must not finish while research is open");
+        check(c.evidence->isFinished(), "evidence should be completed");
+        check(!c.discovery->isFinished(), "parallel discovery must still be active");
+        check(released(c.research) && released(c.witness), "the other discovery tasks should remain available");
         sayAvailable(theatre, c.root);
-        check(availableNow(c.root).size() == 1, "only research should still be available");
     });
 
-    theatre.step("Last discovery task finishes the stage", "discovery and then intake complete", [&] {
+    theatre.step("Finish legal research and witness interviews", "The investigation closes only after the law and precedents have been researched and all relevant witnesses interviewed", [&] {
         drive(c.research, &c.who);
+        drive(c.witness, &c.who);
         c.root->activateChildren();
         check(c.discovery->isFinished(), "discovery should be finished");
-        check(c.intake->isFinished(), "intake should be finished");
+        check(c.intake->isFinished(), "the completed intake/discovery sequence should be finished");
+        check(released(c.draft), "drafting should now be released");
+        sayAvailable(theatre, c.root);
     });
 
     // ------------------------------------------------------------------
-    theatre.section("Legal 5. Reject and cancel");
+    theatre.section("Legal 5. Partner rejection and court-filing cancellation");
 
-    theatre.step("Litigation stage is released", "Drafting opens after intake", [&] {
-        check(released(c.draft), "drafting should be released once intake is done");
-    });
-
-    theatre.step("Reject at partner review", "Finish the draft, then reject(reason) on 'review'", [&] {
+    theatre.step("Prepare the pleadings for the client's case against the opposing party", "The associate can draft court papers only after the client's intake and all investigation branches are complete", [&] {
+        check(released(c.draft), "drafting should be available");
         drive(c.draft, &c.who);
         c.root->activateChildren();
-        check(c.draft->isFinished(), "draft should be finished before review");
-        if (state(c.review) == "Created") c.review->makeAvailable();
-        if (state(c.review) == "Available") c.review->assign(&c.who);
+        check(c.draft->isFinished(), "drafting should be completed");
+        check(released(c.review), "partner review should be released after drafting");
+    });
+
+    theatre.step("Partner returns the client's pleadings for revision", "The partner rejects the draft and records the reason: Pleadings need revision", [&] {
+        c.review->assign(&c.who);
+        c.review->start();
         c.review->reject("Pleadings need revision");
-        const std::string s = state(c.review);
-        theatre.say("review is now " + qs(s));
-        check(s == "Rejected" || s == "Available",
-              "expected Rejected (or back to Available), was " + qs(s));
+        check(state(c.review) == "Rejected", "review should be Rejected");
+        check(c.review->getData("rejectionReason") == "Pleadings need revision",
+              "the rejection reason should be stored");
+        check(c.review->getAssignee() == 0, "the partner should be released from the rejected task");
+        theatre.say("Legal case | Partner review: Rejected\nReason: Pleadings need revision");
     });
 
-    theatre.step("Cancel a task", "cancel() on 'filing' - the client withdrew", [&] {
+    theatre.step("Cancel the court filing for the client's case", "The filing task is cancelled and moves to Cancelled before the papers are submitted", [&] {
         c.filing->cancel();
-        check(state(c.filing) == "Cancelled", "expected Cancelled, was " + qs(state(c.filing)));
-    });
-
-    // ==================================================================
-    // ADDED DETAIL: the full litigation matter
-    // ==================================================================
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 6. Staff, roles and assignment (Strategy)");
-
-    theatre.step("Create the law firm", "Paralegals, 2 associates, senior attorney, partner, managing partner, finance clerk", [&] {
-        c.resetFirm();
-        c.w = new LegalWorld();
-        check(c.w->paralegalSipho.hasRole(&c.w->paralegalRole), "Sipho should hold the Paralegal role");
-        check(c.w->associateRole.getAuthorityLevel() < c.w->seniorRole.getAuthorityLevel(),
-              "a senior attorney outranks an associate");
-        check(c.w->seniorRole.getAuthorityLevel() < c.w->partnerRole.getAuthorityLevel(),
-              "a partner outranks a senior attorney");
-        check(c.w->partnerRole.getAuthorityLevel() < c.w->managingRole.getAuthorityLevel(),
-              "the Managing Partner outranks a partner");
-        theatre.say("8 staff, 6 roles, approval authority 1 to 5");
-    });
-
-    theatre.step("Role-based: a research task goes to an associate", "RoleBasedAssignment skips paralegals, finance and partners", [&] {
-        Task probe("probe", "Probe associate task", &c.w->associateRole, &c.w->byRole);
-        Participant *who = c.w->byRole.selectParticipant(&probe, c.w->staff());
-        check(who != 0, "someone should be selected");
-        check(who->hasRole(&c.w->associateRole), "selected " + qs(who->getName()) + " is not an associate");
-    });
-
-    theatre.step("Workload-based: the least busy associate is chosen", "Associate Zanele has 3 open matters, Associate Johan has none", [&] {
-        c.w->associateZanele.incrementWorkload();
-        c.w->associateZanele.incrementWorkload();
-        c.w->associateZanele.incrementWorkload();
-        Task probe("probe", "Probe associate task", &c.w->associateRole, &c.w->byWorkload);
-        Participant *who = c.w->byWorkload.selectParticipant(&probe, c.w->staff());
-        check(who == &c.w->associateJohan, "expected Associate Johan, got " + qs(who ? who->getName() : "nobody"));
-    });
-
-    theatre.step("Rule-based: skip an associate with 2 open matters", "Rule: an associate with fewer than 2 open matters", [&] {
-        Task probe("probe", "Probe associate task", &c.w->associateRole, &c.w->lightLoadAssociate);
-        Participant *who = c.w->lightLoadAssociate.selectParticipant(&probe, c.w->staff());
-        check(who == &c.w->associateJohan, "expected Associate Johan, got " + qs(who ? who->getName() : "nobody"));
-        check(who != &c.w->associateZanele, "Zanele is over the limit and must be skipped");
+        check(state(c.filing) == "Cancelled", "filing should be Cancelled");
+        theatre.say("Legal case | Court filing: Cancelled");
     });
 
     // ------------------------------------------------------------------
-    theatre.section("Legal 7. Build the litigation matter (Composite + Decorator)");
+    theatre.section("Legal 6. End-to-end: the legal case");
 
-    theatre.step("Create the full matter's root stage", "Empty SequentialStage 'Litigation matter'", [&] {
-        c.full = new SequentialStage("legal-case", "Litigation matter");
-        check(c.full->getChildren().empty(), "A new stage should have no children");
-    });
-
-    theatre.step("Add client intake", "interview -> conflict check -> [engagement || trust deposit]", [&] {
-        c.full->add(makeLegalIntakeStage(*c.w, c.p));
-        check(c.p.intake->getChildren().size() == 3, "intake: interview + conflict check + onboarding");
-        check(c.p.onboarding->getChildren().size() == 2, "onboarding: engagement + trust deposit");
-    });
-
-    theatre.step("Add the investigation", "ParallelStage: evidence || research || witnesses || [expert brief -> report]", [&] {
-        c.full->add(makeLegalInvestigationStage(*c.w, c.p));
-        check(c.p.investigation->getChildren().size() == 4, "investigation: 3 tasks + expert run");
-        check(c.p.expertRun->getChildren().size() == 2, "expert run: brief + report");
-    });
-
-    theatre.step("Add pleadings and court", "draft -> senior review -> e-file -> hearing", [&] {
-        c.full->add(makeLegalPleadingsStage(*c.w, c.p));
-        check(c.p.pleadings->getChildren().size() == 4, "pleadings stage should hold 4 tasks");
-    });
-
-    theatre.step("Add judgment and costs", "record judgment -> agree costs / settlement", [&] {
-        c.full->add(makeLegalJudgmentStage(*c.w, c.p));
-        check(c.p.judgment->getChildren().size() == 2, "judgment stage should hold 2 tasks");
-    });
-
-    theatre.step("Add billing and closure", "invoice the client -> archive the case file", [&] {
-        c.full->add(makeLegalBillingStage(*c.w, c.p));
-        check(c.p.billing->getChildren().size() == 2, "billing stage should hold 2 tasks");
-        check(c.full->getChildren().size() == 5, "root should hold 5 stages");
-    });
-
-    theatre.step("Decorators wrap tasks without new task types", "Interview is validated, draft is audited, review is audited + priority 2", [&] {
-        check(dynamic_cast<ValidatedTask*>(c.p.clientW) != 0, "the interview should be a ValidatedTask");
-        check(dynamic_cast<AuditedTask*>(c.p.draftW) != 0, "the draft should be audited");
-        PriorityTask *pr = dynamic_cast<PriorityTask*>(c.p.reviewW);
-        check(pr != 0, "the review should be a PriorityTask");
-        check(pr->getPriority() == 2, "review priority should be 2 (high)");
-        check(dynamic_cast<AuditedTask*>(pr->getWrapped()) != 0, "the review should also be audited (stacked)");
-        check(c.p.clientW->getItemID() == "client", "a decorator keeps the task's id");
-    });
-
-    theatre.step("Count the work", "17 tasks across 5 stages", [&] {
-        std::vector<WorkItem*> leaves;
-        collectLeaves(c.full, leaves);
-        check(leaves.size() == 17, QString("expected 17 tasks, found %1").arg(leaves.size()));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 8. Two matters, one template (Prototype)");
-
-    theatre.step("Clone the workflow for a second client", "root->clone() copies the whole tree: stages, tasks and decorators", [&] {
-        c.matterB = c.full->clone();
-        check(c.matterB != c.full, "the clone must be a different object");
-        check(c.matterB->getChildren().size() == c.full->getChildren().size(), "same shape as the original");
-        check(findItem(c.matterB, "client") != findItem(c.full, "client"), "every task must be its own copy");
-    });
-
-    theatre.step("Matter B moves, matter A does not", "Driving B's interview leaves A's interview in Created", [&] {
-        c.matterB->makeAvailable();
-        c.matterB->activateChildren();
-        WorkItem *bClient = findItem(c.matterB, "client");
-        bClient->setData("clientName", "Dube Family Trust");
-        bClient->setData("matter", "Estate dispute");
-        drive(bClient, &c.w->paralegalSipho);
-        c.matterB->activateChildren();
-        check(bClient->isFinished(), "B's interview should be finished");
-        check(state(c.p.clientT) == "Created", "A's interview must still be Created, was " + qs(state(c.p.clientT)));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 9. Client intake (Decorator + Strategy + Parallel stage)");
-
-    theatre.step("Open matter A: only the interview is released", "Conflict check and onboarding wait for the interview (sequential)", [&] {
-        c.full->makeAvailable();
-        c.full->activateChildren();
-        check(released(c.p.clientT), "the interview should be released first");
-        check(!released(c.p.conflict), "the conflict check must wait for the interview");
-        check(!released(c.p.engagement), "onboarding must wait for the conflict check");
-        check(!released(c.p.evidence), "the investigation must wait for intake");
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 1, "the iterator should find exactly the interview");
-    });
-
-    theatre.step("Interview refuses to complete without client data", "ValidatedTask throws until clientName and matter are set", [&] {
-        c.p.clientW->assign(&c.w->paralegalSipho);
-        c.p.clientW->start();
-        expectThrows([&] { c.p.clientW->complete(); }, "complete() with no client data");
-        check(state(c.p.clientW) == "Started", "a refused completion must leave the task Started");
-    });
-
-    theatre.step("Paralegal captures the client details", "Fill clientName and matter, then complete", [&] {
-        c.p.clientW->setData("clientName", "Mokwena Trading (Pty) Ltd");
-        c.p.clientW->setData("matter", "Breach of contract, R2.4m");
-        c.p.clientW->complete();
-        check(state(c.p.clientW) == "Completed", "expected Completed, was " + qs(state(c.p.clientW)));
-        c.full->activateChildren();
-        check(released(c.p.conflict), "the conflict check should be released after the interview");
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 1, "only the conflict check should be available now");
-    });
-
-    theatre.step("Conflict check goes to the least busy associate", "Strategy skips Associate Zanele (3 open matters)", [&] {
-        Participant *who = c.w->byWorkload.selectParticipant(c.p.conflict, c.w->staff());
-        check(who != 0 && who->hasRole(&c.w->associateRole), "an associate should be selected");
-        check(who != &c.w->associateZanele, "the busy associate must be skipped");
-        theatre.say("assigned to " + qs(who->getName()));
-        c.p.conflict->assign(who);
-        c.p.conflict->start();
-        c.p.conflict->complete();
-        c.full->activateChildren();
-        check(c.p.conflict->isFinished(), "the conflict check should be complete");
-        check(released(c.p.engagement), "the engagement letter should be released");
-        check(released(c.p.trust), "the trust deposit is released in parallel");
-    });
-
-    theatre.step("Engagement letter and trust deposit run in parallel", "The stage waits for the slower branch", [&] {
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 2, "the iterator should find engagement and trust deposit");
-        drive(c.p.engagement, &c.w->associateJohan);
-        c.full->activateChildren();
-        check(c.p.engagement->isFinished(), "the engagement letter should be sent");
-        check(!c.p.onboarding->isFinished(), "onboarding must wait for the trust deposit");
-        drive(c.p.trust, &c.w->financeNomsa);
-        c.full->activateChildren();
-        check(c.p.onboarding->isFinished(), "onboarding should be finished");
-        check(c.p.intake->isFinished(), "the whole intake stage should be finished");
-    });
-
-    theatre.step("Matter is opened in the firm's case records (Adapter)", "AdapterOne -> APIOne: add matter-2026-118 to case records", [&] {
-        std::string operation = "add";
-        std::string payload = "matter-2026-118=Mokwena Trading breach of contract";
-        c.w->recordsAdapter.request(&operation, &payload);   // throws if the adapter rejects it
-        check(c.w->recordsAdapter.getName() == "API One", "records adapter should front APIOne");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 10. Investigation (Parallel stage with a nested sequence)");
-
-    theatre.step("Four lines of work open together", "Expert report waits for the brief", [&] {
-        check(released(c.p.evidence), "evidence gathering should be released");
-        check(released(c.p.research), "legal research should be released");
-        check(released(c.p.witness), "witness interviews should be released");
-        check(released(c.p.expertBrief), "the expert brief should be released");
-        check(!released(c.p.expertReport), "the expert report must wait for the brief (sequential)");
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 4, "the iterator should find all four lines of work");
-    });
-
-    theatre.step("Expert is briefed, report opens", "Finishing 'expert-brief' releases 'expert-report'", [&] {
-        drive(c.p.expertBrief, &c.w->associateJohan);
-        c.full->activateChildren();
-        check(c.p.expertBrief->isFinished(), "the expert should be briefed");
-        check(released(c.p.expertReport), "the report should be released after the brief");
-    });
-
-    theatre.step("Paralegals gather evidence and witness statements", "Two branches done, the stage is not", [&] {
-        drive(c.p.evidence, &c.w->paralegalSipho);
-        drive(c.p.witness, &c.w->paralegalAnke);
-        c.full->activateChildren();
-        check(c.p.evidence->isFinished() && c.p.witness->isFinished(), "both paralegal tasks should be finished");
-        check(!c.p.investigation->isFinished(), "the investigation must not finish while research and the report are open");
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 2, "research and the expert report should still be available");
-    });
-
-    theatre.step("Research goes to a lightly loaded associate", "Rule-based assignment; Zanele is over the limit", [&] {
-        Participant *who = c.w->lightLoadAssociate.selectParticipant(c.p.research, c.w->staff());
-        check(who != 0 && who->hasRole(&c.w->associateRole), "an associate should be selected");
-        check(who != &c.w->associateZanele, "an associate with 3 open matters must be skipped");
-        c.p.research->assign(who);
-        c.p.research->start();
-        c.p.research->complete();
-        c.full->activateChildren();
-        check(c.p.research->isFinished(), "legal research should be complete");
-        check(!c.p.investigation->isFinished(), "the stage still waits for the expert report");
-    });
-
-    theatre.step("Expert report is the slowest branch", "Report arrives, investigation finishes, drafting opens", [&] {
-        drive(c.p.expertReport, &c.w->associateJohan);
-        c.full->activateChildren();
-        check(c.p.expertRun->isFinished(), "the expert run should be finished");
-        check(c.p.investigation->isFinished(), "the investigation should be finished");
-        check(released(c.p.draftT), "drafting should open once the investigation is done");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 11. Pleadings and review (Command + Memento + State)");
-
-    theatre.step("Draft goes to a lightly loaded associate, audited", "assign, start and complete are each logged", [&] {
-        const std::size_t before = c.w->audit.getRecords().size();
-        Participant *who = c.w->lightLoadAssociate.selectParticipant(c.p.draftT, c.w->staff());
-        check(who != 0 && who != &c.w->associateZanele, "a lightly loaded associate should be selected");
-        c.p.draftW->assign(who);
-        c.p.draftW->start();
-        c.p.draftW->complete();
-        check(state(c.p.draftW) == "Completed", "expected Completed, was " + qs(state(c.p.draftW)));
-        check(c.w->audit.getRecords().size() >= before + 3, "assign, start and complete should each be logged");
-        c.full->activateChildren();
-        check(released(c.p.reviewT), "the senior review should be released after the draft");
-        check(!released(c.p.efile), "e-filing must wait for the review");
-    });
-
-    theatre.step("Review is high priority and audited", "PriorityTask(AuditedTask(Task)): priority 2 stored on the item", [&] {
-        PriorityTask *pr = dynamic_cast<PriorityTask*>(c.p.reviewW);
-        check(pr != 0 && pr->getPriority() == 2, "the review should carry priority 2");
-        check(c.p.reviewW->getData("priority") == "2", "priority should be stored as data");
-    });
-
-    theatre.step("Wrong reviewer assigned, then undone", "AssignCommand snapshots the task (Memento); undo() restores it", [&] {
-        CommandInvoker invoker;
-        invoker.executeCommand(new AssignCommand(c.p.reviewT, &c.w->managingVanWyk));
-        check(state(c.p.reviewT) == "Assigned", "expected Assigned, was " + qs(state(c.p.reviewT)));
-        check(invoker.canUndo(), "the assignment should be undoable");
-        check(invoker.undoLast(), "undo should succeed");
-        check(state(c.p.reviewT) == "Available", "undo should restore Available, was " + qs(state(c.p.reviewT)));
-        check(c.p.reviewT->getAssignee() == 0, "undo should clear the assignee");
-    });
-
-    theatre.step("Senior attorney is assigned but does not respond", "Deadline passes, the firm is told via a TIMEOUT event", [&] {
-        c.p.reviewT->assign(&c.w->seniorMokoena);
-        c.p.reviewT->setDeadline(std::time(0) - 60);
-        check(c.p.reviewT->getDeadline() < std::time(0), "the review deadline should have passed");
-        WorkflowEvent timeout(EventType::TIMEOUT, "review", stamp(),
-                              "Senior Attorney Mokoena did not review the pleadings before the deadline");
-        c.w->bus.publish(&timeout);
-        check(anyContains(c.w->notifier.getNotifications(), "Approval timeout"),
-              "the notifier should report the timeout");
-    });
-
-    theatre.step("Review is escalated to the partner", "reject -> Rejected -> makeAvailable -> assigned to Partner Pillay", [&] {
-        c.p.reviewT->reject("No response within the deadline");
-        check(state(c.p.reviewT) == "Rejected", "expected Rejected, was " + qs(state(c.p.reviewT)));
-        check(c.p.reviewT->getAssignee() == 0, "a rejected task should have no assignee");
-        check(c.p.reviewT->getData("rejectionReason") == "No response within the deadline",
-              "the rejection reason should be stored");
-        c.p.reviewT->makeAvailable();
-        check(state(c.p.reviewT) == "Available", "the review should be available again");
-        c.p.reviewT->assign(&c.w->partnerPillay);
-        check(c.p.reviewT->getAssignee() == &c.w->partnerPillay, "the partner should take over the review");
-    });
-
-    theatre.step("Partner signs off the pleadings", "Started -> Completed (audited); e-filing is released", [&] {
-        c.p.reviewW->start();
-        c.p.reviewW->complete();
-        c.full->activateChildren();
-        check(c.p.reviewT->isFinished(), "the review should be complete");
-        check(anyContains(c.w->audit.getRecords(), "was completed"), "the audit log should show the sign-off");
-        check(released(c.p.efile), "e-filing should be released after sign-off");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 12. Settlement and cost approvals (Chain of Responsibility)");
-
-    theatre.step("Small settlement: the senior attorney can approve", "Required level 3, senior attorney authority 3", [&] {
-        ApprovalRequest request(c.p.settle, 3, std::time(0) + 1800);
-        check(c.w->seniorLevel->canApprove(&request), "a senior attorney should approve a small settlement");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should be Approved");
-    });
-
-    theatre.step("Large settlement: escalates to the Partner", "Required level 4: senior attorney cannot approve, Partner can", [&] {
-        ApprovalRequest request(c.p.settle, 4, std::time(0) + 1800);
-        check(!c.w->seniorLevel->canApprove(&request), "a senior attorney must not approve a large settlement");
-        check(c.w->partnerLevel->canApprove(&request), "the Partner can approve a large settlement");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should end up Approved");
-    });
-
-    theatre.step("Fee write-off: escalates to the Managing Partner", "Required level 5: only the top of the chain can approve", [&] {
-        ApprovalRequest request(c.p.settle, 5, std::time(0) + 3600);
-        check(!c.w->seniorLevel->canApprove(&request), "a senior attorney must not approve a write-off");
-        check(!c.w->partnerLevel->canApprove(&request), "a Partner must not approve a write-off");
-        check(c.w->managingLevel->canApprove(&request), "the Managing Partner can approve a write-off");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should end up Approved");
-    });
-
-    theatre.step("A rejected request stays rejected", "Once decided, later handlers cannot override it", [&] {
-        ApprovalRequest request(c.p.settle, 4, std::time(0) + 1800);
-        request.reject(&c.w->partnerRole);
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Rejected, "a rejected request must stay Rejected");
-    });
-
-    theatre.step("An unanswered approval expires and escalates", "Deadline passed -> isExpired -> the chain resets the deadline and decides", [&] {
-        ApprovalRequest request(c.p.settle, 4, std::time(0) - 60);
-        check(request.isExpired(std::time(0)), "an undecided request past its deadline is expired");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the escalated request should be Approved");
-        check(!request.isExpired(std::time(0)), "a decided request is no longer expired");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 13. Court: e-filing and hearing (Adapter)");
-
-    theatre.step("Paralegal starts the e-filing", "Assigned -> Started", [&] {
-        c.p.efile->assign(&c.w->paralegalAnke);
-        c.p.efile->start();
-        check(state(c.p.efile) == "Started", "expected Started, was " + qs(state(c.p.efile)));
-    });
-
-    theatre.step("Court portal is notified (Adapter)", "ExternalTask -> AdapterTwo -> APITwo court portal", [&] {
-        check(c.p.efile->execute(), "the filing request should be accepted");
-        check(c.p.efile->getResponse() == "Request submitted to API Two",
-              "unexpected portal response: " + qs(c.p.efile->getResponse()));
-        check(c.w->courtAdapter.getName() == "API Two", "the court adapter should front APITwo");
-        c.p.efile->complete();
-        c.full->activateChildren();
-        check(c.p.efile->isFinished(), "e-filing should be complete");
-        check(released(c.p.hearing), "the hearing should be released after filing");
-    });
-
-    theatre.step("Senior attorney attends the hearing", "Role-based assignment, then straight to Completed", [&] {
-        Participant *who = c.w->byRole.selectParticipant(c.p.hearing, c.w->staff());
-        check(who != 0 && who->hasRole(&c.w->seniorRole), "a senior attorney should be selected");
-        c.p.hearing->assign(who);
-        c.p.hearing->start();
-        c.p.hearing->complete();
-        c.full->activateChildren();
-        check(c.p.pleadings->isFinished(), "the pleadings stage should be finished");
-        check(released(c.p.judgmentT), "recording the judgment should open after the hearing");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 14. Judgment, costs, billing and archive");
-
-    theatre.step("Judgment is recorded", "Costs and settlement open", [&] {
-        drive(c.p.judgmentT, &c.w->seniorMokoena);
-        c.full->activateChildren();
-        check(c.p.judgmentT->isFinished(), "the judgment should be recorded");
-        check(released(c.p.settle), "costs / settlement should be released");
-        check(!released(c.p.invoice), "invoicing must wait until costs are agreed");
-    });
-
-    theatre.step("Partner agrees the costs (approved)", "Invoicing opens", [&] {
-        drive(c.p.settle, &c.w->partnerPillay);
-        c.full->activateChildren();
-        check(c.p.settle->isFinished(), "costs should be agreed");
-        check(c.p.judgment->isFinished(), "the judgment stage should be finished");
-        check(released(c.p.invoice), "invoicing should open once costs are agreed");
-    });
-
-    theatre.step("Finance invoices the client", "Created -> Completed", [&] {
-        drive(c.p.invoice, &c.w->financeNomsa);
-        c.full->activateChildren();
-        check(c.p.invoice->isFinished(), "the invoice should be sent");
-        check(released(c.p.archive), "archiving should open after invoicing");
-    });
-
-    theatre.step("Paralegal archives the case file", "Whole matter finishes: judgment for the client", [&] {
-        drive(c.p.archive, &c.w->paralegalSipho);
-        c.full->activateChildren();
-        check(c.full->isFinished(), "the whole matter should be finished");
-        c.full->setData("outcome", "Judgment for client, costs agreed");
-        check(c.full->getData("outcome") == "Judgment for client, costs agreed", "the outcome should be recorded");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 15. Audit, notifications and metrics (Observer)");
-
-    theatre.step("Audit log and notifier saw the same events", "One bus, independent listeners", [&] {
-        const std::size_t audited = c.w->audit.getRecords().size();
-        check(audited > 0, "the audit log should not be empty");
-        check(static_cast<std::size_t>(c.w->notifier.getNotificationCount()) == audited,
-              "every published event should reach both listeners");
-        theatre.say(QString("%1 events on the bus").arg(audited));
-    });
-
-    theatre.step("Court portal reports an external event", "EXTERNAL_EVENT reaches the audit log and the notifier", [&] {
-        const int before = c.w->notifier.getNotificationCount();
-        WorkflowEvent external(EventType::EXTERNAL_EVENT, "court-portal", stamp(),
-                               "Court portal: pleadings accepted, hearing set for 14 November");
-        c.w->bus.publish(&external);
-        check(c.w->notifier.getNotificationCount() == before + 1, "the notifier should receive the event");
-        check(anyContains(c.w->notifier.getNotifications(), "External event received"),
-              "the notification should name an external event");
-        check(anyContains(c.w->audit.getRecords(), "hearing set for 14 November"),
-              "the audit log should record the event details");
-    });
-
-    theatre.step("Metrics: how long was the hearing?", "Two state changes 45 minutes apart give an average of 2700 s", [&] {
-        WorkflowEvent started(EventType::ITEM_STATE_CHANGED, "hearing", "2026-10-31 09:00:00", "Started");
-        WorkflowEvent completed(EventType::ITEM_STATE_CHANGED, "hearing", "2026-10-31 09:45:00", "Completed");
-        c.w->bus.publish(&started);
-        c.w->bus.publish(&completed);
-        check(c.w->metrics.getTransitionCount("Started") == 1, "one transition into Started");
-        const float avg = c.w->metrics.getAverageTimeInState("Started");
-        check(avg > 2699.9f && avg < 2700.1f, QString("expected 2700 s in Started, got %1").arg(avg));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 16. Undo history (Command + Memento)");
-
-    theatre.step("Matter B's conflict check: assign, start, complete", "Three commands, three snapshots, then three undos", [&] {
-        WorkItem *bConflict = findItem(c.matterB, "conflict");
-        check(released(bConflict), "B's conflict check should be released");
-        CommandInvoker invoker;
-        invoker.executeCommand(new AssignCommand(bConflict, &c.w->associateJohan));
-        invoker.executeCommand(new StartCommand(bConflict));
-        invoker.executeCommand(new CompleteCommand(bConflict));
-        check(state(bConflict) == "Completed", "expected Completed, was " + qs(state(bConflict)));
-        check(invoker.getHistory()->size() == 3, "three commands should be in the history");
-
-        check(invoker.undoLast(), "first undo");
-        check(state(bConflict) == "Started", "undoing Complete should give Started, was " + qs(state(bConflict)));
-        check(invoker.undoLast(), "second undo");
-        check(state(bConflict) == "Assigned", "undoing Start should give Assigned, was " + qs(state(bConflict)));
-        check(invoker.undoLast(), "third undo");
-        check(state(bConflict) == "Available", "undoing Assign should give Available, was " + qs(state(bConflict)));
-        check(!invoker.canUndo(), "the history should now be empty");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 17. Work moving from Created to Completed (Iterator)");
-
-    theatre.step("Walk the whole tree (DepthFirstIterator)", "25 nodes: 8 stages + 17 tasks, every task still Created", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        check(countNodes(t) == 25, QString("expected 25 nodes, walked %1").arg(countNodes(t)));
-        theatre.say("tally: " + qs(stateTally(t)));
-        check(stateTally(t) == "Created 17", "every task should start Created, was " + qs(stateTally(t)));
-        delete t;
-    });
-
-    theatre.step("Drain the work with AvailableItemsIterator", "Ask the iterator what is available, complete one task, ask again, until nothing is left", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        p.clientW->setData("clientName", "Khumalo & Sons");
-        p.clientW->setData("matter", "Lease dispute");
-        t->makeAvailable();
-
-        std::vector<std::size_t> sizes;
-        int passes = 0;
-        for (; passes < 60; ++passes) {
-            std::vector<WorkItem*> avail = availableNow(t);
-            if (avail.empty()) break;
-            sizes.push_back(avail.size());
-            theatre.say(QString("pass %1: %2 available [%3] | %4")
-                            .arg(passes + 1).arg(avail.size()).arg(qs(idList(avail))).arg(qs(stateTally(t))));
-            drive(avail[0], &c.w->associateJohan);       // first available task goes Available -> Completed
-            t->activateChildren();                        // next tasks are released
-        }
-        theatre.say("done: " + qs(stateTally(t)));
-        check(passes == 17, QString("expected 17 passes (one per task), took %1").arg(passes));
-        check(sizes.front() == 1, "the matter opens with only the client interview");
-        check(*std::max_element(sizes.begin(), sizes.end()) == 4, "the investigation opens 4 tasks at once");
-        check(sizes.back() == 1, "the last task is the only one left");
-        check(availableNow(t).empty(), "nothing should be available at the end");
-        check(stateTally(t) == "Completed 17", "every task should be Completed, was " + qs(stateTally(t)));
-        check(t->isFinished(), "the root should be finished");
-        delete t;
-    });
-
-    theatre.step("Matter A is done, matter B still has work", "The iterator sees each clone's own state (Prototype)", [&] {
-        check(availableNow(c.full).empty(), "finished matter A should have nothing available");
-        check(stateTally(c.full) == "Completed 17", "matter A should be Completed 17, was " + qs(stateTally(c.full)));
-        c.matterB->activateChildren();
-        sayAvailable(theatre, c.matterB);
-        check(availableNow(c.matterB).size() == 1, "matter B should have its conflict check available");
-        theatre.say("matter B: " + qs(stateTally(c.matterB)));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 18. Failure paths");
-
-    theatre.step("Conflict of interest found: matter declined", "Event published, cancel() on the whole matter, outcome recorded", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        p.clientW->setData("clientName", "Ndlovu Logistics");
-        p.clientW->setData("matter", "Contract claim against existing client");
-        t->makeAvailable();
-        t->activateChildren();
-        drive(p.clientW, &c.w->paralegalSipho);
-        t->activateChildren();
-        check(released(p.conflict), "the conflict check should be released");
-        const int before = c.w->notifier.getNotificationCount();
-        WorkflowEvent conflict(EventType::EXTERNAL_EVENT, "conflict", stamp(),
-                               "Conflict of interest: the firm already acts for the other party");
-        c.w->bus.publish(&conflict);
-        check(c.w->notifier.getNotificationCount() == before + 1, "the partner should be told about the conflict");
-        t->cancel();
-        check(t->isFinished(), "a declined matter should be finished");
-        check(state(p.conflict) == "Cancelled", "the conflict check should be Cancelled, was " + qs(state(p.conflict)));
-        check(state(p.draftT) == "Cancelled", "unstarted work should be Cancelled");
-        check(state(p.clientW) == "Completed", "the interview that already happened stays Completed");
-        t->setData("outcome", "Declined: conflict of interest");
-        check(t->getData("outcome") == "Declined: conflict of interest", "the outcome should be recorded");
-        delete t;
-    });
-
-    theatre.step("Client withdraws during the investigation", "cancel() stops every open task; finished work stays finished", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        p.clientW->setData("clientName", "Botha Farms");
-        p.clientW->setData("matter", "Boundary dispute");
-        t->makeAvailable();
-        t->activateChildren();
-        drive(p.clientW, &c.w->paralegalSipho);
-        t->activateChildren();
-        drive(p.conflict, &c.w->associateJohan);
-        t->activateChildren();
-        drive(p.engagement, &c.w->associateJohan);
-        drive(p.trust, &c.w->financeNomsa);
-        t->activateChildren();
-        check(released(p.evidence), "the investigation should be open");
-        drive(p.evidence, &c.w->paralegalSipho);
-        t->activateChildren();
-
-        WorkflowEvent withdrawn(EventType::EXTERNAL_EVENT, "client", stamp(),
-                                "Botha Farms withdrew instructions");
-        c.w->bus.publish(&withdrawn);
-        t->cancel();
-        check(t->isFinished(), "a withdrawn matter should be finished");
-        check(state(p.evidence) == "Completed", "the evidence already gathered stays Completed");
-        check(state(p.research) == "Cancelled", "open research should be Cancelled, was " + qs(state(p.research)));
-        check(state(p.expertBrief) == "Cancelled", "the expert brief should be Cancelled");
-        check(state(p.efile) == "Cancelled", "e-filing should be Cancelled");
-        check(state(p.archive) == "Cancelled", "archiving should be Cancelled");
-        theatre.say("tally: " + qs(stateTally(t)));
-        delete t;
-    });
-
-    theatre.step("Partner rejects the pleadings: sent back", "Review is rejected, reason stored, reviewer released, pleadings redrafted", [&] {
-        LegalPieces p;
-        Stage *pl = makeLegalPleadingsStage(*c.w, p);
-        pl->makeAvailable();
-        pl->activateChildren();
-        check(released(p.draftT), "drafting should be released");
-        drive(p.draftW, &c.w->associateJohan);
-        pl->activateChildren();
-        check(released(p.reviewT), "the review should be released");
-
-        p.reviewW->assign(&c.w->partnerPillay);
-        p.reviewW->start();
-        p.reviewW->reject("Pleadings must plead the alternative claim");
-        check(state(p.reviewW) == "Rejected", "the review should be Rejected, was " + qs(state(p.reviewW)));
-        check(p.reviewW->getData("rejectionReason").find("alternative claim") != std::string::npos,
-              "the rejection reason should be stored");
-        check(p.reviewW->getAssignee() == 0, "the partner should be released from the task");
-
-        p.reviewW->makeAvailable();
-        p.reviewW->assign(&c.w->seniorMokoena);
-        check(p.reviewW->getAssignee() == &c.w->seniorMokoena, "the senior attorney should take the revised review");
-        delete pl;
-    });
-
-    theatre.step("Matter settles before the hearing: hearing cancelled", "Portal event + cancel() on the hearing only", [&] {
-        LegalPieces p;
-        Stage *pl = makeLegalPleadingsStage(*c.w, p);
-        pl->makeAvailable();
-        pl->activateChildren();
-        const int before = c.w->notifier.getNotificationCount();
-        WorkflowEvent settled(EventType::EXTERNAL_EVENT, "opposing-counsel", stamp(),
-                              "Opposing counsel accepted the settlement offer");
-        c.w->bus.publish(&settled);
-        check(c.w->notifier.getNotificationCount() == before + 1, "the firm should be told about the settlement");
-        p.hearing->cancel();
-        check(state(p.hearing) == "Cancelled", "the hearing should be Cancelled, was " + qs(state(p.hearing)));
-        check(state(p.draftT) != "Cancelled", "the rest of the pleadings are untouched");
-        delete pl;
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 19. End to end");
-
-    theatre.step("Run a fresh legal case to completion",
-                 "Drives every task in order and checks the root finishes", [&] {
+    theatre.step("Complete the legal case from intake to archive", "Interview the client -> conflict check involving the opposing party -> evidence, research and witnesses -> pleadings -> partner approval -> court filing -> hearing -> judgment -> invoice -> archive", [&] {
         LegalCtx full;
         buildLegalFull(full);
         runToCompletion(theatre, full.root, &full.who);
-    });
-
-    theatre.step("Run a fresh litigation matter to completion", "The full matter with staff, decorators and adapters, every task in order", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        p.clientW->setData("clientName", "Pretorius Properties");
-        p.clientW->setData("matter", "Eviction application");
-        runToCompletion(theatre, t, &c.w->associateJohan);
-        t->setData("outcome", "Settled out of court");
-        check(t->getData("outcome") == "Settled out of court", "the outcome should be recorded");
-        delete t;
+        check(full.root->isFinished(), "the legal case root should finish");
+        check(state(full.archive) == "Completed", "the final archive task should be Completed");
+        theatre.say("Legal case completed: all 12 tasks Completed; root Legal Case Workflow Completed");
     });
 }
 
