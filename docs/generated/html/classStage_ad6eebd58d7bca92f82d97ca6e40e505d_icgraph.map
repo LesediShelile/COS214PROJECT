@@ -1,0 +1,24 @@
+<map id="Stage::isFinished" name="Stage::isFinished">
+<area shape="rect" id="Node000001" title=" " alt="" coords="419,166,551,192"/>
+<area shape="poly" id="edge8_Node000001_Node000001" title=" " alt="" coords="525,157,514,148,485,145,461,147,448,152,445,157,452,164,448,168,440,158,444,148,460,142,485,140,516,144,528,153"/>
+<area shape="rect" id="Node000002" href="$classParallelStage.html#ad918ca73256e9bbb2ba332daf2c8b4e1" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="148,41,371,66"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,158,422,117,397,97,369,80,341,69,343,64,372,75,400,93,426,113,466,154"/>
+<area shape="rect" id="Node000003" href="$test__work__items_8cpp.html#aed70fcd57e576c2e391999eeeb36b80d" title=" " alt="" coords="5,41,100,66"/>
+<area shape="poly" id="edge13_Node000001_Node000003" title=" " alt="" coords="471,155,455,124,433,89,405,56,369,31,333,17,294,10,254,8,215,11,142,26,86,44,84,38,141,20,214,6,254,3,295,4,334,12,372,26,408,52,438,86,460,121,476,152"/>
+<area shape="rect" id="Node000004" href="$classStage.html#aa6f7d136fa7bcd84592f97c6d3a0192e" title=" " alt="" coords="205,242,314,268"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="441,199,372,226,309,245,307,240,370,220,439,194"/>
+<area shape="rect" id="Node000005" href="$test__work__items_8cpp.html#a95f92a55cf00b869395d2e2fa24c3be0" title=" " alt="" coords="5,217,100,242"/>
+<area shape="poly" id="edge12_Node000001_Node000005" title=" " alt="" coords="406,191,100,227,100,222,405,186"/>
+<area shape="rect" id="Node000006" href="$classStage.html#a040b774341a9daf33485594158c8fd49" title=" " alt="" coords="179,90,340,116"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="439,164,370,138,307,118,309,113,372,132,441,159"/>
+<area shape="rect" id="Node000007" href="$test__work__items_8cpp.html#ab72a081ef1657128d1027b0facd81b00" title=" " alt="" coords="5,116,100,141"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="405,172,100,136,100,131,406,167"/>
+<area shape="rect" id="Node000008" href="$test__integration__work__items_8cpp.html#a559c2a8f8be7d19a80b30c373bb6255c" title=" " alt="" coords="212,292,307,317"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="466,204,426,245,400,265,372,283,340,295,307,302,306,297,338,290,369,278,397,261,422,241,462,200"/>
+<area shape="rect" id="Node000009" href="$test__integration__work__items_8cpp.html#ab688d3af6d3ba12be86b0d74c0d7df0f" title=" " alt="" coords="212,341,307,366"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="474,205,435,269,407,303,372,332,340,346,307,353,306,348,339,341,369,327,403,300,431,266,470,203"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="134,56,100,56,100,51,134,51"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="191,249,100,238,101,233,191,244"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="188,90,147,80,100,68,101,63,149,75,189,85"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="165,117,101,125,100,120,164,112"/>
+</map>

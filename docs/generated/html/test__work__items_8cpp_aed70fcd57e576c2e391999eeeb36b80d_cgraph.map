@@ -1,0 +1,18 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,56,100,82"/>
+<area shape="rect" id="Node000002" href="$classParallelStage.html#ad918ca73256e9bbb2ba332daf2c8b4e1" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="148,130,371,155"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,79,109,98,149,116,174,123,172,129,147,121,107,103,73,84"/>
+<area shape="rect" id="Node000003" href="$classStage.html#ad6eebd58d7bca92f82d97ca6e40e505d" title=" " alt="" coords="434,31,566,56"/>
+<area shape="poly" id="edge9_Node000001_Node000003" title=" " alt="" coords="70,54,105,33,147,16,225,4,304,5,378,13,439,25,438,30,377,19,304,10,226,10,149,21,107,37,73,58"/>
+<area shape="rect" id="Node000006" href="$classStage.html#a5c11c4655f30de6654a42bfc585c0a1d" title="Add a child." alt="" coords="214,80,305,106"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="101,72,201,83,200,89,100,77"/>
+<area shape="rect" id="Node000007" href="$classStage.html#a040b774341a9daf33485594158c8fd49" title=" " alt="" coords="179,31,340,56"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="100,60,165,52,165,58,101,66"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="334,127,370,116,423,90,468,62,471,66,426,94,372,121,335,132"/>
+<area shape="rect" id="Node000004" href="$classStage.html#a082b95e96f705dccba0cad46b6c5fae2" title=" " alt="" coords="419,130,581,155"/>
+<area shape="poly" id="edge4_Node000002_Node000004" title=" " alt="" coords="371,140,405,140,405,145,371,145"/>
+<area shape="poly" id="edge3_Node000003_Node000003" title=" " alt="" coords="465,32,457,23,461,13,476,6,500,4,530,8,542,17,539,21,528,13,500,10,477,12,465,16,462,22,469,29"/>
+<area shape="rect" id="Node000005" href="$classStage.html#a3ff6cdc4f75dca9f7c37405be7a6ea0c" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="629,130,804,155"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="582,140,616,140,616,145,582,145"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="341,41,420,41,420,46,341,46"/>
+</map>

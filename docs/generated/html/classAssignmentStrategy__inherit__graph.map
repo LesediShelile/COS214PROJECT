@@ -1,0 +1,9 @@
+<map id="AssignmentStrategy" name="AssignmentStrategy">
+<area shape="rect" id="Node000001" title="Abstract strategy for choosing who a task is assigned to (Strategy pattern)." alt="" coords="197,5,379,91"/>
+<area shape="rect" id="Node000002" href="$classRoleBasedAssignment.html" title="Assigns a task to the first participant with the required role (Strategy pattern)." alt="" coords="5,169,165,254"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,101,139,171,136,166,224,97"/>
+<area shape="rect" id="Node000003" href="$classRuleBasedAssignment.html" title="Assigns a task using a custom rule (Strategy pattern)." alt="" coords="190,139,386,284"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="291,104,291,138,285,138,285,104"/>
+<area shape="rect" id="Node000004" href="$classWorkloadAssignment.html" title="Assigns a task to the least busy participant with the required role (Strategy pattern)." alt="" coords="411,179,563,244"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="352,97,400,137,449,176,446,180,397,141,348,101"/>
+</map>

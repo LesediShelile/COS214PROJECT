@@ -1,0 +1,46 @@
+<map id="include/WorkflowCommand.h" name="include/WorkflowCommand.h">
+<area shape="rect" id="Node000001" title="Header file declaring the abstract WorkflowCommand base class." alt="" coords="1079,5,1291,31"/>
+<area shape="rect" id="Node000002" href="$AssignCommand_8h.html" title="Header file declaring the AssignCommand concrete command class." alt="" coords="819,79,1013,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1130,37,960,81,959,76,1128,32"/>
+<area shape="rect" id="Node000006" href="$test__commandMementoWorkflow_8cpp.html" title=" " alt="" coords="997,152,1214,192"/>
+<area shape="poly" id="edge27_Node000001_Node000006" title=" " alt="" coords="1132,38,1103,55,1080,80,1075,97,1077,116,1094,151,1089,153,1072,118,1069,97,1075,77,1099,51,1130,34"/>
+<area shape="rect" id="Node000008" href="$Assigncommand_8h.html" title=" " alt="" coords="1306,79,1499,104"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1234,32,1368,76,1367,81,1232,37"/>
+<area shape="rect" id="Node000009" href="$CompleteCommand_8h.html" title="Header file declaring the CompleteCommand concrete command class." alt="" coords="579,79,794,104"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="1092,35,767,81,767,76,1091,30"/>
+<area shape="rect" id="Node000011" href="$RejectCommand_8h.html" title="Header file declaring the RejectCommand concrete command class." alt="" coords="1089,79,1282,104"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="1188,44,1188,79,1183,79,1183,44"/>
+<area shape="rect" id="Node000013" href="$StartCommand_8h.html" title="Header file declaring the StartCommand concrete command class." alt="" coords="373,79,555,104"/>
+<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="1066,33,567,81,556,82,556,77,566,76,1066,28"/>
+<area shape="rect" id="Node000015" href="$CommandHistory_8cpp.html" title="Implementation of the CommandHistory class for managing executed workflow commands." alt="" coords="1524,79,1708,104"/>
+<area shape="poly" id="edge24_Node000001_Node000015" title=" " alt="" coords="1269,30,1547,76,1546,81,1268,36"/>
+<area shape="rect" id="Node000016" href="$CommandInvoker_8cpp.html" title="Implementation of the CommandInvoker class executing and undoing workflow commands." alt="" coords="1732,79,1919,104"/>
+<area shape="poly" id="edge25_Node000001_Node000016" title=" " alt="" coords="1302,30,1732,77,1731,82,1301,35"/>
+<area shape="rect" id="Node000017" href="$WorkflowCommand_8cpp.html" title="Implementation of the base WorkflowCommand class managing item memento snapshots." alt="" coords="1943,79,2142,104"/>
+<area shape="poly" id="edge26_Node000001_Node000017" title=" " alt="" coords="1305,25,1931,76,1943,77,1943,82,1930,81,1305,31"/>
+<area shape="rect" id="Node000003" href="$Playground_8h.html" title=" " alt="" coords="201,159,375,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="805,107,387,155,345,162,344,157,386,149,804,102"/>
+<area shape="rect" id="Node000004" href="$AssignCommand_8cpp.html" title="Implementation of the AssignCommand class for delegating work items to participants." alt="" coords="1238,159,1421,185"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="990,104,1270,157,1269,162,989,109"/>
+<area shape="rect" id="Node000005" href="$TIVIDYFacade_8cpp.html" title="Implementation of the TIVIDYFacade class coordinating workflow execution and patterns." alt="" coords="812,159,972,185"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="911,118,898,160,893,158,906,117"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="957,107,1061,149,1059,154,955,112"/>
+<area shape="rect" id="Node000007" href="$test__integration__work__items_8cpp.html" title=" " alt="" coords="399,152,561,192"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="834,109,574,155,561,157,560,152,573,149,833,104"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="616,109,347,162,346,157,615,104"/>
+<area shape="poly" id="edge11_Node000009_Node000005" title=" " alt="" coords="730,106,863,157,861,162,728,111"/>
+<area shape="poly" id="edge12_Node000009_Node000006" title=" " alt="" coords="761,104,1006,149,1005,155,760,109"/>
+<area shape="poly" id="edge13_Node000009_Node000007" title=" " alt="" coords="645,111,531,154,529,149,643,106"/>
+<area shape="rect" id="Node000010" href="$CompleteCommand_8cpp.html" title="Implementation of the CompleteCommand class for finishing work items." alt="" coords="585,159,788,185"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="689,118,689,159,684,159,684,118"/>
+<area shape="poly" id="edge16_Node000011_Node000005" title=" " alt="" coords="1130,110,935,162,934,157,1129,105"/>
+<area shape="poly" id="edge17_Node000011_Node000006" title=" " alt="" coords="1166,116,1126,154,1123,150,1162,112"/>
+<area shape="rect" id="Node000012" href="$RejectCommand_8cpp.html" title="Implementation of the RejectCommand class for rejecting work items with a specified reason." alt="" coords="1445,159,1625,185"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="1250,104,1484,157,1483,162,1249,110"/>
+<area shape="poly" id="edge19_Node000013_Node000003" title=" " alt="" coords="427,112,315,162,313,157,425,107"/>
+<area shape="poly" id="edge21_Node000013_Node000005" title=" " alt="" coords="545,104,800,149,838,157,837,162,800,155,544,109"/>
+<area shape="poly" id="edge22_Node000013_Node000006" title=" " alt="" coords="570,102,984,149,997,151,996,156,984,155,569,107"/>
+<area shape="poly" id="edge23_Node000013_Node000007" title=" " alt="" coords="472,117,479,151,474,152,466,118"/>
+<area shape="rect" id="Node000014" href="$StartCommand_8cpp.html" title="Implementation of the StartCommand class for transitioning work items to active execution." alt="" coords="5,159,176,185"/>
+<area shape="poly" id="edge20_Node000013_Node000014" title=" " alt="" coords="397,109,146,162,144,157,396,104"/>
+</map>

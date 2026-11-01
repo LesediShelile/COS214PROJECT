@@ -1,0 +1,26 @@
+<map id="tests/test_adapter.cpp" name="tests/test_adapter.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="502,5,669,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,163,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="505,33,177,80,176,74,504,28"/>
+<area shape="rect" id="Node000003" href="$AdapterOne_8h.html" title=" " alt="" coords="187,79,362,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="536,33,339,78,337,73,535,28"/>
+<area shape="rect" id="Node000004" href="$ExternalConnector_8h.html" title="Declares the common interface for external API adapters." alt="" coords="386,152,539,177"/>
+<area shape="poly" id="edge12_Node000001_Node000004" title=" " alt="" coords="503,33,461,51,442,64,428,80,423,95,425,110,444,140,439,143,420,112,417,94,423,77,439,60,458,46,501,28"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="644,225,703,251"/>
+<area shape="poly" id="edge14_Node000001_Node000005" title=" " alt="" coords="596,30,625,77,653,150,670,211,665,213,647,151,620,80,592,32"/>
+<area shape="rect" id="Node000006" href="$AdapterTwo_8h.html" title=" " alt="" coords="437,79,611,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="577,33,545,70,541,66,573,29"/>
+<area shape="rect" id="Node000007" href="$APIOne_8h.html" title="Declares a generic external API." alt="" coords="685,79,829,104"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="614,28,718,71,716,76,612,33"/>
+<area shape="rect" id="Node000009" href="$APITwo_8h.html" title="Declares a second external API." alt="" coords="811,152,954,177"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="669,18,712,24,758,34,803,52,843,77,856,90,866,106,879,137,874,139,862,108,852,93,840,81,800,56,756,40,711,29,668,23"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="905,79,991,104"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="644,28,891,76,890,81,643,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="306,102,420,144,418,149,304,107"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="497,175,632,220,630,225,496,180"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="516,106,484,143,480,140,512,103"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="753,106,689,215,685,212,748,103"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="736,152,787,177"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="761,104,763,138,757,139,755,104"/>
+<area shape="poly" id="edge11_Node000009_Node000005" title=" " alt="" coords="850,180,717,225,715,220,848,175"/>
+</map>

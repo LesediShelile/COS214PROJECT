@@ -1,0 +1,29 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,177,104,202"/>
+<area shape="rect" id="Node000002" href="$classWorkflowDefinition.html#ab5ac5c8355eb5060f10779397cec59c7" title="Freezes the definition, locking it against further modifications." alt="" coords="185,5,330,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,175,93,118,119,84,150,55,170,44,173,48,154,59,123,88,97,120,64,178"/>
+<area shape="rect" id="Node000003" href="$classWorkflowInstance.html#a9e0c1009a78cf684806e2679edfdc554" title="Gets the current lifecycle execution status." alt="" coords="154,70,361,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="65,175,101,139,125,120,151,104,167,97,169,102,153,109,128,125,104,143,69,178"/>
+<area shape="rect" id="Node000004" href="$classWorkflowInstance.html#a89120d4d5327b1502f3954c6a0541aa0" title="Checks if the workflow instance has reached a terminal state." alt="" coords="152,119,363,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="91,174,151,155,186,145,188,151,153,160,93,179"/>
+<area shape="rect" id="Node000005" href="$classWorkflowDefinition.html#ade882c164e2dfaa33f759bac70da91fe" title="Sets the root WorkItem for the workflow tree." alt="" coords="185,169,330,209"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="104,187,171,187,171,192,104,192"/>
+<area shape="rect" id="Node000006" href="$classWorkflowInstance.html#a02bc18c089fee46a354a1005c2de6707" title="Starts the workflow instance, transitioning from CREATED to RUNNING." alt="" coords="170,234,345,259"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="93,200,153,219,188,228,186,233,151,224,91,205"/>
+<area shape="rect" id="Node000008" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="210,283,305,309"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="70,201,105,235,153,268,198,284,196,289,151,273,101,239,66,204"/>
+<area shape="rect" id="Node000009" href="$classEngineRouter.html#aee8e26d7253e4d10e9c2d5f06f325239" title="Processes a workflow event." alt="" coords="176,333,339,358"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="64,201,96,259,122,292,154,319,165,326,162,330,150,324,118,295,92,262,59,204"/>
+<area shape="rect" id="Node000007" href="$classWorkItem.html#a215d213d1c9653327eb5695cb3a06619" title=" " alt="" coords="431,234,620,259"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="345,244,417,244,417,249,345,249"/>
+<area shape="rect" id="Node000010" href="$classWorkflowInstance.html#a9e4c044672103c026fcf0f6f04163c8c" title="Progresses the workflow tree after a task completes." alt="" coords="411,283,640,309"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="327,330,442,309,443,314,327,335"/>
+<area shape="rect" id="Node000013" href="$classWorkflowEvent.html#a4076f664f223007e1dee7fc9df9229ba" title=" " alt="" coords="436,333,615,358"/>
+<area shape="poly" id="edge12_Node000009_Node000013" title=" " alt="" coords="339,343,422,343,422,348,339,348"/>
+<area shape="rect" id="Node000014" href="$classApprovalHandler.html#a9b61062cec56f24ef59502c49a334b83" title="Handles an approval request or passes it on." alt="" coords="434,382,617,407"/>
+<area shape="poly" id="edge13_Node000009_Node000014" title=" " alt="" coords="327,355,443,377,442,382,327,361"/>
+<area shape="rect" id="Node000011" href="$classWorkItem.html#af87da457ee3b0f665eba7d592faca22d" title="Re&#45;evaluate which children should become available next." alt="" coords="688,259,888,285"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="640,283,674,280,675,285,641,288"/>
+<area shape="rect" id="Node000012" href="$classWorkItem.html#a9c35d6c6acdfdbfc333b485d8ed612bf" title=" " alt="" coords="709,309,867,334"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="641,304,695,310,695,315,640,310"/>
+</map>

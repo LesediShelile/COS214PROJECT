@@ -1,0 +1,5 @@
+<map id="SecureWorkflowProxy" name="SecureWorkflowProxy">
+<area shape="rect" id="Node000001" title="Protection Proxy that controls access to TIVIDY workflow operations." alt="" coords="5,239,196,444"/>
+<area shape="rect" id="Node000002" href="$classIWorkflowService.html" title="Interface defining the workflow operations available to clients." alt="" coords="20,5,181,191"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,205,103,239,98,239,98,205"/>
+</map>

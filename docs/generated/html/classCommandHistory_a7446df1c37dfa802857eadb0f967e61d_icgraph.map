@@ -1,0 +1,64 @@
+<map id="CommandHistory::push" name="CommandHistory::push">
+<area shape="rect" id="Node000001" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="929,331,1104,357"/>
+<area shape="rect" id="Node000002" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="619,306,881,331"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="915,337,881,334,882,328,916,332"/>
+<area shape="rect" id="Node000024" href="$test__commandMementoWorkflow_8cpp.html#a17804ede87be7de8ceed7be234eee7b5" title=" " alt="" coords="703,355,797,381"/>
+<area shape="poly" id="edge38_Node000001_Node000024" title=" " alt="" coords="916,356,798,366,797,361,915,350"/>
+<area shape="rect" id="Node000003" href="$classTIVIDYFacade.html#a3d9a74798fca59f872ec58e4d35944e6" title="Assigns a task within an instance to a specific participant." alt="" coords="372,59,561,85"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="734,295,709,251,672,198,625,144,598,119,569,98,546,87,548,82,572,94,602,115,629,140,676,195,713,249,738,292"/>
+<area shape="rect" id="Node000009" href="$classTIVIDYFacade.html#af1fc724732461f4a6eb8a941aba291e4" title="Marks a specific task item within an instance as completed." alt="" coords="363,158,571,183"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="722,299,656,248,614,222,570,198,534,186,536,181,572,194,616,217,659,244,725,295"/>
+<area shape="rect" id="Node000013" href="$classTIVIDYFacade.html#ade620f15d83fb861851f5653f00ed8a8" title="Rejects a specific task item within an instance with a stated reason." alt="" coords="375,109,559,134"/>
+<area shape="poly" id="edge16_Node000002_Node000013" title=" " alt="" coords="729,297,702,263,665,222,620,182,569,148,543,137,545,132,572,143,623,177,668,218,706,259,733,293"/>
+<area shape="rect" id="Node000015" href="$classTIVIDYFacade.html#a213775747b590071d5bdb37e04287c1d" title="Creates and executes a StartCommand for a work item." alt="" coords="378,207,555,233"/>
+<area shape="poly" id="edge23_Node000002_Node000015" title=" " alt="" coords="708,303,644,275,570,248,525,235,527,230,571,243,646,270,710,298"/>
+<area shape="rect" id="Node000017" href="$test__integration__work__items_8cpp.html#a559c2a8f8be7d19a80b30c373bb6255c" title=" " alt="" coords="419,257,514,282"/>
+<area shape="poly" id="edge31_Node000002_Node000017" title=" " alt="" coords="662,306,514,280,515,275,663,301"/>
+<area shape="rect" id="Node000018" href="$test__integration__work__items_8cpp.html#ae2b1d52a6fab44654954ca712053efb7" title=" " alt="" coords="419,306,514,331"/>
+<area shape="poly" id="edge32_Node000002_Node000018" title=" " alt="" coords="605,321,514,321,514,316,605,316"/>
+<area shape="rect" id="Node000019" href="$test__integration__work__items_8cpp.html#ab688d3af6d3ba12be86b0d74c0d7df0f" title=" " alt="" coords="419,355,514,381"/>
+<area shape="poly" id="edge33_Node000002_Node000019" title=" " alt="" coords="663,336,515,363,514,357,662,331"/>
+<area shape="rect" id="Node000020" href="$test__commandMementoWorkflow_8cpp.html#a4cc707d343e8f941af3811d48a5996e4" title=" " alt="" coords="419,405,514,430"/>
+<area shape="poly" id="edge34_Node000002_Node000020" title=" " alt="" coords="638,338,620,346,605,358,597,370,588,383,572,396,544,408,515,415,513,410,542,403,569,391,584,380,592,367,602,354,617,342,635,333"/>
+<area shape="rect" id="Node000021" href="$test__commandMementoWorkflow_8cpp.html#a8241b1a63183def66c6b5175b84fc103" title=" " alt="" coords="419,454,514,479"/>
+<area shape="poly" id="edge35_Node000002_Node000021" title=" " alt="" coords="629,340,620,346,609,357,603,369,597,394,591,420,584,432,572,445,545,460,515,467,514,462,543,455,569,441,580,429,586,418,592,392,598,367,605,354,617,342,627,335"/>
+<area shape="rect" id="Node000022" href="$test__commandMementoWorkflow_8cpp.html#afc1543d818f316e8b6bff3e57213a54c" title=" " alt="" coords="419,503,514,529"/>
+<area shape="poly" id="edge36_Node000002_Node000022" title=" " alt="" coords="628,340,621,346,606,363,599,380,597,418,595,456,588,475,572,494,545,510,515,518,513,512,543,505,569,490,583,473,590,455,592,417,594,379,602,360,617,342,624,336"/>
+<area shape="rect" id="Node000023" href="$test__integration__work__items_8cpp.html#a6e57564e93fa7563e96da712168164d5" title=" " alt="" coords="419,553,514,578"/>
+<area shape="poly" id="edge37_Node000002_Node000023" title=" " alt="" coords="626,341,621,346,603,369,595,393,594,417,597,442,599,467,599,493,591,518,572,543,545,560,515,568,513,562,543,555,569,539,586,516,593,492,594,468,592,442,589,417,590,392,598,367,617,342,622,337"/>
+<area shape="rect" id="Node000004" href="$classSecureWorkflowProxy.html#ac76f6b94be80b6f353d04b7ada9d2aed" title="Assigns a task after checking permission." alt="" coords="152,5,315,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="388,59,314,44,316,39,389,54"/>
+<area shape="rect" id="Node000008" href="$test__facade_8cpp.html#ab9d19a82094e008646175820dd73c898" title=" " alt="" coords="184,134,283,159"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="387,91,364,98,340,111,316,124,281,136,279,131,314,119,337,106,362,94,385,86"/>
+<area shape="rect" id="Node000005" href="$test__proxy_8cpp.html#a90dfdcaeb16f8246c456e2b3d1946623" title=" " alt="" coords="5,58,104,83"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="142,51,105,61,104,56,140,46"/>
+<area shape="rect" id="Node000006" href="$test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="5,107,104,133"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="165,53,153,60,129,78,106,97,84,109,81,105,102,92,126,73,151,55,162,49"/>
+<area shape="rect" id="Node000007" href="$test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="5,157,104,182"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="159,55,154,59,137,80,130,101,122,123,106,146,88,159,85,154,102,142,118,120,125,99,133,78,150,55,156,51"/>
+<area shape="poly" id="edge15_Node000009_Node000008" title=" " alt="" coords="349,161,283,154,283,149,349,156"/>
+<area shape="rect" id="Node000010" href="$classSecureWorkflowProxy.html#a9bba8bb183b5f16e4876f9e81498abc8" title="Completes a task after checking permission and ownership." alt="" coords="152,184,315,224"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="364,188,315,195,314,190,363,183"/>
+<area shape="poly" id="edge10_Node000010_Node000005" title=" " alt="" coords="159,179,150,173,134,153,125,134,117,116,102,97,86,86,89,81,106,93,122,113,130,132,138,150,154,169,162,175"/>
+<area shape="poly" id="edge12_Node000010_Node000006" title=" " alt="" coords="168,181,151,173,103,146,81,135,83,130,105,142,153,168,170,176"/>
+<area shape="poly" id="edge14_Node000010_Node000007" title=" " alt="" coords="138,188,104,181,105,176,139,183"/>
+<area shape="rect" id="Node000011" href="$test__proxy_8cpp.html#ae3dadaf13d96fbf05b029330c1b959d6" title=" " alt="" coords="5,255,104,281"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="165,231,92,258,90,253,163,226"/>
+<area shape="rect" id="Node000012" href="$test__proxy_8cpp.html#a809f6a1f9ebea212d14ef9ebf5fc5913" title=" " alt="" coords="5,206,104,231"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="138,214,105,217,104,212,138,209"/>
+<area shape="poly" id="edge22_Node000013_Node000008" title=" " alt="" coords="361,135,283,144,282,139,361,130"/>
+<area shape="rect" id="Node000014" href="$classSecureWorkflowProxy.html#a192cab4044889a985cba2801a5840f8d" title="Rejects a task after checking permission and ownership." alt="" coords="152,69,315,109"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="360,109,314,103,315,98,361,104"/>
+<area shape="poly" id="edge18_Node000014_Node000005" title=" " alt="" coords="138,82,104,78,105,73,139,77"/>
+<area shape="poly" id="edge19_Node000014_Node000006" title=" " alt="" coords="139,108,105,114,104,109,138,103"/>
+<area shape="poly" id="edge21_Node000014_Node000007" title=" " alt="" coords="169,117,153,124,81,159,79,154,151,119,167,112"/>
+<area shape="poly" id="edge20_Node000014_Node000012" title=" " alt="" coords="160,119,154,123,138,141,130,159,122,177,106,197,89,208,86,204,102,193,117,174,125,156,134,138,150,119,157,114"/>
+<area shape="poly" id="edge30_Node000015_Node000008" title=" " alt="" coords="387,206,362,198,337,187,314,174,278,162,280,157,316,170,340,182,364,194,388,201"/>
+<area shape="rect" id="Node000016" href="$classSecureWorkflowProxy.html#ac773d4931ba5660c1186477086e088e3" title="Starts a task after checking permission and ownership." alt="" coords="152,248,315,288"/>
+<area shape="poly" id="edge24_Node000015_Node000016" title=" " alt="" coords="391,238,315,254,314,249,390,233"/>
+<area shape="poly" id="edge25_Node000016_Node000005" title=" " alt="" coords="154,242,150,238,136,219,129,201,125,166,121,132,114,114,102,96,88,85,92,81,106,93,119,112,126,130,130,166,134,200,141,217,154,234,158,238"/>
+<area shape="poly" id="edge27_Node000016_Node000006" title=" " alt="" coords="156,243,150,238,132,214,125,191,118,169,102,146,87,135,90,131,106,142,123,166,130,190,137,212,154,234,159,238"/>
+<area shape="poly" id="edge29_Node000016_Node000007" title=" " alt="" coords="162,244,150,238,126,218,102,197,82,185,84,180,106,193,129,214,154,234,164,240"/>
+<area shape="poly" id="edge26_Node000016_Node000011" title=" " alt="" coords="138,271,104,271,104,265,138,265"/>
+<area shape="poly" id="edge28_Node000016_Node000012" title=" " alt="" coords="146,247,101,234,102,229,148,242"/>
+</map>

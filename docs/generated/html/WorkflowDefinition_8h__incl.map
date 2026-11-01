@@ -1,0 +1,5 @@
+<map id="include/WorkflowDefinition.h" name="include/WorkflowDefinition.h">
+<area shape="rect" id="Node000001" title="Declaration of the WorkflowDefinition class representing process blueprints." alt="" coords="5,5,213,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="80,79,139,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,31,112,65,107,65,107,31"/>
+</map>

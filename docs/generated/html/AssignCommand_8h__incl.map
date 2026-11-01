@@ -1,0 +1,8 @@
+<map id="include/AssignCommand.h" name="include/AssignCommand.h">
+<area shape="rect" id="Node000001" title="Header file declaring the AssignCommand concrete command class." alt="" coords="5,5,200,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="73,152,132,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="96,32,84,54,73,79,72,95,75,110,88,139,83,141,70,112,67,95,68,78,79,51,92,29"/>
+<area shape="rect" id="Node000003" href="$WorkflowCommand_8h.html" title="Header file declaring the abstract WorkflowCommand base class." alt="" coords="82,79,243,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="115,29,146,66,142,70,111,33"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="155,106,123,143,119,140,151,103"/>
+</map>

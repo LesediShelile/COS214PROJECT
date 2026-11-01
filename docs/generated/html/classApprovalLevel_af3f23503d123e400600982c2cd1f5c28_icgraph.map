@@ -1,0 +1,5 @@
+<map id="ApprovalLevel::getTimeout" name="ApprovalLevel::getTimeout">
+<area shape="rect" id="Node000001" title="Gets how long this level has to decide." alt="" coords="148,5,347,31"/>
+<area shape="rect" id="Node000002" href="$test__state__strategy__chain_8cpp.html#aee9edd9abb39f21859b8a0c9a35d424c" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,21,100,21,100,15,134,15"/>
+</map>

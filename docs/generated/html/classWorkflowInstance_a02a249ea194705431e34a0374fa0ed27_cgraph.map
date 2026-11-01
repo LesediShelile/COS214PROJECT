@@ -1,0 +1,5 @@
+<map id="WorkflowInstance::getDefinitionVersion" name="WorkflowInstance::getDefinitionVersion">
+<area shape="rect" id="Node000001" title="Gets the definition version number at the time of creation." alt="" coords="5,5,235,45"/>
+<area shape="rect" id="Node000002" href="$classWorkflowDefinition.html#ad0bc7ff7f35a359b612635e5f2f6560c" title="Gets the version number of the workflow definition." alt="" coords="283,5,428,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,23,269,23,269,28,235,28"/>
+</map>

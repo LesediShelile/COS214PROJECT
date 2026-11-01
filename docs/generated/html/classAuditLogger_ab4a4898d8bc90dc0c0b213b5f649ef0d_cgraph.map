@@ -1,0 +1,5 @@
+<map id="AuditLogger::update" name="AuditLogger::update">
+<area shape="rect" id="Node000001" title="Records details from a workflow event." alt="" coords="5,5,159,31"/>
+<area shape="rect" id="Node000002" href="$classWorkflowEvent.html#a864aee362a4757946c77dba4373a93f1" title=" " alt="" coords="207,5,401,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,15,193,15,193,21,159,21"/>
+</map>

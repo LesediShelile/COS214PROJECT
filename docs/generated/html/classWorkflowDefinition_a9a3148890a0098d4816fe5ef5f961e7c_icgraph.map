@@ -1,0 +1,15 @@
+<map id="WorkflowDefinition::getRoot" name="WorkflowDefinition::getRoot">
+<area shape="rect" id="Node000001" title="Gets the root WorkItem of the definition&#39;s composite structure." alt="" coords="259,122,404,162"/>
+<area shape="rect" id="Node000002" href="$test__commandMementoWorkflow_8cpp.html#a35010ea1ad5d46c322f5ab5b3686b556" title=" " alt="" coords="61,5,155,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="300,114,260,77,209,44,183,34,155,27,156,22,184,29,212,40,263,73,304,110"/>
+<area shape="rect" id="Node000003" href="$test__commandMementoWorkflow_8cpp.html#a79d25179425df48961ed13035d0f670b" title=" " alt="" coords="61,55,155,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="274,119,210,94,155,79,156,74,211,89,276,114"/>
+<area shape="rect" id="Node000004" href="$test__commandMementoWorkflow_8cpp.html#af695b6c3a0a7a12431e1a6dfbdeffbcd" title=" " alt="" coords="61,104,155,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="245,135,155,125,156,119,245,130"/>
+<area shape="rect" id="Node000005" href="$test__FacadeCoR_8cpp.html#a7163dbf93de270cba2207fbe765c6ca4" title=" " alt="" coords="59,153,157,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="245,154,158,163,157,158,245,149"/>
+<area shape="rect" id="Node000006" href="$test__facade_8cpp.html#a9458c958231b26ea2461ce5adefb2533" title=" " alt="" coords="59,203,157,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="272,170,211,193,158,207,157,202,210,187,270,165"/>
+<area shape="rect" id="Node000007" href="$classWorkflowInstance.html#a8d06c347e5ed6987f8839adb50ba5561" title="Constructs an instance by cloning the definition&#39;s prototype tree." alt="" coords="5,253,211,293"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="302,173,261,209,212,242,183,255,180,250,209,237,258,204,299,169"/>
+</map>

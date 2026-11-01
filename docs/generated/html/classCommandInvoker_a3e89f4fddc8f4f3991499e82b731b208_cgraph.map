@@ -1,0 +1,7 @@
+<map id="CommandInvoker::undoLast" name="CommandInvoker::undoLast">
+<area shape="rect" id="Node000001" title="Undoes the most recently executed command in the history." alt="" coords="5,31,209,56"/>
+<area shape="rect" id="Node000002" href="$classCommandHistory.html#a1342b4ebb959d12ea96a25e6b0319864" title="Checks if the command history contains any commands." alt="" coords="257,5,453,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="209,30,244,27,244,32,210,36"/>
+<area shape="rect" id="Node000003" href="$classCommandHistory.html#a3ec612d5d6fb40366d51554589ade50f" title="Removes the most recent command and transfers ownership to the caller." alt="" coords="272,55,439,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,51,259,55,258,61,209,56"/>
+</map>

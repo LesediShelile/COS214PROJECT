@@ -1,0 +1,26 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,109,104,134"/>
+<area shape="rect" id="Node000002" href="$classSecureWorkflowProxy.html#a9bba8bb183b5f16e4876f9e81498abc8" title="Completes a task after checking permission and ownership." alt="" coords="152,69,315,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,110,138,104,139,109,105,115"/>
+<area shape="rect" id="Node000006" href="$classSecureWorkflowProxy.html#a593b135584ba27fbfd6f25df620c0870" title="Starts a workflow instance after checking permission." alt="" coords="152,133,315,173"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="105,127,139,134,138,139,104,133"/>
+<area shape="rect" id="Node000010" href="$classSecureWorkflowProxy.html#ac773d4931ba5660c1186477086e088e3" title="Starts a task after checking permission and ownership." alt="" coords="152,5,315,45"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="71,106,107,81,151,55,164,49,166,53,153,60,110,86,74,111"/>
+<area shape="rect" id="Node000012" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="186,198,281,223"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="74,132,109,157,153,183,174,192,172,197,151,188,106,162,71,136"/>
+<area shape="rect" id="Node000003" href="$classTIVIDYFacade.html#af1fc724732461f4a6eb8a941aba291e4" title="Marks a specific task item within an instance as completed." alt="" coords="363,73,571,98"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="315,85,349,85,349,90,315,91"/>
+<area shape="rect" id="Node000004" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="619,45,881,70"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="571,72,608,69,608,74,571,78"/>
+<area shape="rect" id="Node000005" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="937,45,1111,70"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="881,55,923,55,923,60,881,60"/>
+<area shape="rect" id="Node000007" href="$classTIVIDYFacade.html#a66fdc614fe57bc9107d3dc76e9835f09" title="Starts execution of an existing workflow instance." alt="" coords="365,141,568,166"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="315,151,352,151,352,156,315,156"/>
+<area shape="rect" id="Node000008" href="$classWorkflowInstance.html#a02bc18c089fee46a354a1005c2de6707" title="Starts the workflow instance, transitioning from CREATED to RUNNING." alt="" coords="663,141,837,166"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="568,151,649,151,649,156,568,156"/>
+<area shape="rect" id="Node000009" href="$classWorkItem.html#a215d213d1c9653327eb5695cb3a06619" title=" " alt="" coords="929,141,1119,166"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="838,151,916,151,916,156,838,156"/>
+<area shape="rect" id="Node000011" href="$classTIVIDYFacade.html#a213775747b590071d5bdb37e04287c1d" title="Creates and executes a StartCommand for a work item." alt="" coords="378,17,555,42"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="315,24,364,25,364,30,315,29"/>
+<area shape="poly" id="edge11_Node000011_Node000004" title=" " alt="" coords="556,35,608,41,608,46,555,41"/>
+</map>

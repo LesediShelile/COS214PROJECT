@@ -1,0 +1,7 @@
+<map id="WorkItem::clone" name="WorkItem::clone">
+<area shape="rect" id="Node000001" title="Prototype operation: deep copy of this item and everything it owns." alt="" coords="259,35,387,60"/>
+<area shape="rect" id="Node000002" href="$test__decorators_8cpp.html#aa8ddf5d9105497498695c66586bf9c14" title=" " alt="" coords="61,5,155,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="244,39,155,27,156,22,245,34"/>
+<area shape="rect" id="Node000003" href="$classWorkflowInstance.html#a8d06c347e5ed6987f8839adb50ba5561" title="Constructs an instance by cloning the definition&#39;s prototype tree." alt="" coords="5,55,211,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="245,60,211,65,211,59,244,55"/>
+</map>

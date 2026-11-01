@@ -1,0 +1,10 @@
+<map id="include/DepthFirstIterator.h" name="include/DepthFirstIterator.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,204,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="94,152,174,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,32,69,65,63,84,66,103,81,125,102,142,99,146,77,128,61,105,58,83,65,62,90,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="76,79,133,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="107,31,107,65,102,65,102,31"/>
+<area shape="rect" id="Node000004" href="$WorkItemIterator_8h.html" title=" " alt="" coords="158,79,302,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="126,28,199,69,196,74,123,33"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="216,106,162,146,159,141,213,102"/>
+</map>

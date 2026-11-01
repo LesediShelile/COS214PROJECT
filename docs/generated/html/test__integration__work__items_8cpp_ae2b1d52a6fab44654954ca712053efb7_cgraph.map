@@ -1,0 +1,16 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,100,80"/>
+<area shape="rect" id="Node000002" href="$classCommandInvoker.html#a997619b09faa33bc764cf5fb4c23de82" title="Checks if there are any commands currently available to undo." alt="" coords="178,55,381,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,65,164,65,164,70,100,70"/>
+<area shape="rect" id="Node000004" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="148,5,411,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="98,52,147,39,190,31,191,36,149,45,99,57"/>
+<area shape="rect" id="Node000006" href="$classCommandInvoker.html#a3e89f4fddc8f4f3991499e82b731b208" title="Undoes the most recently executed command in the history." alt="" coords="177,104,381,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="101,77,149,89,196,99,195,104,147,94,100,82"/>
+<area shape="rect" id="Node000003" href="$classCommandHistory.html#a1342b4ebb959d12ea96a25e6b0319864" title="Checks if the command history contains any commands." alt="" coords="459,55,655,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="381,65,445,65,445,70,381,70"/>
+<area shape="rect" id="Node000005" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="469,5,644,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="411,15,455,15,455,21,411,21"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="351,101,471,80,472,85,352,107"/>
+<area shape="rect" id="Node000007" href="$classCommandHistory.html#a3ec612d5d6fb40366d51554589ade50f" title="Removes the most recent command and transfers ownership to the caller." alt="" coords="473,104,640,129"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="381,114,460,114,460,119,381,119"/>
+</map>

@@ -1,0 +1,23 @@
+<map id="include/ExternalConnector.h" name="include/ExternalConnector.h">
+<area shape="rect" id="Node000001" title="Declares the common interface for external API adapters." alt="" coords="474,5,678,31"/>
+<area shape="rect" id="Node000002" href="$AdapterOne_8h.html" title=" " alt="" coords="63,86,225,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="499,36,244,81,205,89,204,83,244,76,498,30"/>
+<area shape="rect" id="Node000004" href="$test__adapter_8cpp.html" title=" " alt="" coords="179,167,346,192"/>
+<area shape="poly" id="edge10_Node000001_Node000004" title=" " alt="" coords="461,34,359,52,318,65,291,81,277,100,269,124,265,167,259,166,264,123,272,98,288,77,316,60,358,47,460,28"/>
+<area shape="rect" id="Node000005" href="$AdapterTwo_8h.html" title=" " alt="" coords="301,86,462,111"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="536,38,411,88,409,84,534,33"/>
+<area shape="rect" id="Node000007" href="$DefinitionBuilder_8cpp.html" title=" " alt="" coords="486,86,666,111"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="579,44,579,86,573,86,573,44"/>
+<area shape="rect" id="Node000008" href="$ExternalConnector_8cpp.html" title="Implements the ExternalConnector base class." alt="" coords="690,86,881,111"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="620,33,756,83,754,88,618,38"/>
+<area shape="rect" id="Node000009" href="$ExternalTask_8cpp.html" title="Implements the ExternalTask class." alt="" coords="905,86,1060,111"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="653,31,894,76,930,83,929,89,893,81,652,36"/>
+<area shape="rect" id="Node000010" href="$test__external__task_8cpp.html" title=" " alt="" coords="1084,79,1228,119"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="692,27,871,47,1072,76,1084,78,1083,83,1072,81,871,52,691,32"/>
+<area shape="rect" id="Node000003" href="$AdapterOne_8cpp.html" title=" " alt="" coords="5,167,155,192"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="128,124,92,168,87,165,124,120"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="175,117,247,164,244,169,172,121"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="354,121,282,169,279,164,351,117"/>
+<area shape="rect" id="Node000006" href="$AdapterTwo_8cpp.html" title=" " alt="" coords="370,167,518,192"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="401,120,437,165,433,168,397,124"/>
+</map>

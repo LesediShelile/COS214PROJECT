@@ -1,0 +1,11 @@
+<map id="CommandHistory::size" name="CommandHistory::size">
+<area shape="rect" id="Node000001" title="Returns the total number of commands stored in history." alt="" coords="148,80,317,105"/>
+<area shape="rect" id="Node000002" href="$test__commandMementoWorkflow_8cpp.html#a17804ede87be7de8ceed7be234eee7b5" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="187,77,83,33,85,28,189,72"/>
+<area shape="rect" id="Node000003" href="$test__commandMementoWorkflow_8cpp.html#a4cc707d343e8f941af3811d48a5996e4" title=" " alt="" coords="5,55,100,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,81,100,77,101,71,135,76"/>
+<area shape="rect" id="Node000004" href="$test__commandMementoWorkflow_8cpp.html#a8241b1a63183def66c6b5175b84fc103" title=" " alt="" coords="5,104,100,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="135,108,101,113,100,108,134,103"/>
+<area shape="rect" id="Node000005" href="$test__commandMementoWorkflow_8cpp.html#afc1543d818f316e8b6bff3e57213a54c" title=" " alt="" coords="5,153,100,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="189,113,86,156,84,151,187,108"/>
+</map>

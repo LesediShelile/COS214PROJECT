@@ -1,0 +1,7 @@
+<map id="Task" name="Task">
+<area shape="rect" id="Node000001" title="Leaf of the Composite, Context of State and Strategy, and ConcreteComponent of Decorator." alt="" coords="26,839,173,1344"/>
+<area shape="rect" id="Node000003" href="$classExternalTask.html" title="Represents a task that sends requests to an external service." alt="" coords="33,1392,166,1557"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="102,1358,102,1392,97,1392,97,1358"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html" title="Component of the Composite pattern (also Component of Decorator, Aggregate of Iterator,..." alt="" coords="5,5,193,791"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,805,102,838,97,838,97,805"/>
+</map>

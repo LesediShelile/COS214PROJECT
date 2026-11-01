@@ -1,0 +1,11 @@
+<map id="WorkItem::cancel" name="WorkItem::cancel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="439,55,573,80"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#ad147a81e94dbd1a9b5d1e3d157a1de7a" title=" " alt="" coords="215,5,380,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="438,54,351,33,353,28,439,49"/>
+<area shape="rect" id="Node000004" href="$classWorkflowInstance.html#a9a4b6380c98ee68a9c070fe20b9c6b77" title="Aborts all active items and transitions instance to CANCELLED." alt="" coords="204,55,391,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="425,70,391,70,391,65,425,65"/>
+<area shape="rect" id="Node000005" href="$classWorkflowInstance.html#a1d9c3314b4cb9c595b46987c485a86fa" title="Halts all execution, records a failure reason, and marks as FAILED." alt="" coords="214,104,381,129"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="439,86,353,107,351,101,438,81"/>
+<area shape="rect" id="Node000003" href="$classAuditedTask.html#a05a5305bf4485bf5cee85b80107cd46f" title=" " alt="" coords="5,5,156,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="201,21,156,21,156,15,201,15"/>
+</map>

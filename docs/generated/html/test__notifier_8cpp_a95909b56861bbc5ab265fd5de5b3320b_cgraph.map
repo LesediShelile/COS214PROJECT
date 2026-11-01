@@ -1,0 +1,19 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,169,104,195"/>
+<area shape="rect" id="Node000002" href="$classEventPublisher.html#a9543b9927782798b782414382784144b" title="Registers a listener." alt="" coords="164,5,332,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,168,91,106,117,70,150,40,160,34,163,39,154,44,121,74,95,109,63,170"/>
+<area shape="rect" id="Node000003" href="$classNotifier.html#a58208eb9cfae00b861d5f49306a117f2" title=" " alt="" coords="152,55,344,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="64,167,100,129,124,108,151,90,168,82,170,87,153,95,127,112,103,133,68,171"/>
+<area shape="rect" id="Node000004" href="$classNotifier.html#a2c72aac8c5c6e0778798070ad1ac4e5b" title=" " alt="" coords="161,105,335,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="98,167,166,146,168,151,99,172"/>
+<area shape="rect" id="Node000005" href="$classNotifier.html#a575aaece34f158694a93e1ac3ff224a3" title=" " alt="" coords="157,169,339,195"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="104,179,143,179,143,185,104,185"/>
+<area shape="rect" id="Node000006" href="$classEventPublisher.html#a4653890525868563a37715f09b6014ab" title="Notifies registered listeners of an event." alt="" coords="161,219,335,244"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="105,192,185,213,183,218,103,197"/>
+<area shape="rect" id="Node000007" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="201,268,295,293"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="71,193,106,223,153,253,189,266,187,271,151,258,103,227,67,197"/>
+<area shape="rect" id="Node000008" href="$classNotifier.html#a991fc7e0c256fcd5d5207ab58f88d63b" title="Handles a published workflow event." alt="" coords="187,317,309,343"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="65,194,98,247,123,277,153,302,175,313,172,318,151,307,120,281,94,250,60,196"/>
+<area shape="rect" id="Node000009" href="$classWorkflowEvent.html#a4076f664f223007e1dee7fc9df9229ba" title=" " alt="" coords="392,317,571,343"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="309,327,378,327,378,333,309,333"/>
+</map>

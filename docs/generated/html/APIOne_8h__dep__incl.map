@@ -1,0 +1,9 @@
+<map id="include/APIOne.h" name="include/APIOne.h">
+<area shape="rect" id="Node000001" title="Declares a generic external API." alt="" coords="156,5,288,31"/>
+<area shape="rect" id="Node000002" href="$APIOne_8cpp.html" title="Implements the first external API." alt="" coords="5,79,124,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,39,91,81,89,76,183,34"/>
+<area shape="rect" id="Node000003" href="$AdapterOne_8cpp.html" title=" " alt="" coords="147,79,297,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="225,44,225,79,219,79,219,44"/>
+<area shape="rect" id="Node000004" href="$test__adapter_8cpp.html" title=" " alt="" coords="321,79,488,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="265,33,376,76,374,81,263,38"/>
+</map>

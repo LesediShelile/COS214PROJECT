@@ -1,0 +1,9 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,70,104,95"/>
+<area shape="rect" id="Node000002" href="$classWorkflowDefinition.html#a2a25408a2b42bc068d3102d374464fa5" title="Sets the approval chain of responsibility head." alt="" coords="175,5,320,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,67,166,47,168,52,99,72"/>
+<area shape="rect" id="Node000003" href="$classApprovalHandler.html#ae91e5f31bf3cc5b27418e4a2ca353183" title="Links this handler to the next one in the chain." alt="" coords="152,70,343,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="104,80,138,80,138,85,104,85"/>
+<area shape="rect" id="Node000004" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="200,119,295,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="105,93,187,114,186,119,104,98"/>
+</map>

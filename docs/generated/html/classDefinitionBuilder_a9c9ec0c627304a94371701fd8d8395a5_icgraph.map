@@ -1,0 +1,5 @@
+<map id="DefinitionBuilder::beginParallelStage" name="DefinitionBuilder::beginParallelStage">
+<area shape="rect" id="Node000001" title="Creates a new Parallel stage that gets pushed to the stage stack." alt="" coords="152,5,295,45"/>
+<area shape="rect" id="Node000002" href="$test__facade_8cpp.html#a0cc572bffac4acf8edd4f65a181cbb87" title=" " alt="" coords="5,13,104,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,28,104,28,104,23,138,23"/>
+</map>

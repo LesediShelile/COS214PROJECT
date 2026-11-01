@@ -1,0 +1,42 @@
+<map id="WorkflowDefinition::setRoot" name="WorkflowDefinition::setRoot">
+<area shape="rect" id="Node000001" title="Sets the root WorkItem for the workflow tree." alt="" coords="364,373,509,413"/>
+<area shape="rect" id="Node000002" href="$classDefinitionBuilder.html#a9c9ec0c627304a94371701fd8d8395a5" title="Creates a new Parallel stage that gets pushed to the stage stack." alt="" coords="163,5,305,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="430,360,420,297,400,217,385,174,366,133,342,94,314,59,299,48,303,43,318,55,347,91,371,130,390,172,405,215,425,296,435,359"/>
+<area shape="rect" id="Node000004" href="$classDefinitionBuilder.html#a7acddb1987c9e1f1605f688d95dabd0c" title="Creates a new Sequential stage that gets pushed to the stage stack." alt="" coords="152,69,316,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="427,361,414,309,392,246,359,180,338,150,314,123,298,111,301,107,318,119,342,147,364,178,397,244,419,307,432,359"/>
+<area shape="rect" id="Node000008" href="$test__commandMementoWorkflow_8cpp.html#a58f1f69ae032bce1cf081e5911acc850" title=" " alt="" coords="187,134,281,159"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="424,361,409,318,386,268,355,217,314,174,298,164,281,157,282,152,301,159,318,170,359,214,391,265,414,316,429,359"/>
+<area shape="rect" id="Node000009" href="$test__commandMementoWorkflow_8cpp.html#a35010ea1ad5d46c322f5ab5b3686b556" title=" " alt="" coords="187,183,281,209"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="419,362,378,292,349,255,315,224,280,207,283,202,317,219,353,251,382,289,423,359"/>
+<area shape="rect" id="Node000010" href="$test__commandMementoWorkflow_8cpp.html#a79d25179425df48961ed13035d0f670b" title=" " alt="" coords="187,233,281,258"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="410,364,369,317,343,293,315,273,280,258,282,253,317,268,346,289,373,313,414,360"/>
+<area shape="rect" id="Node000011" href="$test__commandMementoWorkflow_8cpp.html#ad6831039a44c556d98a39524443b8c54" title=" " alt="" coords="187,282,281,307"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="394,368,357,344,315,322,281,310,283,305,317,318,359,340,397,363"/>
+<area shape="rect" id="Node000012" href="$test__commandMementoWorkflow_8cpp.html#a155a465664c9c40575ff662641980ca6" title=" " alt="" coords="187,331,281,357"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="350,375,281,358,282,353,351,370"/>
+<area shape="rect" id="Node000013" href="$test__commandMementoWorkflow_8cpp.html#af695b6c3a0a7a12431e1a6dfbdeffbcd" title=" " alt="" coords="187,381,281,406"/>
+<area shape="poly" id="edge13_Node000001_Node000013" title=" " alt="" coords="350,396,282,396,282,391,350,391"/>
+<area shape="rect" id="Node000014" href="$test__commandMementoWorkflow_8cpp.html#aaa48d9764adb27903616b1600aef4f25" title=" " alt="" coords="187,430,281,455"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="351,417,282,434,281,429,350,412"/>
+<area shape="rect" id="Node000015" href="$test__commandMementoWorkflow_8cpp.html#afa822ab1d85eca540427e1586f783abb" title=" " alt="" coords="187,479,281,505"/>
+<area shape="poly" id="edge15_Node000001_Node000015" title=" " alt="" coords="398,423,360,448,317,470,282,483,280,478,315,466,357,443,395,419"/>
+<area shape="rect" id="Node000016" href="$test__commandMementoWorkflow_8cpp.html#a3ba457be357b421eb353a2da99e0f4f0" title=" " alt="" coords="187,529,281,554"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="415,426,373,474,347,499,317,520,282,534,280,530,315,515,343,495,369,471,411,423"/>
+<area shape="rect" id="Node000017" href="$test__commandMementoWorkflow_8cpp.html#a217a5121b58af7d548e90f195da211f2" title=" " alt="" coords="187,578,281,603"/>
+<area shape="poly" id="edge17_Node000001_Node000017" title=" " alt="" coords="424,427,383,499,353,537,317,569,282,585,280,580,315,564,349,533,378,496,419,425"/>
+<area shape="rect" id="Node000018" href="$test__commandMementoWorkflow_8cpp.html#af3fbfbe8b658c20ceef37dbb9a845bc1" title=" " alt="" coords="187,627,281,653"/>
+<area shape="poly" id="edge18_Node000001_Node000018" title=" " alt="" coords="429,428,414,471,391,522,359,574,318,618,301,629,282,635,281,630,298,624,314,614,355,571,386,520,409,469,424,426"/>
+<area shape="rect" id="Node000019" href="$test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="185,677,283,702"/>
+<area shape="poly" id="edge19_Node000001_Node000019" title=" " alt="" coords="433,427,420,480,399,544,365,610,343,641,318,667,302,678,285,685,283,680,300,673,314,663,339,637,361,608,394,542,415,478,427,426"/>
+<area shape="rect" id="Node000020" href="$test__engine__router_8cpp.html#a64a148f342e78f079933c9f1b1b04ab4" title=" " alt="" coords="185,726,283,751"/>
+<area shape="poly" id="edge20_Node000001_Node000020" title=" " alt="" coords="435,427,426,489,406,567,390,607,371,647,347,684,318,717,302,728,284,735,283,730,300,723,314,713,343,681,366,644,386,605,401,565,421,488,430,427"/>
+<area shape="rect" id="Node000003" href="$test__facade_8cpp.html#a0cc572bffac4acf8edd4f65a181cbb87" title=" " alt="" coords="5,13,104,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="149,28,104,28,104,23,149,23"/>
+<area shape="poly" id="edge6_Node000004_Node000003" title=" " alt="" coords="164,67,90,41,92,36,165,62"/>
+<area shape="rect" id="Node000005" href="$test__facadeCommand_8cpp.html#a359ca32d0aae71e06d7e997cb06f7612" title=" " alt="" coords="5,62,104,87"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="138,84,104,81,105,76,138,79"/>
+<area shape="rect" id="Node000006" href="$test__facade_8cpp.html#a242410d5c15796117bbf14ce6766f6d1" title=" " alt="" coords="5,111,104,137"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="139,110,105,117,104,112,138,105"/>
+<area shape="rect" id="Node000007" href="$test__facade_8cpp.html#ad5405df21430ddc1c6533748d182038f" title=" " alt="" coords="5,161,104,186"/>
+<area shape="poly" id="edge7_Node000004_Node000007" title=" " alt="" coords="168,117,153,124,105,152,84,163,81,158,103,147,151,119,165,112"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,63,104,88"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#a3bf0e9f849e1e1b4abacdc3fdd13db34" title="Children of this item, or an empty list for a leaf." alt="" coords="152,5,320,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,60,151,41,179,32,180,37,153,46,94,65"/>
+<area shape="rect" id="Node000003" href="$classWorkflowDefinition.html#a9a3148890a0098d4816fe5ef5f961e7c" title="Gets the root WorkItem of the definition&#39;s composite structure." alt="" coords="163,55,309,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="104,73,150,73,150,78,104,78"/>
+<area shape="rect" id="Node000004" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="189,120,283,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="94,85,153,105,180,113,179,118,151,110,92,91"/>
+</map>

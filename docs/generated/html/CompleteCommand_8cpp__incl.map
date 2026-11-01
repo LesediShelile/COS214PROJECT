@@ -1,0 +1,17 @@
+<map id="src/CompleteCommand.cpp" name="src/CompleteCommand.cpp">
+<area shape="rect" id="Node000001" title="Implementation of the CompleteCommand class for finishing work items." alt="" coords="125,5,328,31"/>
+<area shape="rect" id="Node000002" href="$CompleteCommand_8h.html" title="Header file declaring the CompleteCommand concrete command class." alt="" coords="5,79,232,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="211,33,149,73,146,69,208,28"/>
+<area shape="rect" id="Node000005" href="$WorkItem_8h.html" title=" " alt="" coords="256,79,416,104"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="246,28,308,69,305,73,243,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="125,225,184,251"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,106,86,120,70,138,61,157,60,167,64,176,86,201,114,219,112,224,82,205,59,179,55,167,56,156,65,135,82,116,100,102"/>
+<area shape="rect" id="Node000004" href="$WorkflowCommand_8h.html" title="Header file declaring the abstract WorkflowCommand base class." alt="" coords="74,152,235,177"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="127,103,145,138,140,141,122,106"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="157,178,157,212,152,212,152,178"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="327,106,293,140,248,179,188,220,185,216,245,175,289,136,323,102"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="311,152,361,177"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="339,104,339,138,333,138,333,104"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="386,152,449,177"/>
+<area shape="poly" id="edge8_Node000005_Node000007" title=" " alt="" coords="351,102,396,141,392,145,347,106"/>
+</map>

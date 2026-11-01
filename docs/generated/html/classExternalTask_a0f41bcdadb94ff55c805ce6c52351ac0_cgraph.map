@@ -1,0 +1,7 @@
+<map id="ExternalTask::execute" name="ExternalTask::execute">
+<area shape="rect" id="Node000001" title="Executes the external request." alt="" coords="5,45,169,70"/>
+<area shape="rect" id="Node000002" href="$classExternalConnector.html#a608caa1f7a3f3cdd5a93ec514111f9d6" title="Returns the name of the external service." alt="" coords="217,5,368,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,42,203,37,204,42,170,47"/>
+<area shape="rect" id="Node000003" href="$classExternalConnector.html#af46b6367d3dcf2eeae658cb52d83ab47" title="Executes a request through the external service." alt="" coords="217,69,368,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,67,204,73,203,78,169,73"/>
+</map>

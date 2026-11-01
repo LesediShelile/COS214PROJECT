@@ -1,0 +1,15 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,159,100,184"/>
+<area shape="rect" id="Node000002" href="$classStage.html#a5c11c4655f30de6654a42bfc585c0a1d" title="Add a child." alt="" coords="196,5,287,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="57,157,90,101,115,69,147,41,182,25,184,30,149,46,119,72,94,104,62,160"/>
+<area shape="rect" id="Node000003" href="$classWorkflowDefinition.html#afd3ce0cbb03b7091a4a84561d0e537c3" title="Instantiates a new WorkflowInstance using the Prototype pattern." alt="" coords="169,55,314,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="68,156,103,131,147,105,162,98,164,103,149,110,106,135,71,161"/>
+<area shape="rect" id="Node000004" href="$classWorkflowDefinition.html#ab5ac5c8355eb5060f10779397cec59c7" title="Freezes the definition, locking it against further modifications." alt="" coords="169,119,314,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="100,161,154,151,155,157,101,166"/>
+<area shape="rect" id="Node000005" href="$classWorkflowDefinition.html#a9a3148890a0098d4816fe5ef5f961e7c" title="Gets the root WorkItem of the definition&#39;s composite structure." alt="" coords="169,183,314,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="101,177,155,186,154,191,100,182"/>
+<area shape="rect" id="Node000006" href="$classWorkItem.html#ae0b2832ad2b27b3d11f4e55bdd7ddd33" title=" " alt="" coords="148,248,335,273"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="71,182,106,208,149,233,170,241,168,246,147,238,103,212,68,187"/>
+<area shape="rect" id="Node000007" href="$classWorkflowDefinition.html#ade882c164e2dfaa33f759bac70da91fe" title="Sets the root WorkItem for the workflow tree." alt="" coords="169,298,314,338"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="64,183,97,231,121,258,150,283,161,290,158,294,146,287,118,262,93,234,59,186"/>
+</map>

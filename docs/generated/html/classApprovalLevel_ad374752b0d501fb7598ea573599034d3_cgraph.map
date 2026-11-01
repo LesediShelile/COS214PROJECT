@@ -1,0 +1,9 @@
+<map id="ApprovalLevel::canApprove" name="ApprovalLevel::canApprove">
+<area shape="rect" id="Node000001" title="Checks whether this level is allowed to approve the request." alt="" coords="5,63,205,88"/>
+<area shape="rect" id="Node000002" href="$classRole.html#a77eaca6b3a76af9de8e3c94336b5bac7" title="Gets the role&#39;s authority level." alt="" coords="276,5,451,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,60,292,31,293,36,164,65"/>
+<area shape="rect" id="Node000003" href="$classApprovalRequest.html#a9dc02d654b3d2cc3dc41c4932b4aaffa" title="Gets the authority level needed to approve." alt="" coords="253,55,473,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="205,73,240,73,240,78,205,78"/>
+<area shape="rect" id="Node000004" href="$classApprovalRequest.html#a7b8b43adff3dccf6fa236bd787829af1" title="Gets the current status of the request." alt="" coords="262,120,465,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="164,85,293,114,292,120,163,91"/>
+</map>

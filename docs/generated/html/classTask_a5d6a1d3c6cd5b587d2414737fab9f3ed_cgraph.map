@@ -1,0 +1,9 @@
+<map id="Task::start" name="Task::start">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,95,56"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#a6fd89a16759c4741def5e17f1463356b" title="Starts work on the task." alt="" coords="143,31,265,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="95,41,129,41,129,46,95,46"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="313,5,467,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="265,32,299,28,300,33,266,38"/>
+<area shape="rect" id="Node000004" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="313,55,467,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="266,49,300,53,299,58,265,54"/>
+</map>

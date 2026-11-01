@@ -1,0 +1,20 @@
+<map id="src/Notifier.cpp" name="src/Notifier.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="263,5,382,31"/>
+<area shape="rect" id="Node000002" href="$Notifier_8h.html" title=" " alt="" coords="72,79,216,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="295,33,186,76,184,71,293,28"/>
+<area shape="rect" id="Node000004" href="$WorkflowEvent_8h.html" title=" " alt="" coords="106,225,237,251"/>
+<area shape="poly" id="edge8_Node000001_Node000004" title=" " alt="" coords="324,31,311,98,296,140,272,179,246,204,216,222,213,217,242,199,268,176,291,138,306,97,319,30"/>
+<area shape="rect" id="Node000006" href="$EventType_8h.html" title=" " alt="" coords="174,299,276,324"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="328,31,332,64,330,104,314,159,291,210,244,288,239,286,286,208,309,157,325,104,327,64,322,31"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="385,79,460,104"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="340,29,396,68,393,73,337,33"/>
+<area shape="rect" id="Node000003" href="$WorkflowListener_8h.html" title=" " alt="" coords="27,152,172,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="139,106,116,142,112,139,134,103"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="89,299,148,324"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="87,107,48,124,30,137,17,153,9,172,9,190,15,209,26,227,57,262,91,289,87,293,54,265,22,231,11,211,4,191,4,171,12,151,27,133,45,120,85,102"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="196,152,259,177"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="159,102,205,141,202,145,155,106"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="113,176,152,214,148,218,110,180"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="165,253,137,289,133,286,161,249"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="183,249,210,286,206,289,178,253"/>
+</map>

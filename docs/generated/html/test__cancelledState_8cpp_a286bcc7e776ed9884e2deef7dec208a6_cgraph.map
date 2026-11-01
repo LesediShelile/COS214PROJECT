@@ -1,0 +1,17 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,153,104,179"/>
+<area shape="rect" id="Node000002" href="$classCancelled.html#a727bd4bbd4a1aad82bfd4e27a3028511" title="Creates a copy of this state (Prototype pattern)." alt="" coords="169,5,299,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,152,94,98,120,67,150,40,160,34,163,39,154,44,123,70,98,101,65,154"/>
+<area shape="rect" id="Node000003" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="157,55,311,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="67,151,103,120,151,89,166,82,168,87,153,94,107,124,71,155"/>
+<area shape="rect" id="Node000004" href="$classCancelled.html#a4d6a835f083b2e904c6a3f10c86b494e" title="Gets the name of this state." alt="" coords="157,104,311,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="101,151,173,131,174,136,102,156"/>
+<area shape="rect" id="Node000005" href="$classTaskState.html#ab6958d33b7f9532307a18f3c8b367103" title="Tells whether a task in this state is ready to be assigned." alt="" coords="152,153,316,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="104,163,138,163,138,169,104,169"/>
+<area shape="rect" id="Node000006" href="$classTaskState.html#a74e9e1532ce2ebc7258bd61bc0ce82ee" title="Tells whether this is an end state (no further actions are possible)." alt="" coords="167,203,301,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="102,176,174,196,173,201,101,181"/>
+<area shape="rect" id="Node000007" href="$classCancelled.html#a79ffe9a8c789339f030dcc728220025a" title="Cancelled is an end state." alt="" coords="166,252,302,277"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="72,177,107,207,153,237,171,245,169,250,151,242,104,211,68,181"/>
+<area shape="rect" id="Node000008" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="187,301,281,327"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="65,177,98,230,124,261,154,286,175,298,172,302,150,291,120,264,94,233,60,180"/>
+</map>

@@ -1,0 +1,27 @@
+<map id="CommandHistory::isEmpty" name="CommandHistory::isEmpty">
+<area shape="rect" id="Node000001" title="Checks if the command history contains any commands." alt="" coords="671,153,867,179"/>
+<area shape="rect" id="Node000002" href="$classCommandInvoker.html#a997619b09faa33bc764cf5fb4c23de82" title="Checks if there are any commands currently available to undo." alt="" coords="419,153,622,179"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="657,169,622,169,622,163,657,163"/>
+<area shape="rect" id="Node000008" href="$test__commandMementoWorkflow_8cpp.html#a17804ede87be7de8ceed7be234eee7b5" title=" " alt="" coords="473,203,568,228"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="691,184,569,209,568,203,690,179"/>
+<area shape="rect" id="Node000009" href="$classCommandInvoker.html#a3e89f4fddc8f4f3991499e82b731b208" title="Undoes the most recently executed command in the history." alt="" coords="419,104,623,129"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="690,153,585,132,586,127,692,148"/>
+<area shape="rect" id="Node000003" href="$test__integration__work__items_8cpp.html#ae2b1d52a6fab44654954ca712053efb7" title=" " alt="" coords="214,55,309,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="434,151,417,143,402,130,393,117,384,105,369,94,339,81,308,74,310,69,341,76,372,89,388,101,397,114,406,127,420,138,436,146"/>
+<area shape="rect" id="Node000004" href="$test__commandMementoWorkflow_8cpp.html#a4cc707d343e8f941af3811d48a5996e4" title=" " alt="" coords="214,252,309,277"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="433,186,420,192,406,204,397,216,388,229,372,242,341,255,310,262,308,257,339,250,369,237,384,226,393,213,402,200,417,188,430,181"/>
+<area shape="rect" id="Node000005" href="$test__commandMementoWorkflow_8cpp.html#a8241b1a63183def66c6b5175b84fc103" title=" " alt="" coords="214,104,309,129"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="439,153,308,128,309,123,440,148"/>
+<area shape="rect" id="Node000006" href="$test__commandMementoWorkflow_8cpp.html#afc1543d818f316e8b6bff3e57213a54c" title=" " alt="" coords="214,153,309,179"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="406,169,309,169,309,163,406,163"/>
+<area shape="rect" id="Node000007" href="$test__integration__work__items_8cpp.html#a6e57564e93fa7563e96da712168164d5" title=" " alt="" coords="214,203,309,228"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="440,184,309,209,308,204,439,179"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="439,104,308,79,309,74,440,99"/>
+<area shape="poly" id="edge10_Node000009_Node000005" title=" " alt="" coords="405,119,309,119,309,114,405,114"/>
+<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="440,135,309,160,308,155,439,129"/>
+<area shape="poly" id="edge12_Node000009_Node000007" title=" " alt="" coords="433,137,420,143,406,154,397,167,388,180,372,192,341,205,310,213,308,208,339,200,369,188,384,176,393,164,402,151,417,138,430,132"/>
+<area shape="rect" id="Node000010" href="$classTIVIDYFacade.html#aab82d5a6718df7b46bb31c8b3c10e31f" title="Undoes the most recently executed command." alt="" coords="152,5,371,31"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="485,99,432,71,370,45,331,33,333,28,372,39,434,66,488,95"/>
+<area shape="rect" id="Node000011" href="$test__facadeCommand_8cpp.html#a0713304c187af795be53667f03f7ffaa" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge14_Node000010_Node000011" title=" " alt="" coords="138,21,104,21,104,15,138,15"/>
+</map>

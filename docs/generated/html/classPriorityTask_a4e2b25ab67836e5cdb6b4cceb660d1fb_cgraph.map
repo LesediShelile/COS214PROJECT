@@ -1,0 +1,7 @@
+<map id="PriorityTask::PriorityTask" name="PriorityTask::PriorityTask">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,188,31"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#ac165c23dbdc7e17e1f705f162bfe6dc2" title=" " alt="" coords="236,5,411,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,15,222,15,222,21,188,21"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#aebd5e2e10ccc3b0e677773f2d0fdddf5" title=" " alt="" coords="459,5,603,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="411,15,445,15,445,21,411,21"/>
+</map>

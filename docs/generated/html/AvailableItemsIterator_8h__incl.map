@@ -1,0 +1,14 @@
+<map id="include/AvailableItemsIterator.h" name="include/AvailableItemsIterator.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,235,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="83,225,163,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,33,81,59,53,95,42,115,36,135,35,156,41,176,60,199,84,217,81,221,56,203,36,179,30,157,30,135,37,113,48,92,77,55,104,29"/>
+<area shape="rect" id="Node000003" href="$WorkItemIterator_8h.html" title=" " alt="" coords="51,152,195,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="123,31,125,138,120,138,118,31"/>
+<area shape="rect" id="Node000004" href="$DepthFirstIterator_8h.html" title=" " alt="" coords="158,79,306,104"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="139,28,203,69,200,73,137,33"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="125,178,125,212,120,212,120,178"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="234,105,227,139,219,160,209,179,186,203,160,221,157,216,183,199,205,176,215,158,222,138,228,104"/>
+<area shape="poly" id="edge7_Node000004_Node000003" title=" " alt="" coords="216,106,154,147,151,142,213,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="270,152,327,177"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="245,103,280,140,277,144,241,106"/>
+</map>

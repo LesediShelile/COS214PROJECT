@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['recordingapprovalhandler_0',['RecordingApprovalHandler',['../classRecordingApprovalHandler.html#ac8f16458824f33f136dfc4161eee4d88',1,'RecordingApprovalHandler']]],
+  ['registerdefinition_1',['registerDefinition',['../classTIVIDYFacade.html#a28b2e738c8e38d4e880990ec9bff1ea5',1,'TIVIDYFacade']]],
+  ['registerparticipant_2',['registerParticipant',['../classTIVIDYFacade.html#a4ed5cd4c0c0d100cdef926d709b77585',1,'TIVIDYFacade']]],
+  ['reject_3',['reject',['../classApprovalRequest.html#a7fe068ec01acd9b5a0f6e4166759ddb8',1,'ApprovalRequest::reject()'],['../classWorkItem.html#af123b04c261359ca971b60c3f5acbda6',1,'WorkItem::reject()'],['../classTaskState.html#ac565a8ae8c1b571cec880100fd5ba2ea',1,'TaskState::reject()'],['../classTaskDecorator.html#a86a6681140e3795b90297f57b44e000d',1,'TaskDecorator::reject()'],['../classTask.html#ad058cda4e8c3e252a050f9fde67f99bf',1,'Task::reject()'],['../classStartedState.html#ac08dc2b1736ebaa7d35cc480663a8c4e',1,'StartedState::reject()'],['../classStage.html#a9f0979b60a5e509e033c73a51dad4763',1,'Stage::reject()'],['../classAvailable.html#a48f8d3b3a45573b5c0a4a1f6c1037123',1,'Available::reject()'],['../classAuditedTask.html#a35d60e285599f4c9ba20635656af9bb2',1,'AuditedTask::reject()'],['../classAssigned.html#ac175d19cba7ff6d4afc8ad41e6315288',1,'Assigned::reject()']]],
+  ['rejectcommand_4',['RejectCommand',['../classRejectCommand.html#ac0fdf6cfa252125aa5ff8f6be2d4a647',1,'RejectCommand']]],
+  ['rejecttask_5',['rejecttask',['../classIWorkflowService.html#a1e93935cb87559b7bf8b8224ef74c7cb',1,'IWorkflowService::rejectTask()'],['../classSecureWorkflowProxy.html#a192cab4044889a985cba2801a5840f8d',1,'SecureWorkflowProxy::rejectTask()'],['../classTIVIDYFacade.html#ade620f15d83fb861851f5653f00ed8a8',1,'TIVIDYFacade::rejectTask()']]],
+  ['relayout_6',['relayout',['../classTheatreCanvas.html#a4985ebbd6393d99d076a240b1b20b4af',1,'TheatreCanvas']]],
+  ['removeentry_7',['removeEntry',['../classAPIOne.html#ad1145fc856689439341f17a26c59fddb',1,'APIOne']]],
+  ['request_8',['request',['../classAdapterTwo.html#aa9e161de7f82b157efdd652c6898bbcb',1,'AdapterTwo::request()'],['../classExternalConnector.html#af46b6367d3dcf2eeae658cb52d83ab47',1,'ExternalConnector::request()'],['../classAdapterOne.html#ab56151653500d3a6445a6c0e9c77ee00',1,'AdapterOne::request()']]],
+  ['requestapproval_9',['requestapproval',['../classIWorkflowService.html#a4f69765f42ffa46a906a08fec2487f58',1,'IWorkflowService::requestApproval()'],['../classSecureWorkflowProxy.html#a731623a1da1d5326ecd9acdce74cda2f',1,'SecureWorkflowProxy::requestApproval()'],['../classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e',1,'TIVIDYFacade::requestApproval()']]],
+  ['reset_10',['reset',['../classDefinitionBuilder.html#a31c5ce3dc2ac3321584976f1b012932d',1,'DefinitionBuilder::reset()'],['../classWorkflowBuilder.html#aa7cc6bd8418dc16b8760aed7454ce127',1,'WorkflowBuilder::reset()']]],
+  ['resetdeadline_11',['resetDeadline',['../classApprovalRequest.html#ab6777c6338275d539f2103c981a81d10',1,'ApprovalRequest']]],
+  ['resizeevent_12',['resizeEvent',['../classTheatreCanvas.html#a2fefdc0afb0f05ebd1eeafb03fde4a93',1,'TheatreCanvas']]],
+  ['restorebackup_13',['restoreBackup',['../classWorkflowCommand.html#a48d4e82e955573b9262bde2627539745',1,'WorkflowCommand']]],
+  ['restorememento_14',['restorememento',['../classStage.html#ad1a5f8d061af9845b4b572098632b949',1,'Stage::restoreMemento()'],['../classTask.html#a57a19a99141017f18e8b38effbdb8638',1,'Task::restoreMemento()'],['../classTaskDecorator.html#ae2fa927271db15938387bfb2e11821e5',1,'TaskDecorator::restoreMemento()'],['../classWorkItem.html#aee5a2f0484f289d5370682076370c599',1,'WorkItem::restoreMemento()']]],
+  ['role_15',['Role',['../classRole.html#afb08a40692e158cda44ee1b18fec3c81',1,'Role']]],
+  ['rulebasedassignment_16',['RuleBasedAssignment',['../classRuleBasedAssignment.html#ad02ef5e95160cc72d34c0dd52a3e6f43',1,'RuleBasedAssignment']]],
+  ['run_17',['run',['../classDesktop.html#a6d9f4088315f3d5e6e631f33345f253c',1,'Desktop']]]
+];

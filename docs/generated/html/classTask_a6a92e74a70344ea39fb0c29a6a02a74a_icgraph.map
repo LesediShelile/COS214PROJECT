@@ -1,0 +1,9 @@
+<map id="Task::getAssignee" name="Task::getAssignee">
+<area shape="rect" id="Node000001" title="Gets the participant assigned to this work item." alt="" coords="148,55,287,80"/>
+<area shape="rect" id="Node000002" href="$test__state__strategy__chain_8cpp.html#a7359452cf7884fa783823be4bcf12f99" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,53,95,33,97,28,162,48"/>
+<area shape="rect" id="Node000003" href="$test__state__strategy__chain_8cpp.html#a5ceea80a3f9b49870045be0718a09582" title=" " alt="" coords="5,55,100,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,70,100,70,100,65,134,65"/>
+<area shape="rect" id="Node000004" href="$test__state__strategy__chain_8cpp.html#a065d9420065ff58be04719589ea93b1f" title=" " alt="" coords="5,104,100,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="162,87,97,106,95,101,161,81"/>
+</map>

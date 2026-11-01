@@ -1,0 +1,17 @@
+<map id="SecureWorkflowProxy::requestApproval" name="SecureWorkflowProxy::requestApproval">
+<area shape="rect" id="Node000001" title="Requests approval after checking permission and ownership." alt="" coords="5,137,168,177"/>
+<area shape="rect" id="Node000002" href="$classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e" title="Submits a work item to an approval chain of responsibility." alt="" coords="216,145,441,170"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,155,202,155,202,160,168,160"/>
+<area shape="rect" id="Node000003" href="$classWorkflowDefinition.html#aa5041d0fdba198b3d48ba0078767b289" title="Gets the head of the approval handler chain." alt="" coords="531,5,677,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="345,142,406,100,488,55,516,44,518,49,490,60,409,105,348,147"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a07f90d9342cb3413103703da2f64f3a8" title=" " alt="" coords="531,70,677,95"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="366,142,489,104,523,96,525,101,490,109,367,147"/>
+<area shape="rect" id="Node000005" href="$classWorkflowInstance.html#a44b26e4fc1c64a18b0eb9c836079cae6" title="Gets the definition blueprint this instance was created from." alt="" coords="489,119,719,145"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="441,144,475,141,476,146,442,150"/>
+<area shape="rect" id="Node000006" href="$classApprovalRequest.html#a7b8b43adff3dccf6fa236bd787829af1" title="Gets the current status of the request." alt="" coords="503,169,705,194"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="442,165,489,169,489,174,441,170"/>
+<area shape="rect" id="Node000007" href="$classApprovalHandler.html#a9b61062cec56f24ef59502c49a334b83" title="Handles an approval request or passes it on." alt="" coords="513,218,695,243"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="370,168,490,203,529,212,528,218,489,208,369,173"/>
+<area shape="rect" id="Node000008" href="$classWorkItem.html#a832fccc6b34774701672028c884cd70e" title=" " alt="" coords="531,267,677,293"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="348,168,409,209,449,232,490,252,518,262,516,267,488,257,446,237,406,214,345,172"/>
+</map>

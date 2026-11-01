@@ -1,0 +1,9 @@
+<map id="TIVIDYFacade::registerDefinition" name="TIVIDYFacade::registerDefinition">
+<area shape="rect" id="Node000001" title="Registers a workflow definition with the facade." alt="" coords="5,77,236,102"/>
+<area shape="rect" id="Node000002" href="$classWorkflowDefinition.html#ab5ac5c8355eb5060f10779397cec59c7" title="Freezes the definition, locking it against further modifications." alt="" coords="284,5,429,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,74,270,46,272,51,169,79"/>
+<area shape="rect" id="Node000003" href="$classWorkflowDefinition.html#a78eb04b258a664bba6428ee0c7199447" title="Gets the name of the workflow definition." alt="" coords="284,69,429,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="236,87,270,87,270,92,236,92"/>
+<area shape="rect" id="Node000004" href="$classWorkflowDefinition.html#a9d69a48eebbb3a4362e3057b2edf54ec" title="Checks if the workflow definition has been frozen." alt="" coords="284,133,429,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="169,100,272,128,270,133,168,105"/>
+</map>

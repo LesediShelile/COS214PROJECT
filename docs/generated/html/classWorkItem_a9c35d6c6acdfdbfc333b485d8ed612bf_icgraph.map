@@ -1,0 +1,17 @@
+<map id="WorkItem::isFinished" name="WorkItem::isFinished">
+<area shape="rect" id="Node000001" title=" " alt="" coords="640,105,799,131"/>
+<area shape="rect" id="Node000002" href="$classWorkflowInstance.html#a9e4c044672103c026fcf0f6f04163c8c" title="Progresses the workflow tree after a task completes." alt="" coords="363,31,592,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="677,102,591,70,547,59,549,53,593,65,679,97"/>
+<area shape="rect" id="Node000006" href="$classTaskDecorator.html#a68bc03f7315dc2598e27d54ca0e73487" title=" " alt="" coords="383,80,571,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="626,111,571,105,572,100,626,106"/>
+<area shape="rect" id="Node000007" href="$test__integration__work__items_8cpp.html#a559c2a8f8be7d19a80b30c373bb6255c" title=" " alt="" coords="430,129,525,155"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="626,130,525,140,524,135,626,125"/>
+<area shape="rect" id="Node000008" href="$test__decorators_8cpp.html#aa8ddf5d9105497498695c66586bf9c14" title=" " alt="" coords="430,179,525,204"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="677,138,593,169,525,185,524,180,591,163,675,133"/>
+<area shape="rect" id="Node000003" href="$classEngineRouter.html#aee8e26d7253e4d10e9c2d5f06f325239" title="Processes a workflow event." alt="" coords="152,31,315,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="349,46,315,46,315,41,349,41"/>
+<area shape="rect" id="Node000004" href="$test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="138,33,104,28,105,22,139,27"/>
+<area shape="rect" id="Node000005" href="$test__engine__router_8cpp.html#a64a148f342e78f079933c9f1b1b04ab4" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="139,59,105,63,104,58,138,53"/>
+</map>

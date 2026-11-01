@@ -1,0 +1,13 @@
+<map id="EngineRouter::update" name="EngineRouter::update">
+<area shape="rect" id="Node000001" title="Processes a workflow event." alt="" coords="5,79,168,104"/>
+<area shape="rect" id="Node000002" href="$classWorkflowInstance.html#a9e4c044672103c026fcf0f6f04163c8c" title="Progresses the workflow tree after a task completes." alt="" coords="216,29,445,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="150,76,253,55,254,60,151,81"/>
+<area shape="rect" id="Node000005" href="$classWorkflowEvent.html#a4076f664f223007e1dee7fc9df9229ba" title=" " alt="" coords="241,79,420,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="168,89,228,89,228,94,168,94"/>
+<area shape="rect" id="Node000006" href="$classApprovalHandler.html#a9b61062cec56f24ef59502c49a334b83" title="Handles an approval request or passes it on." alt="" coords="239,128,422,153"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="151,101,254,123,253,128,150,107"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#af87da457ee3b0f665eba7d592faca22d" title="Re&#45;evaluate which children should become available next." alt="" coords="493,5,693,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="445,29,479,26,480,31,446,34"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a9c35d6c6acdfdbfc333b485d8ed612bf" title=" " alt="" coords="514,55,673,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="446,50,501,56,500,61,445,56"/>
+</map>

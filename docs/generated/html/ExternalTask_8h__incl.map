@@ -1,0 +1,18 @@
+<map id="include/ExternalTask.h" name="include/ExternalTask.h">
+<area shape="rect" id="Node000001" title="Declares a work item that interacts with an external service." alt="" coords="146,5,314,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="219,225,278,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,31,250,152,252,211,246,212,245,152,229,31"/>
+<area shape="rect" id="Node000003" href="$Task_8h.html" title=" " alt="" coords="131,79,193,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,33,185,70,181,67,217,29"/>
+<area shape="poly" id="edge4_Node000003_Node000002" title=" " alt="" coords="180,102,203,123,226,151,239,181,247,211,242,212,234,183,221,153,199,127,176,106"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="30,152,89,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="147,106,89,146,86,142,144,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,225,68,251"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="131,98,103,104,72,114,43,130,20,153,15,167,15,182,25,213,20,214,10,183,10,166,16,151,40,126,70,109,101,99,130,93"/>
+<area shape="rect" id="Node000006" href="$WorkItem_8h.html" title=" " alt="" coords="113,152,211,177"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="165,104,165,138,159,138,159,104"/>
+<area shape="poly" id="edge8_Node000006_Node000002" title=" " alt="" coords="178,175,226,214,222,219,174,179"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="143,180,70,221,68,216,141,175"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="137,225,187,251"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="165,178,165,212,159,212,159,178"/>
+</map>

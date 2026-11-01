@@ -1,0 +1,43 @@
+<map id="include/Stage.h" name="include/Stage.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="871,5,993,31"/>
+<area shape="rect" id="Node000002" href="$ParallelStage_8h.html" title=" " alt="" coords="744,79,915,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="906,41,848,81,845,76,903,36"/>
+<area shape="rect" id="Node000003" href="$Playground_8h.html" title=" " alt="" coords="187,159,362,185"/>
+<area shape="poly" id="edge21_Node000001_Node000003" title=" " alt="" coords="858,35,627,81,453,124,316,162,314,157,452,119,626,76,857,30"/>
+<area shape="rect" id="Node000004" href="$DefinitionBuilder_8cpp.html" title=" " alt="" coords="386,159,566,185"/>
+<area shape="poly" id="edge22_Node000001_Node000004" title=" " alt="" coords="866,36,787,56,701,81,589,124,502,162,499,157,587,119,699,76,785,51,865,31"/>
+<area shape="rect" id="Node000006" href="$test__builder-iterator_8cpp.html" title=" " alt="" coords="590,152,725,192"/>
+<area shape="poly" id="edge24_Node000001_Node000006" title=" " alt="" coords="858,33,795,51,763,64,734,81,714,97,696,116,670,153,666,150,692,113,710,93,730,76,761,59,793,46,857,28"/>
+<area shape="rect" id="Node000008" href="$test__director_8cpp.html" title=" " alt="" coords="1550,159,1717,185"/>
+<area shape="poly" id="edge25_Node000001_Node000008" title=" " alt="" coords="994,31,1067,51,1146,76,1176,90,1205,101,1297,123,1370,131,1444,137,1538,149,1578,157,1577,162,1537,155,1443,142,1369,137,1296,128,1203,107,1173,94,1144,81,1066,56,993,37"/>
+<area shape="rect" id="Node000010" href="$test__work__items_8cpp.html" title=" " alt="" coords="1971,159,2165,185"/>
+<area shape="poly" id="edge26_Node000001_Node000010" title=" " alt="" coords="1008,29,1098,49,1194,76,1222,90,1249,101,1354,124,1445,137,1525,141,1601,141,1759,137,1852,140,1960,149,2009,157,2008,162,1960,155,1851,145,1759,142,1601,146,1525,146,1444,142,1353,130,1247,107,1219,95,1192,81,1096,54,1007,35"/>
+<area shape="rect" id="Node000011" href="$SequentialStage_8h.html" title=" " alt="" coords="943,79,1134,104"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="962,36,1023,76,1020,81,959,40"/>
+<area shape="rect" id="Node000015" href="$Stage_8cpp.html" title=" " alt="" coords="1260,79,1369,104"/>
+<area shape="poly" id="edge23_Node000001_Node000015" title=" " alt="" coords="1007,31,1260,77,1259,82,1006,36"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="731,107,564,127,374,155,332,162,331,157,373,149,563,122,730,101"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="765,110,528,162,527,157,764,104"/>
+<area shape="rect" id="Node000005" href="$ParallelStage_8cpp.html" title=" " alt="" coords="5,159,163,185"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="730,101,478,120,326,135,175,155,135,162,134,157,174,149,326,130,477,115,730,96"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="793,112,700,154,698,149,791,107"/>
+<area shape="rect" id="Node000007" href="$test__commandMementoWorkflow_8cpp.html" title=" " alt="" coords="934,152,1151,192"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="874,106,992,149,990,154,872,111"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="929,101,931,101,1102,115,1235,121,1368,130,1538,149,1581,157,1580,162,1537,155,1367,135,1234,127,1101,120,930,107,928,106"/>
+<area shape="rect" id="Node000009" href="$test__integration__work__items_8cpp.html" title=" " alt="" coords="749,152,910,192"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="832,118,832,152,827,152,827,118"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="929,101,931,101,1087,112,1220,117,1446,120,1671,126,1804,134,1960,149,2010,157,2010,162,1960,155,1804,140,1671,131,1446,126,1220,122,1087,117,930,107,929,107"/>
+<area shape="poly" id="edge11_Node000011_Node000003" title=" " alt="" coords="929,106,927,107,650,127,529,136,374,155,330,162,329,157,373,149,528,131,649,121,926,101,929,101"/>
+<area shape="poly" id="edge12_Node000011_Node000004" title=" " alt="" coords="930,108,764,128,578,155,535,162,534,157,577,149,763,123,929,102"/>
+<area shape="poly" id="edge14_Node000011_Node000006" title=" " alt="" coords="964,109,737,155,725,157,724,152,735,149,963,104"/>
+<area shape="poly" id="edge15_Node000011_Node000007" title=" " alt="" coords="1043,118,1044,152,1039,152,1037,118"/>
+<area shape="poly" id="edge16_Node000011_Node000008" title=" " alt="" coords="1148,102,1538,149,1579,157,1578,162,1537,155,1147,107"/>
+<area shape="poly" id="edge18_Node000011_Node000009" title=" " alt="" coords="997,111,881,154,879,149,995,106"/>
+<area shape="poly" id="edge20_Node000011_Node000010" title=" " alt="" coords="1148,98,1204,101,1417,113,1583,119,1748,128,1960,149,2009,157,2008,162,1960,155,1748,134,1582,124,1417,118,1204,107,1148,103"/>
+<area shape="rect" id="Node000012" href="$SequentialStage_8cpp.html" title=" " alt="" coords="1347,159,1525,185"/>
+<area shape="poly" id="edge13_Node000011_Node000012" title=" " alt="" coords="1110,104,1379,157,1378,162,1109,109"/>
+<area shape="rect" id="Node000013" href="$test__engine__router_8cpp.html" title=" " alt="" coords="1741,159,1947,185"/>
+<area shape="poly" id="edge17_Node000011_Node000013" title=" " alt="" coords="1148,98,1460,124,1730,149,1780,157,1779,162,1729,155,1460,129,1148,104"/>
+<area shape="rect" id="Node000014" href="$test__observer__integrations_8cpp.html" title=" " alt="" coords="1176,152,1323,192"/>
+<area shape="poly" id="edge19_Node000011_Node000014" title=" " alt="" coords="1083,106,1200,149,1198,154,1081,111"/>
+</map>

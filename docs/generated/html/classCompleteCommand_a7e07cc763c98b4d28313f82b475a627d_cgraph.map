@@ -1,0 +1,5 @@
+<map id="CompleteCommand::getDescription" name="CompleteCommand::getDescription">
+<area shape="rect" id="Node000001" title="Returns a descriptive string summarizing the command action." alt="" coords="5,5,260,31"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="308,5,461,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="260,15,294,15,294,21,260,21"/>
+</map>

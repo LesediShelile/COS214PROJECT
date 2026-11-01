@@ -1,0 +1,5 @@
+<map id="RuleBasedAssignment::selectParticipant" name="RuleBasedAssignment::selectParticipant">
+<area shape="rect" id="Node000001" title="Chooses the first participant who passes the rule." alt="" coords="5,5,173,45"/>
+<area shape="rect" id="Node000002" href="$classRuleBasedAssignment.html#a6986d23a91e08a1367bd15c6aaed0bfd" title="Runs the rule for one participant." alt="" coords="221,5,389,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,23,208,23,208,28,174,28"/>
+</map>

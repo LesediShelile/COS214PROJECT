@@ -1,0 +1,5 @@
+<map id="RoleBasedAssignment::hasRequiredRole" name="RoleBasedAssignment::hasRequiredRole">
+<area shape="rect" id="Node000001" title="Checks whether a participant has the role the task needs." alt="" coords="221,5,389,45"/>
+<area shape="rect" id="Node000002" href="$classRoleBasedAssignment.html#abddf3371cf41a296c684fb281b59369c" title="Chooses the first participant who has the task&#39;s required role." alt="" coords="5,5,173,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,28,174,28,174,23,207,23"/>
+</map>

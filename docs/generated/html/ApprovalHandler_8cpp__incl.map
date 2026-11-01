@@ -1,0 +1,14 @@
+<map id="src/ApprovalHandler.cpp" name="src/ApprovalHandler.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="96,5,276,31"/>
+<area shape="rect" id="Node000002" href="$ApprovalHandler_8h.html" title=" " alt="" coords="5,79,148,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="170,33,108,73,105,69,167,28"/>
+<area shape="rect" id="Node000003" href="$ApprovalRequest_8h.html" title=" " alt="" coords="224,79,369,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="205,28,268,69,265,73,202,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="154,152,234,177"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="189,31,195,138,190,138,184,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="282,106,224,146,221,142,279,102"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="262,152,321,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="298,105,296,139,291,138,293,104"/>
+<area shape="rect" id="Node000006" href="$ApprovalStatus_8h.html" title=" " alt="" coords="345,152,478,177"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="316,102,382,142,380,147,314,106"/>
+</map>

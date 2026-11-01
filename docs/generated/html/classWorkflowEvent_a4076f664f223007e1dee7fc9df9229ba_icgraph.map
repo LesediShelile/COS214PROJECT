@@ -1,0 +1,21 @@
+<map id="WorkflowEvent::getType" name="WorkflowEvent::getType">
+<area shape="rect" id="Node000001" title=" " alt="" coords="381,80,560,105"/>
+<area shape="rect" id="Node000002" href="$test__observer__integrations_8cpp.html#ada97855565eb5fcbdd02c3ae476797df" title=" " alt="" coords="193,5,292,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="424,77,333,45,292,33,293,28,334,39,426,72"/>
+<area shape="rect" id="Node000003" href="$classEngineRouter.html#aee8e26d7253e4d10e9c2d5f06f325239" title="Processes a workflow event." alt="" coords="161,55,324,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="367,84,324,79,324,74,368,79"/>
+<area shape="rect" id="Node000006" href="$classMetricsCollector.html#a0e0c5fb9c83d32fa433ec9b3638b148e" title="Handles a published workflow event." alt="" coords="152,104,333,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="368,106,334,110,333,104,367,101"/>
+<area shape="rect" id="Node000008" href="$classNotifier.html#a991fc7e0c256fcd5d5207ab58f88d63b" title="Handles a published workflow event." alt="" coords="181,153,304,179"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="423,113,334,143,292,156,290,151,333,138,421,108"/>
+<area shape="rect" id="Node000004" href="$test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="180,54,104,33,105,28,181,49"/>
+<area shape="rect" id="Node000005" href="$test__engine__router_8cpp.html#a64a148f342e78f079933c9f1b1b04ab4" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="147,70,104,70,104,65,147,65"/>
+<area shape="rect" id="Node000007" href="$test__observer__integrations_8cpp.html#a25779ef275352b248f14f6b8a52afb19" title=" " alt="" coords="5,104,104,129"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="138,119,104,119,104,114,138,114"/>
+<area shape="rect" id="Node000009" href="$test__notifier_8cpp.html#a95909b56861bbc5ab265fd5de5b3320b" title=" " alt="" coords="5,153,104,179"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="167,169,104,169,104,163,167,163"/>
+<area shape="rect" id="Node000010" href="$test__observer__integrations_8cpp.html#a0a89de0f06d176555cc0e36060f05dfa" title=" " alt="" coords="5,203,104,228"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="181,185,105,205,104,200,180,180"/>
+</map>

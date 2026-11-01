@@ -1,0 +1,15 @@
+<map id="TIVIDYFacade::requestApproval" name="TIVIDYFacade::requestApproval">
+<area shape="rect" id="Node000001" title="Submits a work item to an approval chain of responsibility." alt="" coords="5,145,231,170"/>
+<area shape="rect" id="Node000002" href="$classWorkflowDefinition.html#aa5041d0fdba198b3d48ba0078767b289" title="Gets the head of the approval handler chain." alt="" coords="320,5,467,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,142,196,100,278,55,306,44,308,49,280,60,199,105,138,147"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a07f90d9342cb3413103703da2f64f3a8" title=" " alt="" coords="321,70,466,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="155,142,278,104,313,96,314,101,279,109,157,147"/>
+<area shape="rect" id="Node000004" href="$classWorkflowInstance.html#a44b26e4fc1c64a18b0eb9c836079cae6" title="Gets the definition blueprint this instance was created from." alt="" coords="279,119,508,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="231,144,264,141,265,146,231,150"/>
+<area shape="rect" id="Node000005" href="$classApprovalRequest.html#a7b8b43adff3dccf6fa236bd787829af1" title="Gets the current status of the request." alt="" coords="292,169,495,194"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="231,165,278,169,278,174,231,170"/>
+<area shape="rect" id="Node000006" href="$classApprovalHandler.html#a9b61062cec56f24ef59502c49a334b83" title="Handles an approval request or passes it on." alt="" coords="302,218,485,243"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="160,168,279,203,319,212,318,218,278,208,158,173"/>
+<area shape="rect" id="Node000007" href="$classWorkItem.html#a832fccc6b34774701672028c884cd70e" title=" " alt="" coords="320,267,467,293"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="138,168,198,209,238,232,280,252,307,262,306,267,278,257,235,237,195,214,135,172"/>
+</map>

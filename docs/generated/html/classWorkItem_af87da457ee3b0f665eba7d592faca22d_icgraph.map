@@ -1,0 +1,21 @@
+<map id="WorkItem::activateChildren" name="WorkItem::activateChildren">
+<area shape="rect" id="Node000001" title="Re&#45;evaluate which children should become available next." alt="" coords="641,112,841,137"/>
+<area shape="rect" id="Node000002" href="$classSequentialStage.html#a6609d38959b332ee11bb56fff2d4d496" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="383,47,573,87"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="668,112,570,90,571,85,670,106"/>
+<area shape="rect" id="Node000006" href="$classTaskDecorator.html#a07452555413ffa1853545d6c0a9fb873" title="Re&#45;evaluate which children should become available next." alt="" coords="363,112,593,137"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="627,127,593,127,593,122,627,122"/>
+<area shape="rect" id="Node000007" href="$classWorkflowInstance.html#a9e4c044672103c026fcf0f6f04163c8c" title="Progresses the workflow tree after a task completes." alt="" coords="363,161,593,187"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="660,143,547,164,546,159,659,137"/>
+<area shape="rect" id="Node000003" href="$test__integration__work__items_8cpp.html#ab688d3af6d3ba12be86b0d74c0d7df0f" title=" " alt="" coords="186,5,281,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="369,48,280,30,281,25,370,43"/>
+<area shape="rect" id="Node000004" href="$test__work__items_8cpp.html#a3a31b7c43784b1ae1d14834342509a22" title=" " alt="" coords="186,55,281,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="369,70,281,70,281,65,369,65"/>
+<area shape="rect" id="Node000005" href="$test__work__items_8cpp.html#ab72a081ef1657128d1027b0facd81b00" title=" " alt="" coords="186,104,281,129"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="370,92,281,110,280,105,369,87"/>
+<area shape="rect" id="Node000008" href="$classEngineRouter.html#aee8e26d7253e4d10e9c2d5f06f325239" title="Processes a workflow event." alt="" coords="152,161,315,187"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="350,177,315,177,315,171,350,171"/>
+<area shape="rect" id="Node000009" href="$test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="5,136,104,161"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="138,163,104,158,105,153,139,158"/>
+<area shape="rect" id="Node000010" href="$test__engine__router_8cpp.html#a64a148f342e78f079933c9f1b1b04ab4" title=" " alt="" coords="5,185,104,211"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="139,189,105,194,104,189,138,184"/>
+</map>

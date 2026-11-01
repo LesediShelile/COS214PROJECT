@@ -1,0 +1,15 @@
+<map id="WorkflowInstance::getDefinition" name="WorkflowInstance::getDefinition">
+<area shape="rect" id="Node000001" title="Gets the definition blueprint this instance was created from." alt="" coords="636,80,865,105"/>
+<area shape="rect" id="Node000002" href="$classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e" title="Submits a work item to an approval chain of responsibility." alt="" coords="363,80,588,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="622,95,588,95,588,90,622,90"/>
+<area shape="rect" id="Node000003" href="$classSecureWorkflowProxy.html#a731623a1da1d5326ecd9acdce74cda2f" title="Requests approval after checking permission and ownership." alt="" coords="152,73,315,113"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="349,95,315,95,315,90,349,90"/>
+<area shape="rect" id="Node000004" href="$test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="171,70,85,33,87,28,173,65"/>
+<area shape="rect" id="Node000005" href="$test__proxy_8cpp.html#aaf19d5f99495ffd1c276810ffaafdc1f" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="138,82,104,77,105,72,139,77"/>
+<area shape="rect" id="Node000006" href="$test__proxy_8cpp.html#a809f6a1f9ebea212d14ef9ebf5fc5913" title=" " alt="" coords="5,104,104,129"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="139,108,105,113,104,107,138,103"/>
+<area shape="rect" id="Node000007" href="$test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="5,153,104,179"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="173,120,88,156,86,151,171,115"/>
+</map>

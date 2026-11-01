@@ -1,0 +1,3 @@
+<map id="EventPublisher" name="EventPublisher">
+<area shape="rect" id="Node000001" title="Publishes workflow events to registered listeners." alt="" coords="5,5,152,151"/>
+</map>

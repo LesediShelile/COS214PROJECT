@@ -1,0 +1,13 @@
+<map id="SecureWorkflowProxy::completeTask" name="SecureWorkflowProxy::completeTask">
+<area shape="rect" id="Node000001" title="Completes a task after checking permission and ownership." alt="" coords="152,97,315,137"/>
+<area shape="rect" id="Node000002" href="$test__proxy_8cpp.html#a90dfdcaeb16f8246c456e2b3d1946623" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="186,92,103,44,81,33,84,29,105,40,188,87"/>
+<area shape="rect" id="Node000003" href="$test__proxy_8cpp.html#ae3dadaf13d96fbf05b029330c1b959d6" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,95,101,83,102,77,148,90"/>
+<area shape="rect" id="Node000004" href="$test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="5,104,104,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="138,119,104,119,104,114,138,114"/>
+<area shape="rect" id="Node000005" href="$test__proxy_8cpp.html#a809f6a1f9ebea212d14ef9ebf5fc5913" title=" " alt="" coords="5,153,104,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="148,143,102,156,101,151,146,138"/>
+<area shape="rect" id="Node000006" href="$test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="5,203,104,228"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="187,146,105,192,82,205,79,200,103,188,184,142"/>
+</map>

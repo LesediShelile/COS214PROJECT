@@ -1,0 +1,9 @@
+<map id="StartCommand::execute" name="StartCommand::execute">
+<area shape="rect" id="Node000001" title="Executes the start command on the target work item." alt="" coords="5,31,184,56"/>
+<area shape="rect" id="Node000002" href="$classWorkflowCommand.html#a6a9ea26fe4960a57137ae3c0db06b19e" title="Captures a fresh memento snapshot from the target work item." alt="" coords="232,5,467,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,32,218,28,218,34,184,37"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a18435dde12f397de1dca31f9c0e803c6" title=" " alt="" coords="288,55,411,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="184,49,274,58,274,63,184,54"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a8e2a00010a42896ad22f011bb2666a86" title="Memento operations." alt="" coords="515,5,711,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="467,15,501,15,501,21,467,21"/>
+</map>

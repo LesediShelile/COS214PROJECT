@@ -1,0 +1,5 @@
+<map id="DefinitionBuilder::beginParallelStage" name="DefinitionBuilder::beginParallelStage">
+<area shape="rect" id="Node000001" title="Creates a new Parallel stage that gets pushed to the stage stack." alt="" coords="5,5,148,45"/>
+<area shape="rect" id="Node000002" href="$classWorkflowDefinition.html#ade882c164e2dfaa33f759bac70da91fe" title="Sets the root WorkItem for the workflow tree." alt="" coords="196,5,341,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="149,23,182,23,182,28,149,28"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="RuleBasedAssignment" name="RuleBasedAssignment">
+<area shape="rect" id="Node000001" title="Assigns a task using a custom rule (Strategy pattern)." alt="" coords="5,139,201,284"/>
+<area shape="rect" id="Node000002" href="$classAssignmentStrategy.html" title="Abstract strategy for choosing who a task is assigned to (Strategy pattern)." alt="" coords="13,5,194,91"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="106,104,106,138,101,138,101,104"/>
+</map>

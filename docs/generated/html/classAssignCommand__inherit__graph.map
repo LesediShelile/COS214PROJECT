@@ -1,0 +1,6 @@
+<map id="AssignCommand" name="AssignCommand">
+<area shape="rect" id="Node000001" title="Concrete command that assigns a work item to a participant." alt="" coords="14,299,174,544"/>
+<area shape="rect" id="Node000002" href="$classWorkflowCommand.html" title="Abstract base class representing an undoable action on a work item." alt="" coords="5,5,183,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,265,88,298,82,298,82,265"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="106,265,106,298,100,298,100,265"/>
+</map>

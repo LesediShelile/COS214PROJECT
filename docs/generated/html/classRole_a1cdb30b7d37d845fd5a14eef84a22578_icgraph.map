@@ -1,0 +1,9 @@
+<map id="Role::hasPermission" name="Role::hasPermission">
+<area shape="rect" id="Node000001" title="Checks whether this role has a permission." alt="" coords="355,31,509,56"/>
+<area shape="rect" id="Node000002" href="$classRole.html#ad654eb80bd24dd1f477a52abc60362e6" title="Adds a permission to this role." alt="" coords="152,31,307,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="341,46,307,46,307,41,341,41"/>
+<area shape="rect" id="Node000003" href="$test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="138,33,104,28,104,22,139,27"/>
+<area shape="rect" id="Node000004" href="$test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="139,58,104,63,104,58,138,53"/>
+</map>

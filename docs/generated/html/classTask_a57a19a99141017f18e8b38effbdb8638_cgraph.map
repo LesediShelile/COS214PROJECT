@@ -1,0 +1,5 @@
+<map id="Task::restoreMemento" name="Task::restoreMemento">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,172,31"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#ad39164c530a26f145049caa1763897d5" title="Creates a copy of this state (Prototype pattern)." alt="" coords="220,5,348,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,15,206,15,206,21,172,21"/>
+</map>

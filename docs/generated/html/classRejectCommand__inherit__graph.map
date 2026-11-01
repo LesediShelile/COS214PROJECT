@@ -1,0 +1,5 @@
+<map id="RejectCommand" name="RejectCommand">
+<area shape="rect" id="Node000001" title="Concrete command that transitions a work item to a rejected state with a reason." alt="" coords="15,299,173,444"/>
+<area shape="rect" id="Node000002" href="$classWorkflowCommand.html" title="Abstract base class representing an undoable action on a work item." alt="" coords="5,5,183,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,264,97,299,91,299,91,264"/>
+</map>

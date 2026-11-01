@@ -1,0 +1,19 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classTaskState.html" title="Abstract state of a Task (State pattern)." alt="" coords="5,179,91,204"/>
+<area shape="rect" id="Node000001" href="$classAssigned.html" title="State of a task that has a participant but has not been started (State pattern)." alt="" coords="177,5,259,31"/>
+<area shape="poly" id="edge15_Node000000_Node000001" title=" " alt="" coords="56,165,85,102,108,69,137,40,156,29,176,22,178,27,158,34,140,44,112,72,90,105,60,167"/>
+<area shape="rect" id="Node000002" href="$classAvailable.html" title="State of a task that is ready to be assigned (State pattern)." alt="" coords="177,55,259,80"/>
+<area shape="poly" id="edge16_Node000000_Node000002" title=" " alt="" coords="63,166,94,126,137,89,175,73,177,78,140,94,98,130,67,169"/>
+<area shape="rect" id="Node000003" href="$classCancelled.html" title="End state of a task that was cancelled (State pattern)." alt="" coords="175,104,261,129"/>
+<area shape="poly" id="edge17_Node000000_Node000003" title=" " alt="" coords="80,169,138,138,173,125,175,130,140,143,82,174"/>
+<area shape="rect" id="Node000004" href="$classCompleted.html" title="End state of a task that was finished successfully (State pattern)." alt="" coords="171,153,265,179"/>
+<area shape="poly" id="edge18_Node000000_Node000004" title=" " alt="" coords="104,180,171,170,171,176,105,186"/>
+<area shape="rect" id="Node000005" href="$classCreated.html" title="Starting state of every new task (State pattern)." alt="" coords="181,203,255,228"/>
+<area shape="poly" id="edge19_Node000000_Node000005" title=" " alt="" coords="105,197,181,208,181,213,104,202"/>
+<area shape="rect" id="Node000006" href="$classRejectedState.html" title="State of a task that was turned down (State pattern)." alt="" coords="161,252,275,277"/>
+<area shape="poly" id="edge20_Node000000_Node000006" title=" " alt="" coords="83,208,140,237,174,249,172,254,138,242,81,213"/>
+<area shape="rect" id="Node000007" href="$classStartedState.html" title="State of a task that is being worked on (State pattern)." alt="" coords="167,301,269,327"/>
+<area shape="poly" id="edge21_Node000000_Node000007" title=" " alt="" coords="68,213,99,251,140,286,168,300,166,304,137,291,95,255,63,217"/>
+<area shape="rect" id="Node000008" href="$classTestDefaultTaskState.html" title=" " alt="" coords="139,351,297,376"/>
+<area shape="poly" id="edge22_Node000000_Node000008" title=" " alt="" coords="61,216,90,276,113,308,140,336,162,348,159,353,137,340,109,312,86,279,56,218"/>
+</map>

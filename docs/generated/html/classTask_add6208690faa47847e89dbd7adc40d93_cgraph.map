@@ -1,0 +1,5 @@
+<map id="Task::isFinished" name="Task::isFinished">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,129,31"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#a74e9e1532ce2ebc7258bd61bc0ce82ee" title="Tells whether this is an end state (no further actions are possible)." alt="" coords="177,5,312,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,15,164,15,164,21,130,21"/>
+</map>

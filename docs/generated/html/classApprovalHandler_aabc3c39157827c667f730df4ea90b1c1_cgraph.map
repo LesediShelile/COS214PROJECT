@@ -1,0 +1,5 @@
+<map id="ApprovalHandler::forward" name="ApprovalHandler::forward">
+<area shape="rect" id="Node000001" title="Passes the request to the next handler in the chain." alt="" coords="5,5,195,31"/>
+<area shape="rect" id="Node000002" href="$classApprovalHandler.html#a9b61062cec56f24ef59502c49a334b83" title="Handles an approval request or passes it on." alt="" coords="243,5,425,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,15,229,15,229,21,195,21"/>
+</map>

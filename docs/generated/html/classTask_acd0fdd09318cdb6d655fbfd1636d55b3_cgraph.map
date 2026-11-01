@@ -1,0 +1,9 @@
+<map id="Task::makeAvailable" name="Task::makeAvailable">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,160,56"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#a8d7df5b147dbd89bfa5d68219664e849" title="Makes the task ready to be assigned." alt="" coords="208,31,397,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="160,41,194,41,194,46,160,46"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="445,5,599,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="397,30,431,26,432,31,398,35"/>
+<area shape="rect" id="Node000004" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="445,55,599,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="398,51,432,55,431,60,397,56"/>
+</map>

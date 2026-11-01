@@ -1,0 +1,7 @@
+<map id="src/ExternalConnector.cpp" name="src/ExternalConnector.cpp">
+<area shape="rect" id="Node000001" title="Implements the ExternalConnector base class." alt="" coords="5,5,196,31"/>
+<area shape="rect" id="Node000002" href="$ExternalConnector_8h.html" title="Declares the common interface for external API adapters." alt="" coords="24,79,177,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,31,103,65,98,65,98,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="71,152,130,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="103,104,103,138,98,138,98,104"/>
+</map>

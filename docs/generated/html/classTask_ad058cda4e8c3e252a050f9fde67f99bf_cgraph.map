@@ -1,0 +1,9 @@
+<map id="Task::reject" name="Task::reject">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,101,56"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#ac565a8ae8c1b571cec880100fd5ba2ea" title="Rejects the task." alt="" coords="149,31,280,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,41,136,41,136,46,101,46"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="328,5,481,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="280,32,314,27,315,33,281,37"/>
+<area shape="rect" id="Node000004" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="328,55,481,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="281,49,315,53,314,59,280,54"/>
+</map>

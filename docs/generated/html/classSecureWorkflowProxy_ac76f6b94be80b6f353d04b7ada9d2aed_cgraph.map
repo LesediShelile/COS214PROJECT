@@ -1,0 +1,9 @@
+<map id="SecureWorkflowProxy::assignTask" name="SecureWorkflowProxy::assignTask">
+<area shape="rect" id="Node000001" title="Assigns a task after checking permission." alt="" coords="5,5,168,45"/>
+<area shape="rect" id="Node000002" href="$classTIVIDYFacade.html#a3d9a74798fca59f872ec58e4d35944e6" title="Assigns a task within an instance to a specific participant." alt="" coords="216,13,405,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="169,23,202,23,202,28,169,28"/>
+<area shape="rect" id="Node000003" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="453,13,716,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="405,23,439,23,439,28,405,28"/>
+<area shape="rect" id="Node000004" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="764,13,939,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="716,23,750,23,750,28,716,28"/>
+</map>

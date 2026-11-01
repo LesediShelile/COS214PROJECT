@@ -1,0 +1,10 @@
+<map id="ParallelStage::activateChildren" name="ParallelStage::activateChildren">
+<area shape="rect" id="Node000001" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="5,55,228,80"/>
+<area shape="rect" id="Node000002" href="$classStage.html#ad6eebd58d7bca92f82d97ca6e40e505d" title=" " alt="" coords="291,29,423,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="228,53,277,48,278,53,229,58"/>
+<area shape="rect" id="Node000003" href="$classStage.html#a082b95e96f705dccba0cad46b6c5fae2" title=" " alt="" coords="276,79,439,104"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="229,76,263,79,262,85,228,81"/>
+<area shape="poly" id="edge2_Node000002_Node000002" title=" " alt="" coords="322,31,314,21,318,11,333,5,357,3,387,6,399,15,396,20,385,11,357,8,334,10,322,15,320,20,326,28"/>
+<area shape="rect" id="Node000004" href="$classStage.html#a3ff6cdc4f75dca9f7c37405be7a6ea0c" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="487,79,661,104"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="439,89,473,89,473,94,439,94"/>
+</map>

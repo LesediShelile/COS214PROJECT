@@ -1,0 +1,15 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,120,104,145"/>
+<area shape="rect" id="Node000002" href="$classTIVIDYFacade.html#aed9aa0bf77cc225490547f5236495f19" title="Instantiates a new workflow from a registered definition." alt="" coords="152,95,367,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,124,143,119,144,124,105,129"/>
+<area shape="rect" id="Node000007" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="212,144,307,169"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="105,136,199,147,198,152,104,141"/>
+<area shape="rect" id="Node000003" href="$classEventPublisher.html#a9543b9927782798b782414382784144b" title="Registers a listener." alt="" coords="444,5,612,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="286,92,344,67,414,41,448,31,449,36,415,46,346,72,288,97"/>
+<area shape="rect" id="Node000004" href="$classWorkflowDefinition.html#afd3ce0cbb03b7091a4a84561d0e537c3" title="Instantiates a new WorkflowInstance using the Prototype pattern." alt="" coords="455,55,601,95"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="366,92,441,83,442,88,366,97"/>
+<area shape="rect" id="Node000005" href="$classWorkflowDefinition.html#aa5041d0fdba198b3d48ba0078767b289" title="Gets the head of the approval handler chain." alt="" coords="455,119,601,159"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="366,117,441,126,441,132,366,123"/>
+<area shape="rect" id="Node000006" href="$classWorkflowInstance.html#a2a142ac25ce41a0bb0a9a2eeccfb628c" title="Gets the instance&#45;specific EventPublisher." alt="" coords="415,184,641,209"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="338,118,368,129,383,139,393,150,402,160,416,169,436,177,434,182,413,174,398,164,389,153,379,143,365,134,336,123"/>
+</map>

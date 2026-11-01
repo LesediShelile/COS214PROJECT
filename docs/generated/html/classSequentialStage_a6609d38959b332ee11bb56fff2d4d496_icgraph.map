@@ -1,0 +1,9 @@
+<map id="SequentialStage::activateChildren" name="SequentialStage::activateChildren">
+<area shape="rect" id="Node000001" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="148,47,337,87"/>
+<area shape="rect" id="Node000002" href="$test__integration__work__items_8cpp.html#ab688d3af6d3ba12be86b0d74c0d7df0f" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="151,46,99,33,101,28,153,41"/>
+<area shape="rect" id="Node000003" href="$test__work__items_8cpp.html#a3a31b7c43784b1ae1d14834342509a22" title=" " alt="" coords="5,55,100,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,70,100,70,100,65,134,65"/>
+<area shape="rect" id="Node000004" href="$test__work__items_8cpp.html#ab72a081ef1657128d1027b0facd81b00" title=" " alt="" coords="5,104,100,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="153,93,101,107,99,102,151,88"/>
+</map>

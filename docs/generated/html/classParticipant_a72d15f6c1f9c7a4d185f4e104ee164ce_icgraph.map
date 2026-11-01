@@ -1,0 +1,9 @@
+<map id="Participant::getName" name="Participant::getName">
+<area shape="rect" id="Node000001" title="Gets the participant&#39;s name." alt="" coords="431,31,589,56"/>
+<area shape="rect" id="Node000002" href="$classAssignCommand.html#a45d89864fdc39a250bb7c5c6ae6d1c17" title="Returns a descriptive string summarizing the command action." alt="" coords="148,5,383,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="417,36,383,33,383,28,417,31"/>
+<area shape="rect" id="Node000004" href="$test__facade_8cpp.html#acd207db28cd78882537eccd988f6b264" title=" " alt="" coords="216,55,315,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="417,55,315,65,314,60,417,50"/>
+<area shape="rect" id="Node000003" href="$test__commandMementoWorkflow_8cpp.html#aed7f70b4769ca84264cbeb3526872aed" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,21,100,21,100,15,135,15"/>
+</map>

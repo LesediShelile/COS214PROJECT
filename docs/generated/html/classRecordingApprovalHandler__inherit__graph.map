@@ -1,0 +1,5 @@
+<map id="RecordingApprovalHandler" name="RecordingApprovalHandler">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,179,219,284"/>
+<area shape="rect" id="Node000002" href="$classApprovalHandler.html" title="Abstract handler in the approval chain (Chain of Responsibility)." alt="" coords="33,5,191,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,145,115,178,109,178,109,145"/>
+</map>

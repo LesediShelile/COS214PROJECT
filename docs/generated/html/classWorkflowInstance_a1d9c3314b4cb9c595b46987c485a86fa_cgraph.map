@@ -1,0 +1,7 @@
+<map id="WorkflowInstance::fail" name="WorkflowInstance::fail">
+<area shape="rect" id="Node000001" title="Halts all execution, records a failure reason, and marks as FAILED." alt="" coords="5,31,172,56"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#ab78ca83aa8b3e08914f0b3917eaceac6" title=" " alt="" coords="258,5,393,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,32,244,24,245,29,173,37"/>
+<area shape="rect" id="Node000003" href="$classWorkflowInstance.html#a89120d4d5327b1502f3954c6a0541aa0" title="Checks if the workflow instance has reached a terminal state." alt="" coords="220,55,431,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,49,207,53,206,58,172,54"/>
+</map>

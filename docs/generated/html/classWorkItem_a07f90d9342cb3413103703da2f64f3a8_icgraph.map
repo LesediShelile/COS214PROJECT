@@ -1,0 +1,29 @@
+<map id="WorkItem::getData" name="WorkItem::getData">
+<area shape="rect" id="Node000001" title=" " alt="" coords="747,189,892,215"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#a55eabccf40f708c8d277d5a978e51bd8" title=" " alt="" coords="499,79,673,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="788,184,746,156,698,130,635,107,636,102,700,125,749,152,791,179"/>
+<area shape="rect" id="Node000006" href="$classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e" title="Submits a work item to an approval chain of responsibility." alt="" coords="473,140,699,165"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="745,189,646,168,647,163,746,184"/>
+<area shape="rect" id="Node000012" href="$test__integration__work__items_8cpp.html#a559c2a8f8be7d19a80b30c373bb6255c" title=" " alt="" coords="539,189,633,215"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="733,205,634,205,634,199,733,199"/>
+<area shape="rect" id="Node000013" href="$test__work__items_8cpp.html#a8575bbbbc33e8ce376019e375388a3f2" title=" " alt="" coords="539,239,633,264"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="746,220,634,244,633,239,745,215"/>
+<area shape="rect" id="Node000014" href="$test__state__strategy__chain_8cpp.html#a5ceea80a3f9b49870045be0718a09582" title=" " alt="" coords="539,288,633,313"/>
+<area shape="poly" id="edge13_Node000001_Node000014" title=" " alt="" coords="792,225,749,252,700,278,635,296,633,291,698,273,747,248,789,221"/>
+<area shape="rect" id="Node000003" href="$classValidatedTask.html#a039684bb33dcdea36d9ddb0f1a3660aa" title=" " alt="" coords="235,47,425,87"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="485,85,425,79,426,74,485,79"/>
+<area shape="rect" id="Node000004" href="$classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="5,5,187,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="220,47,156,33,157,28,221,42"/>
+<area shape="rect" id="Node000005" href="$classValidatedTask.html#a943c9f09640df44eff4e82ba4b8da81c" title=" " alt="" coords="9,55,183,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="221,70,183,70,183,65,221,65"/>
+<area shape="rect" id="Node000007" href="$classSecureWorkflowProxy.html#a731623a1da1d5326ecd9acdce74cda2f" title="Requests approval after checking permission and ownership." alt="" coords="249,146,411,186"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="460,162,412,164,412,159,459,157"/>
+<area shape="rect" id="Node000008" href="$test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="47,104,145,129"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="235,149,145,130,146,124,236,143"/>
+<area shape="rect" id="Node000009" href="$test__proxy_8cpp.html#aaf19d5f99495ffd1c276810ffaafdc1f" title=" " alt="" coords="47,153,145,179"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="235,169,145,169,145,163,235,163"/>
+<area shape="rect" id="Node000010" href="$test__proxy_8cpp.html#a809f6a1f9ebea212d14ef9ebf5fc5913" title=" " alt="" coords="47,203,145,228"/>
+<area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="236,189,146,208,145,202,235,183"/>
+<area shape="rect" id="Node000011" href="$test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="47,252,145,277"/>
+<area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="284,195,238,219,188,242,147,255,145,250,186,237,236,214,281,190"/>
+</map>

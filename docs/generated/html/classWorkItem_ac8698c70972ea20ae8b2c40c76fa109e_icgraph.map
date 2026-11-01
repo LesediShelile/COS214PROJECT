@@ -1,0 +1,13 @@
+<map id="WorkItem::complete" name="WorkItem::complete">
+<area shape="rect" id="Node000001" title=" " alt="" coords="493,80,648,105"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#a750c27d210bc803debd210fe160a5138" title=" " alt="" coords="248,55,432,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="479,85,432,80,433,75,480,80"/>
+<area shape="rect" id="Node000005" href="$classCompleteCommand.html#a0d62e32c1e68f5515cfa5c9e5b256ba5" title="Executes the completion command on the target work item." alt="" coords="235,104,445,129"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="480,105,446,108,445,103,479,99"/>
+<area shape="rect" id="Node000003" href="$classAuditedTask.html#ade86909039ec3ef411510ab1a003fb6d" title=" " alt="" coords="11,5,181,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="263,55,159,33,160,28,264,49"/>
+<area shape="rect" id="Node000004" href="$classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="5,55,187,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="234,70,187,70,187,65,234,65"/>
+<area shape="rect" id="Node000006" href="$test__commandMementoWorkflow_8cpp.html#aec4bc1e0a87a5187a13c194a8e93f3e1" title=" " alt="" coords="49,104,143,129"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="221,119,144,119,144,114,221,114"/>
+</map>

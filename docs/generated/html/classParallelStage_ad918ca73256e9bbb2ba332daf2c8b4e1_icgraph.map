@@ -1,0 +1,5 @@
+<map id="ParallelStage::activateChildren" name="ParallelStage::activateChildren">
+<area shape="rect" id="Node000001" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="148,5,371,31"/>
+<area shape="rect" id="Node000002" href="$test__work__items_8cpp.html#aed70fcd57e576c2e391999eeeb36b80d" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,21,100,21,100,15,134,15"/>
+</map>

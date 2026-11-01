@@ -1,0 +1,5 @@
+<map id="ScenarioPage::say" name="ScenarioPage::say">
+<area shape="rect" id="Node000001" title=" " alt="" coords="160,5,300,31"/>
+<area shape="rect" id="Node000002" href="$classDesktop.html#aeb39644acdfe18434043d360288995d3" title="Show a short note inside the step that is running (and in the terminal)." alt="" coords="5,5,112,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,21,112,21,112,15,146,15"/>
+</map>

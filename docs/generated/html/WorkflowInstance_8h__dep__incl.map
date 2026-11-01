@@ -1,0 +1,21 @@
+<map id="include/WorkflowInstance.h" name="include/WorkflowInstance.h">
+<area shape="rect" id="Node000001" title="Declaration of the WorkflowInstance class representing an active execution instance." alt="" coords="461,5,661,31"/>
+<area shape="rect" id="Node000002" href="$EngineRouter_8h.html" title=" " alt="" coords="287,86,457,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="522,38,401,88,399,84,520,33"/>
+<area shape="rect" id="Node000004" href="$TIVIDYFacade_8cpp.html" title="Implementation of the TIVIDYFacade class coordinating workflow execution and patterns." alt="" coords="5,174,165,199"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="458,36,368,54,276,81,225,104,176,130,103,176,100,172,173,125,222,99,274,76,367,48,457,30"/>
+<area shape="rect" id="Node000006" href="$test__observer__integrations_8cpp.html" title=" " alt="" coords="604,167,751,207"/>
+<area shape="poly" id="edge10_Node000001_Node000006" title=" " alt="" coords="542,43,530,60,520,80,517,99,522,117,536,129,558,142,616,164,614,169,556,147,533,134,518,120,511,99,515,78,525,58,538,40"/>
+<area shape="rect" id="Node000007" href="$WorkflowDefinition_8cpp.html" title="Implementation of the WorkflowDefinition class managing workflow blueprints." alt="" coords="532,86,727,111"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="582,39,621,84,617,88,578,43"/>
+<area shape="rect" id="Node000008" href="$WorkflowInstance_8cpp.html" title="Implementation of the WorkflowInstance class managing execution lifecycle." alt="" coords="751,86,937,111"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="616,32,804,83,802,89,615,37"/>
+<area shape="rect" id="Node000009" href="$test__commandMementoWorkflow_8cpp.html" title=" " alt="" coords="962,79,1179,119"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="649,30,950,76,962,78,961,83,949,81,649,35"/>
+<area shape="rect" id="Node000003" href="$EngineRouter_8cpp.html" title=" " alt="" coords="190,174,349,199"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="349,122,285,176,282,171,346,118"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="321,118,125,176,123,171,320,113"/>
+<area shape="rect" id="Node000005" href="$test__engine__router_8cpp.html" title=" " alt="" coords="373,174,579,199"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="398,118,464,172,460,176,395,122"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="427,113,611,164,609,169,426,118"/>
+</map>

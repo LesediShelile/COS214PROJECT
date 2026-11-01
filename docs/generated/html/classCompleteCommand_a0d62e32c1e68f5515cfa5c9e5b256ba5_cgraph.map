@@ -1,0 +1,9 @@
+<map id="CompleteCommand::execute" name="CompleteCommand::execute">
+<area shape="rect" id="Node000001" title="Executes the completion command on the target work item." alt="" coords="5,31,216,56"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#ac8698c70972ea20ae8b2c40c76fa109e" title=" " alt="" coords="304,5,459,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="216,31,290,24,290,29,217,36"/>
+<area shape="rect" id="Node000003" href="$classWorkflowCommand.html#a6a9ea26fe4960a57137ae3c0db06b19e" title="Captures a fresh memento snapshot from the target work item." alt="" coords="264,55,499,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="217,50,251,53,250,58,216,55"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a8e2a00010a42896ad22f011bb2666a86" title="Memento operations." alt="" coords="547,55,743,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="499,65,533,65,533,70,499,70"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="SecureWorkflowProxy::assignTask" name="SecureWorkflowProxy::assignTask">
+<area shape="rect" id="Node000001" title="Assigns a task after checking permission." alt="" coords="152,47,315,87"/>
+<area shape="rect" id="Node000002" href="$test__proxy_8cpp.html#a90dfdcaeb16f8246c456e2b3d1946623" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,46,101,33,102,28,148,41"/>
+<area shape="rect" id="Node000003" href="$test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,70,104,70,104,65,138,65"/>
+<area shape="rect" id="Node000004" href="$test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="5,104,104,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="148,94,102,107,101,101,146,89"/>
+</map>

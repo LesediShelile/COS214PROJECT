@@ -1,0 +1,11 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,100,80"/>
+<area shape="rect" id="Node000002" href="$classDirector.html#af7c1180337ca1528b9ff47a68cdecc8a" title="Builds a workflow using a client&#45;supplied recipe." alt="" coords="148,29,291,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,58,134,52,135,58,101,63"/>
+<area shape="rect" id="Node000005" href="$classStage.html#a7622bf3157b683fe821c3a00a4f8fc2f" title="Children of this item, or an empty list for a leaf." alt="" coords="148,79,291,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="101,71,135,76,134,82,100,77"/>
+<area shape="rect" id="Node000003" href="$classWorkflowBuilder.html#a9535b5fb398561e1996386196e50f0e7" title="returns the current workflow definition that has been created" alt="" coords="339,5,537,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="291,32,325,28,326,33,291,37"/>
+<area shape="rect" id="Node000004" href="$classWorkflowBuilder.html#aa7cc6bd8418dc16b8760aed7454ce127" title="resets the current workflow definition so a new one may be created" alt="" coords="353,55,523,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="291,48,340,53,339,59,290,53"/>
+</map>

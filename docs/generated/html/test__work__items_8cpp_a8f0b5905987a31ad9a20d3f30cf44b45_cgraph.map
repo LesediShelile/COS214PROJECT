@@ -1,0 +1,7 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,100,56"/>
+<area shape="rect" id="Node000002" href="$classStage.html#a5c11c4655f30de6654a42bfc585c0a1d" title="Add a child." alt="" coords="194,5,285,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,34,180,23,180,29,101,40"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a6a19389bec2dba729c4aba1a46969996" title="Iterator over this item and all descendants, depth first." alt="" coords="148,55,331,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,47,135,51,134,56,100,52"/>
+</map>

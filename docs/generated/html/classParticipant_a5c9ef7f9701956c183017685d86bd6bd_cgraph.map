@@ -1,0 +1,5 @@
+<map id="Participant::hasRole" name="Participant::hasRole">
+<area shape="rect" id="Node000001" title="Checks whether the participant has a role." alt="" coords="5,5,156,31"/>
+<area shape="rect" id="Node000002" href="$classRole.html#a4e9860f793f7941b3f383d74ea1c3960" title="Checks whether two roles are the same." alt="" coords="204,5,307,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,15,190,15,190,21,156,21"/>
+</map>

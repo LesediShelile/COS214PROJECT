@@ -1,0 +1,7 @@
+<map id="TaskDecorator::complete" name="TaskDecorator::complete">
+<area shape="rect" id="Node000001" title=" " alt="" coords="235,31,419,56"/>
+<area shape="rect" id="Node000002" href="$classAuditedTask.html#ade86909039ec3ef411510ab1a003fb6d" title=" " alt="" coords="11,5,181,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="221,34,181,30,182,25,221,29"/>
+<area shape="rect" id="Node000003" href="$classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="5,55,187,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,57,187,61,186,55,221,52"/>
+</map>

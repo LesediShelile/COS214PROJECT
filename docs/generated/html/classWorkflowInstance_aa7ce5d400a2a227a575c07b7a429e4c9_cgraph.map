@@ -1,0 +1,5 @@
+<map id="WorkflowInstance::getAvailableItems" name="WorkflowInstance::getAvailableItems">
+<area shape="rect" id="Node000001" title="Retrieves all work items currently eligible for assignment." alt="" coords="5,5,232,45"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#ac92b7d3bbd7eef5775101b66b76a359b" title="Iterator over only the available leaf items." alt="" coords="280,5,475,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,23,266,23,266,28,232,28"/>
+</map>

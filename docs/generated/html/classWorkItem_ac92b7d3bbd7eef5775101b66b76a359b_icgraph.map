@@ -1,0 +1,9 @@
+<map id="WorkItem::createAvailableIterator" name="WorkItem::createAvailableIterator">
+<area shape="rect" id="Node000001" title="Iterator over only the available leaf items." alt="" coords="280,63,475,103"/>
+<area shape="rect" id="Node000002" href="$classWorkflowInstance.html#aa7ce5d400a2a227a575c07b7a429e4c9" title="Retrieves all work items currently eligible for assignment." alt="" coords="5,5,232,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="273,62,209,48,210,43,274,57"/>
+<area shape="rect" id="Node000003" href="$test__work__items_8cpp.html#a4db7b6e88dedb6bcd1374c7f0f60ab50" title=" " alt="" coords="71,70,166,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="267,85,166,85,166,80,267,80"/>
+<area shape="rect" id="Node000004" href="$test__work__items_8cpp.html#a45b70c139f533c250b0f95ce3f7db254" title=" " alt="" coords="71,119,166,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="267,106,167,126,166,121,266,101"/>
+</map>

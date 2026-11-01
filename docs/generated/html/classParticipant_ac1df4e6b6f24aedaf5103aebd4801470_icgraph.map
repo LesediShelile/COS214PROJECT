@@ -1,0 +1,12 @@
+<map id="Participant::getParticipantID" name="Participant::getParticipantID">
+<area shape="rect" id="Node000001" title="Gets the participant&#39;s ID." alt="" coords="437,55,640,80"/>
+<area shape="rect" id="Node000002" href="$classTIVIDYFacade.html#a6063af865862f75bc4f93735470533b6" title="Checks whether a participant is assigned to a particular task." alt="" coords="155,5,386,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="455,55,340,33,341,28,456,50"/>
+<area shape="rect" id="Node000003" href="$classTIVIDYFacade.html#a4ed5cd4c0c0d100cdef926d709b77585" title="Registers a participant eligible to be assigned work items." alt="" coords="152,55,389,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="423,70,389,70,389,65,423,65"/>
+<area shape="rect" id="Node000005" href="$test__facade_8cpp.html#acd207db28cd78882537eccd988f6b264" title=" " alt="" coords="5,104,104,129"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="458,85,390,95,233,110,104,117,104,112,233,104,389,90,458,80"/>
+<area shape="rect" id="Node000004" href="$test__facade_8cpp.html#ab9d19a82094e008646175820dd73c898" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="138,70,104,70,104,65,138,65"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="202,86,105,108,104,103,201,80"/>
+</map>

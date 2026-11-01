@@ -1,0 +1,13 @@
+<map id="WorkItem::isAvailable" name="WorkItem::isAvailable">
+<area shape="rect" id="Node000001" title=" " alt="" coords="685,35,849,60"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#a9c00614859899fb685b4c567a06e778a" title=" " alt="" coords="443,5,637,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="671,38,637,33,638,28,672,32"/>
+<area shape="rect" id="Node000003" href="$classAvailableItemsIterator.html#adee6bca64b641da0718ef8df768c8faa" title=" " alt="" coords="457,55,623,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="672,62,624,68,623,62,671,56"/>
+<area shape="rect" id="Node000004" href="$classAvailableItemsIterator.html#ab51a0e3aa9f8d9783459ebf6813ed5a2" title=" " alt="" coords="228,23,395,63"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="443,64,394,58,395,52,443,59"/>
+<area shape="rect" id="Node000006" href="$classAvailableItemsIterator.html#afe64018b874dfc5e4812c1145a432997" title=" " alt="" coords="228,87,395,127"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="443,92,395,98,394,93,443,86"/>
+<area shape="rect" id="Node000005" href="$classAvailableItemsIterator.html#af7c250fe366ca8b6f7a820c0604236ed" title=" " alt="" coords="5,23,180,63"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="214,46,180,46,180,41,214,41"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="WorkflowInstance::isFinished" name="WorkflowInstance::isFinished">
+<area shape="rect" id="Node000001" title="Checks if the workflow instance has reached a terminal state." alt="" coords="240,55,451,80"/>
+<area shape="rect" id="Node000002" href="$classWorkflowInstance.html#a9a4b6380c98ee68a9c070fe20b9c6b77" title="Aborts all active items and transitions instance to CANCELLED." alt="" coords="5,5,192,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,55,163,33,164,28,269,49"/>
+<area shape="rect" id="Node000003" href="$classWorkflowInstance.html#a1d9c3314b4cb9c595b46987c485a86fa" title="Halts all execution, records a failure reason, and marks as FAILED." alt="" coords="15,55,182,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="226,70,182,70,182,65,226,65"/>
+<area shape="rect" id="Node000004" href="$test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="49,104,148,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="268,85,149,110,148,104,267,80"/>
+</map>

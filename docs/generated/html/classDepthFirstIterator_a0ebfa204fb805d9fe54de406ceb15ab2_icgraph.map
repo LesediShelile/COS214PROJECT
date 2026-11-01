@@ -1,0 +1,17 @@
+<map id="DepthFirstIterator::current" name="DepthFirstIterator::current">
+<area shape="rect" id="Node000001" title=" " alt="" coords="872,69,1009,109"/>
+<area shape="rect" id="Node000002" href="$classAvailableItemsIterator.html#a2066e5c08e9cfae7bc85f3fd7fc9de09" title=" " alt="" coords="657,5,824,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="864,68,803,48,804,43,865,63"/>
+<area shape="rect" id="Node000003" href="$classDepthFirstIterator.html#a5a87b79bf2169da85eb3ca87fdf57085" title=" " alt="" coords="672,69,809,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="858,92,809,92,809,87,858,87"/>
+<area shape="rect" id="Node000005" href="$classAvailableItemsIterator.html#adee6bca64b641da0718ef8df768c8faa" title=" " alt="" coords="443,127,609,167"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="863,115,824,124,713,139,610,146,610,141,712,134,824,119,862,110"/>
+<area shape="rect" id="Node000004" href="$classAvailableItemsIterator.html#afe64018b874dfc5e4812c1145a432997" title=" " alt="" coords="228,69,395,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="658,92,395,92,395,87,658,87"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="659,114,602,129,601,124,658,109"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="437,126,386,112,387,107,438,120"/>
+<area shape="rect" id="Node000006" href="$classAvailableItemsIterator.html#ab51a0e3aa9f8d9783459ebf6813ed5a2" title=" " alt="" coords="228,133,395,173"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="429,152,395,153,395,148,428,147"/>
+<area shape="rect" id="Node000007" href="$classAvailableItemsIterator.html#af7c250fe366ca8b6f7a820c0604236ed" title=" " alt="" coords="5,133,180,173"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="214,156,180,156,180,151,214,151"/>
+</map>

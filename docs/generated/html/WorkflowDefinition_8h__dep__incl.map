@@ -1,0 +1,27 @@
+<map id="include/WorkflowDefinition.h" name="include/WorkflowDefinition.h">
+<area shape="rect" id="Node000001" title="Declaration of the WorkflowDefinition class representing process blueprints." alt="" coords="649,5,857,31"/>
+<area shape="rect" id="Node000002" href="$DefinitionBuilder_8h.html" title=" " alt="" coords="157,86,351,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="665,35,370,81,325,89,324,83,370,76,665,30"/>
+<area shape="rect" id="Node000004" href="$test__builder-iterator_8cpp.html" title=" " alt="" coords="5,167,140,207"/>
+<area shape="poly" id="edge9_Node000001_Node000004" title=" " alt="" coords="635,22,505,25,363,35,235,52,185,65,147,81,125,99,106,122,82,168,77,165,102,119,121,95,145,76,183,60,234,47,363,29,505,20,635,17"/>
+<area shape="rect" id="Node000005" href="$test__director_8cpp.html" title=" " alt="" coords="368,174,535,199"/>
+<area shape="poly" id="edge11_Node000001_Node000005" title=" " alt="" coords="635,27,568,33,503,44,449,59,429,69,416,80,410,91,408,103,414,128,428,153,443,172,439,175,423,155,409,130,403,103,405,89,412,77,427,65,447,54,502,39,567,28,634,22"/>
+<area shape="rect" id="Node000006" href="$Director_8cpp.html" title=" " alt="" coords="426,86,549,111"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="702,37,527,89,525,83,700,32"/>
+<area shape="rect" id="Node000007" href="$TIVIDYFacade_8cpp.html" title="Implementation of the TIVIDYFacade class coordinating workflow execution and patterns." alt="" coords="573,86,733,111"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="729,41,669,88,666,84,725,37"/>
+<area shape="rect" id="Node000008" href="$WorkflowDefinition_8cpp.html" title="Implementation of the WorkflowDefinition class managing workflow blueprints." alt="" coords="757,86,951,111"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="780,37,841,84,837,88,777,41"/>
+<area shape="rect" id="Node000009" href="$WorkflowInstance_8cpp.html" title="Implementation of the WorkflowInstance class managing execution lifecycle." alt="" coords="975,86,1162,111"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="813,31,1023,83,1022,89,811,37"/>
+<area shape="rect" id="Node000010" href="$test__commandMementoWorkflow_8cpp.html" title=" " alt="" coords="1187,79,1404,119"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="849,30,1174,76,1187,78,1186,83,1174,81,848,35"/>
+<area shape="rect" id="Node000011" href="$test__engine__router_8cpp.html" title=" " alt="" coords="1428,86,1635,111"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="871,25,1122,45,1417,76,1467,83,1466,89,1416,81,1122,50,870,30"/>
+<area shape="rect" id="Node000012" href="$test__observer__integrations_8cpp.html" title=" " alt="" coords="1659,79,1806,119"/>
+<area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="871,19,1220,34,1434,51,1648,76,1660,78,1659,83,1647,81,1433,56,1219,40,870,24"/>
+<area shape="rect" id="Node000003" href="$DefinitionBuilder_8cpp.html" title=" " alt="" coords="164,174,344,199"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="257,125,257,173,251,173,251,125"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="219,120,114,169,112,164,216,115"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="294,114,426,171,423,176,292,119"/>
+</map>

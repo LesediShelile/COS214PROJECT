@@ -1,0 +1,35 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,255,104,280"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#afeec29eef6ae5feb664573f06b0a81d3" title=" " alt="" coords="183,5,318,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,254,62,212,79,154,107,93,126,65,150,40,169,28,172,33,154,44,131,68,111,96,84,156,67,214,60,255"/>
+<area shape="rect" id="Node000003" href="$classExternalTask.html#af1eba80b0001dd76a758a756e22b1524" title="Creates a copy of this task." alt="" coords="177,55,325,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="57,254,67,220,85,176,113,129,130,108,150,89,163,81,166,86,154,93,134,111,117,132,90,178,72,222,62,255"/>
+<area shape="rect" id="Node000004" href="$classExternalTask.html#a0f41bcdadb94ff55c805ce6c52351ac0" title="Executes the external request." alt="" coords="169,104,333,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="60,253,93,198,119,166,150,138,161,132,164,137,154,143,123,169,97,201,64,256"/>
+<area shape="rect" id="Node000007" href="$classWorkItem.html#ab2c4bb4076f302a5e546be57feefbc1a" title="Unique id of this item inside its workflow." alt="" coords="171,153,330,179"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="69,252,105,224,151,196,187,181,189,186,153,200,108,229,72,257"/>
+<area shape="rect" id="Node000008" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="635,268,788,293"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="94,252,152,239,217,233,284,231,416,236,536,248,633,263,632,268,535,254,415,241,284,236,217,239,152,245,95,257"/>
+<area shape="rect" id="Node000009" href="$classExternalTask.html#abcce234815c670107d177689fbbc99f9" title="Retrieves the response from the external service." alt="" coords="152,255,349,280"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="104,265,138,265,138,270,104,270"/>
+<area shape="rect" id="Node000010" href="$classTask.html#adcb312706a3e150d450c3db9a8cc8b41" title=" " alt="" coords="415,379,569,404"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="64,279,76,304,95,335,121,366,153,389,187,403,223,411,297,418,368,414,429,404,430,409,369,419,297,423,222,417,186,408,151,394,117,370,91,339,71,307,59,281"/>
+<area shape="rect" id="Node000012" href="$classWorkItem.html#ae0b2832ad2b27b3d11f4e55bdd7ddd33" title=" " alt="" coords="157,353,344,379"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="71,278,106,308,153,338,173,347,171,352,151,343,103,313,67,282"/>
+<area shape="rect" id="Node000013" href="$classTask.html#acd0fdd09318cdb6d655fbfd1636d55b3" title=" " alt="" coords="173,304,328,329"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="105,277,187,298,186,303,104,282"/>
+<area shape="rect" id="Node000015" href="$classExternalTask.html#aa104f98022005581fd174b8f36c6a2b1" title="Updates the request sent to the external service." alt="" coords="157,455,344,480"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="62,280,73,311,92,352,119,396,154,433,177,447,174,452,150,437,115,399,87,355,69,313,57,281"/>
+<area shape="rect" id="Node000016" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="203,504,298,529"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="60,280,67,321,84,378,111,439,131,467,154,491,171,502,191,509,189,514,169,506,150,495,126,470,107,442,79,380,62,322,55,281"/>
+<area shape="rect" id="Node000005" href="$classExternalConnector.html#a608caa1f7a3f3cdd5a93ec514111f9d6" title="Returns the name of the external service." alt="" coords="417,118,567,158"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="333,121,403,128,403,133,333,127"/>
+<area shape="rect" id="Node000006" href="$classExternalConnector.html#af46b6367d3dcf2eeae658cb52d83ab47" title="Executes a request through the external service." alt="" coords="417,54,567,94"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="322,101,403,87,404,92,323,107"/>
+<area shape="rect" id="Node000011" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="635,355,788,380"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="569,380,621,375,621,380,569,386"/>
+<area shape="rect" id="Node000014" href="$classTaskState.html#a8d7df5b147dbd89bfa5d68219664e849" title="Makes the task ready to be assigned." alt="" coords="397,304,587,329"/>
+<area shape="poly" id="edge13_Node000013_Node000014" title=" " alt="" coords="328,314,384,314,384,319,328,319"/>
+<area shape="poly" id="edge14_Node000014_Node000008" title=" " alt="" coords="569,301,621,293,622,298,570,307"/>
+<area shape="poly" id="edge15_Node000014_Node000011" title=" " alt="" coords="549,327,643,349,642,354,547,332"/>
+</map>

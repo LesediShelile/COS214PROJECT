@@ -1,0 +1,13 @@
+<map id="ValidatedTask::validate" name="ValidatedTask::validate">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,179,56"/>
+<area shape="rect" id="Node000002" href="$classValidatedTask.html#a039684bb33dcdea36d9ddb0f1a3660aa" title=" " alt="" coords="227,23,417,63"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="179,41,213,41,213,46,179,46"/>
+<area shape="rect" id="Node000003" href="$classTaskDecorator.html#a55eabccf40f708c8d277d5a978e51bd8" title=" " alt="" coords="467,5,641,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="418,30,453,26,453,32,418,36"/>
+<area shape="rect" id="Node000005" href="$classTaskDecorator.html#a3778737d01e7171c8e1dc5b5ed409f6e" title=" " alt="" coords="465,55,643,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="418,51,452,54,451,59,418,56"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a07f90d9342cb3413103703da2f64f3a8" title=" " alt="" coords="691,5,837,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="641,15,677,15,677,21,641,21"/>
+<area shape="rect" id="Node000006" href="$classWorkItem.html#a832fccc6b34774701672028c884cd70e" title=" " alt="" coords="691,55,837,80"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="643,65,677,65,677,70,643,70"/>
+</map>

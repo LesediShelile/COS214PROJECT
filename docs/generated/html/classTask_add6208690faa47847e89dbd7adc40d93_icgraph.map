@@ -1,0 +1,7 @@
+<map id="Task::isFinished" name="Task::isFinished">
+<area shape="rect" id="Node000001" title=" " alt="" coords="148,31,272,56"/>
+<area shape="rect" id="Node000002" href="$test__state__strategy__chain_8cpp.html#aa25122209dd3aeeda9d7b2850770b1bb" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,34,100,28,101,23,135,29"/>
+<area shape="rect" id="Node000003" href="$test__state__strategy__chain_8cpp.html#a7359452cf7884fa783823be4bcf12f99" title=" " alt="" coords="5,55,100,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,57,101,63,100,58,134,52"/>
+</map>

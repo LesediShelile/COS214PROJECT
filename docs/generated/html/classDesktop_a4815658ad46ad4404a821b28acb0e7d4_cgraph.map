@@ -1,0 +1,5 @@
+<map id="Desktop::step" name="Desktop::step">
+<area shape="rect" id="Node000001" title="Register a step." alt="" coords="5,5,117,31"/>
+<area shape="rect" id="Node000002" href="$classDesktop.html#a2cf4b8eaf5e26e25b2dc3d26348139e0" title="Start a new scenario tab; every following section()/step() belongs to it." alt="" coords="165,5,271,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,15,152,15,152,21,117,21"/>
+</map>
