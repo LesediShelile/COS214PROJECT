@@ -28,6 +28,11 @@ $(BUILD)/obj/%.o: src/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
 
+# The interactive application entry point lives in the project root.
+$(BUILD)/obj/main.o: main.cpp
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c $< -o $@
+
 $(BUILD)/obj/tests/%.o: tests/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -Itests/third_party -c $< -o $@
