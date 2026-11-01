@@ -1,2000 +1,1831 @@
-// main.cpp - the test script AND the diagram definition in one place.
-// Every theatre.step(...) below becomes a node in the activity diagram. Add,
-// remove or reorder steps here and the diagram changes with them; the node that
-// is highlighted is the step currently running.
-//
-// Two scenarios run back to back in the same window:
-//   Part A - Hospital emergency patient admission (paramedic pickup to archive)
-//   Part B - Legal case workflow
+/**
+ * @file main.cpp
+ * @brief Interactive, Menu-Driven Terminal User Interface (TUI) for TIVIDY.
+ * 
+ * Replicates the full scenario demonstrations without hardcoded configurations.
+ * Allows users to dynamically configure personnel quantities, select or create custom tasks,
+ * organize sequential and parallel execution groups, apply GoF decorators, execute workflows,
+ * and persist reusable custom scenarios across sessions.
+ */
 
-#include <algorithm>
-#include <cstdio>
-#include <ctime>
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 #include <string>
 #include <vector>
-#include "include/ui/Desktop.h"
-#include "include/ui/Playground.h"
-#include "WorkItem.h"
-#include "Task.h"
-#include "SequentialStage.h"
-#include "ParallelStage.h"
-#include "Participant.h"
-#include "Stage.h"
+#include <map>
+#include <memory>
+#include <algorithm>
+#include <fstream>
+#include <ctime>
+#include <cctype>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <unistd.h>
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+// TIVIDY Core Engine Includes
 #include "Role.h"
+#include "Participant.h"
+#include "AssignmentStrategy.h"
 #include "RoleBasedAssignment.h"
 #include "WorkloadAssignment.h"
 #include "RuleBasedAssignment.h"
-#include "ValidatedTask.h"
-#include "AuditedTask.h"
-#include "PriorityTask.h"
-#include "ExternalTask.h"
-#include "AdapterOne.h"
-#include "AdapterTwo.h"
+#include "ExternalConnector.h"
 #include "APIOne.h"
 #include "APITwo.h"
-#include "ApprovalLevel.h"
-#include "ApprovalRequest.h"
-#include "ApprovalStatus.h"
+#include "AdapterOne.h"
+#include "AdapterTwo.h"
 #include "EventPublisher.h"
-#include "EventType.h"
-#include "WorkflowEvent.h"
 #include "AuditLogger.h"
 #include "Notifier.h"
 #include "MetricsCollector.h"
+#include "ApprovalLevel.h"
+#include "ApprovalRequest.h"
+#include "ApprovalStatus.h"
 #include "CommandInvoker.h"
-#include "CommandHistory.h"
+#include "WorkflowDefinition.h"
+#include "WorkflowInstance.h"
+#include "WorkItem.h"
+#include "Task.h"
+#include "ExternalTask.h"
+#include "TaskDecorator.h"
+#include "PriorityTask.h"
+#include "ValidatedTask.h"
+#include "AuditedTask.h"
+#include "Stage.h"
+#include "SequentialStage.h"
+#include "ParallelStage.h"
+#include "WorkItemIterator.h"
+#include "AvailableItemsIterator.h"
 #include "AssignCommand.h"
 #include "StartCommand.h"
 #include "CompleteCommand.h"
-#include "WorkItemIterator.h"
-#include "AvailableItemsIterator.h"
-#include "DepthFirstIterator.h"
+#include "RejectCommand.h"
+#include "WorkflowEvent.h"
+#include "EventType.h"
 
 namespace {
 
-// ---- helpers (shared by both scenarios) -----------------------------------
-std::string state(WorkItem *w) { return w->getStateName(); }
-QString qs(const std::string &s) { return QString::fromStdString(s); }
+// ===========================================================================
+// ANSI Terminal Styling and Helpers
+// ===========================================================================
+const char* RESET   = "\033[0m";
+const char* BOLD    = "\033[1m";
+const char* DIM     = "\033[2m";
+const char* CYAN    = "\033[36m";
+const char* BLUE    = "\033[34m";
+const char* GREEN   = "\033[32m";
+const char* YELLOW  = "\033[33m";
+const char* RED     = "\033[31m";
+const char* MAGENTA = "\033[35m";
+const char* WHITE   = "\033[97m";
 
-// "Released" = the parent stage has let this item start (available or beyond).
-bool released(WorkItem *w) { return w->isAvailable() || state(w) != "Created"; }
-
-// Push a task through its whole lifecycle.
-void drive(WorkItem *w, Participant *who) {
-    if (state(w) == "Created") w->makeAvailable();
-    if (state(w) == "Available") w->assign(who);
-    if (state(w) == "Assigned") w->start();
-    if (state(w) == "Started") w->complete();
+void clearScreen() {
+#ifdef _WIN32
+    std::system("cls");
+#else
+    std::cout << "\033[2J\033[H";
+#endif
 }
 
-void collectLeaves(WorkItem *w, std::vector<WorkItem*> &out) {
-    const std::vector<WorkItem*> kids = w->getChildren();
-    if (kids.empty()) out.push_back(w);
-    else for (std::size_t i = 0; i < kids.size(); ++i) collectLeaves(kids[i], out);
+void printRule(int width = 72, const char* colour = DIM) {
+    std::cout << colour;
+    for (int i = 0; i < width; ++i) std::cout << "─";
+    std::cout << RESET << "\n";
 }
 
-// Drives every leaf task of a tree until the root reports finished.
-void runToCompletion(Desktop &theatre, Stage *root, Participant *who) {
-    root->makeAvailable();
-    std::vector<WorkItem*> leaves;
-    collectLeaves(root, leaves);
-    for (int pass = 0; pass < 50 && !root->isFinished(); ++pass) {
-        root->activateChildren();
-        for (std::size_t i = 0; i < leaves.size(); ++i)
-            if (!leaves[i]->isFinished() && released(leaves[i])) drive(leaves[i], who);
+void printBanner() {
+    std::cout << CYAN << BOLD
+              << "  ████████╗██╗██╗   ██╗██╗██████╗ ██╗   ██╗\n"
+              << "  ╚══██╔══╝██║██║   ██║██║██╔══██╗╚██╗ ██╔╝\n"
+              << "     ██║   ██║██║   ██║██║██║  ██║ ╚████╔╝ \n"
+              << "     ██║   ██║╚██╗ ██╔╝██║██║  ██║  ╚██╔╝  \n"
+              << "     ██║   ██║ ╚████╔╝ ██║██████╔╝   ██║   \n"
+              << "     ╚═╝   ╚═╝  ╚═══╝  ╚═╝╚═════╝    ╚═╝   \n"
+              << RESET << DIM
+              << "  Interactive Menu-Driven Workflow Engine Terminal\n"
+              << RESET;
+}
+
+void printHeader(const std::string& title, const std::string& subtitle = "") {
+    clearScreen();
+    std::cout << "\n";
+    printBanner();
+    printRule(72, CYAN);
+    std::cout << "  " << WHITE << BOLD << "▶  " << title << RESET << "\n";
+    if (!subtitle.empty()) {
+        std::cout << "  " << DIM << subtitle << RESET << "\n";
     }
-    theatre.say(QString("%1 tasks driven").arg(leaves.size()));
-    Desktop::check(root->isFinished(), "root stage did not finish");
-    for (std::size_t i = 0; i < leaves.size(); ++i)
-        Desktop::check(state(leaves[i]) == "Completed",
-                           "task not completed: " + qs(leaves[i]->getItemID()));
+    printRule(72, DIM);
+    std::cout << "\n";
 }
 
-// ---- Iterator helpers (shared by both scenarios) ---------------------------
-// Every task that is Available right now, found with AvailableItemsIterator.
-// Call it again after any step: tasks drop out as they are assigned and
-// completed, and new ones appear as the next stage opens.
-std::vector<WorkItem*> availableNow(WorkItem *root) {
-    std::vector<WorkItem*> out;
-    WorkItemIterator *it = root->createAvailableIterator();
-    for (it->first(); !it->isDone(); it->next()) out.push_back(it->current());
-    delete it;
-    return out;
+void pause(const std::string& prompt = "Press ENTER to continue...") {
+    std::cout << "\n  " << DIM << "↩ " << prompt << RESET;
+    std::string line;
+    std::getline(std::cin, line);
 }
 
-std::string idList(const std::vector<WorkItem*> &v) {
-    if (v.empty()) return "(none)";
-    std::string s;
-    for (std::size_t i = 0; i < v.size(); ++i) s += (i ? ", " : "") + v[i]->getItemID();
-    return s;
+std::string pad(const std::string& str, std::size_t width) {
+    if (str.length() >= width) return str.substr(0, width);
+    return str + std::string(width - str.length(), ' ');
 }
 
-// Walks the whole tree with DepthFirstIterator and counts every node.
-int countNodes(WorkItem *root) {
-    int n = 0;
-    WorkItemIterator *it = root->createIterator();
-    for (it->first(); !it->isDone(); it->next()) ++n;
-    delete it;
-    return n;
-}
-
-// Walks the tree with DepthFirstIterator and tallies the state of every task,
-// e.g. "Created 9 | Available 2 | Completed 1".
-std::string stateTally(WorkItem *root) {
-    static const char *names[] = {"Created", "Available", "Assigned", "Started",
-                                  "Completed", "Rejected", "Cancelled"};
-    int counts[7] = {0, 0, 0, 0, 0, 0, 0};
-    WorkItemIterator *it = root->createIterator();
-    for (it->first(); !it->isDone(); it->next()) {
-        WorkItem *w = it->current();
-        if (!w->getChildren().empty()) continue;          // stages are not tasks
-        const std::string s = w->getStateName();
-        for (int i = 0; i < 7; ++i) if (s == names[i]) ++counts[i];
+int promptChoice(const std::string& prompt, int minVal, int maxVal) {
+    while (true) {
+        std::cout << prompt;
+        std::string input;
+        if (!std::getline(std::cin, input)) return minVal;
+        size_t first = input.find_first_not_of(" \t\r\n");
+        if (first == std::string::npos) {
+            std::cout << "  " << RED << "Please enter a choice (" << minVal << " - " << maxVal << ")." << RESET << "\n";
+            continue;
+        }
+        size_t last = input.find_last_not_of(" \t\r\n");
+        std::string trimmed = input.substr(first, last - first + 1);
+        if (trimmed == "b" || trimmed == "B" || trimmed == "q" || trimmed == "Q") return 0;
+        std::stringstream ss(trimmed);
+        int val;
+        char extra;
+        if ((ss >> val) && !(ss >> extra) && val >= minVal && val <= maxVal) return val;
+        std::cout << "  " << RED << "Invalid selection! Please enter a number between " << minVal << " and " << maxVal << "." << RESET << "\n";
     }
-    delete it;
-    std::string out;
-    for (int i = 0; i < 7; ++i) {
-        if (!counts[i]) continue;
-        if (!out.empty()) out += " | ";
-        out += std::string(names[i]) + " " + std::to_string(counts[i]);
+}
+
+int promptInt(const std::string& prompt, int defaultVal, int minVal = 0, int maxVal = 9999) {
+    while (true) {
+        std::cout << prompt;
+        std::string input;
+        if (!std::getline(std::cin, input)) return defaultVal;
+        size_t first = input.find_first_not_of(" \t\r\n");
+        if (first == std::string::npos) return defaultVal;
+        size_t last = input.find_last_not_of(" \t\r\n");
+        std::string trimmed = input.substr(first, last - first + 1);
+        std::stringstream ss(trimmed);
+        int val;
+        char extra;
+        if ((ss >> val) && !(ss >> extra) && val >= minVal && val <= maxVal) return val;
+        std::cout << "  " << RED << "Please enter an integer between " << minVal << " and " << maxVal << " (default " << defaultVal << ")." << RESET << "\n";
     }
-    return out.empty() ? "(no tasks)" : out;
 }
 
-void sayAvailable(Desktop &theatre, WorkItem *root) {
-    const std::vector<WorkItem*> a = availableNow(root);
-    theatre.say(QString("iterator: %1 available -> %2").arg(a.size()).arg(qs(idList(a))));
+std::string promptString(const std::string& prompt, const std::string& defaultVal = "", bool allowEmpty = false) {
+    while (true) {
+        std::cout << prompt;
+        std::string input;
+        if (!std::getline(std::cin, input)) return defaultVal;
+        size_t first = input.find_first_not_of(" \t\r\n");
+        if (first == std::string::npos) {
+            if (!defaultVal.empty()) return defaultVal;
+            if (allowEmpty) return "";
+            std::cout << "  " << RED << "Input cannot be blank. Please try again." << RESET << "\n";
+            continue;
+        }
+        size_t last = input.find_last_not_of(" \t\r\n");
+        return input.substr(first, last - first + 1);
+    }
 }
 
-// ---- shared by both scenarios: timestamps, log search, tree search ----------
-std::string stamp() {
+bool promptBool(const std::string& prompt, bool defaultVal = true) {
+    while (true) {
+        std::cout << prompt << (defaultVal ? " [Y/n]: " : " [y/N]: ");
+        std::string input;
+        if (!std::getline(std::cin, input)) return defaultVal;
+        size_t first = input.find_first_not_of(" \t\r\n");
+        if (first == std::string::npos) return defaultVal;
+        char c = static_cast<char>(std::tolower(input[first]));
+        if (c == 'y') return true;
+        if (c == 'n') return false;
+        std::cout << "  " << RED << "Please enter 'y' for yes or 'n' for no." << RESET << "\n";
+    }
+}
+
+std::string stateBadge(const std::string& stateName) {
+    if (stateName == "Completed") return std::string(GREEN) + "[Completed]" + RESET;
+    if (stateName == "Started")   return std::string(CYAN) + "[Started]  " + RESET;
+    if (stateName == "Assigned")  return std::string(YELLOW) + "[Assigned] " + RESET;
+    if (stateName == "Available") return std::string(WHITE) + BOLD + "[Available]" + RESET;
+    if (stateName == "Created")   return std::string(DIM) + "[Created]  " + RESET;
+    if (stateName == "Rejected")  return std::string(RED) + "[Rejected] " + RESET;
+    if (stateName == "Cancelled") return std::string(RED) + DIM + "[Cancelled]" + RESET;
+    return "[" + stateName + "]";
+}
+
+// ===========================================================================
+// Scenario Configuration Models
+// ===========================================================================
+struct RoleConfig {
+    std::string name;
+    int authorityLevel;
+    RoleConfig() : authorityLevel(1) {}
+    RoleConfig(const std::string& n, int lvl) : name(n), authorityLevel(lvl) {}
+};
+
+struct ParticipantConfig {
+    std::string id;
+    std::string name;
+    std::string roleName;
+    ParticipantConfig() {}
+    ParticipantConfig(const std::string& i, const std::string& n, const std::string& r)
+        : id(i), name(n), roleName(r) {}
+};
+
+struct DecoratorConfig {
+    bool hasPriority;
+    int priorityLevel;
+    bool hasValidation;
+    std::vector<std::string> requiredFields;
+    bool hasAuditing;
+
+    DecoratorConfig()
+        : hasPriority(false), priorityLevel(2), hasValidation(false), hasAuditing(false) {}
+
+    std::string summary() const {
+        std::string s;
+        if (hasPriority) s += "[Priority " + std::to_string(priorityLevel) + "]";
+        if (hasValidation) {
+            if (!s.empty()) s += " ";
+            s += "[Validation: ";
+            for (std::size_t i = 0; i < requiredFields.size(); ++i) {
+                if (i > 0) s += ",";
+                s += requiredFields[i];
+            }
+            s += "]";
+        }
+        if (hasAuditing) {
+            if (!s.empty()) s += " ";
+            s += "[Audited]";
+        }
+        return s.empty() ? "None" : s;
+    }
+};
+
+struct TaskConfig {
+    std::string id;
+    std::string name;
+    std::string roleName;
+    std::string strategyType;
+    bool isExternal;
+    std::string externalConnectorType;
+    std::string externalRequest;
+    std::string stageGroupId;
+    DecoratorConfig decorators;
+
+    TaskConfig() : strategyType("RoleBased"), isExternal(false) {}
+    TaskConfig(const std::string& taskId, const std::string& taskName, const std::string& role,
+               const std::string& strat = "RoleBased")
+        : id(taskId), name(taskName), roleName(role), strategyType(strat), isExternal(false) {}
+};
+
+struct StageGroupConfig {
+    std::string id;
+    std::string name;
+    bool isParallel;
+    std::vector<std::string> taskIds;
+    StageGroupConfig() : isParallel(false) {}
+    StageGroupConfig(const std::string& gid, const std::string& gname, bool parallel = false)
+        : id(gid), name(gname), isParallel(parallel) {}
+};
+
+class ScenarioModel {
+public:
+    std::string scenarioType;
+    std::string name;
+    std::string description;
+    std::vector<RoleConfig> roles;
+    std::vector<ParticipantConfig> participants;
+    std::vector<TaskConfig> tasks;
+    std::vector<StageGroupConfig> stageGroups;
+
+    ScenarioModel() : scenarioType("Custom"), name("Custom Workflow"), description("") {}
+    ScenarioModel(const std::string& type, const std::string& n, const std::string& d = "")
+        : scenarioType(type), name(n), description(d) {}
+
+    void addRole(const std::string& roleName, int authorityLevel) {
+        for (auto& r : roles) {
+            if (r.name == roleName) {
+                r.authorityLevel = authorityLevel;
+                return;
+            }
+        }
+        roles.push_back(RoleConfig(roleName, authorityLevel));
+    }
+
+    void addParticipant(const std::string& id, const std::string& pName, const std::string& rName) {
+        participants.push_back(ParticipantConfig(id, pName, rName));
+    }
+
+    std::vector<ParticipantConfig> getParticipantsByRole(const std::string& rName) const {
+        std::vector<ParticipantConfig> out;
+        for (const auto& p : participants) {
+            if (p.roleName == rName) out.push_back(p);
+        }
+        return out;
+    }
+
+    TaskConfig* findTask(const std::string& tid) {
+        for (auto& t : tasks) if (t.id == tid) return &t;
+        return nullptr;
+    }
+
+    const TaskConfig* findTask(const std::string& tid) const {
+        for (const auto& t : tasks) if (t.id == tid) return &t;
+        return nullptr;
+    }
+
+    void addStageGroup(const std::string& gid, const std::string& gname, bool isParallel) {
+        stageGroups.push_back(StageGroupConfig(gid, gname, isParallel));
+    }
+
+    StageGroupConfig* findStageGroup(const std::string& gid) {
+        for (auto& g : stageGroups) if (g.id == gid) return &g;
+        return nullptr;
+    }
+
+    void assignTaskToGroup(const std::string& tid, const std::string& gid) {
+        TaskConfig* t = findTask(tid);
+        if (t) t->stageGroupId = gid;
+        for (auto& g : stageGroups) {
+            auto& tids = g.taskIds;
+            for (auto it = tids.begin(); it != tids.end(); ) {
+                if (*it == tid) it = tids.erase(it);
+                else ++it;
+            }
+        }
+        StageGroupConfig* grp = findStageGroup(gid);
+        if (grp) grp->taskIds.push_back(tid);
+    }
+
+    void printSummary() const {
+        std::cout << "  " << BOLD << WHITE << "Scenario: " << name << " (" << scenarioType << ")" << RESET << "\n";
+        if (!description.empty()) std::cout << "  " << DIM << description << RESET << "\n";
+        printRule(72, DIM);
+
+        std::cout << "  " << CYAN << BOLD << "[1] PERSONNEL (" << participants.size() << " created dynamically)" << RESET << "\n";
+        for (const auto& r : roles) {
+            auto parts = getParticipantsByRole(r.name);
+            std::cout << "    • " << BOLD << r.name << RESET << " (Auth Level " << r.authorityLevel << "): "
+                      << parts.size() << " instance(s)\n";
+            for (const auto& p : parts) {
+                std::cout << "      └─ " << p.name << " [" << p.id << "]\n";
+            }
+        }
+        std::cout << "\n";
+
+        std::cout << "  " << CYAN << BOLD << "[2] EXECUTION GROUPS & TASKS (" << tasks.size() << " tasks)" << RESET << "\n";
+        for (std::size_t g = 0; g < stageGroups.size(); ++g) {
+            const auto& grp = stageGroups[g];
+            std::string mode = grp.isParallel ? (std::string(MAGENTA) + BOLD + "PARALLEL" + RESET)
+                                              : (std::string(BLUE) + BOLD + "SEQUENTIAL" + RESET);
+            std::cout << "    📂 Group " << (g + 1) << ": " << BOLD << grp.name << RESET << " (" << mode << ")\n";
+            if (grp.taskIds.empty()) std::cout << "       " << DIM << "(No tasks assigned)" << RESET << "\n";
+            for (const auto& tid : grp.taskIds) {
+                const TaskConfig* tk = findTask(tid);
+                if (tk) {
+                    std::cout << "       " << (grp.isParallel ? "⇉ " : "⇣ ")
+                              << pad(tk->name, 40)
+                              << DIM << "Role: " << pad(tk->roleName, 18)
+                              << "Strategy: " << tk->strategyType << RESET << "\n";
+                    if (tk->decorators.hasPriority || tk->decorators.hasValidation || tk->decorators.hasAuditing) {
+                        std::cout << "          " << YELLOW << "Decorators: " << tk->decorators.summary() << RESET << "\n";
+                    }
+                    if (tk->isExternal) {
+                        std::cout << "          " << GREEN << "External: " << tk->externalConnectorType
+                                  << " (" << tk->externalRequest << ")" << RESET << "\n";
+                    }
+                }
+            }
+        }
+        std::cout << "\n";
+    }
+
+    static std::vector<RoleConfig> getHospitalDefaultRoles() {
+        return {
+            RoleConfig("Paramedic", 1),
+            RoleConfig("Nurse", 2),
+            RoleConfig("Doctor", 3),
+            RoleConfig("Secretary", 1),
+            RoleConfig("Cleaner", 1),
+            RoleConfig("Department Head", 4),
+            RoleConfig("Hospital Administrator", 5)
+        };
+    }
+
+    static std::vector<RoleConfig> getLegalDefaultRoles() {
+        return {
+            RoleConfig("Paralegal", 1),
+            RoleConfig("Associate", 2),
+            RoleConfig("Senior Attorney", 3),
+            RoleConfig("Partner", 4),
+            RoleConfig("Managing Partner", 5),
+            RoleConfig("Finance Clerk", 1)
+        };
+    }
+
+    static std::vector<TaskConfig> getHospitalPredefinedTasks() {
+        std::vector<TaskConfig> list;
+        TaskConfig t1("h_pickup", "Paramedic picks up patient (dispatch notified)", "Paramedic", "RoleBased");
+        t1.isExternal = true;
+        t1.externalConnectorType = "APITwo_Dispatch";
+        t1.externalRequest = "Ambulance dispatch confirmation";
+        t1.stageGroupId = "grp_transport";
+        list.push_back(t1);
+
+        TaskConfig t2("h_transport", "Transport patient to hospital", "Paramedic", "RoleBased");
+        t2.stageGroupId = "grp_transport";
+        list.push_back(t2);
+
+        TaskConfig t3("h_bay_prep", "Nurse prepares treatment bay", "Nurse", "Workload");
+        t3.stageGroupId = "grp_transport";
+        list.push_back(t3);
+
+        TaskConfig t4("h_register", "Secretary registers patient", "Secretary", "RoleBased");
+        t4.decorators.hasValidation = true;
+        t4.decorators.requiredFields = {"patientName", "complaint"};
+        t4.stageGroupId = "grp_arrival";
+        list.push_back(t4);
+
+        TaskConfig t5("h_records", "Retrieve patient history from hospital records", "Secretary", "RoleBased");
+        t5.isExternal = true;
+        t5.externalConnectorType = "APIOne_Records";
+        t5.externalRequest = "patient-history-query";
+        t5.stageGroupId = "grp_arrival";
+        list.push_back(t5);
+
+        TaskConfig t6("h_handover", "Paramedic hands patient over to nurse", "Paramedic", "RoleBased");
+        t6.stageGroupId = "grp_arrival";
+        list.push_back(t6);
+
+        TaskConfig t7("h_intake", "Nurse intake and triage preparation", "Nurse", "Workload");
+        t7.decorators.hasAuditing = true;
+        t7.decorators.hasPriority = true;
+        t7.decorators.priorityLevel = 1;
+        t7.stageGroupId = "grp_arrival";
+        list.push_back(t7);
+
+        TaskConfig t8("h_doctor_accept", "Doctor accepts the case", "Doctor", "Workload");
+        t8.stageGroupId = "grp_treatment";
+        list.push_back(t8);
+
+        TaskConfig t9("h_assessment", "Doctor assesses and treats patient", "Doctor", "RuleBased");
+        t9.decorators.hasAuditing = true;
+        t9.stageGroupId = "grp_treatment";
+        list.push_back(t9);
+
+        TaskConfig t10("h_room_alloc", "Doctor allocates room (ward / ICU / surgery)", "Doctor", "RoleBased");
+        t10.stageGroupId = "grp_treatment";
+        list.push_back(t10);
+
+        TaskConfig t11("h_cleaning", "Cleaning staff clean the bay", "Cleaner", "RoleBased");
+        t11.stageGroupId = "grp_closeout";
+        list.push_back(t11);
+
+        TaskConfig t12("h_archive", "Secretary archives patient history", "Secretary", "RoleBased");
+        t12.stageGroupId = "grp_closeout";
+        list.push_back(t12);
+
+        return list;
+    }
+
+    static std::vector<TaskConfig> getLegalPredefinedTasks() {
+        std::vector<TaskConfig> list;
+        TaskConfig t1("l_client_intake", "Client intake interview", "Paralegal", "RoleBased");
+        t1.decorators.hasValidation = true;
+        t1.decorators.requiredFields = {"clientName", "matter"};
+        t1.stageGroupId = "grp_legal_intake";
+        list.push_back(t1);
+
+        TaskConfig t2("l_conflict", "Conflict of interest check", "Associate", "Workload");
+        t2.stageGroupId = "grp_legal_intake";
+        list.push_back(t2);
+
+        TaskConfig t3("l_engagement", "Send engagement letter", "Associate", "Workload");
+        t3.stageGroupId = "grp_legal_onboarding";
+        list.push_back(t3);
+
+        TaskConfig t4("l_trust", "Receive trust deposit", "Finance Clerk", "RoleBased");
+        t4.stageGroupId = "grp_legal_onboarding";
+        list.push_back(t4);
+
+        TaskConfig t5("l_evidence", "Gather documents and evidence", "Paralegal", "RoleBased");
+        t5.stageGroupId = "grp_investigation";
+        list.push_back(t5);
+
+        TaskConfig t6("l_research", "Legal research and precedents", "Associate", "RuleBased");
+        t6.stageGroupId = "grp_investigation";
+        list.push_back(t6);
+
+        TaskConfig t7("l_witness", "Interview witnesses", "Paralegal", "RoleBased");
+        t7.stageGroupId = "grp_investigation";
+        list.push_back(t7);
+
+        TaskConfig t8("l_expert_brief", "Brief expert witness", "Associate", "Workload");
+        t8.stageGroupId = "grp_investigation";
+        list.push_back(t8);
+
+        TaskConfig t9("l_expert_report", "Receive expert report", "Associate", "Workload");
+        t9.stageGroupId = "grp_investigation";
+        list.push_back(t9);
+
+        TaskConfig t10("l_draft", "Draft court pleadings", "Associate", "RuleBased");
+        t10.decorators.hasAuditing = true;
+        t10.stageGroupId = "grp_pleadings";
+        list.push_back(t10);
+
+        TaskConfig t11("l_review", "Senior review and sign-off", "Senior Attorney", "RoleBased");
+        t11.decorators.hasAuditing = true;
+        t11.decorators.hasPriority = true;
+        t11.decorators.priorityLevel = 2;
+        t11.stageGroupId = "grp_pleadings";
+        list.push_back(t11);
+
+        TaskConfig t12("l_efile", "E-file pleadings with court (portal notified)", "Paralegal", "RoleBased");
+        t12.isExternal = true;
+        t12.externalConnectorType = "APITwo_Dispatch";
+        t12.externalRequest = "Court e-filing submission";
+        t12.stageGroupId = "grp_pleadings";
+        list.push_back(t12);
+
+        TaskConfig t13("l_hearing", "Attend court hearing", "Senior Attorney", "RoleBased");
+        t13.stageGroupId = "grp_pleadings";
+        list.push_back(t13);
+
+        TaskConfig t14("l_judgment", "Record court judgment", "Senior Attorney", "RoleBased");
+        t14.stageGroupId = "grp_judgment";
+        list.push_back(t14);
+
+        TaskConfig t15("l_settle", "Agree costs / settlement", "Partner", "RoleBased");
+        t15.stageGroupId = "grp_judgment";
+        list.push_back(t15);
+
+        TaskConfig t16("l_invoice", "Invoice the client", "Finance Clerk", "RoleBased");
+        t16.stageGroupId = "grp_billing";
+        list.push_back(t16);
+
+        TaskConfig t17("l_archive", "Archive the case file", "Paralegal", "RoleBased");
+        t17.stageGroupId = "grp_billing";
+        list.push_back(t17);
+
+        return list;
+    }
+};
+
+// ===========================================================================
+// Scenario Persistence (Disk Storage & JSON Serialization)
+// ===========================================================================
+struct SavedScenarioInfo {
+    std::string filename;
+    std::string name;
+    std::string type;
+    int taskCount;
+    int personnelCount;
+};
+
+std::string sanitizeFilename(const std::string& name) {
+    std::string clean;
+    for (char c : name) {
+        if (std::isalnum(c) || c == '_' || c == '-') clean += c;
+        else if (c == ' ') clean += '_';
+    }
+    return clean.empty() ? "scenario" : clean;
+}
+
+std::string resolveSavedDir(const std::string& dir = "saved_scenarios") {
+    struct stat st;
+    if (stat(dir.c_str(), &st) == 0 && S_ISDIR(st.st_mode)) return dir;
+    std::string fallback = "cpp_project/" + dir;
+    if (stat(fallback.c_str(), &st) == 0 && S_ISDIR(st.st_mode)) return fallback;
+    mkdir(dir.c_str(), 0755);
+    return dir;
+}
+
+std::string escapeJson(const std::string& s) {
+    std::string res;
+    for (char c : s) {
+        if (c == '"') res += "\\\"";
+        else if (c == '\\') res += "\\\\";
+        else if (c == '\n') res += "\\n";
+        else if (c == '\r') res += "\\r";
+        else if (c == '\t') res += "\\t";
+        else res += c;
+    }
+    return res;
+}
+
+std::string serializeScenario(const ScenarioModel& model) {
+    std::ostringstream ss;
+    ss << "{\n";
+    ss << "  \"scenarioType\": \"" << escapeJson(model.scenarioType) << "\",\n";
+    ss << "  \"name\": \"" << escapeJson(model.name) << "\",\n";
+    ss << "  \"description\": \"" << escapeJson(model.description) << "\",\n";
+
+    ss << "  \"roles\": [\n";
+    for (std::size_t i = 0; i < model.roles.size(); ++i) {
+        ss << "    {\n";
+        ss << "      \"name\": \"" << escapeJson(model.roles[i].name) << "\",\n";
+        ss << "      \"authorityLevel\": " << model.roles[i].authorityLevel << "\n";
+        ss << "    }" << (i + 1 < model.roles.size() ? "," : "") << "\n";
+    }
+    ss << "  ],\n";
+
+    ss << "  \"participants\": [\n";
+    for (std::size_t i = 0; i < model.participants.size(); ++i) {
+        ss << "    {\n";
+        ss << "      \"id\": \"" << escapeJson(model.participants[i].id) << "\",\n";
+        ss << "      \"name\": \"" << escapeJson(model.participants[i].name) << "\",\n";
+        ss << "      \"roleName\": \"" << escapeJson(model.participants[i].roleName) << "\"\n";
+        ss << "    }" << (i + 1 < model.participants.size() ? "," : "") << "\n";
+    }
+    ss << "  ],\n";
+
+    ss << "  \"tasks\": [\n";
+    for (std::size_t i = 0; i < model.tasks.size(); ++i) {
+        const auto& t = model.tasks[i];
+        ss << "    {\n";
+        ss << "      \"id\": \"" << escapeJson(t.id) << "\",\n";
+        ss << "      \"name\": \"" << escapeJson(t.name) << "\",\n";
+        ss << "      \"roleName\": \"" << escapeJson(t.roleName) << "\",\n";
+        ss << "      \"strategyType\": \"" << escapeJson(t.strategyType) << "\",\n";
+        ss << "      \"isExternal\": " << (t.isExternal ? "true" : "false") << ",\n";
+        ss << "      \"externalConnectorType\": \"" << escapeJson(t.externalConnectorType) << "\",\n";
+        ss << "      \"externalRequest\": \"" << escapeJson(t.externalRequest) << "\",\n";
+        ss << "      \"stageGroupId\": \"" << escapeJson(t.stageGroupId) << "\",\n";
+        ss << "      \"decorators\": {\n";
+        ss << "        \"hasPriority\": " << (t.decorators.hasPriority ? "true" : "false") << ",\n";
+        ss << "        \"priorityLevel\": " << t.decorators.priorityLevel << ",\n";
+        ss << "        \"hasValidation\": " << (t.decorators.hasValidation ? "true" : "false") << ",\n";
+        ss << "        \"requiredFields\": [";
+        for (std::size_t f = 0; f < t.decorators.requiredFields.size(); ++f) {
+            ss << "\"" << escapeJson(t.decorators.requiredFields[f]) << "\""
+               << (f + 1 < t.decorators.requiredFields.size() ? ", " : "");
+        }
+        ss << "],\n";
+        ss << "        \"hasAuditing\": " << (t.decorators.hasAuditing ? "true" : "false") << "\n";
+        ss << "      }\n";
+        ss << "    }" << (i + 1 < model.tasks.size() ? "," : "") << "\n";
+    }
+    ss << "  ],\n";
+
+    ss << "  \"stageGroups\": [\n";
+    for (std::size_t i = 0; i < model.stageGroups.size(); ++i) {
+        const auto& g = model.stageGroups[i];
+        ss << "    {\n";
+        ss << "      \"id\": \"" << escapeJson(g.id) << "\",\n";
+        ss << "      \"name\": \"" << escapeJson(g.name) << "\",\n";
+        ss << "      \"isParallel\": " << (g.isParallel ? "true" : "false") << ",\n";
+        ss << "      \"taskIds\": [";
+        for (std::size_t k = 0; k < g.taskIds.size(); ++k) {
+            ss << "\"" << escapeJson(g.taskIds[k]) << "\"" << (k + 1 < g.taskIds.size() ? ", " : "");
+        }
+        ss << "]\n";
+        ss << "    }" << (i + 1 < model.stageGroups.size() ? "," : "") << "\n";
+    }
+    ss << "  ]\n";
+    ss << "}\n";
+    return ss.str();
+}
+
+std::string extractString(const std::string& src, const std::string& key) {
+    std::string needle = "\"" + key + "\": \"";
+    size_t pos = src.find(needle);
+    if (pos == std::string::npos) return "";
+    pos += needle.size();
+    size_t endPos = src.find("\"", pos);
+    return (endPos == std::string::npos) ? "" : src.substr(pos, endPos - pos);
+}
+
+int extractInt(const std::string& src, const std::string& key, int defaultVal = 0) {
+    std::string needle = "\"" + key + "\": ";
+    size_t pos = src.find(needle);
+    if (pos == std::string::npos) return defaultVal;
+    pos += needle.size();
+    try { return std::stoi(src.substr(pos)); } catch (...) { return defaultVal; }
+}
+
+bool extractBool(const std::string& src, const std::string& key, bool defaultVal = false) {
+    std::string needle = "\"" + key + "\": ";
+    size_t pos = src.find(needle);
+    if (pos == std::string::npos) return defaultVal;
+    pos += needle.size();
+    if (src.compare(pos, 4, "true") == 0) return true;
+    if (src.compare(pos, 5, "false") == 0) return false;
+    return defaultVal;
+}
+
+bool deserializeScenario(const std::string& jsonContent, ScenarioModel& model) {
+    try {
+        model.scenarioType = extractString(jsonContent, "scenarioType");
+        if (model.scenarioType.empty()) model.scenarioType = "Custom";
+        model.name = extractString(jsonContent, "name");
+        model.description = extractString(jsonContent, "description");
+        model.roles.clear();
+        model.participants.clear();
+        model.tasks.clear();
+        model.stageGroups.clear();
+
+        size_t rolesPos = jsonContent.find("\"roles\": [");
+        if (rolesPos != std::string::npos) {
+            size_t endRoles = jsonContent.find("]", rolesPos);
+            size_t cur = rolesPos;
+            while ((cur = jsonContent.find("{", cur)) != std::string::npos && cur < endRoles) {
+                size_t objEnd = jsonContent.find("}", cur);
+                if (objEnd == std::string::npos) break;
+                std::string block = jsonContent.substr(cur, objEnd - cur + 1);
+                std::string rName = extractString(block, "name");
+                int auth = extractInt(block, "authorityLevel", 1);
+                if (!rName.empty()) model.addRole(rName, auth);
+                cur = objEnd + 1;
+            }
+        }
+
+        size_t partPos = jsonContent.find("\"participants\": [");
+        if (partPos != std::string::npos) {
+            size_t endParts = jsonContent.find("]", partPos);
+            size_t cur = partPos;
+            while ((cur = jsonContent.find("{", cur)) != std::string::npos && cur < endParts) {
+                size_t objEnd = jsonContent.find("}", cur);
+                if (objEnd == std::string::npos) break;
+                std::string block = jsonContent.substr(cur, objEnd - cur + 1);
+                std::string pId = extractString(block, "id");
+                std::string pName = extractString(block, "name");
+                std::string rName = extractString(block, "roleName");
+                if (!pId.empty()) model.addParticipant(pId, pName, rName);
+                cur = objEnd + 1;
+            }
+        }
+
+        size_t tasksPos = jsonContent.find("\"tasks\": [");
+        if (tasksPos != std::string::npos) {
+            size_t endTasks = jsonContent.find("\"stageGroups\":");
+            if (endTasks == std::string::npos) endTasks = jsonContent.size();
+            size_t cur = tasksPos;
+            while ((cur = jsonContent.find("{\n      \"id\":", cur)) != std::string::npos && cur < endTasks) {
+                size_t objEnd = jsonContent.find("\n    }", cur);
+                if (objEnd == std::string::npos) break;
+                std::string block = jsonContent.substr(cur, objEnd - cur + 6);
+                TaskConfig tc;
+                tc.id = extractString(block, "id");
+                tc.name = extractString(block, "name");
+                tc.roleName = extractString(block, "roleName");
+                tc.strategyType = extractString(block, "strategyType");
+                tc.isExternal = extractBool(block, "isExternal");
+                tc.externalConnectorType = extractString(block, "externalConnectorType");
+                tc.externalRequest = extractString(block, "externalRequest");
+                tc.stageGroupId = extractString(block, "stageGroupId");
+
+                tc.decorators.hasPriority = extractBool(block, "hasPriority");
+                tc.decorators.priorityLevel = extractInt(block, "priorityLevel", 2);
+                tc.decorators.hasValidation = extractBool(block, "hasValidation");
+                tc.decorators.hasAuditing = extractBool(block, "hasAuditing");
+
+                size_t rfPos = block.find("\"requiredFields\": [");
+                if (rfPos != std::string::npos) {
+                    size_t rfEnd = block.find("]", rfPos);
+                    size_t fCur = rfPos;
+                    while ((fCur = block.find("\"", fCur + 1)) != std::string::npos && fCur < rfEnd) {
+                        if (block.substr(fCur, 15) == "\"requiredFields") { fCur += 15; continue; }
+                        size_t strEnd = block.find("\"", fCur + 1);
+                        if (strEnd == std::string::npos || strEnd > rfEnd) break;
+                        tc.decorators.requiredFields.push_back(block.substr(fCur + 1, strEnd - fCur - 1));
+                        fCur = strEnd + 1;
+                    }
+                }
+                if (!tc.id.empty()) model.tasks.push_back(tc);
+                cur = objEnd + 1;
+            }
+        }
+
+        size_t sgPos = jsonContent.find("\"stageGroups\": [");
+        if (sgPos != std::string::npos) {
+            size_t endSg = jsonContent.find("]", sgPos);
+            size_t cur = sgPos;
+            while ((cur = jsonContent.find("{", cur)) != std::string::npos && cur < endSg) {
+                size_t objEnd = jsonContent.find("}", cur);
+                if (objEnd == std::string::npos) break;
+                std::string block = jsonContent.substr(cur, objEnd - cur + 1);
+                std::string gid = extractString(block, "id");
+                std::string gname = extractString(block, "name");
+                bool isPar = extractBool(block, "isParallel");
+                if (!gid.empty()) model.addStageGroup(gid, gname, isPar);
+
+                size_t tidsPos = block.find("\"taskIds\": [");
+                if (tidsPos != std::string::npos) {
+                    size_t tidsEnd = block.find("]", tidsPos);
+                    size_t tCur = tidsPos;
+                    while ((tCur = block.find("\"", tCur + 1)) != std::string::npos && tCur < tidsEnd) {
+                        if (block.substr(tCur, 8) == "\"taskIds") { tCur += 8; continue; }
+                        size_t strEnd = block.find("\"", tCur + 1);
+                        if (strEnd == std::string::npos || strEnd > tidsEnd) break;
+                        std::string tId = block.substr(tCur + 1, strEnd - tCur - 1);
+                        model.assignTaskToGroup(tId, gid);
+                        tCur = strEnd + 1;
+                    }
+                }
+                cur = objEnd + 1;
+            }
+        }
+        return true;
+    } catch (...) { return false; }
+}
+
+bool saveScenarioToDisk(const ScenarioModel& model) {
+    std::string dir = resolveSavedDir();
+    std::string fullPath = dir + "/" + sanitizeFilename(model.name) + ".json";
+    std::ofstream out(fullPath);
+    if (!out.is_open()) return false;
+    out << serializeScenario(model);
+    out.close();
+    return true;
+}
+
+bool loadScenarioFromDisk(const std::string& path, ScenarioModel& model) {
+    std::ifstream in(path);
+    if (!in.is_open()) return false;
+    std::stringstream buf;
+    buf << in.rdbuf();
+    in.close();
+    return deserializeScenario(buf.str(), model);
+}
+
+std::vector<SavedScenarioInfo> listSavedScenarios() {
+    std::vector<SavedScenarioInfo> list;
+    std::string dir = resolveSavedDir();
+    DIR* dp = opendir(dir.c_str());
+    if (!dp) return list;
+    struct dirent* ep;
+    while ((ep = readdir(dp)) != nullptr) {
+        std::string fname = ep->d_name;
+        if (fname.size() > 5 && fname.substr(fname.size() - 5) == ".json") {
+            std::string fullPath = dir + "/" + fname;
+            ScenarioModel model;
+            if (loadScenarioFromDisk(fullPath, model)) {
+                SavedScenarioInfo info;
+                info.filename = fullPath;
+                info.name = model.name;
+                info.type = model.scenarioType;
+                info.taskCount = static_cast<int>(model.tasks.size());
+                info.personnelCount = static_cast<int>(model.participants.size());
+                list.push_back(info);
+            }
+        }
+    }
+    closedir(dp);
+    return list;
+}
+
+// ===========================================================================
+// Interactive Scenario Builder Steps (Dynamic Configuration)
+// ===========================================================================
+bool step1ConfigurePersonnel(ScenarioModel& model) {
+    while (true) {
+        printHeader(model.name, "Step 1 of 5: Configure Personnel");
+        std::cout << "  " << BOLD << "Please specify the quantity of each personnel type to create dynamically:" << RESET << "\n\n";
+
+        model.participants.clear();
+        int participantNum = 1;
+
+        for (const auto& role : model.roles) {
+            std::string promptText = "  How many " + role.name + "s? (Authority " + std::to_string(role.authorityLevel) + ") [default: 1]: ";
+            int defaultQty = 1;
+            if (role.name == "Nurse" || role.name == "Doctor" || role.name == "Paralegal" || role.name == "Associate") {
+                defaultQty = 2;
+            }
+            int qty = promptInt(promptText, defaultQty, 0, 50);
+
+            for (int i = 1; i <= qty; ++i) {
+                std::string pid = "P" + std::to_string(participantNum++);
+                std::string pname = role.name + " #" + std::to_string(i);
+                if (role.name == "Paramedic") pname = (i == 1) ? "Paramedic Thabo" : ("Paramedic Sbu " + std::to_string(i));
+                else if (role.name == "Nurse") pname = (i == 1) ? "Nurse Dlamini" : (i == 2 ? "Nurse Khoza" : ("Nurse Nandi " + std::to_string(i)));
+                else if (role.name == "Doctor") pname = (i == 1) ? "Dr. Khumalo" : (i == 2 ? "Dr. Naidoo" : ("Dr. Patel " + std::to_string(i)));
+                else if (role.name == "Secretary") pname = (i == 1) ? "Secretary Lerato" : ("Secretary James " + std::to_string(i));
+                else if (role.name == "Cleaner") pname = (i == 1) ? "Cleaner Pieter" : ("Cleaner Sipho " + std::to_string(i));
+                else if (role.name == "Department Head") pname = "Dr. Mthembu (Dept Head)";
+                else if (role.name == "Hospital Administrator") pname = "Dr. Botha (CEO/Admin)";
+                else if (role.name == "Paralegal") pname = (i == 1) ? "Paralegal Sipho" : (i == 2 ? "Paralegal Anke" : ("Paralegal Ayesha " + std::to_string(i)));
+                else if (role.name == "Associate") pname = (i == 1) ? "Associate Zanele" : (i == 2 ? "Associate Johan" : ("Associate Thabo " + std::to_string(i)));
+                else if (role.name == "Senior Attorney") pname = (i == 1) ? "Senior Attorney Mokoena" : ("Senior Attorney Botha " + std::to_string(i));
+                else if (role.name == "Partner") pname = (i == 1) ? "Partner Pillay" : ("Partner Adams " + std::to_string(i));
+                else if (role.name == "Managing Partner") pname = "Managing Partner van Wyk";
+                else if (role.name == "Finance Clerk") pname = (i == 1) ? "Finance Clerk Nomsa" : ("Finance Clerk Megan " + std::to_string(i));
+
+                model.addParticipant(pid, pname, role.name);
+            }
+        }
+
+        std::cout << "\n  " << GREEN << BOLD << "✔ Dynamic Personnel Creation Complete!" << RESET << " ("
+                  << model.participants.size() << " instances instantiated)\n";
+        printRule(72, DIM);
+        for (const auto& p : model.participants) {
+            std::cout << "    [" << p.id << "] " << pad(p.name, 32) << DIM << "Role: " << p.roleName << RESET << "\n";
+        }
+        printRule(72, DIM);
+
+        std::cout << "\n  Options:\n";
+        std::cout << "    1) Confirm personnel and proceed to Step 2 (Tasks)\n";
+        std::cout << "    2) Reconfigure personnel quantities\n";
+        std::cout << "    3) Add custom role & participant\n";
+        std::cout << "    0) Cancel / Back to Main Menu\n";
+
+        int opt = promptChoice("  Select choice [0-3]: ", 0, 3);
+        if (opt == 1) return true;
+        if (opt == 0) return false;
+        if (opt == 3) {
+            std::string nrName = promptString("    Enter new role name: ");
+            int nAuth = promptInt("    Enter authority level [1-5]: ", 1, 1, 5);
+            model.addRole(nrName, nAuth);
+            std::string npName = promptString("    Enter participant name: ");
+            std::string npId = "P" + std::to_string(model.participants.size() + 1);
+            model.addParticipant(npId, npName, nrName);
+            std::cout << "  " << GREEN << "Added role and participant!" << RESET << "\n";
+            pause();
+        }
+    }
+}
+
+void promptSelectPredefinedTasks(ScenarioModel& model, const std::vector<TaskConfig>& pool) {
+    if (pool.empty()) {
+        std::cout << "  " << YELLOW << "No predefined tasks available for this scenario type." << RESET << "\n";
+        pause();
+        return;
+    }
+    std::vector<bool> selected(pool.size(), true);
+    while (true) {
+        printHeader(model.name, "Select Predefined Tasks");
+        std::cout << "  " << BOLD << "Predefined Tasks (toggle or include all):" << RESET << "\n\n";
+        for (std::size_t i = 0; i < pool.size(); ++i) {
+            std::cout << "    " << (i + 1) << ") [" << (selected[i] ? GREEN + std::string("✔") + RESET : " ") << "] "
+                      << pad(pool[i].name, 45) << DIM << "Role: " << pool[i].roleName << RESET << "\n";
+        }
+        std::cout << "\n    [A] Select All\n    [C] Clear All\n    [1-" << pool.size() << "] Toggle task\n"
+                  << "    [D / ENTER] Done / Add selected tasks to scenario\n    [0] Cancel\n";
+
+        std::string choice = promptString("\n  Enter command [D]: ", "d", true);
+        if (choice == "0" || choice == "q" || choice == "Q") return;
+        if (choice.empty() || choice == "d" || choice == "D") {
+            int added = 0;
+            for (std::size_t i = 0; i < pool.size(); ++i) {
+                if (selected[i] && !model.findTask(pool[i].id)) {
+                    model.tasks.push_back(pool[i]);
+                    model.assignTaskToGroup(pool[i].id, pool[i].stageGroupId);
+                    added++;
+                }
+            }
+            std::cout << "  " << GREEN << "Added " << added << " task(s) to workflow." << RESET << "\n";
+            pause();
+            return;
+        }
+        if (choice == "a" || choice == "A") { std::fill(selected.begin(), selected.end(), true); continue; }
+        if (choice == "c" || choice == "C") { std::fill(selected.begin(), selected.end(), false); continue; }
+        try {
+            int idx = std::stoi(choice);
+            if (idx >= 1 && idx <= static_cast<int>(pool.size())) selected[idx - 1] = !selected[idx - 1];
+        } catch (...) {}
+    }
+}
+
+void promptCustomTask(ScenarioModel& model) {
+    printHeader(model.name, "Create Custom Task");
+    std::string tName = promptString("  Enter task name: ");
+    if (tName.empty()) return;
+    std::string tId = "task_" + std::to_string(model.tasks.size() + 1);
+
+    std::cout << "\n  Select required role for this task:\n";
+    for (std::size_t i = 0; i < model.roles.size(); ++i) {
+        std::cout << "    " << (i + 1) << ") " << model.roles[i].name << " (Auth Level " << model.roles[i].authorityLevel << ")\n";
+    }
+    int rChoice = promptChoice("  Role choice [1-" + std::to_string(model.roles.size()) + "]: ", 1, static_cast<int>(model.roles.size()));
+    std::string roleName = model.roles[rChoice - 1].name;
+
+    std::cout << "\n  Select assignment strategy:\n";
+    std::cout << "    1) Role-Based Assignment\n    2) Workload-Based Assignment\n    3) Rule-Based Assignment\n";
+    int sChoice = promptChoice("  Strategy choice [1-3]: ", 1, 3);
+    std::string strat = (sChoice == 2) ? "Workload" : (sChoice == 3 ? "RuleBased" : "RoleBased");
+
+    TaskConfig tc(tId, tName, roleName, strat);
+    bool isExt = promptBool("  Is this an external task communicating with an external API?", false);
+    if (isExt) {
+        tc.isExternal = true;
+        std::cout << "    1) APITwo - Dispatch / External Service Notification\n";
+        std::cout << "    2) APIOne - Database / Archive Query Connector\n";
+        int eChoice = promptChoice("    Connector choice [1-2]: ", 1, 2);
+        tc.externalConnectorType = (eChoice == 1) ? "APITwo_Dispatch" : "APIOne_Records";
+        tc.externalRequest = promptString("    Enter request payload: ", "External task query payload");
+    }
+
+    if (!model.stageGroups.empty()) {
+        std::cout << "\n  Select stage group to place this task in:\n";
+        for (std::size_t i = 0; i < model.stageGroups.size(); ++i) {
+            std::cout << "    " << (i + 1) << ") " << model.stageGroups[i].name
+                      << (model.stageGroups[i].isParallel ? " [Parallel]" : " [Sequential]") << "\n";
+        }
+        int gChoice = promptChoice("    Group choice [1-" + std::to_string(model.stageGroups.size()) + "]: ",
+                                   1, static_cast<int>(model.stageGroups.size()));
+        tc.stageGroupId = model.stageGroups[gChoice - 1].id;
+    }
+
+    model.tasks.push_back(tc);
+    if (!tc.stageGroupId.empty()) model.assignTaskToGroup(tc.id, tc.stageGroupId);
+    std::cout << "\n  " << GREEN << "✔ Custom task created successfully!" << RESET << "\n";
+    pause();
+}
+
+bool step2ConfigureTasks(ScenarioModel& model, const std::vector<TaskConfig>& predefinedPool) {
+    while (true) {
+        printHeader(model.name, "Step 2 of 5: Configure Tasks");
+        std::cout << "  Current tasks configured: " << BOLD << model.tasks.size() << RESET << "\n";
+        if (!model.tasks.empty()) {
+            std::cout << "\n  " << DIM << "Configured Tasks:" << RESET << "\n";
+            for (std::size_t i = 0; i < model.tasks.size(); ++i) {
+                std::cout << "    " << (i + 1) << ") " << pad(model.tasks[i].name, 40)
+                          << DIM << "Role: " << pad(model.tasks[i].roleName, 18)
+                          << "Strategy: " << model.tasks[i].strategyType << RESET << "\n";
+            }
+        }
+        std::cout << "\n  " << BOLD << "Choose task configuration method:" << RESET << "\n";
+        std::cout << "    1) Use predefined tasks (" << predefinedPool.size() << " available)\n";
+        std::cout << "    2) Create custom task\n";
+        if (!model.tasks.empty()) {
+            std::cout << "    3) Proceed to Step 3 (View and Organize Tasks)\n";
+            std::cout << "    4) Clear all tasks\n";
+        }
+        std::cout << "    0) Back to Step 1 (Personnel)\n";
+
+        int maxChoice = model.tasks.empty() ? 2 : 4;
+        int opt = promptChoice("  Select choice [0-" + std::to_string(maxChoice) + "]: ", 0, maxChoice);
+        if (opt == 0) return false;
+        if (opt == 1) promptSelectPredefinedTasks(model, predefinedPool);
+        else if (opt == 2) promptCustomTask(model);
+        else if (opt == 3) return true;
+        else if (opt == 4) {
+            model.tasks.clear();
+            std::cout << "  " << YELLOW << "Cleared all tasks." << RESET << "\n";
+            pause();
+        }
+    }
+}
+
+bool step3ViewAndOrganizeTasks(ScenarioModel& model) {
+    while (true) {
+        printHeader(model.name, "Step 3 of 5: View and Organize Tasks");
+        std::cout << "  " << BOLD << "Tasks and Execution Organization:" << RESET << "\n\n";
+
+        for (std::size_t g = 0; g < model.stageGroups.size(); ++g) {
+            const auto& grp = model.stageGroups[g];
+            std::string mode = grp.isParallel ? (std::string(MAGENTA) + BOLD + "PARALLEL GROUP" + RESET)
+                                              : (std::string(BLUE) + BOLD + "SEQUENTIAL GROUP" + RESET);
+            std::cout << "  📂 Group " << (g + 1) << ": " << BOLD << grp.name << RESET << " (" << mode << ")\n";
+            if (grp.taskIds.empty()) std::cout << "     " << DIM << "(No tasks assigned)" << RESET << "\n";
+            for (const auto& tid : grp.taskIds) {
+                const TaskConfig* tk = model.findTask(tid);
+                if (tk) {
+                    std::cout << "     " << (grp.isParallel ? "⇉ " : "⇣ ")
+                              << pad(tk->name, 40) << DIM << "Role: " << pad(tk->roleName, 18)
+                              << "Decorators: " << tk->decorators.summary() << RESET << "\n";
+                }
+            }
+            std::cout << "\n";
+        }
+
+        std::cout << "  Organization Actions:\n";
+        std::cout << "    1) Create new execution group\n";
+        std::cout << "    2) Toggle group mode (Sequential ↔ Parallel)\n";
+        std::cout << "    3) Move task to another group\n";
+        std::cout << "    4) View task details\n";
+        std::cout << "    5) Remove a task\n";
+        std::cout << "    6) Proceed to Step 4 (Apply Decorators)\n";
+        std::cout << "    0) Back to Step 2 (Tasks)\n";
+
+        int opt = promptChoice("\n  Select choice [0-6]: ", 0, 6);
+        if (opt == 0) return false;
+        if (opt == 6) return true;
+
+        if (opt == 1) {
+            std::string gName = promptString("  Enter new group name: ");
+            bool isPar = promptBool("  Should tasks in this group execute in PARALLEL?", false);
+            std::string gid = "grp_" + std::to_string(model.stageGroups.size() + 1);
+            model.addStageGroup(gid, gName, isPar);
+            std::cout << "  " << GREEN << "Execution group added." << RESET << "\n";
+            pause();
+        } else if (opt == 2) {
+            std::cout << "\n  Select group to toggle execution mode:\n";
+            for (std::size_t i = 0; i < model.stageGroups.size(); ++i) {
+                std::cout << "    " << (i + 1) << ") " << model.stageGroups[i].name
+                          << " (Currently: " << (model.stageGroups[i].isParallel ? "PARALLEL" : "SEQUENTIAL") << ")\n";
+            }
+            int gIdx = promptChoice("  Group choice [1-" + std::to_string(model.stageGroups.size()) + "]: ",
+                                    1, static_cast<int>(model.stageGroups.size()));
+            model.stageGroups[gIdx - 1].isParallel = !model.stageGroups[gIdx - 1].isParallel;
+            std::cout << "  " << GREEN << "Mode changed to "
+                      << (model.stageGroups[gIdx - 1].isParallel ? "PARALLEL" : "SEQUENTIAL") << RESET << "\n";
+            pause();
+        } else if (opt == 3) {
+            if (model.tasks.empty()) { std::cout << "  " << RED << "No tasks available." << RESET << "\n"; pause(); continue; }
+            std::cout << "\n  Select task to move:\n";
+            for (std::size_t i = 0; i < model.tasks.size(); ++i) {
+                std::cout << "    " << (i + 1) << ") " << model.tasks[i].name << "\n";
+            }
+            int tIdx = promptChoice("  Task choice: ", 1, static_cast<int>(model.tasks.size()));
+            std::cout << "\n  Move \"" << model.tasks[tIdx - 1].name << "\" to which group?\n";
+            for (std::size_t i = 0; i < model.stageGroups.size(); ++i) {
+                std::cout << "    " << (i + 1) << ") " << model.stageGroups[i].name << "\n";
+            }
+            int gChoice = promptChoice("  Group choice: ", 1, static_cast<int>(model.stageGroups.size()));
+            model.assignTaskToGroup(model.tasks[tIdx - 1].id, model.stageGroups[gChoice - 1].id);
+            std::cout << "  " << GREEN << "Task moved." << RESET << "\n";
+            pause();
+        } else if (opt == 4) {
+            for (std::size_t i = 0; i < model.tasks.size(); ++i) std::cout << "    " << (i + 1) << ") " << model.tasks[i].name << "\n";
+            int tIdx = promptChoice("  Task choice: ", 1, static_cast<int>(model.tasks.size()));
+            const TaskConfig& tk = model.tasks[tIdx - 1];
+            std::cout << "\n  " << BOLD << "Task Details:" << RESET << "\n"
+                      << "    ID: " << tk.id << "\n    Name: " << tk.name << "\n    Role: " << tk.roleName
+                      << "\n    Strategy: " << tk.strategyType << "\n    Decorators: " << tk.decorators.summary() << "\n";
+            pause();
+        } else if (opt == 5) {
+            for (std::size_t i = 0; i < model.tasks.size(); ++i) std::cout << "    " << (i + 1) << ") " << model.tasks[i].name << "\n";
+            int tIdx = promptChoice("  Task choice: ", 1, static_cast<int>(model.tasks.size()));
+            std::string remName = model.tasks[tIdx - 1].name;
+            std::string remId = model.tasks[tIdx - 1].id;
+            for (auto it = model.tasks.begin(); it != model.tasks.end(); ++it) {
+                if (it->id == remId) { model.tasks.erase(it); break; }
+            }
+            std::cout << "  " << YELLOW << "Removed \"" << remName << "\"." << RESET << "\n";
+            pause();
+        }
+    }
+}
+
+void promptTaskDecoratorConfig(TaskConfig& task) {
+    while (true) {
+        printHeader("Configure Decorators", "Task: " + task.name);
+        std::cout << "  " << BOLD << "Current Decorators applied:" << RESET << "\n";
+        std::cout << "    " << YELLOW << task.decorators.summary() << RESET << "\n\n";
+
+        std::cout << "  Select decorator action:\n";
+        std::cout << "    1) " << (task.decorators.hasPriority ? "Modify Priority Decorator" : "Add Priority Decorator (PriorityTask)") << "\n";
+        std::cout << "    2) " << (task.decorators.hasValidation ? "Modify Validation Decorator" : "Add Validation Decorator (ValidatedTask)") << "\n";
+        std::cout << "    3) " << (task.decorators.hasAuditing ? "Remove Auditing Decorator" : "Add Auditing Decorator (AuditedTask)") << "\n";
+        std::cout << "    4) Clear all decorators on this task\n";
+        std::cout << "    0) Done / Back to task list\n";
+
+        int c = promptChoice("\n  Select choice [0-4]: ", 0, 4);
+        if (c == 0) return;
+        if (c == 1) {
+            std::cout << "\n  Priority Levels: 1 = Critical, 2 = High, 3 = Medium, 4 = Low\n";
+            int pr = promptInt("  Enter priority level [1-4]: ", task.decorators.priorityLevel, 1, 4);
+            task.decorators.hasPriority = true;
+            task.decorators.priorityLevel = pr;
+            std::cout << "  " << GREEN << "Priority decorator set to level " << pr << "." << RESET << "\n";
+            pause();
+        } else if (c == 2) {
+            task.decorators.hasValidation = true;
+            std::cout << "\n  Enter required field keys (separated by comma, e.g. patientName,complaint):\n";
+            std::string fieldsStr = promptString("  Required fields: ", "patientName,complaint");
+            task.decorators.requiredFields.clear();
+            std::stringstream ss(fieldsStr);
+            std::string item;
+            while (std::getline(ss, item, ',')) {
+                size_t f = item.find_first_not_of(" \t\r\n");
+                size_t l = item.find_last_not_of(" \t\r\n");
+                if (f != std::string::npos) task.decorators.requiredFields.push_back(item.substr(f, l - f + 1));
+            }
+            std::cout << "  " << GREEN << "Validation decorator set with " << task.decorators.requiredFields.size() << " required field(s)." << RESET << "\n";
+            pause();
+        } else if (c == 3) {
+            task.decorators.hasAuditing = !task.decorators.hasAuditing;
+            std::cout << "  " << GREEN << "Auditing decorator " << (task.decorators.hasAuditing ? "enabled" : "disabled") << "." << RESET << "\n";
+            pause();
+        } else if (c == 4) {
+            task.decorators.hasPriority = false;
+            task.decorators.hasValidation = false;
+            task.decorators.hasAuditing = false;
+            task.decorators.requiredFields.clear();
+            std::cout << "  " << YELLOW << "Cleared decorators for this task." << RESET << "\n";
+            pause();
+        }
+    }
+}
+
+bool step4ApplyDecorators(ScenarioModel& model) {
+    while (true) {
+        printHeader(model.name, "Step 4 of 5: Apply Decorators");
+        std::cout << "  " << BOLD << "Task Decorators Configuration (Priority, Validation, Auditing):" << RESET << "\n\n";
+        for (std::size_t i = 0; i < model.tasks.size(); ++i) {
+            std::cout << "    " << std::setw(2) << (i + 1) << ") "
+                      << pad(model.tasks[i].name, 40)
+                      << YELLOW << model.tasks[i].decorators.summary() << RESET << "\n";
+        }
+        std::cout << "\n  Actions:\n    [1-" << model.tasks.size() << "] Select task to configure decorators\n"
+                  << "    [P / ENTER] Proceed to Step 5 (Review and Execution)\n    [0] Back to Step 3 (Organize Tasks)\n";
+
+        std::string choice = promptString("\n  Select option [P]: ", "p", true);
+        if (choice == "0" || choice == "b" || choice == "B") return false;
+        if (choice.empty() || choice == "p" || choice == "P") return true;
+        try {
+            int idx = std::stoi(choice);
+            if (idx >= 1 && idx <= static_cast<int>(model.tasks.size())) {
+                promptTaskDecoratorConfig(model.tasks[idx - 1]);
+            }
+        } catch (...) {}
+    }
+}
+
+bool step5ReviewScenario(ScenarioModel& model) {
+    while (true) {
+        printHeader(model.name, "Step 5 of 5: Scenario Review & Confirmation");
+        model.printSummary();
+
+        std::cout << "  " << BOLD << "Ready to execute the scenario with the TIVIDY workflow engine?" << RESET << "\n\n";
+        std::cout << "    1) Confirm and Execute Workflow\n";
+        std::cout << "    2) Modify Task Decorators (Step 4)\n";
+        std::cout << "    3) Modify Organization & Parallel Groups (Step 3)\n";
+        std::cout << "    4) Modify Tasks (Step 2)\n";
+        std::cout << "    5) Modify Personnel (Step 1)\n";
+        std::cout << "    0) Cancel and Return to Main Menu\n";
+
+        int opt = promptChoice("\n  Select choice [0-5]: ", 0, 5);
+        if (opt == 1) return true;
+        if (opt == 0) return false;
+        if (opt == 2) { if (!step4ApplyDecorators(model)) continue; }
+        else if (opt == 3) { if (!step3ViewAndOrganizeTasks(model)) continue; }
+        else if (opt == 4) {
+            auto predefined = (model.scenarioType == "Hospital") ? ScenarioModel::getHospitalPredefinedTasks()
+                            : (model.scenarioType == "Legal" ? ScenarioModel::getLegalPredefinedTasks() : std::vector<TaskConfig>());
+            if (!step2ConfigureTasks(model, predefined)) continue;
+        } else if (opt == 5) {
+            if (!step1ConfigurePersonnel(model)) continue;
+        }
+    }
+}
+
+// ===========================================================================
+// Workflow Execution Engine (Composite, Decorators, Observers, Commands)
+// ===========================================================================
+std::string currentTimestamp() {
     char buf[32];
-    std::time_t t = std::time(0);
+    std::time_t t = std::time(nullptr);
     std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", std::localtime(&t));
     return buf;
 }
 
-bool anyContains(const std::vector<std::string> &lines, const std::string &needle) {
-    for (std::size_t i = 0; i < lines.size(); ++i)
-        if (lines[i].find(needle) != std::string::npos) return true;
-    return false;
+std::vector<WorkItem*> getAvailableTasks(WorkItem* root) {
+    std::vector<WorkItem*> out;
+    if (!root) return out;
+    WorkItemIterator* it = root->createAvailableIterator();
+    if (it) {
+        for (it->first(); !it->isDone(); it->next()) {
+            if (it->current()) out.push_back(it->current());
+        }
+        delete it;
+    }
+    return out;
 }
 
-WorkItem *findItem(WorkItem *w, const std::string &id) {
-    if (!w) return 0;
-    if (w->getItemID() == id) return w;
-    const std::vector<WorkItem*> kids = w->getChildren();
-    for (std::size_t i = 0; i < kids.size(); ++i)
-        if (WorkItem *hit = findItem(kids[i], id)) return hit;
+void executeScenarioWorkflow(const ScenarioModel& model) {
+    printHeader("Execution Mode Selection", model.name);
+    std::cout << "  " << BOLD << "Choose execution mode:" << RESET << "\n\n";
+    std::cout << "    1) 🎬 Automated Demonstration Execution (auto-assigns & completes live)\n";
+    std::cout << "    2) 🕹 Interactive Step-by-Step Execution (manual task driving, undo, reject)\n";
+    std::cout << "    0) ↩ Back\n";
+
+    int mode = promptChoice("\n  Select execution mode [0-2]: ", 0, 2);
+    if (mode == 0) return;
+
+    // Instantiate dynamic resources
+    std::map<std::string, Role*> roles;
+    std::vector<Participant*> participants;
+    std::map<std::string, Participant*> participantMap;
+
+    for (const auto& r : model.roles) {
+        roles[r.name] = new Role(r.name, r.authorityLevel);
+    }
+    for (const auto& p : model.participants) {
+        Role* rp = roles[p.roleName];
+        if (!rp) { rp = new Role(p.roleName, 1); roles[p.roleName] = rp; }
+        Participant* part = new Participant(p.id, p.name, rp);
+        participants.push_back(part);
+        participantMap[p.id] = part;
+    }
+
+    RoleBasedAssignment byRoleStrategy;
+    WorkloadAssignment byWorkloadStrategy;
+    RuleBasedAssignment ruleStrategy([](Task* t, Participant* p) {
+        if (!t || !p) return false;
+        Role* req = t->getRequiredRole();
+        if (req && !p->hasRole(req)) return false;
+        return p->getWorkload() < 3;
+    });
+
+    APIOne apiOne;
+    APITwo apiTwo;
+    AdapterOne adapterOne(&apiOne);
+    AdapterTwo adapterTwo(&apiTwo);
+
+    EventPublisher publisher;
+    AuditLogger auditLogger;
+    Notifier notifier;
+    MetricsCollector metricsCollector;
+
+    publisher.attach(&auditLogger);
+    publisher.attach(&notifier);
+    publisher.attach(&metricsCollector);
+
+    // Approval Chain
+    std::vector<Role*> sortedRoles;
+    for (auto& pair : roles) sortedRoles.push_back(pair.second);
+    std::sort(sortedRoles.begin(), sortedRoles.end(), [](Role* a, Role* b) {
+        return a->getAuthorityLevel() < b->getAuthorityLevel();
+    });
+    ApprovalLevel* headApproval = nullptr;
+    ApprovalLevel* prevApproval = nullptr;
+    for (auto* r : sortedRoles) {
+        if (r->getAuthorityLevel() >= 2) {
+            ApprovalLevel* lvl = new ApprovalLevel(r, 1800);
+            if (!headApproval) headApproval = lvl;
+            if (prevApproval) prevApproval->setNext(lvl);
+            prevApproval = lvl;
+        }
+    }
+
+    // Build Stage Tree
+    Stage* rootStage = new SequentialStage("root_workflow", model.name);
+    std::map<std::string, WorkItem*> taskMap;
+
+    for (const auto& grp : model.stageGroups) {
+        Stage* stage = grp.isParallel ? static_cast<Stage*>(new ParallelStage(grp.id, grp.name))
+                                      : static_cast<Stage*>(new SequentialStage(grp.id, grp.name));
+        for (const auto& tid : grp.taskIds) {
+            const TaskConfig* tc = model.findTask(tid);
+            if (!tc) continue;
+            Role* r = roles[tc->roleName];
+            AssignmentStrategy* strat = &byRoleStrategy;
+            if (tc->strategyType == "Workload") strat = &byWorkloadStrategy;
+            else if (tc->strategyType == "RuleBased") strat = &ruleStrategy;
+
+            Task* baseTask = nullptr;
+            if (tc->isExternal) {
+                ExternalConnector* conn = (tc->externalConnectorType == "APIOne_Records") ? static_cast<ExternalConnector*>(&adapterOne) : static_cast<ExternalConnector*>(&adapterTwo);
+                baseTask = new ExternalTask(tc->id, tc->name, r, strat, conn, tc->externalRequest);
+            } else {
+                baseTask = new Task(tc->id, tc->name, r, strat);
+            }
+
+            WorkItem* decorated = baseTask;
+            if (tc->decorators.hasValidation) {
+                auto fields = tc->decorators.requiredFields;
+                if (fields.empty()) fields.push_back("dataEntry");
+                decorated = new ValidatedTask(decorated, fields);
+            }
+            if (tc->decorators.hasAuditing) {
+                decorated = new AuditedTask(decorated, &publisher);
+            }
+            if (tc->decorators.hasPriority) {
+                decorated = new PriorityTask(decorated, tc->decorators.priorityLevel);
+            }
+            stage->add(decorated);
+            taskMap[tc->id] = decorated;
+        }
+        rootStage->add(stage);
+    }
+    rootStage->setPublisher(&publisher);
+
+    WorkflowEvent startEvt(EventType::ITEM_STATE_CHANGED, rootStage->getItemID(), currentTimestamp(), "Started");
+    publisher.publish(&startEvt);
+
+    CommandInvoker invoker;
+
+    auto driveTask = [&](WorkItem* task, Participant* assignee) {
+        if (!task) return;
+        if (task->getStateName() == "Created") task->makeAvailable();
+        if (task->getStateName() == "Available") {
+            if (!assignee) {
+                Role* req = nullptr;
+                const TaskConfig* tc = model.findTask(task->getItemID());
+                if (tc && roles.count(tc->roleName)) req = roles[tc->roleName];
+                for (auto* p : participants) {
+                    if (!req || p->hasRole(req)) { assignee = p; break; }
+                }
+                if (!assignee && !participants.empty()) assignee = participants[0];
+            }
+            invoker.executeCommand(new AssignCommand(task, assignee));
+        }
+        if (task->getStateName() == "Assigned") {
+            invoker.executeCommand(new StartCommand(task));
+        }
+        if (task->getStateName() == "Started") {
+            const TaskConfig* tc = model.findTask(task->getItemID());
+            if (tc && tc->decorators.hasValidation) {
+                for (const auto& f : tc->decorators.requiredFields) task->setData(f, "ValidRecord_" + f);
+            }
+            invoker.executeCommand(new CompleteCommand(task));
+        }
+    };
+
+    rootStage->makeAvailable();
+    rootStage->activateChildren();
+
+    if (mode == 1) {
+        // Automated Demonstration
+        printHeader(model.name, "Automated Workflow Demonstration Execution");
+        std::cout << "  " << CYAN << BOLD << "Executing workflow with live event logging..." << RESET << "\n\n";
+
+        int guard = 0;
+        while (!rootStage->isFinished() && ++guard < 100) {
+            std::vector<WorkItem*> ready = getAvailableTasks(rootStage);
+            if (ready.empty()) break;
+
+            for (auto* item : ready) {
+                std::cout << "  ▶ Advancing task: " << BOLD << item->getName() << RESET << " ... ";
+                Participant* who = nullptr;
+                const TaskConfig* tc = model.findTask(item->getItemID());
+                if (tc && roles.count(tc->roleName)) {
+                    Role* req = roles[tc->roleName];
+                    for (auto* p : participants) {
+                        if (p->hasRole(req)) { who = p; break; }
+                    }
+                }
+                if (!who && !participants.empty()) who = participants[0];
+
+                driveTask(item, who);
+                std::cout << GREEN << "[DONE]" << RESET << " (Assigned to " << (who ? who->getName() : "None") << ")\n";
+
+                if (item->getItemID().find("room") != std::string::npos ||
+                    item->getItemID().find("settle") != std::string::npos) {
+                    if (headApproval) {
+                        std::cout << "     " << MAGENTA << "✦ Triggering Approval Chain (Chain of Responsibility)..." << RESET << "\n";
+                        ApprovalRequest req(item, 3, std::time(nullptr) + 1800);
+                        headApproval->handle(&req);
+                        std::cout << "     " << GREEN << "✔ Request "
+                                  << (req.getStatus() == ApprovalStatus::Approved ? "Approved by Department Authority" : "Processed")
+                                  << RESET << "\n";
+                    }
+                }
+                rootStage->activateChildren();
+            }
+        }
+
+        if (rootStage->isFinished()) {
+            std::cout << "\n  " << GREEN << BOLD << "🎉 Scenario execution finished successfully!" << RESET << "\n";
+            WorkflowEvent finishEvt(EventType::WORKFLOW_FINISHED, rootStage->getItemID(), currentTimestamp(), "All tasks completed successfully.");
+            publisher.publish(&finishEvt);
+        }
+    } else {
+        // Interactive Execution
+        while (true) {
+            printHeader(model.name, "Interactive Workflow Execution");
+            std::vector<WorkItem*> taskList;
+            for (const auto& pair : taskMap) {
+                taskList.push_back(pair.second);
+                std::cout << "    • " << stateBadge(pair.second->getStateName()) << " "
+                          << pad(pair.second->getName(), 38)
+                          << DIM << "Assignee: " << (pair.second->getAssignee() ? pair.second->getAssignee()->getName() : "None") << RESET << "\n";
+            }
+
+            std::vector<WorkItem*> ready = getAvailableTasks(rootStage);
+            std::cout << "\n  " << GREEN << "Currently Available Tasks (" << ready.size() << "):" << RESET << "\n";
+            if (ready.empty() && rootStage->isFinished()) {
+                std::cout << "    " << GREEN << BOLD << "🎉 All tasks have completed!" << RESET << "\n";
+            } else {
+                for (auto* w : ready) std::cout << "    * " << BOLD << w->getName() << RESET << "\n";
+            }
+
+            std::cout << "\n  Interactive Actions:\n";
+            std::cout << "    1) Step & Advance next available task\n";
+            std::cout << "    2) Pick specific task and execute action (Assign/Start/Complete/Reject)\n";
+            std::cout << "    3) Run Approval Chain check (Chain of Responsibility)\n";
+            std::cout << "    4) Undo last command (Command & Memento) [" << (invoker.canUndo() ? "Available" : "Empty") << "]\n";
+            std::cout << "    5) Auto-run remaining tasks to completion\n";
+            std::cout << "    0) Finish / Return to Scenario Menu\n";
+
+            int c = promptChoice("\n  Select choice [0-5]: ", 0, 5);
+            if (c == 0) break;
+            if (c == 1) {
+                if (ready.empty()) { std::cout << "  " << YELLOW << "No tasks available." << RESET << "\n"; pause(); continue; }
+                driveTask(ready[0], nullptr);
+                rootStage->activateChildren();
+                pause("Task advanced. Press ENTER...");
+            } else if (c == 2) {
+                std::cout << "\n  Select task:\n";
+                for (std::size_t i = 0; i < taskList.size(); ++i) std::cout << "    " << (i + 1) << ") " << taskList[i]->getName() << "\n";
+                int tChoice = promptChoice("  Task index: ", 1, static_cast<int>(taskList.size()));
+                WorkItem* w = taskList[tChoice - 1];
+                std::cout << "    1) Assign task  2) Start task  3) Complete task  4) Reject task  0) Cancel\n";
+                int aChoice = promptChoice("  Action choice [0-4]: ", 0, 4);
+                if (aChoice == 1) {
+                    for (std::size_t i = 0; i < participants.size(); ++i) std::cout << "    " << (i + 1) << ") " << participants[i]->getName() << "\n";
+                    int pChoice = promptChoice("  Participant choice: ", 1, static_cast<int>(participants.size()));
+                    invoker.executeCommand(new AssignCommand(w, participants[pChoice - 1]));
+                    pause("Assigned.");
+                } else if (aChoice == 2) {
+                    invoker.executeCommand(new StartCommand(w));
+                    pause("Started.");
+                } else if (aChoice == 3) {
+                    const TaskConfig* tc = model.findTask(w->getItemID());
+                    if (tc && tc->decorators.hasValidation) {
+                        for (const auto& f : tc->decorators.requiredFields) {
+                            if (!w->hasData(f) || w->getData(f).empty()) {
+                                std::string val = promptString("  Required field '" + f + "': ", "ValidData_" + f);
+                                w->setData(f, val);
+                            }
+                        }
+                    }
+                    invoker.executeCommand(new CompleteCommand(w));
+                    rootStage->activateChildren();
+                    pause("Completed.");
+                } else if (aChoice == 4) {
+                    std::string reason = promptString("  Rejection reason: ", "Review required");
+                    w->reject(reason);
+                    rootStage->activateChildren();
+                    pause("Rejected.");
+                }
+            } else if (c == 3) {
+                if (headApproval) {
+                    int reqLvl = promptInt("  Authority level required [1-5]: ", 3, 1, 5);
+                    ApprovalRequest req(rootStage, reqLvl, std::time(nullptr) + 1800);
+                    headApproval->handle(&req);
+                    std::cout << "  Result: " << (req.getStatus() == ApprovalStatus::Approved ? GREEN + std::string("Approved") : RED + std::string("Rejected/Undecided")) << RESET << "\n";
+                    pause();
+                }
+            } else if (c == 4) {
+                if (invoker.canUndo() && invoker.undoLast()) {
+                    std::cout << "  " << GREEN << "Undid last command." << RESET << "\n";
+                    rootStage->activateChildren();
+                } else {
+                    std::cout << "  " << YELLOW << "Nothing to undo." << RESET << "\n";
+                }
+                pause();
+            } else if (c == 5) {
+                while (!rootStage->isFinished()) {
+                    std::vector<WorkItem*> r = getAvailableTasks(rootStage);
+                    if (r.empty()) break;
+                    for (auto* itm : r) {
+                        driveTask(itm, nullptr);
+                        rootStage->activateChildren();
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    // Results & Telemetry Output
+    printHeader(model.name, "Execution Results, History & Observer Telemetry");
+    std::cout << "  " << BOLD << CYAN << "[1] FINAL WORKFLOW STATUS" << RESET << "\n";
+    for (const auto& pair : taskMap) {
+        WorkItem* w = pair.second;
+        Participant* p = w->getAssignee();
+        std::cout << "    • " << pad(w->getName(), 38) << stateBadge(w->getStateName()) << " "
+                  << DIM << (p ? "Owner: " + p->getName() : "Unassigned") << RESET << "\n";
+    }
+    std::cout << "\n  " << BOLD << CYAN << "[2] AUDIT TRAIL (" << auditLogger.getRecords().size() << " records)" << RESET << "\n";
+    auto records = auditLogger.getRecords();
+    std::size_t startR = (records.size() > 8) ? records.size() - 8 : 0;
+    for (std::size_t i = startR; i < records.size(); ++i) std::cout << "    📋 " << DIM << records[i] << RESET << "\n";
+
+    std::cout << "\n  " << BOLD << CYAN << "[3] NOTIFIER BROADCASTS (" << notifier.getNotificationCount() << " notifications)" << RESET << "\n";
+    auto notes = notifier.getNotifications();
+    std::size_t startN = (notes.size() > 6) ? notes.size() - 6 : 0;
+    for (std::size_t i = startN; i < notes.size(); ++i) std::cout << "    🔔 " << notes[i] << "\n";
+
+    std::cout << "\n  " << BOLD << CYAN << "[4] METRICS SUMMARY" << RESET << "\n";
+    std::cout << "    Completed Transitions: " << metricsCollector.getTransitionCount("Completed") << "\n";
+    std::cout << "    Started Transitions:   " << metricsCollector.getTransitionCount("Started") << "\n";
+    std::cout << "\n";
+
+    pause("Press ENTER to return to scenario menu...");
+
+    if (model.scenarioType == "Custom" || promptBool("  Would you like to save this scenario to disk for future sessions?", false)) {
+        saveScenarioToDisk(model);
+        std::cout << "  " << GREEN << "Scenario saved to disk." << RESET << "\n";
+        pause();
+    }
+
+    // Cleanup dynamically allocated resources
+    delete rootStage;
+    delete headApproval;
+    for (auto* p : participants) delete p;
+    for (auto& pair : roles) delete pair.second;
+}
+
+// ===========================================================================
+// Menu Handlers for Hospital, Legal, Custom, and Saved Scenarios
+// ===========================================================================
+void handleHospitalScenario() {
+    ScenarioModel model("Hospital", "Hospital Emergency Admission",
+                        "Emergency patient admission workflow from paramedic pickup to cleaning and archiving.");
+    auto defaultRoles = ScenarioModel::getHospitalDefaultRoles();
+    for (const auto& r : defaultRoles) model.addRole(r.name, r.authorityLevel);
+
+    model.addStageGroup("grp_transport", "Transport & Bay Preparation", true);
+    model.addStageGroup("grp_arrival", "Arrival & Intake", false);
+    model.addStageGroup("grp_treatment", "Assessment & Treatment", false);
+    model.addStageGroup("grp_closeout", "Cleaning & Closeout", false);
+
+    auto predefined = ScenarioModel::getHospitalPredefinedTasks();
+
+    if (!step1ConfigurePersonnel(model)) return;
+    if (!step2ConfigureTasks(model, predefined)) return;
+    if (!step3ViewAndOrganizeTasks(model)) return;
+    if (!step4ApplyDecorators(model)) return;
+    if (!step5ReviewScenario(model)) return;
+
+    executeScenarioWorkflow(model);
+}
+
+void handleLegalScenario() {
+    ScenarioModel model("Legal", "Legal Case Management",
+                        "Civil litigation matter lifecycle from client intake to court hearing and invoice.");
+    auto defaultRoles = ScenarioModel::getLegalDefaultRoles();
+    for (const auto& r : defaultRoles) model.addRole(r.name, r.authorityLevel);
+
+    model.addStageGroup("grp_legal_intake", "Client Intake & Conflict Check", false);
+    model.addStageGroup("grp_legal_onboarding", "Engagement & Trust Deposit", true);
+    model.addStageGroup("grp_investigation", "Case Investigation & Discovery", true);
+    model.addStageGroup("grp_pleadings", "Pleadings & Court Filing", false);
+    model.addStageGroup("grp_judgment", "Judgment & Settlement", false);
+    model.addStageGroup("grp_billing", "Billing & Case Archive", false);
+
+    auto predefined = ScenarioModel::getLegalPredefinedTasks();
+
+    if (!step1ConfigurePersonnel(model)) return;
+    if (!step2ConfigureTasks(model, predefined)) return;
+    if (!step3ViewAndOrganizeTasks(model)) return;
+    if (!step4ApplyDecorators(model)) return;
+    if (!step5ReviewScenario(model)) return;
+
+    executeScenarioWorkflow(model);
+}
+
+void handleCreateCustomScenario() {
+    printHeader("Create Your Own Scenario", "Initialize Custom Scenario");
+    std::string name = promptString("  Enter scenario name [My Custom Workflow]: ", "My Custom Workflow");
+    std::string desc = promptString("  Enter brief description: ", "Custom reusable workflow created via TUI");
+    ScenarioModel model("Custom", name, desc);
+
+    std::cout << "\n  Configure Roles for your custom workflow:\n";
+    std::cout << "    1) Use standard professional roles (Manager, Specialist, Officer, Assistant, Admin)\n";
+    std::cout << "    2) Define custom roles from scratch\n";
+    int rChoice = promptChoice("  Select choice [1-2]: ", 1, 2);
+    if (rChoice == 1) {
+        model.addRole("Manager", 4);
+        model.addRole("Specialist", 3);
+        model.addRole("Officer", 2);
+        model.addRole("Assistant", 1);
+        model.addRole("Administrator", 5);
+    } else {
+        int rCount = promptInt("  Number of roles [1-10]: ", 3, 1, 10);
+        for (int i = 1; i <= rCount; ++i) {
+            std::string rName = promptString("    Role #" + std::to_string(i) + " name: ", "Role_" + std::to_string(i));
+            int auth = promptInt("    Approval authority level (1-5): ", 1, 1, 5);
+            model.addRole(rName, auth);
+        }
+    }
+
+    model.addStageGroup("grp_phase1", "Phase 1 - Preparation", false);
+    model.addStageGroup("grp_phase2", "Phase 2 - Execution", true);
+    model.addStageGroup("grp_phase3", "Phase 3 - Wrap up", false);
+
+    std::vector<TaskConfig> emptyPredefined;
+
+    if (!step1ConfigurePersonnel(model)) return;
+    if (!step2ConfigureTasks(model, emptyPredefined)) return;
+    if (!step3ViewAndOrganizeTasks(model)) return;
+    if (!step4ApplyDecorators(model)) return;
+    if (!step5ReviewScenario(model)) return;
+
+    if (promptBool("  Save this custom scenario for future sessions?", true)) {
+        saveScenarioToDisk(model);
+        std::cout << "  " << GREEN << "Scenario saved to disk!" << RESET << "\n";
+        pause();
+    }
+
+    executeScenarioWorkflow(model);
+}
+
+void handleSavedScenariosMenu() {
+    while (true) {
+        printHeader("Saved Custom Scenarios", "Manage and Execute Persisted Workflows");
+        auto saved = listSavedScenarios();
+        if (saved.empty()) {
+            std::cout << "  " << YELLOW << "No saved scenarios found on disk." << RESET << "\n";
+            pause();
+            return;
+        }
+
+        std::cout << "  " << BOLD << "Select a saved scenario:" << RESET << "\n\n";
+        for (std::size_t i = 0; i < saved.size(); ++i) {
+            std::cout << "    " << (i + 1) << ") " << pad(saved[i].name, 35)
+                      << DIM << "[" << saved[i].type << " | " << saved[i].taskCount << " tasks | "
+                      << saved[i].personnelCount << " staff]" << RESET << "\n";
+        }
+        std::cout << "\n    0) ↩ Back to Main Menu\n";
+
+        int c = promptChoice("\n  Select scenario [0-" + std::to_string(saved.size()) + "]: ", 0, static_cast<int>(saved.size()));
+        if (c == 0) return;
+
+        std::string chosenFile = saved[c - 1].filename;
+        ScenarioModel model;
+        if (!loadScenarioFromDisk(chosenFile, model)) {
+            std::cout << "  " << RED << "Error reading scenario file." << RESET << "\n";
+            pause();
+            continue;
+        }
+
+        while (true) {
+            printHeader("Saved Scenario: " + model.name, "Manage Workflow");
+            model.printSummary();
+
+            std::cout << "  " << BOLD << "Available Operations:" << RESET << "\n";
+            std::cout << "    1) ▶ Execute this scenario\n";
+            std::cout << "    2) ✏ Edit this scenario (Personnel, Tasks, Groups, Decorators)\n";
+            std::cout << "    3) 💾 Save changes\n";
+            std::cout << "    4) 🗑 Delete this saved scenario from disk\n";
+            std::cout << "    0) ↩ Back to Saved Scenarios List\n";
+
+            int op = promptChoice("\n  Select operation [0-4]: ", 0, 4);
+            if (op == 0) break;
+            if (op == 1) {
+                executeScenarioWorkflow(model);
+            } else if (op == 2) {
+                std::cout << "\n    1) Reconfigure Personnel  2) Modify Tasks  3) Modify Groups  4) Modify Decorators  0) Cancel\n";
+                int eChoice = promptChoice("  Edit choice [0-4]: ", 0, 4);
+                if (eChoice == 1) step1ConfigurePersonnel(model);
+                else if (eChoice == 2) {
+                    auto pre = (model.scenarioType == "Hospital") ? ScenarioModel::getHospitalPredefinedTasks()
+                             : (model.scenarioType == "Legal" ? ScenarioModel::getLegalPredefinedTasks() : std::vector<TaskConfig>());
+                    step2ConfigureTasks(model, pre);
+                } else if (eChoice == 3) step3ViewAndOrganizeTasks(model);
+                else if (eChoice == 4) step4ApplyDecorators(model);
+            } else if (op == 3) {
+                saveScenarioToDisk(model);
+                std::cout << "  " << GREEN << "Changes saved to disk!" << RESET << "\n";
+                pause();
+            } else if (op == 4) {
+                if (promptBool("  Are you sure you want to permanently delete this scenario?", false)) {
+                    unlink(chosenFile.c_str());
+                    std::cout << "  " << YELLOW << "Scenario deleted." << RESET << "\n";
+                    pause();
+                    break;
+                }
+            }
+        }
+    }
+}
+
+} // anonymous namespace
+
+// ===========================================================================
+// Application Main Entry Point
+// ===========================================================================
+int main() {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    DWORD mode = 0;
+    if (hOut != INVALID_HANDLE_VALUE && GetConsoleMode(hOut, &mode)) {
+        SetConsoleMode(hOut, mode | 0x0004);
+    }
+#endif
+
+    resolveSavedDir();
+
+    while (true) {
+        printHeader("TIVIDY Main Menu", "Interactive Workflow Scenario System");
+
+        auto saved = listSavedScenarios();
+
+        std::cout << "  " << BOLD << "Please select an option:" << RESET << "\n\n";
+        std::cout << "    " << CYAN << BOLD << "1)" << RESET << " 🏥 Hospital Scenario (Emergency Admission)\n";
+        std::cout << "    " << CYAN << BOLD << "2)" << RESET << " ⚖️  Legal Scenario (Litigation Matter)\n";
+        std::cout << "    " << CYAN << BOLD << "3)" << RESET << " ✨ Create Your Own Scenario\n";
+
+        if (!saved.empty()) {
+            std::cout << "    " << CYAN << BOLD << "4)" << RESET << " 📁 Saved Custom Scenarios (" << saved.size() << " saved)\n";
+        }
+        std::cout << "\n    " << RED << BOLD << "0)" << RESET << " 👋 Exit\n\n";
+
+        int maxChoice = saved.empty() ? 3 : 4;
+        int choice = promptChoice("  Enter your choice [0-" + std::to_string(maxChoice) + "]: ", 0, maxChoice);
+
+        if (choice == 0) {
+            std::cout << "\n  " << CYAN << "Thank you for using TIVIDY! Goodbye." << RESET << "\n\n";
+            break;
+        } else if (choice == 1) {
+            handleHospitalScenario();
+        } else if (choice == 2) {
+            handleLegalScenario();
+        } else if (choice == 3) {
+            handleCreateCustomScenario();
+        } else if (choice == 4) {
+            handleSavedScenariosMenu();
+        }
+    }
+
     return 0;
-}
-
-// ===========================================================================
-// PART A - HOSPITAL: EMERGENCY PATIENT ADMISSION
-//
-// One ambulance patient, from paramedic pickup to cleaning and archiving:
-//
-//   Transport and bay preparation (parallel)
-//       Ambulance run (sequential): paramedic pickup (dispatch is told) -> transport
-//       Nurse prepares the treatment bay while the ambulance is on its way
-//   Arrival and intake (sequential)
-//       Secretary registers the patient -> patient history is retrieved ->
-//       paramedic hands over -> nurse intake (triage priority, audited)
-//   Assessment and treatment (sequential)
-//       Doctor accepts the case (deadline + reroute) -> assessment -> room allocation
-//       (ICU needs the Department Head, surgery needs the Hospital Administrator)
-//   Closeout (sequential)
-//       Cleaning (only after the patient has left) -> archive the history
-//
-// Failure paths: delayed ambulance, doctor who does not respond, patient who
-// deteriorates during intake, patient who does not survive.
-// External systems: ambulance dispatch (APITwo via AdapterTwo) and hospital
-// patient records (APIOne via AdapterOne).
-// ===========================================================================
-
-// Everything the hospital needs that is NOT the workflow tree itself: the
-// staff, their roles, the assignment strategies, the approval chain, the
-// event bus with its listeners, and the two external systems with adapters.
-struct HospitalWorld {
-    // roles (the number is the authority level used by the approval chain)
-    Role paramedicRole, secretaryRole, nurseRole, doctorRole,
-         deptHeadRole, adminRole, cleanerRole;
-
-    // staff
-    Participant paramedic, secretary, nurseDlamini, nurseKhoza,
-                drKhumalo, drNaidoo, cleaner;
-
-    // Strategy: who gets the next task
-    RoleBasedAssignment byRole;
-    WorkloadAssignment byWorkload;
-    RuleBasedAssignment lightLoadDoctor;   // a doctor with fewer than 2 open cases
-
-    // Observer: one bus, three independent listeners
-    EventPublisher bus;
-    AuditLogger audit;
-    Notifier notifier;
-    MetricsCollector metrics;
-
-    // Adapter: the two external systems the hospital talks to
-    APIOne patientRecords;
-    APITwo ambulanceDispatch;
-    AdapterOne recordsAdapter;
-    AdapterTwo dispatchAdapter;
-
-    // Chain of Responsibility: Doctor -> Department Head -> Hospital Administrator.
-    // The head of the chain owns the rest, so only 'chain' is ever deleted.
-    ApprovalLevel *doctorLevel, *headLevel, *adminLevel, *chain;
-
-    HospitalWorld()
-        : paramedicRole("Paramedic", 1), secretaryRole("Secretary", 1),
-          nurseRole("Nurse", 2), doctorRole("Doctor", 3),
-          deptHeadRole("Department Head", 4), adminRole("Hospital Administrator", 5),
-          cleanerRole("Cleaner", 1),
-          paramedic("PM1", "Paramedic Thabo", &paramedicRole),
-          secretary("SEC1", "Secretary Lerato", &secretaryRole),
-          nurseDlamini("N1", "Nurse Dlamini", &nurseRole),
-          nurseKhoza("N2", "Nurse Khoza", &nurseRole),
-          drKhumalo("DR1", "Dr Khumalo", &doctorRole),
-          drNaidoo("DR2", "Dr Naidoo", &doctorRole),
-          cleaner("CL1", "Cleaner Pieter", &cleanerRole),
-          lightLoadDoctor([this](Task*, Participant *p) {
-              return p->hasRole(&doctorRole) && p->getWorkload() < 2;
-          }),
-          recordsAdapter(&patientRecords),
-          dispatchAdapter(&ambulanceDispatch) {
-        doctorLevel = new ApprovalLevel(&doctorRole, 1800);
-        headLevel   = new ApprovalLevel(&deptHeadRole, 1800);
-        adminLevel  = new ApprovalLevel(&adminRole, 3600);
-        doctorLevel->setNext(headLevel);
-        headLevel->setNext(adminLevel);
-        chain = doctorLevel;
-
-        bus.attach(&audit);
-        bus.attach(&notifier);
-        bus.attach(&metrics);
-    }
-    ~HospitalWorld() { delete chain; }
-
-    std::vector<Participant*> staff() {
-        std::vector<Participant*> v;
-        v.push_back(&paramedic);    v.push_back(&secretary);
-        v.push_back(&nurseDlamini); v.push_back(&nurseKhoza);
-        v.push_back(&drKhumalo);    v.push_back(&drNaidoo);
-        v.push_back(&cleaner);
-        return v;
-    }
-};
-
-// Raw task pointers, so a step can reach a task without searching the tree.
-// 'xxxW' is the item as it sits in the tree (possibly wrapped in decorators).
-struct Pieces {
-    Stage *transport, *ambulance, *arrival, *treatment, *closeout;
-    ExternalTask *pickup;
-    Task *transportT, *bay, *regT, *records, *handover, *intakeT,
-         *accept, *assessT, *room, *cleaning, *archive;
-    WorkItem *regW, *intakeW, *assessW;
-    Pieces() : transport(0), ambulance(0), arrival(0), treatment(0), closeout(0),
-               pickup(0), transportT(0), bay(0), regT(0), records(0), handover(0),
-               intakeT(0), accept(0), assessT(0), room(0), cleaning(0), archive(0),
-               regW(0), intakeW(0), assessW(0) {}
-};
-
-// ---- the four stages of the emergency admission -----------------------------
-
-// Transport and bay preparation run side by side.
-Stage *makeTransportStage(HospitalWorld &w, Pieces &p) {
-    p.transport = new ParallelStage("transport-stage", "Transport and bay preparation");
-    p.ambulance = new SequentialStage("ambulance", "Ambulance run");
-    p.pickup = new ExternalTask("pickup", "Paramedic picks up patient (dispatch notified)",
-                                &w.paramedicRole, &w.byRole, &w.dispatchAdapter, "dispatch");
-    p.transportT = new Task("transport", "Transport patient to hospital",
-                            &w.paramedicRole, &w.byRole);
-    p.ambulance->add(p.pickup);
-    p.ambulance->add(p.transportT);
-    p.bay = new Task("bay-prep", "Nurse prepares treatment bay",
-                     &w.nurseRole, &w.byWorkload);
-    p.transport->add(p.ambulance);
-    p.transport->add(p.bay);
-    return p.transport;
-}
-
-// Registration, patient history, handover, nurse intake: strictly in order.
-Stage *makeArrivalStage(HospitalWorld &w, Pieces &p) {
-    p.arrival = new SequentialStage("arrival-stage", "Arrival and intake");
-
-    p.regT = new Task("register", "Secretary registers patient",
-                      &w.secretaryRole, &w.byRole);
-    std::vector<std::string> required;
-    required.push_back("patientName");
-    required.push_back("complaint");
-    p.regW = new ValidatedTask(p.regT, required);            // Decorator: needs patient data
-
-    p.records = new Task("records", "Retrieve patient history from hospital records",
-                         &w.secretaryRole, &w.byRole);
-    p.handover = new Task("handover", "Paramedic hands patient over to nurse",
-                          &w.paramedicRole, &w.byRole);
-
-    p.intakeT = new Task("intake", "Nurse intake and preparation",
-                         &w.nurseRole, &w.byWorkload);
-    WorkItem *audited = new AuditedTask(p.intakeT, &w.bus);  // Decorator: audited ...
-    p.intakeW = new PriorityTask(audited, 1);                // ... and stacked with priority 1 = critical
-
-    p.arrival->add(p.regW);
-    p.arrival->add(p.records);
-    p.arrival->add(p.handover);
-    p.arrival->add(p.intakeW);
-    return p.arrival;
-}
-
-// Doctor accepts (with a deadline), assesses, then allocates a room.
-Stage *makeTreatmentStage(HospitalWorld &w, Pieces &p) {
-    p.treatment = new SequentialStage("treatment-stage", "Assessment and treatment");
-    p.accept = new Task("doctor-accept", "Doctor accepts the case",
-                        &w.doctorRole, &w.byWorkload);
-    p.assessT = new Task("assessment", "Doctor assesses and treats patient",
-                         &w.doctorRole, &w.lightLoadDoctor);
-    p.assessW = new AuditedTask(p.assessT, &w.bus);
-    p.room = new Task("room-allocation", "Doctor allocates room (ward / ICU / surgery)",
-                      &w.doctorRole, &w.byRole);
-    p.treatment->add(p.accept);
-    p.treatment->add(p.assessW);
-    p.treatment->add(p.room);
-    return p.treatment;
-}
-
-// Cleaning only starts once the patient has left the area.
-Stage *makeCloseoutStage(HospitalWorld &w, Pieces &p) {
-    p.closeout = new SequentialStage("closeout-stage", "Cleaning and closeout");
-    p.cleaning = new Task("cleaning", "Cleaning staff clean the bay",
-                          &w.cleanerRole, &w.byRole);
-    p.archive = new Task("archive", "Secretary archives patient history",
-                         &w.secretaryRole, &w.byRole);
-    p.closeout->add(p.cleaning);
-    p.closeout->add(p.archive);
-    return p.closeout;
-}
-
-Stage *buildEmergencyAdmission(HospitalWorld &w, Pieces &p) {
-    Stage *root = new SequentialStage("emergency-admission", "Emergency patient admission");
-    root->add(makeTransportStage(w, p));
-    root->add(makeArrivalStage(w, p));
-    root->add(makeTreatmentStage(w, p));
-    root->add(makeCloseoutStage(w, p));
-    return root;
-}
-
-// Everything the hospital steps share. Its first step resets it, so "Restart"
-// in the GUI works. The tree is always deleted before the world it points into.
-struct HospitalCtx {
-    HospitalWorld *w;
-    Stage *root;          // patient A, the case we walk through step by step
-    WorkItem *patientB;   // a second patient cloned from the same definition
-    Pieces p;
-    HospitalCtx() : w(0), root(0), patientB(0) {}
-    void reset() {
-        delete patientB;
-        delete root;
-        delete w;
-        patientB = 0;
-        root = 0;
-        w = 0;
-        p = Pieces();
-    }
-    ~HospitalCtx() { reset(); }
-};
-
-void addHospitalScenario(Desktop &theatre, HospitalCtx &c) {
-    auto &check = Desktop::check;
-    auto &expectThrows = Desktop::expectThrows;
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 1. Staff, roles and assignment (Strategy)");
-
-    theatre.step("Create the hospital", "Paramedic, secretary, 2 nurses, 2 doctors, cleaner, plus Department Head and Administrator roles", [&] {
-        c.reset();
-        c.w = new HospitalWorld();
-        check(c.w->paramedic.hasRole(&c.w->paramedicRole), "paramedic should hold the Paramedic role");
-        check(c.w->nurseRole.getAuthorityLevel() < c.w->doctorRole.getAuthorityLevel(),
-              "a doctor outranks a nurse");
-        check(c.w->doctorRole.getAuthorityLevel() < c.w->deptHeadRole.getAuthorityLevel(),
-              "the Department Head outranks a doctor");
-        check(c.w->deptHeadRole.getAuthorityLevel() < c.w->adminRole.getAuthorityLevel(),
-              "the Administrator outranks the Department Head");
-        theatre.say("7 staff, 7 roles, approval authority 1 to 5");
-    });
-
-    theatre.step("Role-based: a nursing task goes to a nurse", "RoleBasedAssignment skips the paramedic and secretary", [&] {
-        Task probe("probe", "Probe nursing task", &c.w->nurseRole, &c.w->byRole);
-        Participant *who = c.w->byRole.selectParticipant(&probe, c.w->staff());
-        check(who != 0, "someone should be selected");
-        check(who->hasRole(&c.w->nurseRole), "selected " + qs(who->getName()) + " is not a nurse");
-    });
-
-    theatre.step("Workload-based: the least busy nurse is chosen", "Nurse Dlamini has 3 patients, Nurse Khoza has none", [&] {
-        c.w->nurseDlamini.incrementWorkload();
-        c.w->nurseDlamini.incrementWorkload();
-        c.w->nurseDlamini.incrementWorkload();
-        Task probe("probe", "Probe nursing task", &c.w->nurseRole, &c.w->byWorkload);
-        Participant *who = c.w->byWorkload.selectParticipant(&probe, c.w->staff());
-        check(who == &c.w->nurseKhoza, "expected Nurse Khoza, got " + qs(who ? who->getName() : "nobody"));
-    });
-
-    theatre.step("Rule-based: skip a doctor with 2 open cases", "Rule: a doctor with fewer than 2 open cases", [&] {
-        c.w->drKhumalo.incrementWorkload();
-        c.w->drKhumalo.incrementWorkload();
-        Task probe("probe", "Probe doctor task", &c.w->doctorRole, &c.w->lightLoadDoctor);
-        Participant *who = c.w->lightLoadDoctor.selectParticipant(&probe, c.w->staff());
-        c.w->drKhumalo.decrementWorkload();
-        c.w->drKhumalo.decrementWorkload();
-        check(who == &c.w->drNaidoo, "expected Dr Naidoo, got " + qs(who ? who->getName() : "nobody"));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 2. Build the emergency admission (Composite + Decorator)");
-
-    theatre.step("Create the root stage", "Empty SequentialStage 'Emergency patient admission'", [&] {
-        c.root = new SequentialStage("emergency-admission", "Emergency patient admission");
-        check(c.root->getChildren().empty(), "A new stage should have no children");
-    });
-
-    theatre.step("Add transport and bay preparation", "ParallelStage: [ambulance run (pickup -> transport)] || [bay prep]", [&] {
-        c.root->add(makeTransportStage(*c.w, c.p));
-        check(c.p.transport->getChildren().size() == 2, "transport stage: ambulance run + bay prep");
-        check(c.p.ambulance->getChildren().size() == 2, "ambulance run: pickup + transport");
-    });
-
-    theatre.step("Add arrival and intake", "register -> patient history -> handover -> nurse intake", [&] {
-        c.root->add(makeArrivalStage(*c.w, c.p));
-        check(c.p.arrival->getChildren().size() == 4, "arrival stage should hold 4 tasks");
-    });
-
-    theatre.step("Add assessment and treatment", "doctor accepts -> assessment -> room allocation", [&] {
-        c.root->add(makeTreatmentStage(*c.w, c.p));
-        check(c.p.treatment->getChildren().size() == 3, "treatment stage should hold 3 tasks");
-    });
-
-    theatre.step("Add cleaning and closeout", "cleaning -> archive history", [&] {
-        c.root->add(makeCloseoutStage(*c.w, c.p));
-        check(c.p.closeout->getChildren().size() == 2, "closeout stage should hold 2 tasks");
-        check(c.root->getChildren().size() == 4, "root should hold 4 stages");
-    });
-
-    theatre.step("Decorators wrap tasks without new task types", "Registration is validated, intake is audited + priority 1, assessment is audited", [&] {
-        check(dynamic_cast<ValidatedTask*>(c.p.regW) != 0, "registration should be a ValidatedTask");
-        PriorityTask *pr = dynamic_cast<PriorityTask*>(c.p.intakeW);
-        check(pr != 0, "intake should be a PriorityTask");
-        check(pr->getPriority() == 1, "intake priority should be 1 (critical)");
-        check(dynamic_cast<AuditedTask*>(pr->getWrapped()) != 0, "intake should also be audited (stacked)");
-        check(dynamic_cast<AuditedTask*>(c.p.assessW) != 0, "assessment should be audited");
-        check(c.p.regW->getItemID() == "register", "a decorator keeps the task's id");
-    });
-
-    theatre.step("Count the work", "12 tasks across 4 stages", [&] {
-        std::vector<WorkItem*> leaves;
-        collectLeaves(c.root, leaves);
-        check(leaves.size() == 12, QString("expected 12 tasks, found %1").arg(leaves.size()));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 3. Two patients, one definition (Prototype)");
-
-    theatre.step("Clone the workflow for a second patient", "root->clone() copies the whole tree: stages, tasks and decorators", [&] {
-        c.patientB = c.root->clone();
-        check(c.patientB != c.root, "the clone must be a different object");
-        check(c.patientB->getChildren().size() == c.root->getChildren().size(), "same shape as the original");
-        check(findItem(c.patientB, "pickup") != findItem(c.root, "pickup"), "every task must be its own copy");
-    });
-
-    theatre.step("Patient B moves, patient A does not", "Driving B's pickup leaves A's pickup in Created", [&] {
-        c.patientB->makeAvailable();
-        c.patientB->activateChildren();
-        WorkItem *bPickup = findItem(c.patientB, "pickup");
-        drive(bPickup, &c.w->paramedic);
-        check(bPickup->isFinished(), "B's pickup should be finished");
-        check(state(c.p.pickup) == "Created", "A's pickup must still be Created, was " + qs(state(c.p.pickup)));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 4. Pickup and transport (Parallel stage + Adapter)");
-
-    theatre.step("Ambulance dispatched: start patient A", "Pickup and bay preparation open together; transport waits for pickup", [&] {
-        c.root->makeAvailable();
-        c.root->activateChildren();
-        check(released(c.p.pickup), "pickup should be released");
-        check(released(c.p.bay), "bay preparation runs in parallel, so it is released too");
-        check(!released(c.p.transportT), "transport must wait for the pickup (sequential)");
-        check(!released(c.p.regT), "registration must wait for the transport stage");
-        sayAvailable(theatre, c.root);
-        check(availableNow(c.root).size() == 2, "the iterator should find exactly pickup and bay-prep");
-    });
-
-    theatre.step("Paramedic picks the patient up", "Assigned -> Started", [&] {
-        c.p.pickup->assign(&c.w->paramedic);
-        c.p.pickup->start();
-        check(state(c.p.pickup) == "Started", "expected Started, was " + qs(state(c.p.pickup)));
-    });
-
-    theatre.step("Ambulance dispatch is notified (Adapter)", "ExternalTask -> AdapterTwo -> APITwo dispatch", [&] {
-        check(c.p.pickup->execute(), "the dispatch request should be accepted");
-        check(c.p.pickup->getResponse() == "Request submitted to API Two",
-              "unexpected dispatch response: " + qs(c.p.pickup->getResponse()));
-        check(c.w->dispatchAdapter.getName() == "API Two", "dispatch adapter should front APITwo");
-        c.p.pickup->complete();
-        check(c.p.pickup->isFinished(), "pickup should be complete");
-    });
-
-    theatre.step("Transport opens after pickup", "Finishing 'pickup' releases 'transport'", [&] {
-        c.root->activateChildren();
-        check(released(c.p.transportT), "transport should be released after pickup");
-        sayAvailable(theatre, c.root);
-        check(availableNow(c.root).size() == 2, "the iterator should now find transport and bay-prep");
-    });
-
-    theatre.step("Nurse prepares the bay while the ambulance drives", "Workload strategy picks Nurse Khoza; the iterator count drops from 2 to 1", [&] {
-        c.p.bay->autoAssign(c.w->staff());
-        check(c.p.bay->getAssignee() == &c.w->nurseKhoza,
-              "expected Nurse Khoza, got " + qs(c.p.bay->getAssignee() ? c.p.bay->getAssignee()->getName() : "nobody"));
-        c.p.bay->start();
-        sayAvailable(theatre, c.root);
-        check(availableNow(c.root).size() == 1, "bay-prep is being worked on, so only transport is still waiting");
-        c.p.bay->complete();
-        check(c.p.bay->isFinished(), "bay should be ready");
-        check(!c.p.transport->isFinished(), "the stage waits for the slowest branch (the ambulance)");
-    });
-
-    theatre.step("Ambulance arrives", "Transport completes, the parallel stage finishes, arrival opens", [&] {
-        drive(c.p.transportT, &c.w->paramedic);
-        c.root->activateChildren();
-        check(c.p.transport->isFinished(), "transport stage should be finished");
-        check(released(c.p.regT), "registration should be released on arrival");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 5. Arrival and nurse intake (Decorator + Strategy + Adapter)");
-
-    theatre.step("Registration refuses to complete without patient data", "ValidatedTask throws until patientName and complaint are set", [&] {
-        c.p.regW->assign(&c.w->secretary);
-        c.p.regW->start();
-        expectThrows([&] { c.p.regW->complete(); }, "complete() with no patient data");
-        check(state(c.p.regW) == "Started", "a refused completion must leave the task Started");
-    });
-
-    theatre.step("Secretary registers the patient", "Fill patientName and complaint, then complete", [&] {
-        c.p.regW->setData("patientName", "Unknown male, approx. 50");
-        c.p.regW->setData("complaint", "Chest pain");
-        c.p.regW->complete();
-        check(state(c.p.regW) == "Completed", "expected Completed, was " + qs(state(c.p.regW)));
-        c.root->activateChildren();
-        check(released(c.p.records), "patient history should be released after registration");
-        sayAvailable(theatre, c.root);
-        check(availableNow(c.root).size() == 1, "only the patient-history task should be available now");
-    });
-
-    theatre.step("Patient history is retrieved (Adapter)", "AdapterOne -> APIOne: add patient-1042 to hospital records", [&] {
-        std::string operation = "add";
-        std::string payload = "patient-1042=chest pain on arrival";
-        c.w->recordsAdapter.request(&operation, &payload);   // throws if the adapter rejects it
-        check(c.w->recordsAdapter.getName() == "API One", "records adapter should front APIOne");
-        drive(c.p.records, &c.w->secretary);
-        check(c.p.records->isFinished(), "history retrieval should be complete");
-    });
-
-    theatre.step("Handover: intake cannot begin before it", "Nurse intake stays locked until the paramedic hands over", [&] {
-        c.root->activateChildren();
-        check(released(c.p.handover), "handover should be released");
-        check(!released(c.p.intakeT), "intake must wait for the handover");
-        drive(c.p.handover, &c.w->paramedic);
-        c.root->activateChildren();
-        check(released(c.p.intakeT), "intake should open once the handover is complete");
-    });
-
-    theatre.step("Intake is critical priority and audited", "PriorityTask(AuditedTask(Task)): priority 1 stored on the item", [&] {
-        PriorityTask *pr = dynamic_cast<PriorityTask*>(c.p.intakeW);
-        check(pr != 0 && pr->getPriority() == 1, "intake should carry priority 1");
-        check(c.p.intakeW->getData("priority") == "1", "priority should be stored as data");
-    });
-
-    theatre.step("Intake goes to the least busy nurse", "Strategy picks Nurse Khoza; the audited decorator logs the assignment", [&] {
-        const std::size_t before = c.w->audit.getRecords().size();
-        Participant *who = c.w->byWorkload.selectParticipant(c.p.intakeT, c.w->staff());
-        check(who == &c.w->nurseKhoza, "expected Nurse Khoza, got " + qs(who ? who->getName() : "nobody"));
-        c.p.intakeW->assign(who);
-        c.p.intakeW->start();
-        c.p.intakeW->complete();
-        check(state(c.p.intakeW) == "Completed", "expected Completed, was " + qs(state(c.p.intakeW)));
-        check(c.w->audit.getRecords().size() > before, "the audited decorator should have logged the intake");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 6. Doctor acceptance, deadline and reroute (Command + Memento + State)");
-
-    theatre.step("Treatment opens", "The doctor's acceptance is the first task of the next stage", [&] {
-        c.root->activateChildren();
-        check(released(c.p.accept), "doctor acceptance should be released");
-        check(!released(c.p.assessT), "assessment must wait for the doctor to accept");
-    });
-
-    theatre.step("Wrong doctor assigned, then undone", "AssignCommand snapshots the task (Memento); undo() restores it", [&] {
-        CommandInvoker invoker;
-        invoker.executeCommand(new AssignCommand(c.p.accept, &c.w->drNaidoo));
-        check(state(c.p.accept) == "Assigned", "expected Assigned, was " + qs(state(c.p.accept)));
-        check(invoker.canUndo(), "the assignment should be undoable");
-        check(invoker.undoLast(), "undo should succeed");
-        check(state(c.p.accept) == "Available", "undo should restore Available, was " + qs(state(c.p.accept)));
-        check(c.p.accept->getAssignee() == 0, "undo should clear the assignee");
-    });
-
-    theatre.step("Dr Khumalo is assigned but does not respond", "Deadline passes, the hospital is told via a TIMEOUT event", [&] {
-        c.p.accept->assign(&c.w->drKhumalo);
-        c.w->drKhumalo.incrementWorkload();
-        c.p.accept->setDeadline(std::time(0) - 60);
-        check(c.p.accept->getDeadline() < std::time(0), "the acceptance deadline should have passed");
-        WorkflowEvent timeout(EventType::TIMEOUT, "doctor-accept", stamp(),
-                              "Dr Khumalo did not accept the case before the deadline");
-        c.w->bus.publish(&timeout);
-        check(anyContains(c.w->notifier.getNotifications(), "Approval timeout"),
-              "the notifier should report the timeout");
-    });
-
-    theatre.step("Case is rerouted to the other doctor", "reject -> Rejected -> makeAvailable -> workload strategy picks Dr Naidoo", [&] {
-        c.p.accept->reject("No response within the deadline");
-        check(state(c.p.accept) == "Rejected", "expected Rejected, was " + qs(state(c.p.accept)));
-        check(c.p.accept->getAssignee() == 0, "a rejected task should have no assignee");
-        check(c.p.accept->getData("rejectionReason") == "No response within the deadline",
-              "the rejection reason should be stored");
-        c.p.accept->makeAvailable();
-        check(state(c.p.accept) == "Available", "the case should be available again");
-        c.p.accept->autoAssign(c.w->staff());
-        check(c.p.accept->getAssignee() == &c.w->drNaidoo,
-              "expected Dr Naidoo, got " + qs(c.p.accept->getAssignee() ? c.p.accept->getAssignee()->getName() : "nobody"));
-    });
-
-    theatre.step("Dr Naidoo accepts the case", "Started -> Completed; assessment is released", [&] {
-        c.p.accept->start();
-        c.p.accept->complete();
-        c.root->activateChildren();
-        check(c.p.accept->isFinished(), "acceptance should be complete");
-        check(released(c.p.assessT), "assessment should be released after acceptance");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 7. Assessment and room approval (Chain of Responsibility)");
-
-    theatre.step("A lightly loaded doctor assesses and treats the patient", "Rule-based assignment; assign, start and complete are all audited", [&] {
-        const std::size_t before = c.w->audit.getRecords().size();
-        Participant *who = c.w->lightLoadDoctor.selectParticipant(c.p.assessT, c.w->staff());
-        check(who != 0 && who->hasRole(&c.w->doctorRole), "a doctor should be selected");
-        c.p.assessW->assign(who);
-        c.p.assessW->start();
-        c.p.assessW->complete();
-        check(state(c.p.assessW) == "Completed", "expected Completed, was " + qs(state(c.p.assessW)));
-        check(anyContains(c.w->audit.getRecords(), "was completed"), "the audit log should show the completion");
-        check(c.w->audit.getRecords().size() >= before + 3, "assign, start and complete should each be logged");
-        c.root->activateChildren();
-    });
-
-    theatre.step("General room: the doctor can approve", "Required level 3, doctor authority 3", [&] {
-        ApprovalRequest request(c.p.room, 3, std::time(0) + 1800);
-        check(c.w->doctorLevel->canApprove(&request), "a doctor should be able to approve a general room");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should be Approved");
-    });
-
-    theatre.step("ICU transfer: escalates to the Department Head", "Required level 4: doctor cannot approve, Department Head can", [&] {
-        ApprovalRequest request(c.p.room, 4, std::time(0) + 1800);
-        check(!c.w->doctorLevel->canApprove(&request), "a doctor must not approve an ICU transfer");
-        check(c.w->headLevel->canApprove(&request), "the Department Head can approve an ICU transfer");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should end up Approved");
-    });
-
-    theatre.step("Surgery: escalates to the Hospital Administrator", "Required level 5: only the top of the chain can approve", [&] {
-        ApprovalRequest request(c.p.room, 5, std::time(0) + 3600);
-        check(!c.w->doctorLevel->canApprove(&request), "a doctor must not approve surgery");
-        check(!c.w->headLevel->canApprove(&request), "the Department Head must not approve surgery");
-        check(c.w->adminLevel->canApprove(&request), "the Administrator can approve surgery");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should end up Approved");
-    });
-
-    theatre.step("A rejected request stays rejected", "Once decided, later handlers cannot override it", [&] {
-        ApprovalRequest request(c.p.room, 4, std::time(0) + 1800);
-        request.reject(&c.w->deptHeadRole);
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Rejected, "a rejected request must stay Rejected");
-    });
-
-    theatre.step("An unanswered approval expires and escalates", "Deadline passed -> isExpired -> the chain resets the deadline and decides", [&] {
-        ApprovalRequest request(c.p.room, 4, std::time(0) - 60);
-        check(request.isExpired(std::time(0)), "an undecided request past its deadline is expired");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the escalated request should be Approved");
-        check(!request.isExpired(std::time(0)), "a decided request is no longer expired");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 8. Room allocation, cleaning and archive");
-
-    theatre.step("Cleaning is locked until the patient leaves", "Cleaning waits for room allocation", [&] {
-        check(!released(c.p.cleaning), "cleaning must not start while the patient is still in the area");
-    });
-
-    theatre.step("Doctor allocates the ICU (approved)", "The patient is moved; cleaning opens", [&] {
-        drive(c.p.room, &c.w->drNaidoo);
-        c.root->activateChildren();
-        check(c.p.room->isFinished(), "room allocation should be complete");
-        check(released(c.p.cleaning), "cleaning should open once the patient has left");
-    });
-
-    theatre.step("Cleaning staff clean the bay", "Created -> Completed", [&] {
-        drive(c.p.cleaning, &c.w->cleaner);
-        c.root->activateChildren();
-        check(c.p.cleaning->isFinished(), "cleaning should be complete");
-        check(released(c.p.archive), "archiving should open after cleaning");
-    });
-
-    theatre.step("Secretary archives the history", "Whole workflow finishes: transferred to ICU", [&] {
-        drive(c.p.archive, &c.w->secretary);
-        c.root->activateChildren();
-        check(c.root->isFinished(), "the whole admission should be finished");
-        c.root->setData("outcome", "Transferred to ICU");
-        check(c.root->getData("outcome") == "Transferred to ICU", "the outcome should be recorded");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 9. Audit, notifications and metrics (Observer)");
-
-    theatre.step("Audit log and notifier saw the same events", "One bus, independent listeners", [&] {
-        const std::size_t audited = c.w->audit.getRecords().size();
-        check(audited > 0, "the audit log should not be empty");
-        check(static_cast<std::size_t>(c.w->notifier.getNotificationCount()) == audited,
-              "every published event should reach both listeners");
-    });
-
-    theatre.step("Ambulance dispatch reports an external event", "EXTERNAL_EVENT reaches the audit log and the notifier", [&] {
-        const int before = c.w->notifier.getNotificationCount();
-        WorkflowEvent external(EventType::EXTERNAL_EVENT, "ambulance-12", stamp(),
-                               "Ambulance 12 is en route with the patient");
-        c.w->bus.publish(&external);
-        check(c.w->notifier.getNotificationCount() == before + 1, "the notifier should receive the event");
-        check(anyContains(c.w->notifier.getNotifications(), "External event received"),
-              "the notification should name an external event");
-        check(anyContains(c.w->audit.getRecords(), "Ambulance 12 is en route"),
-              "the audit log should record the event details");
-    });
-
-    theatre.step("Metrics: how long did treatment take?", "Two state changes 12 minutes apart give an average of 720 s", [&] {
-        WorkflowEvent started(EventType::ITEM_STATE_CHANGED, "assessment", "2026-10-31 10:00:00", "Started");
-        WorkflowEvent completed(EventType::ITEM_STATE_CHANGED, "assessment", "2026-10-31 10:12:00", "Completed");
-        c.w->bus.publish(&started);
-        c.w->bus.publish(&completed);
-        check(c.w->metrics.getTransitionCount("Started") == 1, "one transition into Started");
-        const float avg = c.w->metrics.getAverageTimeInState("Started");
-        check(avg > 719.9f && avg < 720.1f, QString("expected 720 s in Started, got %1").arg(avg));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 10. Undo history (Command + Memento)");
-
-    theatre.step("Patient B's bay: assign, start, complete", "Three commands, three snapshots", [&] {
-        WorkItem *bBay = findItem(c.patientB, "bay-prep");
-        check(released(bBay), "B's bay should be released");
-        CommandInvoker invoker;
-        invoker.executeCommand(new AssignCommand(bBay, &c.w->nurseKhoza));
-        invoker.executeCommand(new StartCommand(bBay));
-        invoker.executeCommand(new CompleteCommand(bBay));
-        check(state(bBay) == "Completed", "expected Completed, was " + qs(state(bBay)));
-        check(invoker.getHistory()->size() == 3, "three commands should be in the history");
-
-        check(invoker.undoLast(), "first undo");
-        check(state(bBay) == "Started", "undoing Complete should give Started, was " + qs(state(bBay)));
-        check(invoker.undoLast(), "second undo");
-        check(state(bBay) == "Assigned", "undoing Start should give Assigned, was " + qs(state(bBay)));
-        check(invoker.undoLast(), "third undo");
-        check(state(bBay) == "Available", "undoing Assign should give Available, was " + qs(state(bBay)));
-        check(!invoker.canUndo(), "the history should now be empty");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 11. Work moving from Created to Completed (Iterator)");
-
-    theatre.step("Walk the whole tree (DepthFirstIterator)", "18 nodes: 6 stages + 12 tasks, every task still Created", [&] {
-        Pieces p;
-        Stage *t = buildEmergencyAdmission(*c.w, p);
-        check(countNodes(t) == 18, QString("expected 18 nodes, walked %1").arg(countNodes(t)));
-        theatre.say("tally: " + qs(stateTally(t)));
-        check(stateTally(t) == "Created 12", "every task should start Created, was " + qs(stateTally(t)));
-        delete t;
-    });
-
-    theatre.step("Drain the work with AvailableItemsIterator", "Ask the iterator what is available, complete one task, ask again, until nothing is left", [&] {
-        Pieces p;
-        Stage *t = buildEmergencyAdmission(*c.w, p);
-        p.regW->setData("patientName", "Unknown male, approx. 40");
-        p.regW->setData("complaint", "Road traffic accident");
-        t->makeAvailable();
-
-        std::vector<std::size_t> sizes;
-        int passes = 0;
-        for (; passes < 40; ++passes) {
-            std::vector<WorkItem*> avail = availableNow(t);
-            if (avail.empty()) break;
-            sizes.push_back(avail.size());
-            theatre.say(QString("pass %1: %2 available [%3] | %4")
-                            .arg(passes + 1).arg(avail.size()).arg(qs(idList(avail))).arg(qs(stateTally(t))));
-            drive(avail[0], &c.w->nurseKhoza);          // first available task goes Available -> Completed
-            t->activateChildren();                       // next tasks are released
-        }
-        theatre.say("done: " + qs(stateTally(t)));
-        check(passes == 12, QString("expected 12 passes (one per task), took %1").arg(passes));
-        check(sizes.front() == 2, "the parallel stage opens with 2 available tasks");
-        check(sizes.back() == 1, "the last task is the only one left");
-        check(availableNow(t).empty(), "nothing should be available at the end");
-        check(stateTally(t) == "Completed 12", "every task should be Completed, was " + qs(stateTally(t)));
-        check(t->isFinished(), "the root should be finished");
-        delete t;
-    });
-
-    theatre.step("Patient A is done, patient B still has work", "The iterator sees each clone's own state (Prototype)", [&] {
-        check(availableNow(c.root).empty(), "finished patient A should have nothing available");
-        check(stateTally(c.root) == "Completed 12", "patient A should be Completed 12, was " + qs(stateTally(c.root)));
-        c.patientB->activateChildren();
-        sayAvailable(theatre, c.patientB);
-        check(availableNow(c.patientB).size() == 2, "patient B should have transport and bay-prep available");
-        theatre.say("patient B: " + qs(stateTally(c.patientB)));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 12. Failure paths");
-
-    theatre.step("Ambulance delayed: hospital informed, bay prep cancelled", "EXTERNAL_EVENT + cancel() on the transport stage", [&] {
-        Pieces p;
-        Stage *t = buildEmergencyAdmission(*c.w, p);
-        t->makeAvailable();
-        t->activateChildren();
-        const int before = c.w->notifier.getNotificationCount();
-        WorkflowEvent delayed(EventType::EXTERNAL_EVENT, "ambulance-12", stamp(),
-                              "Ambulance 12 delayed: road closure");
-        c.w->bus.publish(&delayed);
-        check(c.w->notifier.getNotificationCount() == before + 1, "the hospital should be informed of the delay");
-        p.transport->cancel();
-        check(state(p.pickup) == "Cancelled", "pickup should be Cancelled, was " + qs(state(p.pickup)));
-        check(state(p.transportT) == "Cancelled", "transport should be Cancelled");
-        check(state(p.bay) == "Cancelled", "bay preparation should be Cancelled");
-        check(p.transport->isFinished(), "a fully cancelled stage counts as finished");
-        delete t;
-    });
-
-    theatre.step("Patient deteriorates during intake: escalated", "Intake is rejected and handed to the doctor", [&] {
-        Pieces p;
-        Stage *arr = makeArrivalStage(*c.w, p);
-        arr->makeAvailable();
-        p.regW->setData("patientName", "Unknown female, approx. 30");
-        p.regW->setData("complaint", "Shortness of breath");
-        drive(p.regW, &c.w->secretary);
-        arr->activateChildren();
-        drive(p.records, &c.w->secretary);
-        arr->activateChildren();
-        drive(p.handover, &c.w->paramedic);
-        arr->activateChildren();
-        check(released(p.intakeT), "intake should be released");
-
-        p.intakeW->assign(&c.w->nurseKhoza);
-        p.intakeW->start();
-        p.intakeW->reject("Patient deteriorating: escalate to emergency treatment");
-        check(state(p.intakeW) == "Rejected", "intake should be Rejected, was " + qs(state(p.intakeW)));
-        check(p.intakeW->getData("rejectionReason").find("emergency treatment") != std::string::npos,
-              "the escalation reason should be stored");
-        check(p.intakeW->getAssignee() == 0, "the nurse should be released from the task");
-
-        p.intakeW->makeAvailable();
-        p.intakeW->assign(&c.w->drNaidoo);
-        check(p.intakeW->getAssignee() == &c.w->drNaidoo, "the doctor should take over the patient");
-        delete arr;
-    });
-
-    theatre.step("Patient does not survive: workflow ends as deceased", "cancel() the whole case; the outcome is recorded and archived", [&] {
-        Pieces p;
-        Stage *t = buildEmergencyAdmission(*c.w, p);
-        t->makeAvailable();
-        t->activateChildren();
-        t->cancel();
-        check(t->isFinished(), "a cancelled case should be finished");
-        check(state(p.room) == "Cancelled", "unfinished work should be Cancelled");
-        t->setData("outcome", "Deceased");
-        check(t->getData("outcome") == "Deceased", "the outcome should be recorded as Deceased");
-        WorkflowEvent done(EventType::WORKFLOW_FINISHED, "emergency-admission", stamp(),
-                           "Patient deceased: history archived");
-        c.w->bus.publish(&done);
-        check(anyContains(c.w->audit.getRecords(), "Patient deceased"), "the audit log should archive the outcome");
-        delete t;
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Hospital 13. End to end");
-
-    theatre.step("Run a fresh emergency admission to completion", "Every task, in order, until the root finishes", [&] {
-        Pieces p;
-        Stage *t = buildEmergencyAdmission(*c.w, p);
-        p.regW->setData("patientName", "Unknown male, approx. 70");
-        p.regW->setData("complaint", "Fall with head injury");
-        runToCompletion(theatre, t, &c.w->nurseKhoza);
-        t->setData("outcome", "Admitted to ward");
-        check(t->getData("outcome") == "Admitted to ward", "the outcome should be recorded");
-        delete t;
-    });
-}
-
-// ===========================================================================
-// PART B - LEGAL
-//
-// Legal 1 to 5 are the original steps, unchanged: a small case built from plain
-// tasks (Composite, lifecycle, parallel discovery, reject and cancel).
-// Legal 6 onward add the detail: a full litigation matter with staff, roles,
-// decorators, adapters, approvals, observers, undo, iterators and failure paths.
-//
-// The full matter:
-//   Client intake (sequential)
-//       Client interview (validated) -> conflict check ->
-//       [engagement letter || trust deposit] (parallel)
-//   Investigation (parallel)
-//       evidence || legal research || witness statements ||
-//       [expert brief -> expert report] (sequential, nested)
-//   Pleadings and court (sequential)
-//       Draft (audited) -> senior review (audited + priority) ->
-//       e-file with the court (ExternalTask / adapter) -> attend hearing
-//   Judgment and costs (sequential)
-//       Record judgment -> agree costs / settlement (approval chain)
-//   Billing and closure (sequential)
-//       Invoice the client -> archive the case file
-//
-// External systems: court e-filing portal (APITwo via AdapterTwo) and the
-// firm's case records (APIOne via AdapterOne).
-// ===========================================================================
-
-// Everything the firm needs that is NOT the matter tree itself.
-struct LegalWorld {
-    // roles (the number is the authority level used by the approval chain)
-    Role paralegalRole, associateRole, seniorRole, partnerRole, managingRole, financeRole;
-
-    // staff
-    Participant paralegalSipho, paralegalAnke, associateZanele, associateJohan,
-                seniorMokoena, partnerPillay, managingVanWyk, financeNomsa;
-
-    // Strategy: who gets the next task
-    RoleBasedAssignment byRole;
-    WorkloadAssignment byWorkload;
-    RuleBasedAssignment lightLoadAssociate;   // an associate with fewer than 2 open matters
-
-    // Observer: one bus, three independent listeners
-    EventPublisher bus;
-    AuditLogger audit;
-    Notifier notifier;
-    MetricsCollector metrics;
-
-    // Adapter: the two external systems the firm talks to
-    APIOne caseRecords;
-    APITwo courtPortal;
-    AdapterOne recordsAdapter;
-    AdapterTwo courtAdapter;
-
-    // Chain of Responsibility: Senior Attorney -> Partner -> Managing Partner.
-    // The head of the chain owns the rest, so only 'chain' is ever deleted.
-    ApprovalLevel *seniorLevel, *partnerLevel, *managingLevel, *chain;
-
-    LegalWorld()
-        : paralegalRole("Paralegal", 1), associateRole("Associate", 2),
-          seniorRole("Senior Attorney", 3), partnerRole("Partner", 4),
-          managingRole("Managing Partner", 5), financeRole("Finance Clerk", 1),
-          paralegalSipho("PL1", "Paralegal Sipho", &paralegalRole),
-          paralegalAnke("PL2", "Paralegal Anke", &paralegalRole),
-          associateZanele("AS1", "Associate Zanele", &associateRole),
-          associateJohan("AS2", "Associate Johan", &associateRole),
-          seniorMokoena("SA1", "Senior Attorney Mokoena", &seniorRole),
-          partnerPillay("PT1", "Partner Pillay", &partnerRole),
-          managingVanWyk("MP1", "Managing Partner van Wyk", &managingRole),
-          financeNomsa("FIN1", "Finance Clerk Nomsa", &financeRole),
-          lightLoadAssociate([this](Task*, Participant *p) {
-              return p->hasRole(&associateRole) && p->getWorkload() < 2;
-          }),
-          recordsAdapter(&caseRecords),
-          courtAdapter(&courtPortal) {
-        seniorLevel   = new ApprovalLevel(&seniorRole, 1800);
-        partnerLevel  = new ApprovalLevel(&partnerRole, 1800);
-        managingLevel = new ApprovalLevel(&managingRole, 3600);
-        seniorLevel->setNext(partnerLevel);
-        partnerLevel->setNext(managingLevel);
-        chain = seniorLevel;
-
-        bus.attach(&audit);
-        bus.attach(&notifier);
-        bus.attach(&metrics);
-    }
-    ~LegalWorld() { delete chain; }
-
-    std::vector<Participant*> staff() {
-        std::vector<Participant*> v;
-        v.push_back(&paralegalSipho);  v.push_back(&paralegalAnke);
-        v.push_back(&associateZanele); v.push_back(&associateJohan);
-        v.push_back(&seniorMokoena);   v.push_back(&partnerPillay);
-        v.push_back(&managingVanWyk);  v.push_back(&financeNomsa);
-        return v;
-    }
-};
-
-// Raw task pointers, so a step can reach a task without searching the tree.
-// 'xxxW' is the item as it sits in the tree (possibly wrapped in decorators).
-struct LegalPieces {
-    Stage *intake = 0, *onboarding = 0, *investigation = 0, *expertRun = 0,
-          *pleadings = 0, *judgment = 0, *billing = 0;
-    ExternalTask *efile = 0;
-    Task *clientT = 0, *conflict = 0, *engagement = 0, *trust = 0,
-         *evidence = 0, *research = 0, *witness = 0, *expertBrief = 0, *expertReport = 0,
-         *draftT = 0, *reviewT = 0, *hearing = 0,
-         *judgmentT = 0, *settle = 0, *invoice = 0, *archive = 0;
-    WorkItem *clientW = 0, *draftW = 0, *reviewW = 0;
-};
-
-// ---- the five stages of the litigation matter --------------------------------
-
-// Interview (validated), conflict check, then engagement + trust deposit in parallel.
-Stage *makeLegalIntakeStage(LegalWorld &w, LegalPieces &p) {
-    p.intake = new SequentialStage("intake-stage", "Client intake and conflict check");
-
-    p.clientT = new Task("client", "Client intake interview", &w.paralegalRole, &w.byRole);
-    std::vector<std::string> required;
-    required.push_back("clientName");
-    required.push_back("matter");
-    p.clientW = new ValidatedTask(p.clientT, required);          // Decorator: needs client data
-
-    p.conflict = new Task("conflict", "Conflict of interest check", &w.associateRole, &w.byWorkload);
-
-    p.onboarding = new ParallelStage("onboarding", "Engagement and trust deposit");
-    p.engagement = new Task("engagement", "Send engagement letter", &w.associateRole, &w.byWorkload);
-    p.trust = new Task("trust", "Receive trust deposit", &w.financeRole, &w.byRole);
-    p.onboarding->add(p.engagement);
-    p.onboarding->add(p.trust);
-
-    p.intake->add(p.clientW);
-    p.intake->add(p.conflict);
-    p.intake->add(p.onboarding);
-    return p.intake;
-}
-
-// Four lines of investigation run side by side; the expert report waits for the brief.
-Stage *makeLegalInvestigationStage(LegalWorld &w, LegalPieces &p) {
-    p.investigation = new ParallelStage("investigation-stage", "Investigate the case");
-    p.evidence = new Task("evidence", "Gather evidence", &w.paralegalRole, &w.byRole);
-    p.research = new Task("research", "Legal research and precedents", &w.associateRole, &w.lightLoadAssociate);
-    p.witness = new Task("witness", "Interview witnesses", &w.paralegalRole, &w.byRole);
-
-    p.expertRun = new SequentialStage("expert-run", "Expert witness");
-    p.expertBrief = new Task("expert-brief", "Brief the expert witness", &w.associateRole, &w.byWorkload);
-    p.expertReport = new Task("expert-report", "Receive expert report", &w.associateRole, &w.byWorkload);
-    p.expertRun->add(p.expertBrief);
-    p.expertRun->add(p.expertReport);
-
-    p.investigation->add(p.evidence);
-    p.investigation->add(p.research);
-    p.investigation->add(p.witness);
-    p.investigation->add(p.expertRun);
-    return p.investigation;
-}
-
-// Draft (audited), senior review (audited + priority), e-file (adapter), hearing.
-Stage *makeLegalPleadingsStage(LegalWorld &w, LegalPieces &p) {
-    p.pleadings = new SequentialStage("pleadings-stage", "Pleadings and court");
-
-    p.draftT = new Task("draft", "Draft pleadings", &w.associateRole, &w.lightLoadAssociate);
-    p.draftW = new AuditedTask(p.draftT, &w.bus);                // Decorator: audited
-
-    p.reviewT = new Task("review", "Senior review and sign-off", &w.seniorRole, &w.byRole);
-    WorkItem *audited = new AuditedTask(p.reviewT, &w.bus);      // Decorator: audited ...
-    p.reviewW = new PriorityTask(audited, 2);                    // ... and stacked with priority 2 = high
-
-    p.efile = new ExternalTask("efile", "E-file pleadings with the court (portal notified)",
-                               &w.paralegalRole, &w.byRole, &w.courtAdapter, "dispatch");
-    p.hearing = new Task("hearing", "Attend hearing", &w.seniorRole, &w.byRole);
-
-    p.pleadings->add(p.draftW);
-    p.pleadings->add(p.reviewW);
-    p.pleadings->add(p.efile);
-    p.pleadings->add(p.hearing);
-    return p.pleadings;
-}
-
-// Judgment, then costs / settlement (which needs approval).
-Stage *makeLegalJudgmentStage(LegalWorld &w, LegalPieces &p) {
-    p.judgment = new SequentialStage("judgment-stage", "Judgment and costs");
-    p.judgmentT = new Task("judgment", "Record judgment", &w.seniorRole, &w.byRole);
-    p.settle = new Task("settle", "Agree costs / settlement", &w.partnerRole, &w.byRole);
-    p.judgment->add(p.judgmentT);
-    p.judgment->add(p.settle);
-    return p.judgment;
-}
-
-// Invoice only after costs are agreed; the file is archived last.
-Stage *makeLegalBillingStage(LegalWorld &w, LegalPieces &p) {
-    p.billing = new SequentialStage("billing-stage", "Billing and closure");
-    p.invoice = new Task("invoice", "Invoice the client", &w.financeRole, &w.byRole);
-    p.archive = new Task("archive-case", "Archive the case file", &w.paralegalRole, &w.byRole);
-    p.billing->add(p.invoice);
-    p.billing->add(p.archive);
-    return p.billing;
-}
-
-Stage *buildLegalCase(LegalWorld &w, LegalPieces &p) {
-    Stage *root = new SequentialStage("legal-case", "Litigation matter");
-    root->add(makeLegalIntakeStage(w, p));
-    root->add(makeLegalInvestigationStage(w, p));
-    root->add(makeLegalPleadingsStage(w, p));
-    root->add(makeLegalJudgmentStage(w, p));
-    root->add(makeLegalBillingStage(w, p));
-    return root;
-}
-
-struct LegalCtx {
-    // original small case (Legal 1 to 5)
-    Participant who;
-    Stage *root = 0, *intake = 0, *discovery = 0, *litigation = 0;
-    Task *client = 0, *conflict = 0, *evidence = 0, *research = 0, *draft = 0, *review = 0, *filing = 0;
-
-    // full litigation matter (Legal 6 onward)
-    LegalWorld *w = 0;
-    Stage *full = 0;           // matter A, the case we walk through step by step
-    WorkItem *matterB = 0;     // a second matter cloned from the same definition
-    LegalPieces p;
-
-    LegalCtx() : who("lawyer", "Test Attorney", 0) {}
-
-    void resetSmall() {
-        delete root;
-        root = intake = discovery = litigation = 0;
-        client = conflict = evidence = research = draft = review = filing = 0;
-    }
-    // The tree is always deleted before the world it points into.
-    void resetFirm() {
-        delete matterB;
-        delete full;
-        delete w;
-        matterB = 0;
-        full = 0;
-        w = 0;
-        p = LegalPieces();
-    }
-    void reset() { resetFirm(); resetSmall(); }
-    ~LegalCtx() { reset(); }
-};
-
-// Full legal case tree in one go, used by the original end-to-end step.
-void buildLegalFull(LegalCtx &c) {
-    c.reset();
-    c.root = new SequentialStage("legal-full-root", "Legal case workflow");
-    Stage *intake = new SequentialStage("intake-stage", "Client intake and conflict check");
-    intake->add(new Task("client", "Client intake interview", 0, 0));
-    intake->add(new Task("conflict", "Conflict of interest check", 0, 0));
-    Stage *discovery = new ParallelStage("discovery-stage", "Investigate the case in parallel");
-    discovery->add(new Task("evidence", "Gather evidence", 0, 0));
-    discovery->add(new Task("research", "Legal research and precedents", 0, 0));
-    discovery->add(new Task("witness", "Interview witnesses", 0, 0));
-    intake->add(discovery);
-    c.root->add(intake);
-    Stage *litigation = new SequentialStage("litigation-stage", "Pleadings and court");
-    litigation->add(new Task("draft", "Draft pleadings", 0, 0));
-    litigation->add(new Task("review", "Partner review and sign-off", 0, 0));
-    litigation->add(new Task("filing", "File with the court", 0, 0));
-    litigation->add(new Task("hearing", "Attend hearing", 0, 0));
-    c.root->add(litigation);
-    Stage *closure = new SequentialStage("closure-stage", "Judgment and closure");
-    closure->add(new Task("judgment", "Record judgment or settlement", 0, 0));
-    closure->add(new Task("invoice", "Invoice the client", 0, 0));
-    closure->add(new Task("archive-case", "Archive the case file", 0, 0));
-    c.root->add(closure);
-}
-
-void addLegalScenario(Desktop &theatre, LegalCtx &c) {
-    auto &check = Desktop::check;
-    auto &expectThrows = Desktop::expectThrows;
-
-    // ==================================================================
-    // ORIGINAL STEPS (unchanged)
-    // ==================================================================
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 1. Build the workflow (Composite)");
-
-    theatre.step("Create the root stage", "Empty SequentialStage for a new legal case", [&] {
-        c.reset();
-        c.root = new SequentialStage("legal-root", "Legal case workflow");
-        check(c.root->getChildren().empty(), "A new stage should have no children");
-        theatre.say("legal root created");
-    });
-
-    theatre.step("Add tasks to a sequential stage", "client intake + conflict check inside 'intake'", [&] {
-        c.intake = new SequentialStage("intake", "Client intake and conflict check");
-        c.client = new Task("client", "Client intake interview", 0, 0);
-        c.conflict = new Task("conflict", "Conflict of interest check", 0, 0);
-        c.intake->add(c.client);
-        c.intake->add(c.conflict);
-        check(c.intake->getChildren().size() == 2, "intake should have 2 children");
-    });
-
-    theatre.step("Nest a parallel stage", "evidence + research run side by side inside 'intake'", [&] {
-        c.discovery = new ParallelStage("discovery", "Investigate the case");
-        c.evidence = new Task("evidence", "Gather evidence", 0, 0);
-        c.research = new Task("research", "Legal research and precedents", 0, 0);
-        c.discovery->add(c.evidence);
-        c.discovery->add(c.research);
-        c.intake->add(c.discovery);
-        c.root->add(c.intake);
-        check(c.intake->getChildren().size() == 3, "intake should now have 3 children");
-        check(c.root->getChildren().size() == 1, "root should have 1 child");
-    });
-
-    theatre.step("Add a second sequential stage", "draft -> review -> filing inside 'litigation'", [&] {
-        c.litigation = new SequentialStage("litigation", "Pleadings and court");
-        c.draft = new Task("draft", "Draft pleadings", 0, 0);
-        c.review = new Task("review", "Partner review and sign-off", 0, 0);
-        c.filing = new Task("filing", "File with the court", 0, 0);
-        c.litigation->add(c.draft);
-        c.litigation->add(c.review);
-        c.litigation->add(c.filing);
-        c.root->add(c.litigation);
-        check(c.litigation->getChildren().size() == 3, "litigation should have 3 children");
-        check(c.root->getChildren().size() == 2, "root should have 2 stages");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 2. Initial state and sequential gating");
-
-    theatre.step("Tasks start in Created", "Nothing is released before the case is opened", [&] {
-        check(state(c.client) == "Created", "client intake should be Created, was " + qs(state(c.client)));
-        check(state(c.conflict) == "Created", "conflict check should be Created");
-    });
-
-    theatre.step("Open the case", "makeAvailable() + activateChildren() releases only client intake", [&] {
-        c.root->makeAvailable();
-        c.root->activateChildren();
-        check(released(c.client), "client intake should be released first");
-        check(!released(c.conflict), "conflict check must wait for client intake (sequential)");
-        check(!released(c.draft), "drafting must wait for the intake stage");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 3. Task lifecycle");
-
-    theatre.step("Assign", "Available -> Assigned", [&] {
-        if (state(c.client) == "Created") c.client->makeAvailable();
-        c.client->assign(&c.who);
-        check(state(c.client) == "Assigned", "expected Assigned, was " + qs(state(c.client)));
-    });
-
-    theatre.step("Start", "Assigned -> Started", [&] {
-        c.client->start();
-        check(state(c.client) == "Started", "expected Started, was " + qs(state(c.client)));
-    });
-
-    theatre.step("Complete", "Started -> Completed", [&] {
-        c.client->complete();
-        check(state(c.client) == "Completed", "expected Completed, was " + qs(state(c.client)));
-        check(c.client->isFinished(), "a completed task should report isFinished()");
-    });
-
-    theatre.step("Next task is released", "Finishing client intake opens the conflict check", [&] {
-        c.root->activateChildren();
-        check(released(c.conflict), "conflict check should be released after intake completes");
-    });
-
-    theatre.step("Illegal transition is refused", "Starting a task that is already completed must throw", [&] {
-        expectThrows([&] { c.client->start(); }, "start() on a completed task");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 4. Parallel discovery");
-
-    theatre.step("Clear the conflict check", "Opens the parallel discovery stage", [&] {
-        drive(c.conflict, &c.who);
-        c.root->activateChildren();
-        check(c.conflict->isFinished(), "conflict check should be finished");
-    });
-
-    theatre.step("Both discovery tasks open together", "evidence and research are released at the same time", [&] {
-        check(released(c.evidence), "evidence gathering should be released");
-        check(released(c.research), "legal research should be released");
-        sayAvailable(theatre, c.root);
-        check(availableNow(c.root).size() == 2, "the iterator should find evidence and research");
-    });
-
-    theatre.step("One discovery task done, stage not done", "Stage waits for every child", [&] {
-        drive(c.evidence, &c.who);
-        c.root->activateChildren();
-        check(c.evidence->isFinished(), "evidence gathering should be finished");
-        check(!c.discovery->isFinished(), "discovery must not finish while research is open");
-        sayAvailable(theatre, c.root);
-        check(availableNow(c.root).size() == 1, "only research should still be available");
-    });
-
-    theatre.step("Last discovery task finishes the stage", "discovery and then intake complete", [&] {
-        drive(c.research, &c.who);
-        c.root->activateChildren();
-        check(c.discovery->isFinished(), "discovery should be finished");
-        check(c.intake->isFinished(), "intake should be finished");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 5. Reject and cancel");
-
-    theatre.step("Litigation stage is released", "Drafting opens after intake", [&] {
-        check(released(c.draft), "drafting should be released once intake is done");
-    });
-
-    theatre.step("Reject at partner review", "Finish the draft, then reject(reason) on 'review'", [&] {
-        drive(c.draft, &c.who);
-        c.root->activateChildren();
-        check(c.draft->isFinished(), "draft should be finished before review");
-        if (state(c.review) == "Created") c.review->makeAvailable();
-        if (state(c.review) == "Available") c.review->assign(&c.who);
-        c.review->reject("Pleadings need revision");
-        const std::string s = state(c.review);
-        theatre.say("review is now " + qs(s));
-        check(s == "Rejected" || s == "Available",
-              "expected Rejected (or back to Available), was " + qs(s));
-    });
-
-    theatre.step("Cancel a task", "cancel() on 'filing' - the client withdrew", [&] {
-        c.filing->cancel();
-        check(state(c.filing) == "Cancelled", "expected Cancelled, was " + qs(state(c.filing)));
-    });
-
-    // ==================================================================
-    // ADDED DETAIL: the full litigation matter
-    // ==================================================================
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 6. Staff, roles and assignment (Strategy)");
-
-    theatre.step("Create the law firm", "Paralegals, 2 associates, senior attorney, partner, managing partner, finance clerk", [&] {
-        c.resetFirm();
-        c.w = new LegalWorld();
-        check(c.w->paralegalSipho.hasRole(&c.w->paralegalRole), "Sipho should hold the Paralegal role");
-        check(c.w->associateRole.getAuthorityLevel() < c.w->seniorRole.getAuthorityLevel(),
-              "a senior attorney outranks an associate");
-        check(c.w->seniorRole.getAuthorityLevel() < c.w->partnerRole.getAuthorityLevel(),
-              "a partner outranks a senior attorney");
-        check(c.w->partnerRole.getAuthorityLevel() < c.w->managingRole.getAuthorityLevel(),
-              "the Managing Partner outranks a partner");
-        theatre.say("8 staff, 6 roles, approval authority 1 to 5");
-    });
-
-    theatre.step("Role-based: a research task goes to an associate", "RoleBasedAssignment skips paralegals, finance and partners", [&] {
-        Task probe("probe", "Probe associate task", &c.w->associateRole, &c.w->byRole);
-        Participant *who = c.w->byRole.selectParticipant(&probe, c.w->staff());
-        check(who != 0, "someone should be selected");
-        check(who->hasRole(&c.w->associateRole), "selected " + qs(who->getName()) + " is not an associate");
-    });
-
-    theatre.step("Workload-based: the least busy associate is chosen", "Associate Zanele has 3 open matters, Associate Johan has none", [&] {
-        c.w->associateZanele.incrementWorkload();
-        c.w->associateZanele.incrementWorkload();
-        c.w->associateZanele.incrementWorkload();
-        Task probe("probe", "Probe associate task", &c.w->associateRole, &c.w->byWorkload);
-        Participant *who = c.w->byWorkload.selectParticipant(&probe, c.w->staff());
-        check(who == &c.w->associateJohan, "expected Associate Johan, got " + qs(who ? who->getName() : "nobody"));
-    });
-
-    theatre.step("Rule-based: skip an associate with 2 open matters", "Rule: an associate with fewer than 2 open matters", [&] {
-        Task probe("probe", "Probe associate task", &c.w->associateRole, &c.w->lightLoadAssociate);
-        Participant *who = c.w->lightLoadAssociate.selectParticipant(&probe, c.w->staff());
-        check(who == &c.w->associateJohan, "expected Associate Johan, got " + qs(who ? who->getName() : "nobody"));
-        check(who != &c.w->associateZanele, "Zanele is over the limit and must be skipped");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 7. Build the litigation matter (Composite + Decorator)");
-
-    theatre.step("Create the full matter's root stage", "Empty SequentialStage 'Litigation matter'", [&] {
-        c.full = new SequentialStage("legal-case", "Litigation matter");
-        check(c.full->getChildren().empty(), "A new stage should have no children");
-    });
-
-    theatre.step("Add client intake", "interview -> conflict check -> [engagement || trust deposit]", [&] {
-        c.full->add(makeLegalIntakeStage(*c.w, c.p));
-        check(c.p.intake->getChildren().size() == 3, "intake: interview + conflict check + onboarding");
-        check(c.p.onboarding->getChildren().size() == 2, "onboarding: engagement + trust deposit");
-    });
-
-    theatre.step("Add the investigation", "ParallelStage: evidence || research || witnesses || [expert brief -> report]", [&] {
-        c.full->add(makeLegalInvestigationStage(*c.w, c.p));
-        check(c.p.investigation->getChildren().size() == 4, "investigation: 3 tasks + expert run");
-        check(c.p.expertRun->getChildren().size() == 2, "expert run: brief + report");
-    });
-
-    theatre.step("Add pleadings and court", "draft -> senior review -> e-file -> hearing", [&] {
-        c.full->add(makeLegalPleadingsStage(*c.w, c.p));
-        check(c.p.pleadings->getChildren().size() == 4, "pleadings stage should hold 4 tasks");
-    });
-
-    theatre.step("Add judgment and costs", "record judgment -> agree costs / settlement", [&] {
-        c.full->add(makeLegalJudgmentStage(*c.w, c.p));
-        check(c.p.judgment->getChildren().size() == 2, "judgment stage should hold 2 tasks");
-    });
-
-    theatre.step("Add billing and closure", "invoice the client -> archive the case file", [&] {
-        c.full->add(makeLegalBillingStage(*c.w, c.p));
-        check(c.p.billing->getChildren().size() == 2, "billing stage should hold 2 tasks");
-        check(c.full->getChildren().size() == 5, "root should hold 5 stages");
-    });
-
-    theatre.step("Decorators wrap tasks without new task types", "Interview is validated, draft is audited, review is audited + priority 2", [&] {
-        check(dynamic_cast<ValidatedTask*>(c.p.clientW) != 0, "the interview should be a ValidatedTask");
-        check(dynamic_cast<AuditedTask*>(c.p.draftW) != 0, "the draft should be audited");
-        PriorityTask *pr = dynamic_cast<PriorityTask*>(c.p.reviewW);
-        check(pr != 0, "the review should be a PriorityTask");
-        check(pr->getPriority() == 2, "review priority should be 2 (high)");
-        check(dynamic_cast<AuditedTask*>(pr->getWrapped()) != 0, "the review should also be audited (stacked)");
-        check(c.p.clientW->getItemID() == "client", "a decorator keeps the task's id");
-    });
-
-    theatre.step("Count the work", "17 tasks across 5 stages", [&] {
-        std::vector<WorkItem*> leaves;
-        collectLeaves(c.full, leaves);
-        check(leaves.size() == 17, QString("expected 17 tasks, found %1").arg(leaves.size()));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 8. Two matters, one template (Prototype)");
-
-    theatre.step("Clone the workflow for a second client", "root->clone() copies the whole tree: stages, tasks and decorators", [&] {
-        c.matterB = c.full->clone();
-        check(c.matterB != c.full, "the clone must be a different object");
-        check(c.matterB->getChildren().size() == c.full->getChildren().size(), "same shape as the original");
-        check(findItem(c.matterB, "client") != findItem(c.full, "client"), "every task must be its own copy");
-    });
-
-    theatre.step("Matter B moves, matter A does not", "Driving B's interview leaves A's interview in Created", [&] {
-        c.matterB->makeAvailable();
-        c.matterB->activateChildren();
-        WorkItem *bClient = findItem(c.matterB, "client");
-        bClient->setData("clientName", "Dube Family Trust");
-        bClient->setData("matter", "Estate dispute");
-        drive(bClient, &c.w->paralegalSipho);
-        c.matterB->activateChildren();
-        check(bClient->isFinished(), "B's interview should be finished");
-        check(state(c.p.clientT) == "Created", "A's interview must still be Created, was " + qs(state(c.p.clientT)));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 9. Client intake (Decorator + Strategy + Parallel stage)");
-
-    theatre.step("Open matter A: only the interview is released", "Conflict check and onboarding wait for the interview (sequential)", [&] {
-        c.full->makeAvailable();
-        c.full->activateChildren();
-        check(released(c.p.clientT), "the interview should be released first");
-        check(!released(c.p.conflict), "the conflict check must wait for the interview");
-        check(!released(c.p.engagement), "onboarding must wait for the conflict check");
-        check(!released(c.p.evidence), "the investigation must wait for intake");
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 1, "the iterator should find exactly the interview");
-    });
-
-    theatre.step("Interview refuses to complete without client data", "ValidatedTask throws until clientName and matter are set", [&] {
-        c.p.clientW->assign(&c.w->paralegalSipho);
-        c.p.clientW->start();
-        expectThrows([&] { c.p.clientW->complete(); }, "complete() with no client data");
-        check(state(c.p.clientW) == "Started", "a refused completion must leave the task Started");
-    });
-
-    theatre.step("Paralegal captures the client details", "Fill clientName and matter, then complete", [&] {
-        c.p.clientW->setData("clientName", "Mokwena Trading (Pty) Ltd");
-        c.p.clientW->setData("matter", "Breach of contract, R2.4m");
-        c.p.clientW->complete();
-        check(state(c.p.clientW) == "Completed", "expected Completed, was " + qs(state(c.p.clientW)));
-        c.full->activateChildren();
-        check(released(c.p.conflict), "the conflict check should be released after the interview");
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 1, "only the conflict check should be available now");
-    });
-
-    theatre.step("Conflict check goes to the least busy associate", "Strategy skips Associate Zanele (3 open matters)", [&] {
-        Participant *who = c.w->byWorkload.selectParticipant(c.p.conflict, c.w->staff());
-        check(who != 0 && who->hasRole(&c.w->associateRole), "an associate should be selected");
-        check(who != &c.w->associateZanele, "the busy associate must be skipped");
-        theatre.say("assigned to " + qs(who->getName()));
-        c.p.conflict->assign(who);
-        c.p.conflict->start();
-        c.p.conflict->complete();
-        c.full->activateChildren();
-        check(c.p.conflict->isFinished(), "the conflict check should be complete");
-        check(released(c.p.engagement), "the engagement letter should be released");
-        check(released(c.p.trust), "the trust deposit is released in parallel");
-    });
-
-    theatre.step("Engagement letter and trust deposit run in parallel", "The stage waits for the slower branch", [&] {
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 2, "the iterator should find engagement and trust deposit");
-        drive(c.p.engagement, &c.w->associateJohan);
-        c.full->activateChildren();
-        check(c.p.engagement->isFinished(), "the engagement letter should be sent");
-        check(!c.p.onboarding->isFinished(), "onboarding must wait for the trust deposit");
-        drive(c.p.trust, &c.w->financeNomsa);
-        c.full->activateChildren();
-        check(c.p.onboarding->isFinished(), "onboarding should be finished");
-        check(c.p.intake->isFinished(), "the whole intake stage should be finished");
-    });
-
-    theatre.step("Matter is opened in the firm's case records (Adapter)", "AdapterOne -> APIOne: add matter-2026-118 to case records", [&] {
-        std::string operation = "add";
-        std::string payload = "matter-2026-118=Mokwena Trading breach of contract";
-        c.w->recordsAdapter.request(&operation, &payload);   // throws if the adapter rejects it
-        check(c.w->recordsAdapter.getName() == "API One", "records adapter should front APIOne");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 10. Investigation (Parallel stage with a nested sequence)");
-
-    theatre.step("Four lines of work open together", "Expert report waits for the brief", [&] {
-        check(released(c.p.evidence), "evidence gathering should be released");
-        check(released(c.p.research), "legal research should be released");
-        check(released(c.p.witness), "witness interviews should be released");
-        check(released(c.p.expertBrief), "the expert brief should be released");
-        check(!released(c.p.expertReport), "the expert report must wait for the brief (sequential)");
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 4, "the iterator should find all four lines of work");
-    });
-
-    theatre.step("Expert is briefed, report opens", "Finishing 'expert-brief' releases 'expert-report'", [&] {
-        drive(c.p.expertBrief, &c.w->associateJohan);
-        c.full->activateChildren();
-        check(c.p.expertBrief->isFinished(), "the expert should be briefed");
-        check(released(c.p.expertReport), "the report should be released after the brief");
-    });
-
-    theatre.step("Paralegals gather evidence and witness statements", "Two branches done, the stage is not", [&] {
-        drive(c.p.evidence, &c.w->paralegalSipho);
-        drive(c.p.witness, &c.w->paralegalAnke);
-        c.full->activateChildren();
-        check(c.p.evidence->isFinished() && c.p.witness->isFinished(), "both paralegal tasks should be finished");
-        check(!c.p.investigation->isFinished(), "the investigation must not finish while research and the report are open");
-        sayAvailable(theatre, c.full);
-        check(availableNow(c.full).size() == 2, "research and the expert report should still be available");
-    });
-
-    theatre.step("Research goes to a lightly loaded associate", "Rule-based assignment; Zanele is over the limit", [&] {
-        Participant *who = c.w->lightLoadAssociate.selectParticipant(c.p.research, c.w->staff());
-        check(who != 0 && who->hasRole(&c.w->associateRole), "an associate should be selected");
-        check(who != &c.w->associateZanele, "an associate with 3 open matters must be skipped");
-        c.p.research->assign(who);
-        c.p.research->start();
-        c.p.research->complete();
-        c.full->activateChildren();
-        check(c.p.research->isFinished(), "legal research should be complete");
-        check(!c.p.investigation->isFinished(), "the stage still waits for the expert report");
-    });
-
-    theatre.step("Expert report is the slowest branch", "Report arrives, investigation finishes, drafting opens", [&] {
-        drive(c.p.expertReport, &c.w->associateJohan);
-        c.full->activateChildren();
-        check(c.p.expertRun->isFinished(), "the expert run should be finished");
-        check(c.p.investigation->isFinished(), "the investigation should be finished");
-        check(released(c.p.draftT), "drafting should open once the investigation is done");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 11. Pleadings and review (Command + Memento + State)");
-
-    theatre.step("Draft goes to a lightly loaded associate, audited", "assign, start and complete are each logged", [&] {
-        const std::size_t before = c.w->audit.getRecords().size();
-        Participant *who = c.w->lightLoadAssociate.selectParticipant(c.p.draftT, c.w->staff());
-        check(who != 0 && who != &c.w->associateZanele, "a lightly loaded associate should be selected");
-        c.p.draftW->assign(who);
-        c.p.draftW->start();
-        c.p.draftW->complete();
-        check(state(c.p.draftW) == "Completed", "expected Completed, was " + qs(state(c.p.draftW)));
-        check(c.w->audit.getRecords().size() >= before + 3, "assign, start and complete should each be logged");
-        c.full->activateChildren();
-        check(released(c.p.reviewT), "the senior review should be released after the draft");
-        check(!released(c.p.efile), "e-filing must wait for the review");
-    });
-
-    theatre.step("Review is high priority and audited", "PriorityTask(AuditedTask(Task)): priority 2 stored on the item", [&] {
-        PriorityTask *pr = dynamic_cast<PriorityTask*>(c.p.reviewW);
-        check(pr != 0 && pr->getPriority() == 2, "the review should carry priority 2");
-        check(c.p.reviewW->getData("priority") == "2", "priority should be stored as data");
-    });
-
-    theatre.step("Wrong reviewer assigned, then undone", "AssignCommand snapshots the task (Memento); undo() restores it", [&] {
-        CommandInvoker invoker;
-        invoker.executeCommand(new AssignCommand(c.p.reviewT, &c.w->managingVanWyk));
-        check(state(c.p.reviewT) == "Assigned", "expected Assigned, was " + qs(state(c.p.reviewT)));
-        check(invoker.canUndo(), "the assignment should be undoable");
-        check(invoker.undoLast(), "undo should succeed");
-        check(state(c.p.reviewT) == "Available", "undo should restore Available, was " + qs(state(c.p.reviewT)));
-        check(c.p.reviewT->getAssignee() == 0, "undo should clear the assignee");
-    });
-
-    theatre.step("Senior attorney is assigned but does not respond", "Deadline passes, the firm is told via a TIMEOUT event", [&] {
-        c.p.reviewT->assign(&c.w->seniorMokoena);
-        c.p.reviewT->setDeadline(std::time(0) - 60);
-        check(c.p.reviewT->getDeadline() < std::time(0), "the review deadline should have passed");
-        WorkflowEvent timeout(EventType::TIMEOUT, "review", stamp(),
-                              "Senior Attorney Mokoena did not review the pleadings before the deadline");
-        c.w->bus.publish(&timeout);
-        check(anyContains(c.w->notifier.getNotifications(), "Approval timeout"),
-              "the notifier should report the timeout");
-    });
-
-    theatre.step("Review is escalated to the partner", "reject -> Rejected -> makeAvailable -> assigned to Partner Pillay", [&] {
-        c.p.reviewT->reject("No response within the deadline");
-        check(state(c.p.reviewT) == "Rejected", "expected Rejected, was " + qs(state(c.p.reviewT)));
-        check(c.p.reviewT->getAssignee() == 0, "a rejected task should have no assignee");
-        check(c.p.reviewT->getData("rejectionReason") == "No response within the deadline",
-              "the rejection reason should be stored");
-        c.p.reviewT->makeAvailable();
-        check(state(c.p.reviewT) == "Available", "the review should be available again");
-        c.p.reviewT->assign(&c.w->partnerPillay);
-        check(c.p.reviewT->getAssignee() == &c.w->partnerPillay, "the partner should take over the review");
-    });
-
-    theatre.step("Partner signs off the pleadings", "Started -> Completed (audited); e-filing is released", [&] {
-        c.p.reviewW->start();
-        c.p.reviewW->complete();
-        c.full->activateChildren();
-        check(c.p.reviewT->isFinished(), "the review should be complete");
-        check(anyContains(c.w->audit.getRecords(), "was completed"), "the audit log should show the sign-off");
-        check(released(c.p.efile), "e-filing should be released after sign-off");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 12. Settlement and cost approvals (Chain of Responsibility)");
-
-    theatre.step("Small settlement: the senior attorney can approve", "Required level 3, senior attorney authority 3", [&] {
-        ApprovalRequest request(c.p.settle, 3, std::time(0) + 1800);
-        check(c.w->seniorLevel->canApprove(&request), "a senior attorney should approve a small settlement");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should be Approved");
-    });
-
-    theatre.step("Large settlement: escalates to the Partner", "Required level 4: senior attorney cannot approve, Partner can", [&] {
-        ApprovalRequest request(c.p.settle, 4, std::time(0) + 1800);
-        check(!c.w->seniorLevel->canApprove(&request), "a senior attorney must not approve a large settlement");
-        check(c.w->partnerLevel->canApprove(&request), "the Partner can approve a large settlement");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should end up Approved");
-    });
-
-    theatre.step("Fee write-off: escalates to the Managing Partner", "Required level 5: only the top of the chain can approve", [&] {
-        ApprovalRequest request(c.p.settle, 5, std::time(0) + 3600);
-        check(!c.w->seniorLevel->canApprove(&request), "a senior attorney must not approve a write-off");
-        check(!c.w->partnerLevel->canApprove(&request), "a Partner must not approve a write-off");
-        check(c.w->managingLevel->canApprove(&request), "the Managing Partner can approve a write-off");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the request should end up Approved");
-    });
-
-    theatre.step("A rejected request stays rejected", "Once decided, later handlers cannot override it", [&] {
-        ApprovalRequest request(c.p.settle, 4, std::time(0) + 1800);
-        request.reject(&c.w->partnerRole);
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Rejected, "a rejected request must stay Rejected");
-    });
-
-    theatre.step("An unanswered approval expires and escalates", "Deadline passed -> isExpired -> the chain resets the deadline and decides", [&] {
-        ApprovalRequest request(c.p.settle, 4, std::time(0) - 60);
-        check(request.isExpired(std::time(0)), "an undecided request past its deadline is expired");
-        c.w->chain->handle(&request);
-        check(request.getStatus() == ApprovalStatus::Approved, "the escalated request should be Approved");
-        check(!request.isExpired(std::time(0)), "a decided request is no longer expired");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 13. Court: e-filing and hearing (Adapter)");
-
-    theatre.step("Paralegal starts the e-filing", "Assigned -> Started", [&] {
-        c.p.efile->assign(&c.w->paralegalAnke);
-        c.p.efile->start();
-        check(state(c.p.efile) == "Started", "expected Started, was " + qs(state(c.p.efile)));
-    });
-
-    theatre.step("Court portal is notified (Adapter)", "ExternalTask -> AdapterTwo -> APITwo court portal", [&] {
-        check(c.p.efile->execute(), "the filing request should be accepted");
-        check(c.p.efile->getResponse() == "Request submitted to API Two",
-              "unexpected portal response: " + qs(c.p.efile->getResponse()));
-        check(c.w->courtAdapter.getName() == "API Two", "the court adapter should front APITwo");
-        c.p.efile->complete();
-        c.full->activateChildren();
-        check(c.p.efile->isFinished(), "e-filing should be complete");
-        check(released(c.p.hearing), "the hearing should be released after filing");
-    });
-
-    theatre.step("Senior attorney attends the hearing", "Role-based assignment, then straight to Completed", [&] {
-        Participant *who = c.w->byRole.selectParticipant(c.p.hearing, c.w->staff());
-        check(who != 0 && who->hasRole(&c.w->seniorRole), "a senior attorney should be selected");
-        c.p.hearing->assign(who);
-        c.p.hearing->start();
-        c.p.hearing->complete();
-        c.full->activateChildren();
-        check(c.p.pleadings->isFinished(), "the pleadings stage should be finished");
-        check(released(c.p.judgmentT), "recording the judgment should open after the hearing");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 14. Judgment, costs, billing and archive");
-
-    theatre.step("Judgment is recorded", "Costs and settlement open", [&] {
-        drive(c.p.judgmentT, &c.w->seniorMokoena);
-        c.full->activateChildren();
-        check(c.p.judgmentT->isFinished(), "the judgment should be recorded");
-        check(released(c.p.settle), "costs / settlement should be released");
-        check(!released(c.p.invoice), "invoicing must wait until costs are agreed");
-    });
-
-    theatre.step("Partner agrees the costs (approved)", "Invoicing opens", [&] {
-        drive(c.p.settle, &c.w->partnerPillay);
-        c.full->activateChildren();
-        check(c.p.settle->isFinished(), "costs should be agreed");
-        check(c.p.judgment->isFinished(), "the judgment stage should be finished");
-        check(released(c.p.invoice), "invoicing should open once costs are agreed");
-    });
-
-    theatre.step("Finance invoices the client", "Created -> Completed", [&] {
-        drive(c.p.invoice, &c.w->financeNomsa);
-        c.full->activateChildren();
-        check(c.p.invoice->isFinished(), "the invoice should be sent");
-        check(released(c.p.archive), "archiving should open after invoicing");
-    });
-
-    theatre.step("Paralegal archives the case file", "Whole matter finishes: judgment for the client", [&] {
-        drive(c.p.archive, &c.w->paralegalSipho);
-        c.full->activateChildren();
-        check(c.full->isFinished(), "the whole matter should be finished");
-        c.full->setData("outcome", "Judgment for client, costs agreed");
-        check(c.full->getData("outcome") == "Judgment for client, costs agreed", "the outcome should be recorded");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 15. Audit, notifications and metrics (Observer)");
-
-    theatre.step("Audit log and notifier saw the same events", "One bus, independent listeners", [&] {
-        const std::size_t audited = c.w->audit.getRecords().size();
-        check(audited > 0, "the audit log should not be empty");
-        check(static_cast<std::size_t>(c.w->notifier.getNotificationCount()) == audited,
-              "every published event should reach both listeners");
-        theatre.say(QString("%1 events on the bus").arg(audited));
-    });
-
-    theatre.step("Court portal reports an external event", "EXTERNAL_EVENT reaches the audit log and the notifier", [&] {
-        const int before = c.w->notifier.getNotificationCount();
-        WorkflowEvent external(EventType::EXTERNAL_EVENT, "court-portal", stamp(),
-                               "Court portal: pleadings accepted, hearing set for 14 November");
-        c.w->bus.publish(&external);
-        check(c.w->notifier.getNotificationCount() == before + 1, "the notifier should receive the event");
-        check(anyContains(c.w->notifier.getNotifications(), "External event received"),
-              "the notification should name an external event");
-        check(anyContains(c.w->audit.getRecords(), "hearing set for 14 November"),
-              "the audit log should record the event details");
-    });
-
-    theatre.step("Metrics: how long was the hearing?", "Two state changes 45 minutes apart give an average of 2700 s", [&] {
-        WorkflowEvent started(EventType::ITEM_STATE_CHANGED, "hearing", "2026-10-31 09:00:00", "Started");
-        WorkflowEvent completed(EventType::ITEM_STATE_CHANGED, "hearing", "2026-10-31 09:45:00", "Completed");
-        c.w->bus.publish(&started);
-        c.w->bus.publish(&completed);
-        check(c.w->metrics.getTransitionCount("Started") == 1, "one transition into Started");
-        const float avg = c.w->metrics.getAverageTimeInState("Started");
-        check(avg > 2699.9f && avg < 2700.1f, QString("expected 2700 s in Started, got %1").arg(avg));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 16. Undo history (Command + Memento)");
-
-    theatre.step("Matter B's conflict check: assign, start, complete", "Three commands, three snapshots, then three undos", [&] {
-        WorkItem *bConflict = findItem(c.matterB, "conflict");
-        check(released(bConflict), "B's conflict check should be released");
-        CommandInvoker invoker;
-        invoker.executeCommand(new AssignCommand(bConflict, &c.w->associateJohan));
-        invoker.executeCommand(new StartCommand(bConflict));
-        invoker.executeCommand(new CompleteCommand(bConflict));
-        check(state(bConflict) == "Completed", "expected Completed, was " + qs(state(bConflict)));
-        check(invoker.getHistory()->size() == 3, "three commands should be in the history");
-
-        check(invoker.undoLast(), "first undo");
-        check(state(bConflict) == "Started", "undoing Complete should give Started, was " + qs(state(bConflict)));
-        check(invoker.undoLast(), "second undo");
-        check(state(bConflict) == "Assigned", "undoing Start should give Assigned, was " + qs(state(bConflict)));
-        check(invoker.undoLast(), "third undo");
-        check(state(bConflict) == "Available", "undoing Assign should give Available, was " + qs(state(bConflict)));
-        check(!invoker.canUndo(), "the history should now be empty");
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 17. Work moving from Created to Completed (Iterator)");
-
-    theatre.step("Walk the whole tree (DepthFirstIterator)", "25 nodes: 8 stages + 17 tasks, every task still Created", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        check(countNodes(t) == 25, QString("expected 25 nodes, walked %1").arg(countNodes(t)));
-        theatre.say("tally: " + qs(stateTally(t)));
-        check(stateTally(t) == "Created 17", "every task should start Created, was " + qs(stateTally(t)));
-        delete t;
-    });
-
-    theatre.step("Drain the work with AvailableItemsIterator", "Ask the iterator what is available, complete one task, ask again, until nothing is left", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        p.clientW->setData("clientName", "Khumalo & Sons");
-        p.clientW->setData("matter", "Lease dispute");
-        t->makeAvailable();
-
-        std::vector<std::size_t> sizes;
-        int passes = 0;
-        for (; passes < 60; ++passes) {
-            std::vector<WorkItem*> avail = availableNow(t);
-            if (avail.empty()) break;
-            sizes.push_back(avail.size());
-            theatre.say(QString("pass %1: %2 available [%3] | %4")
-                            .arg(passes + 1).arg(avail.size()).arg(qs(idList(avail))).arg(qs(stateTally(t))));
-            drive(avail[0], &c.w->associateJohan);       // first available task goes Available -> Completed
-            t->activateChildren();                        // next tasks are released
-        }
-        theatre.say("done: " + qs(stateTally(t)));
-        check(passes == 17, QString("expected 17 passes (one per task), took %1").arg(passes));
-        check(sizes.front() == 1, "the matter opens with only the client interview");
-        check(*std::max_element(sizes.begin(), sizes.end()) == 4, "the investigation opens 4 tasks at once");
-        check(sizes.back() == 1, "the last task is the only one left");
-        check(availableNow(t).empty(), "nothing should be available at the end");
-        check(stateTally(t) == "Completed 17", "every task should be Completed, was " + qs(stateTally(t)));
-        check(t->isFinished(), "the root should be finished");
-        delete t;
-    });
-
-    theatre.step("Matter A is done, matter B still has work", "The iterator sees each clone's own state (Prototype)", [&] {
-        check(availableNow(c.full).empty(), "finished matter A should have nothing available");
-        check(stateTally(c.full) == "Completed 17", "matter A should be Completed 17, was " + qs(stateTally(c.full)));
-        c.matterB->activateChildren();
-        sayAvailable(theatre, c.matterB);
-        check(availableNow(c.matterB).size() == 1, "matter B should have its conflict check available");
-        theatre.say("matter B: " + qs(stateTally(c.matterB)));
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 18. Failure paths");
-
-    theatre.step("Conflict of interest found: matter declined", "Event published, cancel() on the whole matter, outcome recorded", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        p.clientW->setData("clientName", "Ndlovu Logistics");
-        p.clientW->setData("matter", "Contract claim against existing client");
-        t->makeAvailable();
-        t->activateChildren();
-        drive(p.clientW, &c.w->paralegalSipho);
-        t->activateChildren();
-        check(released(p.conflict), "the conflict check should be released");
-        const int before = c.w->notifier.getNotificationCount();
-        WorkflowEvent conflict(EventType::EXTERNAL_EVENT, "conflict", stamp(),
-                               "Conflict of interest: the firm already acts for the other party");
-        c.w->bus.publish(&conflict);
-        check(c.w->notifier.getNotificationCount() == before + 1, "the partner should be told about the conflict");
-        t->cancel();
-        check(t->isFinished(), "a declined matter should be finished");
-        check(state(p.conflict) == "Cancelled", "the conflict check should be Cancelled, was " + qs(state(p.conflict)));
-        check(state(p.draftT) == "Cancelled", "unstarted work should be Cancelled");
-        check(state(p.clientW) == "Completed", "the interview that already happened stays Completed");
-        t->setData("outcome", "Declined: conflict of interest");
-        check(t->getData("outcome") == "Declined: conflict of interest", "the outcome should be recorded");
-        delete t;
-    });
-
-    theatre.step("Client withdraws during the investigation", "cancel() stops every open task; finished work stays finished", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        p.clientW->setData("clientName", "Botha Farms");
-        p.clientW->setData("matter", "Boundary dispute");
-        t->makeAvailable();
-        t->activateChildren();
-        drive(p.clientW, &c.w->paralegalSipho);
-        t->activateChildren();
-        drive(p.conflict, &c.w->associateJohan);
-        t->activateChildren();
-        drive(p.engagement, &c.w->associateJohan);
-        drive(p.trust, &c.w->financeNomsa);
-        t->activateChildren();
-        check(released(p.evidence), "the investigation should be open");
-        drive(p.evidence, &c.w->paralegalSipho);
-        t->activateChildren();
-
-        WorkflowEvent withdrawn(EventType::EXTERNAL_EVENT, "client", stamp(),
-                                "Botha Farms withdrew instructions");
-        c.w->bus.publish(&withdrawn);
-        t->cancel();
-        check(t->isFinished(), "a withdrawn matter should be finished");
-        check(state(p.evidence) == "Completed", "the evidence already gathered stays Completed");
-        check(state(p.research) == "Cancelled", "open research should be Cancelled, was " + qs(state(p.research)));
-        check(state(p.expertBrief) == "Cancelled", "the expert brief should be Cancelled");
-        check(state(p.efile) == "Cancelled", "e-filing should be Cancelled");
-        check(state(p.archive) == "Cancelled", "archiving should be Cancelled");
-        theatre.say("tally: " + qs(stateTally(t)));
-        delete t;
-    });
-
-    theatre.step("Partner rejects the pleadings: sent back", "Review is rejected, reason stored, reviewer released, pleadings redrafted", [&] {
-        LegalPieces p;
-        Stage *pl = makeLegalPleadingsStage(*c.w, p);
-        pl->makeAvailable();
-        pl->activateChildren();
-        check(released(p.draftT), "drafting should be released");
-        drive(p.draftW, &c.w->associateJohan);
-        pl->activateChildren();
-        check(released(p.reviewT), "the review should be released");
-
-        p.reviewW->assign(&c.w->partnerPillay);
-        p.reviewW->start();
-        p.reviewW->reject("Pleadings must plead the alternative claim");
-        check(state(p.reviewW) == "Rejected", "the review should be Rejected, was " + qs(state(p.reviewW)));
-        check(p.reviewW->getData("rejectionReason").find("alternative claim") != std::string::npos,
-              "the rejection reason should be stored");
-        check(p.reviewW->getAssignee() == 0, "the partner should be released from the task");
-
-        p.reviewW->makeAvailable();
-        p.reviewW->assign(&c.w->seniorMokoena);
-        check(p.reviewW->getAssignee() == &c.w->seniorMokoena, "the senior attorney should take the revised review");
-        delete pl;
-    });
-
-    theatre.step("Matter settles before the hearing: hearing cancelled", "Portal event + cancel() on the hearing only", [&] {
-        LegalPieces p;
-        Stage *pl = makeLegalPleadingsStage(*c.w, p);
-        pl->makeAvailable();
-        pl->activateChildren();
-        const int before = c.w->notifier.getNotificationCount();
-        WorkflowEvent settled(EventType::EXTERNAL_EVENT, "opposing-counsel", stamp(),
-                              "Opposing counsel accepted the settlement offer");
-        c.w->bus.publish(&settled);
-        check(c.w->notifier.getNotificationCount() == before + 1, "the firm should be told about the settlement");
-        p.hearing->cancel();
-        check(state(p.hearing) == "Cancelled", "the hearing should be Cancelled, was " + qs(state(p.hearing)));
-        check(state(p.draftT) != "Cancelled", "the rest of the pleadings are untouched");
-        delete pl;
-    });
-
-    // ------------------------------------------------------------------
-    theatre.section("Legal 19. End to end");
-
-    theatre.step("Run a fresh legal case to completion",
-                 "Drives every task in order and checks the root finishes", [&] {
-        LegalCtx full;
-        buildLegalFull(full);
-        runToCompletion(theatre, full.root, &full.who);
-    });
-
-    theatre.step("Run a fresh litigation matter to completion", "The full matter with staff, decorators and adapters, every task in order", [&] {
-        LegalPieces p;
-        Stage *t = buildLegalCase(*c.w, p);
-        p.clientW->setData("clientName", "Pretorius Properties");
-        p.clientW->setData("matter", "Eviction application");
-        runToCompletion(theatre, t, &c.w->associateJohan);
-        t->setData("outcome", "Settled out of court");
-        check(t->getData("outcome") == "Settled out of court", "the outcome should be recorded");
-        delete t;
-    });
-}
-
-} // namespace
-
-int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    Desktop theatre("TIVIDY | Workflow tests");
-    HospitalCtx hospital;
-    LegalCtx legal;
-
-    theatre.tab("Hospital admission");        // Part A
-    addHospitalScenario(theatre, hospital);
-
-    theatre.tab("Legal case");                // Part B
-    addLegalScenario(theatre, legal);
-
-    Playground playground;                    // must be declared after theatre
-    theatre.addTab("Playground", &playground);
-
-    theatre.run();
-    return app.exec();
 }
