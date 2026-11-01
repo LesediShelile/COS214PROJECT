@@ -1,0 +1,19 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,237,100,262"/>
+<area shape="rect" id="Node000002" href="$classWorkflowDefinition.html#afd3ce0cbb03b7091a4a84561d0e537c3" title="Instantiates a new WorkflowInstance using the Prototype pattern." alt="" coords="148,5,293,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,236,65,201,83,153,110,102,146,56,151,51,154,55,150,59,114,104,88,155,70,202,60,237"/>
+<area shape="rect" id="Node000003" href="$classWorkflowDefinition.html#ab5ac5c8355eb5060f10779397cec59c7" title="Freezes the definition, locking it against further modifications." alt="" coords="148,69,293,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="58,235,91,180,117,148,146,119,153,114,156,119,150,123,121,152,96,184,63,238"/>
+<area shape="rect" id="Node000004" href="$classWorkflowDefinition.html#a78eb04b258a664bba6428ee0c7199447" title="Gets the name of the workflow definition." alt="" coords="148,133,293,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="69,234,147,183,158,177,160,182,149,188,72,239"/>
+<area shape="rect" id="Node000005" href="$classWorkflowDefinition.html#a9a3148890a0098d4816fe5ef5f961e7c" title="Gets the root WorkItem of the definition&#39;s composite structure." alt="" coords="148,197,293,237"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="100,238,134,231,135,236,101,243"/>
+<area shape="rect" id="Node000006" href="$classWorkflowDefinition.html#ad0bc7ff7f35a359b612635e5f2f6560c" title="Gets the version number of the workflow definition." alt="" coords="148,261,293,301"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="101,256,135,262,134,267,100,261"/>
+<area shape="rect" id="Node000007" href="$classWorkflowDefinition.html#a9d69a48eebbb3a4362e3057b2edf54ec" title="Checks if the workflow definition has been frozen." alt="" coords="148,325,293,365"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="72,260,149,311,160,317,158,322,147,316,69,264"/>
+<area shape="rect" id="Node000008" href="$classWorkflowDefinition.html#a2a25408a2b42bc068d3102d374464fa5" title="Sets the approval chain of responsibility head." alt="" coords="148,389,293,429"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="63,261,96,315,121,347,150,375,156,380,153,384,146,379,117,351,91,318,58,264"/>
+<area shape="rect" id="Node000009" href="$classWorkflowDefinition.html#ade882c164e2dfaa33f759bac70da91fe" title="Sets the root WorkItem for the workflow tree." alt="" coords="148,453,293,493"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="60,262,70,296,88,344,114,394,150,440,154,443,151,447,146,443,110,397,83,346,65,298,55,263"/>
+</map>

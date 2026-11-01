@@ -1,0 +1,13 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,92,100,117"/>
+<area shape="rect" id="Node000002" href="$classStage.html#a5c11c4655f30de6654a42bfc585c0a1d" title="Add a child." alt="" coords="200,5,291,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,89,104,65,147,41,186,27,188,32,149,46,106,69,72,94"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#ac92b7d3bbd7eef5775101b66b76a359b" title="Iterator over only the available leaf items." alt="" coords="148,55,343,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="100,95,134,90,135,95,101,100"/>
+<area shape="rect" id="Node000004" href="$classStage.html#a7622bf3157b683fe821c3a00a4f8fc2f" title="Children of this item, or an empty list for a leaf." alt="" coords="174,120,317,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="101,109,161,118,160,123,100,114"/>
+<area shape="rect" id="Node000005" href="$classStage.html#a082b95e96f705dccba0cad46b6c5fae2" title=" " alt="" coords="164,169,327,195"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="75,115,109,135,149,154,174,163,172,168,147,159,107,140,72,120"/>
+<area shape="rect" id="Node000006" href="$classStage.html#a3ff6cdc4f75dca9f7c37405be7a6ea0c" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="391,169,565,195"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="327,179,377,179,377,185,327,185"/>
+</map>

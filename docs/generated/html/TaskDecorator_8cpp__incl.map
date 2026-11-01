@@ -1,0 +1,15 @@
+<map id="src/TaskDecorator.cpp" name="src/TaskDecorator.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="93,5,257,31"/>
+<area shape="rect" id="Node000002" href="$TaskDecorator_8h.html" title=" " alt="" coords="46,79,173,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,33,131,70,127,67,162,29"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="197,79,283,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="187,29,222,67,218,70,183,33"/>
+<area shape="rect" id="Node000003" href="$WorkItem_8h.html" title=" " alt="" coords="61,152,158,177"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="112,104,112,138,107,138,107,104"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,225,56,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="98,179,55,218,52,214,95,175"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="80,225,139,251"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="112,178,112,212,107,212,107,178"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="163,225,226,251"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="125,175,172,214,169,219,121,179"/>
+</map>

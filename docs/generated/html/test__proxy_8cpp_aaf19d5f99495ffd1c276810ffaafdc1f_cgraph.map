@@ -1,0 +1,23 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,209,104,234"/>
+<area shape="rect" id="Node000002" href="$classSecureWorkflowProxy.html#a731623a1da1d5326ecd9acdce74cda2f" title="Requests approval after checking permission and ownership." alt="" coords="152,137,315,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,206,163,180,165,185,92,211"/>
+<area shape="rect" id="Node000010" href="$classWorkflowDefinition.html#a2a25408a2b42bc068d3102d374464fa5" title="Sets the approval chain of responsibility head." alt="" coords="161,201,306,241"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="104,219,147,219,147,224,104,224"/>
+<area shape="rect" id="Node000011" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="186,266,281,291"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="95,232,153,251,179,259,178,264,151,256,93,237"/>
+<area shape="rect" id="Node000003" href="$classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e" title="Submits a work item to an approval chain of responsibility." alt="" coords="363,145,588,170"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="315,155,349,155,349,160,315,160"/>
+<area shape="rect" id="Node000004" href="$classWorkflowDefinition.html#aa5041d0fdba198b3d48ba0078767b289" title="Gets the head of the approval handler chain." alt="" coords="677,5,824,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="492,142,553,100,635,55,663,44,665,49,637,60,556,105,495,147"/>
+<area shape="rect" id="Node000005" href="$classWorkItem.html#a07f90d9342cb3413103703da2f64f3a8" title=" " alt="" coords="678,70,823,95"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="512,142,635,104,670,96,671,101,637,109,514,147"/>
+<area shape="rect" id="Node000006" href="$classWorkflowInstance.html#a44b26e4fc1c64a18b0eb9c836079cae6" title="Gets the definition blueprint this instance was created from." alt="" coords="636,119,865,145"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="588,144,622,141,622,146,589,150"/>
+<area shape="rect" id="Node000007" href="$classApprovalRequest.html#a7b8b43adff3dccf6fa236bd787829af1" title="Gets the current status of the request." alt="" coords="649,169,852,194"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="589,165,636,169,635,174,588,170"/>
+<area shape="rect" id="Node000008" href="$classApprovalHandler.html#a9b61062cec56f24ef59502c49a334b83" title="Handles an approval request or passes it on." alt="" coords="659,218,842,243"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="517,168,637,203,676,212,675,218,635,208,516,173"/>
+<area shape="rect" id="Node000009" href="$classWorkItem.html#a832fccc6b34774701672028c884cd70e" title=" " alt="" coords="677,267,824,293"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="495,168,556,209,595,232,637,252,665,262,663,267,635,257,593,237,553,214,492,172"/>
+</map>

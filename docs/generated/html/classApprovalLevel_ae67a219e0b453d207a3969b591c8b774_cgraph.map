@@ -1,0 +1,24 @@
+<map id="ApprovalLevel::handle" name="ApprovalLevel::handle">
+<area shape="rect" id="Node000001" title="Approves the request, or escalates it to the next level." alt="" coords="5,169,172,195"/>
+<area shape="rect" id="Node000002" href="$classApprovalRequest.html#a6783839d5f3ce710ad075724dcc2c593" title="Approves the request." alt="" coords="242,19,437,44"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,167,144,111,179,80,219,53,234,46,236,51,221,58,182,84,148,115,101,171"/>
+<area shape="rect" id="Node000003" href="$classApprovalLevel.html#ad374752b0d501fb7598ea573599034d3" title="Checks whether this level is allowed to approve the request." alt="" coords="239,68,439,93"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="109,167,158,139,219,110,267,94,268,99,221,115,161,144,112,172"/>
+<area shape="rect" id="Node000006" href="$classApprovalRequest.html#a7b8b43adff3dccf6fa236bd787829af1" title="Gets the current status of the request." alt="" coords="515,120,718,145"/>
+<area shape="poly" id="edge9_Node000001_Node000006" title=" " alt="" coords="150,167,220,155,366,141,502,134,502,139,367,147,220,161,151,172"/>
+<area shape="rect" id="Node000007" href="$classApprovalHandler.html#aabc3c39157827c667f730df4ea90b1c1" title="Passes the request to the next handler in the chain." alt="" coords="245,169,434,195"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="172,179,231,179,231,185,172,185"/>
+<area shape="rect" id="Node000009" href="$classRole.html#aadb5dbe2faa7d6bb9c10dd8638be9d18" title="Gets the name of the role." alt="" coords="280,219,399,244"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="154,192,267,215,266,220,153,197"/>
+<area shape="rect" id="Node000010" href="$classApprovalRequest.html#a03f344078d8f989646a04aa5759fd0f1" title="Marks a pending request as escalated to a higher level." alt="" coords="220,268,459,293"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="109,193,158,224,221,254,245,262,244,267,219,259,156,228,107,197"/>
+<area shape="rect" id="Node000011" href="$classApprovalRequest.html#ab6777c6338275d539f2103c981a81d10" title="Sets a new deadline, e.g." alt="" coords="223,317,455,343"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="101,193,149,248,183,278,221,304,236,310,234,315,219,308,180,282,145,251,97,197"/>
+<area shape="rect" id="Node000004" href="$classRole.html#a77eaca6b3a76af9de8e3c94336b5bac7" title="Gets the role&#39;s authority level." alt="" coords="529,5,704,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="401,65,458,53,506,41,546,31,548,36,507,46,459,58,403,71"/>
+<area shape="rect" id="Node000005" href="$classApprovalRequest.html#a9dc02d654b3d2cc3dc41c4932b4aaffa" title="Gets the authority level needed to approve." alt="" coords="507,55,727,95"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="439,76,493,75,493,80,439,81"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="408,91,535,115,535,120,407,96"/>
+<area shape="rect" id="Node000008" href="$classApprovalHandler.html#a9b61062cec56f24ef59502c49a334b83" title="Handles an approval request or passes it on." alt="" coords="525,169,708,195"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="434,179,511,179,511,185,434,185"/>
+</map>

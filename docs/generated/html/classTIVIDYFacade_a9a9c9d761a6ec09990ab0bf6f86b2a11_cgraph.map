@@ -1,0 +1,7 @@
+<map id="TIVIDYFacade::getMetricsSummary" name="TIVIDYFacade::getMetricsSummary">
+<area shape="rect" id="Node000001" title="Retrieves the aggregate performance and execution metrics summary." alt="" coords="5,5,192,45"/>
+<area shape="rect" id="Node000002" href="$classMetricsCollector.html#a9a93efe07d0e3ae406c46e60f76266ce" title=" " alt="" coords="240,13,460,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="192,23,226,23,226,28,192,28"/>
+<area shape="rect" id="Node000003" href="$classMetricsCollector.html#aca25ddde6a7b3fb947ee11b22414b668" title=" " alt="" coords="508,5,719,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="460,23,494,23,494,28,460,28"/>
+</map>

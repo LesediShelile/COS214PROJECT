@@ -1,0 +1,19 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,105,100,131"/>
+<area shape="rect" id="Node000002" href="$classStage.html#a5c11c4655f30de6654a42bfc585c0a1d" title="Add a child." alt="" coords="184,5,275,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="65,103,100,71,147,40,170,30,172,35,149,44,103,76,69,107"/>
+<area shape="rect" id="Node000003" href="$classStage.html#aa6f7d136fa7bcd84592f97c6d3a0192e" title=" " alt="" coords="175,55,284,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="97,103,171,81,172,86,99,108"/>
+<area shape="rect" id="Node000004" href="$classStage.html#ad6eebd58d7bca92f82d97ca6e40e505d" title=" " alt="" coords="380,80,512,105"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="100,112,366,95,367,100,101,118"/>
+<area shape="rect" id="Node000005" href="$classTask.html#adcb312706a3e150d450c3db9a8cc8b41" title=" " alt="" coords="153,156,306,181"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="99,128,172,150,171,155,97,133"/>
+<area shape="rect" id="Node000007" href="$classStage.html#a082b95e96f705dccba0cad46b6c5fae2" title=" " alt="" coords="148,205,311,231"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="69,129,103,160,149,192,163,198,161,203,147,196,100,165,65,133"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="284,71,366,81,366,86,284,76"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="411,82,403,72,407,62,422,56,446,53,476,57,488,66,485,70,474,62,446,59,423,61,411,66,408,71,415,78"/>
+<area shape="rect" id="Node000006" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="369,156,523,181"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="306,166,356,166,356,171,306,171"/>
+<area shape="rect" id="Node000008" href="$classStage.html#a3ff6cdc4f75dca9f7c37405be7a6ea0c" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="359,205,533,231"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="311,215,345,215,345,221,311,221"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="ApprovalRequest::resetDeadline" name="ApprovalRequest::resetDeadline">
+<area shape="rect" id="Node000001" title="Sets a new deadline, e.g." alt="" coords="363,31,595,56"/>
+<area shape="rect" id="Node000002" href="$classApprovalLevel.html#ae67a219e0b453d207a3969b591c8b774" title="Approves the request, or escalates it to the next level." alt="" coords="148,5,315,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="349,33,314,29,315,24,349,27"/>
+<area shape="rect" id="Node000004" href="$test__state__strategy__chain_8cpp.html#a407e0244e5dbfb777b8e77b850069db7" title=" " alt="" coords="184,55,279,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="349,59,279,65,279,60,349,53"/>
+<area shape="rect" id="Node000003" href="$test__state__strategy__chain_8cpp.html#aee9edd9abb39f21859b8a0c9a35d424c" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="134,21,100,21,100,15,134,15"/>
+</map>

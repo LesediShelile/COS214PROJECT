@@ -1,0 +1,10 @@
+<map id="MetricsCollector::getAverageTimeInState" name="MetricsCollector::getAverageTimeInState">
+<area shape="rect" id="Node000001" title=" " alt="" coords="508,37,719,77"/>
+<area shape="rect" id="Node000002" href="$classMetricsCollector.html#a9a93efe07d0e3ae406c46e60f76266ce" title=" " alt="" coords="240,19,460,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="494,49,460,45,460,40,495,43"/>
+<area shape="rect" id="Node000004" href="$test__observer__integrations_8cpp.html#a25779ef275352b248f14f6b8a52afb19" title=" " alt="" coords="49,70,148,95"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="494,66,149,83,148,78,494,60"/>
+<area shape="rect" id="Node000003" href="$classTIVIDYFacade.html#a9a9c9d761a6ec09990ab0bf6f86b2a11" title="Retrieves the aggregate performance and execution metrics summary." alt="" coords="5,5,192,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="226,31,192,30,192,25,227,26"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="273,50,149,75,148,70,272,45"/>
+</map>

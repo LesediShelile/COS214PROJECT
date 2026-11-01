@@ -1,0 +1,5 @@
+<map id="ScenarioPage::log" name="ScenarioPage::log">
+<area shape="rect" id="Node000001" title=" " alt="" coords="157,5,295,31"/>
+<area shape="rect" id="Node000002" href="$classDesktop.html#abb46924e6652701a7ae697c64919a059" title="Print a line to the terminal only (not into the diagram node)." alt="" coords="5,5,109,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="144,21,110,21,110,15,144,15"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="include/MetricsCollector.h" name="include/MetricsCollector.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,196,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="13,79,63,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,33,59,70,55,66,88,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="74,225,133,251"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="103,31,106,211,100,211,98,31"/>
+<area shape="rect" id="Node000004" href="$WorkflowListener_8h.html" title=" " alt="" coords="139,79,284,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="120,28,183,69,180,73,117,33"/>
+<area shape="rect" id="Node000005" href="$WorkflowEvent_8h.html" title=" " alt="" coords="143,152,274,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="214,104,212,139,207,138,208,104"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="193,180,133,220,130,215,190,175"/>
+<area shape="rect" id="Node000006" href="$EventType_8h.html" title=" " alt="" coords="158,225,259,251"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="211,178,211,212,206,212,206,178"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="Task::getStateName" name="Task::getStateName">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,159,31"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="207,5,360,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="159,15,193,15,193,21,159,21"/>
+</map>

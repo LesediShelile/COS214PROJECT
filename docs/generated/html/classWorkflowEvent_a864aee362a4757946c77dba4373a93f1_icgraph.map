@@ -1,0 +1,9 @@
+<map id="WorkflowEvent::getDetails" name="WorkflowEvent::getDetails">
+<area shape="rect" id="Node000001" title=" " alt="" coords="353,31,548,56"/>
+<area shape="rect" id="Node000002" href="$test__observer__integrations_8cpp.html#ada97855565eb5fcbdd02c3ae476797df" title=" " alt="" coords="179,5,278,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="339,33,278,26,279,21,340,28"/>
+<area shape="rect" id="Node000003" href="$classAuditLogger.html#ab4a4898d8bc90dc0c0b213b5f649ef0d" title="Records details from a workflow event." alt="" coords="152,55,305,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="340,58,306,62,305,56,339,53"/>
+<area shape="rect" id="Node000004" href="$test__observer__integrations_8cpp.html#a30d9dbdab0865cb58059f22d9054b52e" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="138,70,104,70,104,65,138,65"/>
+</map>

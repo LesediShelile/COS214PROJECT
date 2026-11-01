@@ -1,0 +1,5 @@
+<map id="StartedState" name="StartedState">
+<area shape="rect" id="Node000001" title="State of a task that is being worked on (State pattern)." alt="" coords="23,319,123,464"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html" title="Abstract state of a Task (State pattern)." alt="" coords="5,5,140,271"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="75,285,75,318,70,318,70,285"/>
+</map>

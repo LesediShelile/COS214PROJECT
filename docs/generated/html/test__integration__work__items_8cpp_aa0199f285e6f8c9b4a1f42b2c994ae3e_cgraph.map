@@ -1,0 +1,9 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,100,56"/>
+<area shape="rect" id="Node000002" href="$classStage.html#a5c11c4655f30de6654a42bfc585c0a1d" title="Add a child." alt="" coords="184,5,275,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,34,169,24,170,29,101,39"/>
+<area shape="rect" id="Node000003" href="$classStage.html#a082b95e96f705dccba0cad46b6c5fae2" title=" " alt="" coords="148,55,311,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="101,47,135,52,134,57,100,52"/>
+<area shape="rect" id="Node000004" href="$classStage.html#a3ff6cdc4f75dca9f7c37405be7a6ea0c" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="359,55,533,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="311,65,345,65,345,70,311,70"/>
+</map>

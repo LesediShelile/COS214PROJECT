@@ -1,0 +1,11 @@
+<map id="RoleBasedAssignment::selectParticipant" name="RoleBasedAssignment::selectParticipant">
+<area shape="rect" id="Node000001" title="Chooses the first participant who has the task&#39;s required role." alt="" coords="5,23,173,63"/>
+<area shape="rect" id="Node000002" href="$classRoleBasedAssignment.html#a6a5c69d023c8bca7a4f29da601759e68" title="Checks whether a participant has the role the task needs." alt="" coords="221,23,389,63"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,41,208,41,208,46,174,46"/>
+<area shape="rect" id="Node000003" href="$classTask.html#a7e73818c68e72ec527208cfc073dad0b" title=" " alt="" coords="437,5,604,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="389,31,423,27,424,32,390,36"/>
+<area shape="rect" id="Node000004" href="$classParticipant.html#a5c9ef7f9701956c183017685d86bd6bd" title="Checks whether the participant has a role." alt="" coords="445,55,596,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="390,50,432,55,431,60,389,55"/>
+<area shape="rect" id="Node000005" href="$classRole.html#a4e9860f793f7941b3f383d74ea1c3960" title="Checks whether two roles are the same." alt="" coords="652,55,755,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="596,65,638,65,638,70,596,70"/>
+</map>

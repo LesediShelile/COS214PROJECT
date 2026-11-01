@@ -1,0 +1,9 @@
+<map id="DepthFirstIterator::first" name="DepthFirstIterator::first">
+<area shape="rect" id="Node000001" title=" " alt="" coords="443,37,580,77"/>
+<area shape="rect" id="Node000002" href="$classDepthFirstIterator.html#a99d918b09649d35bdea62850b9180f45" title=" " alt="" coords="239,5,384,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="429,47,384,40,385,34,430,42"/>
+<area shape="rect" id="Node000003" href="$classAvailableItemsIterator.html#ab51a0e3aa9f8d9783459ebf6813ed5a2" title=" " alt="" coords="228,69,395,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="430,73,395,79,394,73,429,68"/>
+<area shape="rect" id="Node000004" href="$classAvailableItemsIterator.html#af7c250fe366ca8b6f7a820c0604236ed" title=" " alt="" coords="5,69,180,109"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="214,92,180,92,180,87,214,87"/>
+</map>

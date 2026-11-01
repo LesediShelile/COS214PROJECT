@@ -1,0 +1,9 @@
+<map id="Task::complete" name="Task::complete">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,125,56"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#ad98305bdb5ed339e4b05902ca375c58b" title="Completes the task." alt="" coords="173,31,328,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,41,160,41,160,46,125,46"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="376,5,529,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="328,31,362,27,362,32,329,36"/>
+<area shape="rect" id="Node000004" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="376,55,529,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="329,50,362,54,362,59,328,55"/>
+</map>

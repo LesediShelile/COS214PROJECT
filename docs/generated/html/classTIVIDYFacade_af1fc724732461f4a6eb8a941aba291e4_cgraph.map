@@ -1,0 +1,7 @@
+<map id="TIVIDYFacade::completeTask" name="TIVIDYFacade::completeTask">
+<area shape="rect" id="Node000001" title="Marks a specific task item within an instance as completed." alt="" coords="5,5,213,31"/>
+<area shape="rect" id="Node000002" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="261,5,524,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,15,248,15,248,21,214,21"/>
+<area shape="rect" id="Node000003" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="572,5,747,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="524,15,558,15,558,21,524,21"/>
+</map>

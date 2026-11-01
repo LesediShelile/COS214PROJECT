@@ -1,0 +1,9 @@
+<map id="RejectCommand::execute" name="RejectCommand::execute">
+<area shape="rect" id="Node000001" title="Executes the rejection command on the target work item." alt="" coords="5,31,195,56"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#af123b04c261359ca971b60c3f5acbda6" title=" " alt="" coords="295,5,425,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,31,281,23,281,28,195,37"/>
+<area shape="rect" id="Node000003" href="$classWorkflowCommand.html#a6a9ea26fe4960a57137ae3c0db06b19e" title="Captures a fresh memento snapshot from the target work item." alt="" coords="243,55,477,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="195,49,229,53,229,58,195,55"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a8e2a00010a42896ad22f011bb2666a86" title="Memento operations." alt="" coords="525,55,721,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="478,65,512,65,512,70,478,70"/>
+</map>

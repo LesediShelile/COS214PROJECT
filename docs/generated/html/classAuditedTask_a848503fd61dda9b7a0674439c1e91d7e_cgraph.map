@@ -1,0 +1,7 @@
+<map id="AuditedTask::start" name="AuditedTask::start">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,144,31"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#a7716b5cb1f4f1b2559ea9b03411bef50" title=" " alt="" coords="192,5,345,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,15,178,15,178,21,145,21"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a18435dde12f397de1dca31f9c0e803c6" title=" " alt="" coords="393,5,516,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="346,15,380,15,380,21,346,21"/>
+</map>

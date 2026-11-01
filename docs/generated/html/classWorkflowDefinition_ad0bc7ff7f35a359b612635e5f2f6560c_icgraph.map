@@ -1,0 +1,7 @@
+<map id="WorkflowDefinition::getVersion" name="WorkflowDefinition::getVersion">
+<area shape="rect" id="Node000001" title="Gets the version number of the workflow definition." alt="" coords="283,35,428,75"/>
+<area shape="rect" id="Node000002" href="$classWorkflowInstance.html#a02a249ea194705431e34a0374fa0ed27" title="Gets the definition version number at the time of creation." alt="" coords="5,5,235,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="269,47,234,42,235,37,269,41"/>
+<area shape="rect" id="Node000003" href="$test__commandMementoWorkflow_8cpp.html#a35010ea1ad5d46c322f5ab5b3686b556" title=" " alt="" coords="73,70,167,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="269,68,168,80,167,74,269,62"/>
+</map>

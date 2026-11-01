@@ -1,0 +1,7 @@
+<map id="DepthFirstIterator::next" name="DepthFirstIterator::next">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,35,143,75"/>
+<area shape="rect" id="Node000002" href="$classDepthFirstIterator.html#a0ebfa204fb805d9fe54de406ceb15ab2" title=" " alt="" coords="206,5,343,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,42,192,35,193,40,143,47"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a3bf0e9f849e1e1b4abacdc3fdd13db34" title="Children of this item, or an empty list for a leaf." alt="" coords="191,70,359,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="143,62,177,66,177,72,143,67"/>
+</map>

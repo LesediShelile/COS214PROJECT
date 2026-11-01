@@ -1,0 +1,11 @@
+<map id="include/CancelledState.h" name="include/CancelledState.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,188,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="10,152,90,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,33,57,53,38,80,34,94,34,110,42,139,36,140,29,110,29,94,33,78,53,49,77,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="134,152,193,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="116,29,140,49,160,78,168,108,169,138,164,138,163,109,156,80,136,53,113,33"/>
+<area shape="rect" id="Node000004" href="$TaskState_8h.html" title=" " alt="" coords="48,79,145,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="99,31,99,65,94,65,94,31"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="91,106,67,142,63,139,87,103"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="110,103,145,140,141,144,106,106"/>
+</map>

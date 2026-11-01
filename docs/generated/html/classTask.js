@@ -1,0 +1,28 @@
+var classTask =
+[
+    [ "Task", "classTask.html#ab9fa96bcb01fa2be85af9bf71058bec3", null ],
+    [ "Task", "classTask.html#a4eeccb28177492d5f58a9ff18f64fc15", null ],
+    [ "~Task", "classTask.html#a3ecf499ea35fb4a96853969a1e1cbbce", null ],
+    [ "assign", "classTask.html#a24887c9b917151d5bb1300f543d9df6f", null ],
+    [ "autoAssign", "classTask.html#a2a89b92343173d5a1d6f8b32a0a7efb7", null ],
+    [ "cancel", "classTask.html#a1a9d9c69519c5b2c1769a76de6c95e69", null ],
+    [ "clone", "classTask.html#ae301c0f31c03867cf2a88cb43c440003", null ],
+    [ "complete", "classTask.html#a99921df21eb9f8f04a8816f045ac6206", null ],
+    [ "createMemento", "classTask.html#a76b3ed312a13004f74c7a771f0b03b27", null ],
+    [ "getAssignee", "classTask.html#a6a92e74a70344ea39fb0c29a6a02a74a", null ],
+    [ "getDeadline", "classTask.html#a3f7683aff6e84fcdac0df624bd6dff56", null ],
+    [ "getPublisher", "classTask.html#ad5e2ad792d357ee47cbcbfaf246319e7", null ],
+    [ "getRequiredRole", "classTask.html#a7e73818c68e72ec527208cfc073dad0b", null ],
+    [ "getStateName", "classTask.html#adcb312706a3e150d450c3db9a8cc8b41", null ],
+    [ "handleChange", "classTask.html#a711b33c40be2df4c3e790745b49a1fc8", null ],
+    [ "isAvailable", "classTask.html#abea356c67a5cd5ff3419088027270fca", null ],
+    [ "isFinished", "classTask.html#add6208690faa47847e89dbd7adc40d93", null ],
+    [ "makeAvailable", "classTask.html#acd0fdd09318cdb6d655fbfd1636d55b3", null ],
+    [ "reject", "classTask.html#ad058cda4e8c3e252a050f9fde67f99bf", null ],
+    [ "restoreMemento", "classTask.html#a57a19a99141017f18e8b38effbdb8638", null ],
+    [ "setAssignee", "classTask.html#a49f0494bc9e662ab13df96ecd00159f8", null ],
+    [ "setAssignmentStrategy", "classTask.html#a263ac87f0e48613fa8f1e5b1fe83aa25", null ],
+    [ "setDeadline", "classTask.html#a4417acc9e6816383e099d36c68cbb328", null ],
+    [ "setPublisher", "classTask.html#a549ce6319688be18b8ffde2afd8aa1d3", null ],
+    [ "start", "classTask.html#a5d6a1d3c6cd5b587d2414737fab9f3ed", null ]
+];

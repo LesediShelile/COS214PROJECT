@@ -1,0 +1,43 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,320,100,345"/>
+<area shape="rect" id="Node000002" href="$classTask.html#a2a89b92343173d5a1d6f8b32a0a7efb7" title="Ask the strategy for a participant and assign the task to them." alt="" coords="196,120,327,145"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,319,65,287,84,245,110,201,146,163,181,144,184,148,150,167,115,204,88,248,70,289,60,321"/>
+<area shape="rect" id="Node000008" href="$classTask.html#a6a92e74a70344ea39fb0c29a6a02a74a" title="Gets the participant assigned to this work item." alt="" coords="192,221,331,247"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="64,318,99,286,147,256,177,244,179,249,149,260,103,291,68,322"/>
+<area shape="rect" id="Node000009" href="$classTask.html#a7e73818c68e72ec527208cfc073dad0b" title=" " alt="" coords="178,271,345,296"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="99,317,147,305,184,296,185,302,149,310,100,323"/>
+<area shape="rect" id="Node000010" href="$classTask.html#adcb312706a3e150d450c3db9a8cc8b41" title=" " alt="" coords="670,169,823,195"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="57,319,69,294,88,262,114,231,147,206,188,192,243,181,380,171,528,170,656,174,656,180,528,175,380,176,244,186,189,197,149,211,118,235,92,265,74,296,62,321"/>
+<area shape="rect" id="Node000011" href="$classParticipant.html#a1ef13078582fd153ff8d9787293be6db" title="Gets how many tasks the participant is working on." alt="" coords="423,345,604,371"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="95,343,148,354,284,363,409,362,409,367,284,368,148,359,94,348"/>
+<area shape="rect" id="Node000012" href="$test__state__strategy__chain_8cpp.html#a80d2c30f9ec77ece987052c6e334c595" title=" " alt="" coords="212,320,311,345"/>
+<area shape="poly" id="edge12_Node000001_Node000012" title=" " alt="" coords="100,330,198,330,198,335,100,335"/>
+<area shape="rect" id="Node000013" href="$classParticipant.html#a5c9ef7f9701956c183017685d86bd6bd" title="Checks whether the participant has a role." alt="" coords="186,421,337,447"/>
+<area shape="poly" id="edge14_Node000001_Node000013" title=" " alt="" coords="70,344,105,372,149,400,189,415,187,420,147,404,102,376,67,348"/>
+<area shape="rect" id="Node000015" href="$classParticipant.html#a1e2748e4380b0ba42c2e23999a173830" title="Adds one task to the participant&#39;s workload." alt="" coords="148,471,375,496"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="62,344,94,400,119,431,150,457,160,463,157,467,146,462,115,435,89,403,57,347"/>
+<area shape="rect" id="Node000016" href="$classTask.html#acd0fdd09318cdb6d655fbfd1636d55b3" title=" " alt="" coords="436,5,591,31"/>
+<area shape="poly" id="edge17_Node000001_Node000016" title=" " alt="" coords="53,319,60,278,76,220,103,158,123,130,146,105,177,83,211,64,283,37,356,22,422,15,422,21,357,27,284,43,213,69,180,87,150,109,127,133,108,161,81,222,65,279,58,320"/>
+<area shape="rect" id="Node000018" href="$classTask.html#a263ac87f0e48613fa8f1e5b1fe83aa25" title=" " alt="" coords="156,520,367,545"/>
+<area shape="poly" id="edge21_Node000001_Node000018" title=" " alt="" coords="60,345,69,378,87,422,113,468,130,489,150,507,157,512,154,516,146,511,126,493,109,471,82,425,64,380,54,346"/>
+<area shape="rect" id="Node000019" href="$classRuleBasedAssignment.html#afce2066ac251adcd0303427d04abb163" title="Replaces the rule." alt="" coords="177,570,345,610"/>
+<area shape="poly" id="edge22_Node000001_Node000019" title=" " alt="" coords="58,345,65,386,81,443,108,504,127,532,150,556,167,568,164,572,146,560,123,535,104,506,76,445,60,387,53,346"/>
+<area shape="rect" id="Node000003" href="$classTask.html#a24887c9b917151d5bb1300f543d9df6f" title=" " alt="" coords="463,120,564,145"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="327,130,449,130,449,135,327,135"/>
+<area shape="rect" id="Node000007" href="$classAssignmentStrategy.html#abfc26e7856c3895c2d04a34fc6a5bac1" title="Chooses a participant for the task." alt="" coords="436,55,591,95"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="317,117,422,93,423,99,319,123"/>
+<area shape="rect" id="Node000004" href="$classTaskState.html#a38519e3589346f130681fe2ba1b2cb2b" title="Assigns a participant to the task." alt="" coords="679,120,814,145"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="564,130,666,130,666,135,564,135"/>
+<area shape="rect" id="Node000005" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="889,71,1043,96"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="803,117,895,96,896,102,804,123"/>
+<area shape="rect" id="Node000006" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="889,120,1043,145"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="814,130,876,130,876,135,814,135"/>
+<area shape="poly" id="edge10_Node000010_Node000006" title=" " alt="" coords="803,167,895,146,896,151,804,172"/>
+<area shape="poly" id="edge13_Node000012_Node000011" title=" " alt="" coords="311,335,409,345,409,350,310,340"/>
+<area shape="rect" id="Node000014" href="$classRole.html#a4e9860f793f7941b3f383d74ea1c3960" title="Checks whether two roles are the same." alt="" coords="462,421,565,447"/>
+<area shape="poly" id="edge15_Node000013_Node000014" title=" " alt="" coords="337,431,448,431,448,437,337,437"/>
+<area shape="rect" id="Node000017" href="$classTaskState.html#a8d7df5b147dbd89bfa5d68219664e849" title="Makes the task ready to be assigned." alt="" coords="652,71,841,96"/>
+<area shape="poly" id="edge18_Node000016_Node000017" title=" " alt="" coords="560,28,688,64,687,70,559,33"/>
+<area shape="poly" id="edge19_Node000017_Node000005" title=" " alt="" coords="842,81,876,81,876,86,842,86"/>
+<area shape="poly" id="edge20_Node000017_Node000006" title=" " alt="" coords="804,93,896,114,895,120,803,99"/>
+</map>

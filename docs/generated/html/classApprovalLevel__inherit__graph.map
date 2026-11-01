@@ -1,0 +1,5 @@
+<map id="ApprovalLevel" name="ApprovalLevel">
+<area shape="rect" id="Node000001" title="Concrete handler in the approval chain (Chain of Responsibility)." alt="" coords="13,179,156,344"/>
+<area shape="rect" id="Node000002" href="$classApprovalHandler.html" title="Abstract handler in the approval chain (Chain of Responsibility)." alt="" coords="5,5,164,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,144,87,179,82,179,82,144"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="AssignCommand::getDescription" name="AssignCommand::getDescription">
+<area shape="rect" id="Node000001" title="Returns a descriptive string summarizing the command action." alt="" coords="148,5,383,31"/>
+<area shape="rect" id="Node000002" href="$test__commandMementoWorkflow_8cpp.html#aed7f70b4769ca84264cbeb3526872aed" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,21,100,21,100,15,135,15"/>
+</map>

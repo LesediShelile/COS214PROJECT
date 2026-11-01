@@ -1,0 +1,7 @@
+<map id="WorkflowInstance::activateNext" name="WorkflowInstance::activateNext">
+<area shape="rect" id="Node000001" title="Progresses the workflow tree after a task completes." alt="" coords="5,31,235,56"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#af87da457ee3b0f665eba7d592faca22d" title="Re&#45;evaluate which children should become available next." alt="" coords="283,5,483,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="235,30,269,26,269,32,235,35"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a9c35d6c6acdfdbfc333b485d8ed612bf" title=" " alt="" coords="303,55,462,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,51,290,56,289,62,235,56"/>
+</map>

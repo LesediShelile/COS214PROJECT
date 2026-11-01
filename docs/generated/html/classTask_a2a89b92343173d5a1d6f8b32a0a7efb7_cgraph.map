@@ -1,0 +1,13 @@
+<map id="Task::autoAssign" name="Task::autoAssign">
+<area shape="rect" id="Node000001" title="Ask the strategy for a participant and assign the task to them." alt="" coords="5,60,136,85"/>
+<area shape="rect" id="Node000002" href="$classTask.html#a24887c9b917151d5bb1300f543d9df6f" title=" " alt="" coords="211,31,312,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,60,197,51,198,56,137,65"/>
+<area shape="rect" id="Node000006" href="$classAssignmentStrategy.html#abfc26e7856c3895c2d04a34fc6a5bac1" title="Chooses a participant for the task." alt="" coords="184,81,339,121"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="137,80,171,85,170,90,136,85"/>
+<area shape="rect" id="Node000003" href="$classTaskState.html#a38519e3589346f130681fe2ba1b2cb2b" title="Assigns a participant to the task." alt="" coords="387,31,521,56"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="312,41,373,41,373,46,312,46"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="569,5,723,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="521,32,555,27,556,33,522,37"/>
+<area shape="rect" id="Node000005" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="569,55,723,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="522,49,556,53,555,59,521,54"/>
+</map>

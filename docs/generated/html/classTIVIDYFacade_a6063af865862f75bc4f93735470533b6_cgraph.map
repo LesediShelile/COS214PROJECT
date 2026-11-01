@@ -1,0 +1,7 @@
+<map id="TIVIDYFacade::isTaskAssignedTo" name="TIVIDYFacade::isTaskAssignedTo">
+<area shape="rect" id="Node000001" title="Checks whether a participant is assigned to a particular task." alt="" coords="5,31,236,56"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#a0577e9de8be8a284cce967e9c61c6ab1" title="Gets the participant assigned to this work item." alt="" coords="299,5,472,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="236,30,285,25,286,30,236,35"/>
+<area shape="rect" id="Node000003" href="$classParticipant.html#ac1df4e6b6f24aedaf5103aebd4801470" title="Gets the participant&#39;s ID." alt="" coords="284,55,487,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="236,51,270,54,270,60,236,56"/>
+</map>

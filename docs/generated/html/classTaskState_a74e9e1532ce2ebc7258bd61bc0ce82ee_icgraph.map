@@ -1,0 +1,13 @@
+<map id="TaskState::isFinal" name="TaskState::isFinal">
+<area shape="rect" id="Node000001" title="Tells whether this is an end state (no further actions are possible)." alt="" coords="320,79,455,104"/>
+<area shape="rect" id="Node000002" href="$classTask.html#add6208690faa47847e89dbd7adc40d93" title=" " alt="" coords="148,29,272,55"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="327,77,256,57,257,52,329,72"/>
+<area shape="rect" id="Node000005" href="$test__cancelledState_8cpp.html#a286bcc7e776ed9884e2deef7dec208a6" title=" " alt="" coords="161,79,259,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="307,94,259,94,259,89,307,89"/>
+<area shape="rect" id="Node000006" href="$test__task__state__defaults_8cpp.html#ad28c62bc8b7f2e93d9e648ef803c997c" title=" " alt="" coords="161,128,259,153"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="329,110,257,130,256,125,327,105"/>
+<area shape="rect" id="Node000003" href="$test__state__strategy__chain_8cpp.html#aa25122209dd3aeeda9d7b2850770b1bb" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="134,33,100,28,101,23,135,28"/>
+<area shape="rect" id="Node000004" href="$test__state__strategy__chain_8cpp.html#a7359452cf7884fa783823be4bcf12f99" title=" " alt="" coords="5,55,100,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="135,57,101,62,100,57,134,51"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="include/ValidatedTask.h" name="include/ValidatedTask.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="37,5,211,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,225,64,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,33,74,52,50,80,38,113,32,149,34,212,28,212,27,149,33,112,46,77,70,48,99,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="183,225,246,251"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,29,177,49,201,77,214,112,221,148,221,212,215,212,215,149,209,113,196,80,173,52,145,33"/>
+<area shape="rect" id="Node000004" href="$TaskDecorator_8h.html" title=" " alt="" coords="61,79,187,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="127,31,127,65,121,65,121,31"/>
+<area shape="rect" id="Node000005" href="$WorkItem_8h.html" title=" " alt="" coords="75,152,173,177"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="127,104,127,138,121,138,121,104"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="111,179,62,219,58,214,108,175"/>
+<area shape="poly" id="edge7_Node000005_Node000003" title=" " alt="" coords="140,175,191,214,187,219,137,179"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="99,225,149,251"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="127,178,127,212,121,212,121,178"/>
+</map>

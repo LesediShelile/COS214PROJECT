@@ -1,0 +1,7 @@
+<map id="AuditedTask::cancel" name="AuditedTask::cancel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,156,31"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#ad147a81e94dbd1a9b5d1e3d157a1de7a" title=" " alt="" coords="204,5,369,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="157,15,190,15,190,21,157,21"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#ab78ca83aa8b3e08914f0b3917eaceac6" title=" " alt="" coords="417,5,552,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="370,15,403,15,403,21,370,21"/>
+</map>

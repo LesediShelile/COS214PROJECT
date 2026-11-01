@@ -1,0 +1,21 @@
+<map id="WorkflowInstance::start" name="WorkflowInstance::start">
+<area shape="rect" id="Node000001" title="Starts the workflow instance, transitioning from CREATED to RUNNING." alt="" coords="613,159,788,184"/>
+<area shape="rect" id="Node000002" href="$classTIVIDYFacade.html#a66fdc614fe57bc9107d3dc76e9835f09" title="Starts execution of an existing workflow instance." alt="" coords="363,133,565,159"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="599,163,565,160,566,154,600,158"/>
+<area shape="rect" id="Node000010" href="$test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="415,183,513,208"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="600,184,514,193,513,188,599,179"/>
+<area shape="rect" id="Node000003" href="$classSecureWorkflowProxy.html#a593b135584ba27fbfd6f25df620c0870" title="Starts a workflow instance after checking permission." alt="" coords="152,97,315,137"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="350,134,315,130,315,124,351,129"/>
+<area shape="rect" id="Node000009" href="$test__facade_8cpp.html#ab9d19a82094e008646175820dd73c898" title=" " alt="" coords="184,161,283,187"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="349,163,283,171,282,165,349,157"/>
+<area shape="rect" id="Node000004" href="$test__proxy_8cpp.html#a9883967c2c055ff49171206acd6d8bae" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="186,92,103,44,81,33,84,29,105,40,188,87"/>
+<area shape="rect" id="Node000005" href="$test__proxy_8cpp.html#a90dfdcaeb16f8246c456e2b3d1946623" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="146,95,101,83,102,77,148,90"/>
+<area shape="rect" id="Node000006" href="$test__proxy_8cpp.html#ae3dadaf13d96fbf05b029330c1b959d6" title=" " alt="" coords="5,104,104,129"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="138,119,104,119,104,114,138,114"/>
+<area shape="rect" id="Node000007" href="$test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="5,153,104,179"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="148,143,102,156,101,151,146,138"/>
+<area shape="rect" id="Node000008" href="$test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="5,203,104,228"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="164,145,154,151,130,172,106,193,86,205,83,200,102,189,126,168,150,146,161,140"/>
+</map>

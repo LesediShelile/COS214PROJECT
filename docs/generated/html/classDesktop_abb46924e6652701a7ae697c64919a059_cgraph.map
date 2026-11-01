@@ -1,0 +1,7 @@
+<map id="Desktop::log" name="Desktop::log">
+<area shape="rect" id="Node000001" title="Print a line to the terminal only (not into the diagram node)." alt="" coords="5,31,109,56"/>
+<area shape="rect" id="Node000002" href="$classScenarioPage.html#adc0a1726ae013c75802de824e48f6658" title=" " alt="" coords="157,5,337,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,34,143,29,144,34,110,39"/>
+<area shape="rect" id="Node000003" href="$classScenarioPage.html#af6305a9e7a7a27f5cd4b9c1f8afcc3f0" title=" " alt="" coords="179,55,316,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="110,47,165,54,164,60,109,52"/>
+</map>

@@ -1,0 +1,22 @@
+<map id="include/CommandHistory.h" name="include/CommandHistory.h">
+<area shape="rect" id="Node000001" title="Header file declaring the CommandHistory class for tracking command lifecycles." alt="" coords="843,5,1040,31"/>
+<area shape="rect" id="Node000002" href="$CommandInvoker_8h.html" title="Header file declaring the CommandInvoker class for executing and managing command undo logic." alt="" coords="618,79,817,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="893,37,754,81,753,76,892,32"/>
+<area shape="rect" id="Node000008" href="$test__commandMementoWorkflow_8cpp.html" title=" " alt="" coords="922,152,1139,192"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="948,44,956,73,969,103,988,128,1010,150,1006,154,984,132,964,105,951,75,943,45"/>
+<area shape="rect" id="Node000010" href="$CommandHistory_8cpp.html" title="Implementation of the CommandHistory class for managing executed workflow commands." alt="" coords="979,79,1163,104"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="976,35,1051,76,1048,81,973,40"/>
+<area shape="rect" id="Node000003" href="$TIVIDYFacade_8h.html" title="Header file declaring the TIVIDYFacade class for the TIVIDY workflow engine." alt="" coords="128,159,301,185"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="620,109,314,155,273,162,272,157,313,149,619,103"/>
+<area shape="rect" id="Node000006" href="$Playground_8h.html" title=" " alt="" coords="326,159,501,185"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="661,110,458,162,457,157,659,105"/>
+<area shape="rect" id="Node000007" href="$CommandInvoker_8cpp.html" title="Implementation of the CommandInvoker class executing and undoing workflow commands." alt="" coords="525,159,712,185"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="694,115,635,161,632,157,690,111"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="777,105,956,149,955,155,775,110"/>
+<area shape="rect" id="Node000009" href="$test__integration__work__items_8cpp.html" title=" " alt="" coords="737,152,898,192"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="745,111,795,150,792,154,741,115"/>
+<area shape="rect" id="Node000004" href="$SecureWorkflowProxy_8cpp.html" title=" " alt="" coords="5,240,216,265"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="190,195,128,242,124,238,187,191"/>
+<area shape="rect" id="Node000005" href="$TIVIDYFacade_8cpp.html" title="Implementation of the TIVIDYFacade class coordinating workflow execution and patterns." alt="" coords="240,240,400,265"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="243,191,306,238,303,242,239,195"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="include/ExternalTask.h" name="include/ExternalTask.h">
+<area shape="rect" id="Node000001" title="Declares a work item that interacts with an external service." alt="" coords="203,5,371,31"/>
+<area shape="rect" id="Node000002" href="$DefinitionBuilder_8cpp.html" title=" " alt="" coords="5,86,185,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="248,38,124,88,122,84,246,33"/>
+<area shape="rect" id="Node000003" href="$ExternalTask_8cpp.html" title="Implements the ExternalTask class." alt="" coords="210,86,365,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,44,290,86,285,86,285,44"/>
+<area shape="rect" id="Node000004" href="$test__external__task_8cpp.html" title=" " alt="" coords="389,79,533,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="326,34,420,76,418,81,324,39"/>
+</map>

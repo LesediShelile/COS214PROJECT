@@ -1,0 +1,5 @@
+<map id="AuditLogger" name="AuditLogger">
+<area shape="rect" id="Node000001" title="Records details from workflow events." alt="" coords="22,159,150,284"/>
+<area shape="rect" id="Node000002" href="$classWorkflowListener.html" title="Interface for objects that receive workflow events." alt="" coords="5,5,167,111"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,124,89,158,83,158,83,124"/>
+</map>

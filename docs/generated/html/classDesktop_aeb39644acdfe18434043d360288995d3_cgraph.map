@@ -1,0 +1,9 @@
+<map id="Desktop::say" name="Desktop::say">
+<area shape="rect" id="Node000001" title="Show a short note inside the step that is running (and in the terminal)." alt="" coords="5,31,112,56"/>
+<area shape="rect" id="Node000002" href="$classScenarioPage.html#adc0a1726ae013c75802de824e48f6658" title=" " alt="" coords="160,5,340,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,34,146,29,147,34,112,39"/>
+<area shape="rect" id="Node000003" href="$classScenarioPage.html#ae25e60139ef4d2feb7e629894ad031eb" title=" " alt="" coords="180,55,320,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="112,47,167,54,166,60,112,53"/>
+<area shape="rect" id="Node000004" href="$classScenarioPage.html#a30feab70a6fbe8b96ebf4c6f52a6191b" title=" " alt="" coords="388,55,535,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="320,65,374,65,374,70,320,70"/>
+</map>

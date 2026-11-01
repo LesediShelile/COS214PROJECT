@@ -1,0 +1,36 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,153,100,179"/>
+<area shape="rect" id="Node000002" href="$classTask.html#a24887c9b917151d5bb1300f543d9df6f" title=" " alt="" coords="175,153,276,179"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,163,161,163,161,169,100,169"/>
+<area shape="rect" id="Node000006" href="$classTask.html#a6a92e74a70344ea39fb0c29a6a02a74a" title="Gets the participant assigned to this work item." alt="" coords="156,255,295,280"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="71,177,106,204,149,233,177,247,175,252,147,238,103,209,68,181"/>
+<area shape="rect" id="Node000007" href="$classWorkItem.html#a07f90d9342cb3413103703da2f64f3a8" title=" " alt="" coords="153,304,298,329"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="62,178,95,232,120,264,150,291,158,296,155,300,146,295,116,267,90,235,58,180"/>
+<area shape="rect" id="Node000008" href="$classTask.html#adcb312706a3e150d450c3db9a8cc8b41" title=" " alt="" coords="369,203,522,228"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="95,176,148,189,255,203,355,210,354,215,255,208,148,194,94,181"/>
+<area shape="rect" id="Node000009" href="$classTask.html#acd0fdd09318cdb6d655fbfd1636d55b3" title=" " alt="" coords="148,5,303,31"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="58,152,91,98,116,67,146,40,156,34,158,39,150,44,120,70,95,101,63,154"/>
+<area shape="rect" id="Node000011" href="$classTask.html#ad058cda4e8c3e252a050f9fde67f99bf" title=" " alt="" coords="177,55,273,80"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="65,151,100,120,147,89,163,81,166,86,149,94,104,125,69,155"/>
+<area shape="rect" id="Node000013" href="$classTask.html#a5d6a1d3c6cd5b587d2414737fab9f3ed" title=" " alt="" coords="181,104,270,129"/>
+<area shape="poly" id="edge17_Node000001_Node000013" title=" " alt="" coords="97,151,167,131,168,136,99,156"/>
+<area shape="rect" id="Node000003" href="$classTaskState.html#a38519e3589346f130681fe2ba1b2cb2b" title="Assigns a participant to the task." alt="" coords="378,153,513,179"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="277,163,364,163,364,169,277,169"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="588,55,741,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="512,152,539,140,553,128,562,115,571,102,586,89,598,83,600,88,590,94,575,106,566,118,557,132,541,144,514,156"/>
+<area shape="rect" id="Node000005" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="588,104,741,129"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="502,151,594,130,595,135,503,156"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="506,200,539,189,590,163,633,135,636,140,592,168,541,194,508,205"/>
+<area shape="rect" id="Node000010" href="$classTaskState.html#a8d7df5b147dbd89bfa5d68219664e849" title="Makes the task ready to be assigned." alt="" coords="351,5,540,31"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="303,15,337,15,337,21,303,21"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="503,28,595,49,594,54,502,33"/>
+<area shape="poly" id="edge12_Node000010_Node000005" title=" " alt="" coords="516,28,541,40,557,52,566,65,575,77,589,89,603,97,601,101,587,94,571,81,562,68,553,56,539,44,514,33"/>
+<area shape="rect" id="Node000012" href="$classTaskState.html#ac565a8ae8c1b571cec880100fd5ba2ea" title="Rejects the task." alt="" coords="380,55,511,80"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="274,65,366,65,366,70,274,70"/>
+<area shape="poly" id="edge15_Node000012_Node000004" title=" " alt="" coords="511,65,574,65,574,70,511,70"/>
+<area shape="poly" id="edge16_Node000012_Node000005" title=" " alt="" coords="503,77,595,98,594,104,502,83"/>
+<area shape="rect" id="Node000014" href="$classTaskState.html#a6fd89a16759c4741def5e17f1463356b" title="Starts work on the task." alt="" coords="384,104,507,129"/>
+<area shape="poly" id="edge18_Node000013_Node000014" title=" " alt="" coords="270,114,370,114,370,119,270,119"/>
+<area shape="poly" id="edge19_Node000014_Node000004" title=" " alt="" coords="502,101,594,80,595,86,503,107"/>
+<area shape="poly" id="edge20_Node000014_Node000005" title=" " alt="" coords="507,114,574,114,574,119,507,119"/>
+</map>

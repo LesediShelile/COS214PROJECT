@@ -1,0 +1,5 @@
+<map id="CompleteCommand" name="CompleteCommand">
+<area shape="rect" id="Node000001" title="Concrete command that transitions a work item to its completed state." alt="" coords="5,299,185,444"/>
+<area shape="rect" id="Node000002" href="$classWorkflowCommand.html" title="Abstract base class representing an undoable action on a work item." alt="" coords="7,5,184,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,264,98,299,93,299,93,264"/>
+</map>

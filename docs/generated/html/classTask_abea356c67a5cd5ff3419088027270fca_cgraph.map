@@ -1,0 +1,5 @@
+<map id="Task::isAvailable" name="Task::isAvailable">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,136,31"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#ab6958d33b7f9532307a18f3c8b367103" title="Tells whether a task in this state is ready to be assigned." alt="" coords="184,5,348,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,15,170,15,170,21,136,21"/>
+</map>

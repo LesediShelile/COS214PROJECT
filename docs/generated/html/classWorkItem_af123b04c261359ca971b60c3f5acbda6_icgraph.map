@@ -1,0 +1,11 @@
+<map id="WorkItem::reject" name="WorkItem::reject">
+<area shape="rect" id="Node000001" title=" " alt="" coords="437,31,568,56"/>
+<area shape="rect" id="Node000002" href="$classRejectCommand.html#a6493c23689a21f7c5fc3d589594820f2" title="Executes the rejection command on the target work item." alt="" coords="200,5,389,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="423,36,389,32,390,27,424,31"/>
+<area shape="rect" id="Node000004" href="$classTaskDecorator.html#a86a6681140e3795b90297f57b44e000d" title=" " alt="" coords="215,55,375,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="424,55,375,61,375,55,423,50"/>
+<area shape="rect" id="Node000003" href="$test__commandMementoWorkflow_8cpp.html#a3bb5027daa3fd82ba5b391d8ec37474a" title=" " alt="" coords="31,5,126,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="186,21,126,21,126,15,186,15"/>
+<area shape="rect" id="Node000005" href="$classAuditedTask.html#a35d60e285599f4c9ba20635656af9bb2" title=" " alt="" coords="5,55,152,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="201,70,152,70,152,65,201,65"/>
+</map>

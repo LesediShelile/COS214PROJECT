@@ -1,0 +1,9 @@
+<map id="WorkItem::getStateName" name="WorkItem::getStateName">
+<area shape="rect" id="Node000001" title=" " alt="" coords="271,55,457,80"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#a40aeb8a1298f6e31a261bb63a16a3311" title=" " alt="" coords="5,5,223,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="285,55,179,33,180,28,286,49"/>
+<area shape="rect" id="Node000003" href="$test__commandMementoWorkflow_8cpp.html#af695b6c3a0a7a12431e1a6dfbdeffbcd" title=" " alt="" coords="67,55,161,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,70,161,70,161,65,257,65"/>
+<area shape="rect" id="Node000004" href="$test__external__task_8cpp.html#adf42dc81e34db610baf0b39d3538d161" title=" " alt="" coords="65,104,163,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="286,85,164,110,163,104,285,80"/>
+</map>

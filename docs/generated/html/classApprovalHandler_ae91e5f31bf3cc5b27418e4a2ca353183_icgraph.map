@@ -1,0 +1,7 @@
+<map id="ApprovalHandler::setNext" name="ApprovalHandler::setNext">
+<area shape="rect" id="Node000001" title="Links this handler to the next one in the chain." alt="" coords="152,31,343,56"/>
+<area shape="rect" id="Node000002" href="$test__state__strategy__chain_8cpp.html#aee9edd9abb39f21859b8a0c9a35d424c" title=" " alt="" coords="7,5,102,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,32,102,27,103,22,139,26"/>
+<area shape="rect" id="Node000003" href="$test__FacadeCoR_8cpp.html#af9c8b037c8cf71efbdead533f0f18dba" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,60,105,64,104,59,138,54"/>
+</map>

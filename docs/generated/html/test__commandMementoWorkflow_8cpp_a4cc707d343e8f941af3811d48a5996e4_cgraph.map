@@ -1,0 +1,15 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,100,105"/>
+<area shape="rect" id="Node000002" href="$classCommandInvoker.html#a997619b09faa33bc764cf5fb4c23de82" title="Checks if there are any commands currently available to undo." alt="" coords="178,5,381,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="72,78,106,58,147,40,174,31,176,36,149,44,109,63,75,82"/>
+<area shape="rect" id="Node000004" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="148,55,411,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="100,85,152,79,152,84,101,90"/>
+<area shape="rect" id="Node000006" href="$classCommandInvoker.html#aba2de4c9640347b60f686919599af212" title="Retrieves a pointer to the internal history stack." alt="" coords="173,104,386,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="101,95,159,101,159,107,100,100"/>
+<area shape="rect" id="Node000007" href="$classCommandHistory.html#a9bfa5bc62a40316761f71ccef7e984fe" title="Returns the total number of commands stored in history." alt="" coords="195,153,364,179"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="76,103,110,121,149,138,182,148,181,153,147,143,107,126,74,108"/>
+<area shape="rect" id="Node000003" href="$classCommandHistory.html#a1342b4ebb959d12ea96a25e6b0319864" title="Checks if the command history contains any commands." alt="" coords="459,5,655,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="381,15,445,15,445,21,381,21"/>
+<area shape="rect" id="Node000005" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="469,55,644,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="411,65,455,65,455,70,411,70"/>
+</map>

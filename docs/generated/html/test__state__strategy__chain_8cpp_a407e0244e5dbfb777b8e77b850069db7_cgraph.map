@@ -1,0 +1,17 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,169,100,195"/>
+<area shape="rect" id="Node000002" href="$classApprovalRequest.html#a6783839d5f3ce710ad075724dcc2c593" title="Approves the request." alt="" coords="170,5,365,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,168,87,107,113,71,146,41,159,34,162,38,150,45,117,75,92,109,61,170"/>
+<area shape="rect" id="Node000003" href="$classApprovalRequest.html#a9dc02d654b3d2cc3dc41c4932b4aaffa" title="Gets the authority level needed to approve." alt="" coords="157,55,377,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="65,167,100,136,147,105,162,98,165,103,149,110,103,140,69,171"/>
+<area shape="rect" id="Node000004" href="$classApprovalRequest.html#a7b8b43adff3dccf6fa236bd787829af1" title="Gets the current status of the request." alt="" coords="166,120,369,145"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="98,167,147,154,186,146,187,151,149,159,99,172"/>
+<area shape="rect" id="Node000005" href="$classApprovalRequest.html#a3d6878ea7fcd0b962e4c5ed0e0861f59" title="Checks whether an undecided request has passed its deadline." alt="" coords="167,169,368,195"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="100,179,153,179,153,185,100,185"/>
+<area shape="rect" id="Node000006" href="$classApprovalRequest.html#a03f344078d8f989646a04aa5759fd0f1" title="Marks a pending request as escalated to a higher level." alt="" coords="148,219,387,244"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="101,192,149,203,192,213,191,218,147,209,100,197"/>
+<area shape="rect" id="Node000007" href="$classApprovalRequest.html#a7fe068ec01acd9b5a0f6e4166759ddb8" title="Rejects the request." alt="" coords="178,268,357,293"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="68,193,103,224,149,253,171,262,169,266,147,258,100,228,65,197"/>
+<area shape="rect" id="Node000008" href="$classApprovalRequest.html#ab6777c6338275d539f2103c981a81d10" title="Sets a new deadline, e.g." alt="" coords="151,317,383,343"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="62,193,94,247,119,277,149,302,163,310,161,315,147,307,115,281,90,250,58,196"/>
+</map>

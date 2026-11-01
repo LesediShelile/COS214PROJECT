@@ -1,0 +1,7 @@
+<map id="TIVIDYFacade::assignTask" name="TIVIDYFacade::assignTask">
+<area shape="rect" id="Node000001" title="Assigns a task within an instance to a specific participant." alt="" coords="5,5,195,31"/>
+<area shape="rect" id="Node000002" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="243,5,505,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,15,229,15,229,21,195,21"/>
+<area shape="rect" id="Node000003" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="553,5,728,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="505,15,540,15,540,21,505,21"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,100,56"/>
+<area shape="rect" id="Node000002" href="$classAssignCommand.html#a45d89864fdc39a250bb7c5c6ae6d1c17" title="Returns a descriptive string summarizing the command action." alt="" coords="148,31,383,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,41,135,41,135,46,100,46"/>
+<area shape="rect" id="Node000003" href="$classParticipant.html#a72d15f6c1f9c7a4d185f4e104ee164ce" title="Gets the participant&#39;s name." alt="" coords="431,5,589,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="382,29,417,25,417,30,383,34"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="433,55,587,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="383,52,420,56,419,61,382,57"/>
+</map>

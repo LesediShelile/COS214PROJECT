@@ -1,0 +1,23 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,119,104,145"/>
+<area shape="rect" id="Node000002" href="$classExternalConnector.html#a608caa1f7a3f3cdd5a93ec514111f9d6" title="Returns the name of the external service." alt="" coords="155,5,305,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,117,104,87,151,55,162,49,164,54,153,60,108,91,72,121"/>
+<area shape="rect" id="Node000003" href="$classAdapterOne.html#ab56151653500d3a6445a6c0e9c77ee00" title="Executes a request through the external service." alt="" coords="152,70,308,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="100,117,170,97,171,102,101,122"/>
+<area shape="rect" id="Node000006" href="$classAdapterTwo.html#aa9e161de7f82b157efdd652c6898bbcb" title="Executes a request through the external service." alt="" coords="153,143,307,169"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="104,136,139,141,138,146,104,141"/>
+<area shape="rect" id="Node000011" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="183,193,277,218"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="80,142,153,178,174,186,173,191,151,182,78,147"/>
+<area shape="rect" id="Node000004" href="$classAPIOne.html#a50e2a221a694638a057753a0bdc13cc2" title="Adds an entry to the external service." alt="" coords="369,7,504,33"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="272,67,355,41,379,34,380,39,357,47,273,72"/>
+<area shape="rect" id="Node000005" href="$classAPIOne.html#ad1145fc856689439341f17a26c59fddb" title="Removes an entry from the external service." alt="" coords="356,57,517,82"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="308,75,342,73,342,78,309,80"/>
+<area shape="rect" id="Node000007" href="$classAPITwo.html#ab34b15631db52f0a12f80d93d334f3c3" title="Adds information to the external service." alt="" coords="387,106,487,131"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="300,141,372,127,373,133,301,146"/>
+<area shape="rect" id="Node000008" href="$classAPITwo.html#a4c0a91989aec85eebad724fcdc04bd7d" title="Sends an alert through the external service." alt="" coords="383,155,490,181"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="308,158,369,161,369,167,308,163"/>
+<area shape="rect" id="Node000009" href="$classAPITwo.html#a768fa936821fb3c69cf713b81cc435fb" title="Dispatches the requested operation." alt="" coords="371,205,502,230"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="274,166,381,198,379,203,273,171"/>
+<area shape="rect" id="Node000010" href="$classAPITwo.html#a2704856875311f46f0a30fc06a146504" title="Sets the information required for an operation." alt="" coords="376,254,497,279"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="288,166,310,178,326,193,334,209,343,225,358,239,369,246,367,251,354,243,338,228,330,212,321,197,306,182,285,171"/>
+</map>

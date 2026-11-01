@@ -1,0 +1,5 @@
+<map id="TaskDecorator::getName" name="TaskDecorator::getName">
+<area shape="rect" id="Node000001" title="Human readable name." alt="" coords="235,5,417,31"/>
+<area shape="rect" id="Node000002" href="$classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="5,5,187,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="221,21,187,21,187,15,221,15"/>
+</map>

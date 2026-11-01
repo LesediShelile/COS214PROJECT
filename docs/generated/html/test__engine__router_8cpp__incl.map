@@ -1,0 +1,47 @@
+<map id="tests/test_engine_router.cpp" name="tests/test_engine_router.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="375,5,581,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,175,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="416,33,166,79,166,74,415,28"/>
+<area shape="rect" id="Node000003" href="$EngineRouter_8h.html" title=" " alt="" coords="387,79,569,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="481,31,481,65,475,65,475,31"/>
+<area shape="rect" id="Node000005" href="$WorkflowEvent_8h.html" title=" " alt="" coords="126,225,257,251"/>
+<area shape="poly" id="edge15_Node000001_Node000005" title=" " alt="" coords="430,33,376,52,322,81,285,113,253,149,207,215,203,212,249,146,282,109,319,76,373,47,428,28"/>
+<area shape="rect" id="Node000011" href="$ApprovalRequest_8h.html" title=" " alt="" coords="886,79,1094,104"/>
+<area shape="poly" id="edge11_Node000001_Node000011" title=" " alt="" coords="561,28,895,74,894,79,560,33"/>
+<area shape="rect" id="Node000015" href="$WorkflowDefinition_8h.html" title="Declaration of the WorkflowDefinition class representing process blueprints." alt="" coords="281,225,501,251"/>
+<area shape="poly" id="edge16_Node000001_Node000015" title=" " alt="" coords="445,33,406,50,362,76,321,110,304,130,291,153,288,163,289,173,300,191,320,206,344,218,342,223,317,210,296,194,284,174,283,163,286,151,300,127,317,106,359,71,404,46,443,28"/>
+<area shape="rect" id="Node000016" href="$SequentialStage_8h.html" title=" " alt="" coords="594,79,797,104"/>
+<area shape="poly" id="edge18_Node000001_Node000016" title=" " alt="" coords="514,28,648,72,646,77,512,33"/>
+<area shape="rect" id="Node000018" href="$WorkItem_8h.html" title=" " alt="" coords="801,225,899,251"/>
+<area shape="poly" id="edge26_Node000001_Node000018" title=" " alt="" coords="582,23,649,30,715,41,772,56,794,66,811,77,833,108,846,144,852,180,854,211,848,212,847,181,841,145,829,110,807,81,792,70,770,61,714,46,648,36,581,29"/>
+<area shape="rect" id="Node000004" href="$WorkflowListener_8h.html" title=" " alt="" coords="301,152,447,177"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="463,106,404,146,401,142,460,102"/>
+<area shape="rect" id="Node000008" href="$WorkflowInstance_8h.html" title="Declaration of the WorkflowInstance class representing an active execution instance." alt="" coords="526,225,675,251"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="551,102,593,119,612,133,627,151,633,167,632,184,619,215,614,213,627,182,628,167,622,153,608,137,590,124,549,107"/>
+<area shape="rect" id="Node000010" href="$ApprovalHandler_8h.html" title=" " alt="" coords="471,152,613,177"/>
+<area shape="poly" id="edge10_Node000003_Node000010" title=" " alt="" coords="491,103,525,140,521,144,487,106"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="346,180,235,223,233,218,344,175"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="571,299,630,324"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="258,248,558,300,557,305,257,253"/>
+<area shape="rect" id="Node000007" href="$EventType_8h.html" title=" " alt="" coords="141,299,242,324"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="194,251,194,285,189,285,189,251"/>
+<area shape="poly" id="edge8_Node000008_Node000006" title=" " alt="" coords="603,251,603,285,598,285,598,251"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="732,299,795,324"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="628,248,725,291,723,295,626,253"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="871,152,951,177"/>
+<area shape="poly" id="edge12_Node000011_Node000012" title=" " alt="" coords="979,106,936,145,932,141,976,102"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="975,152,1034,177"/>
+<area shape="poly" id="edge13_Node000011_Node000013" title=" " alt="" coords="995,104,1002,138,997,139,990,105"/>
+<area shape="rect" id="Node000014" href="$ApprovalStatus_8h.html" title=" " alt="" coords="1058,152,1191,177"/>
+<area shape="poly" id="edge14_Node000011_Node000014" title=" " alt="" coords="1013,102,1092,143,1089,148,1010,106"/>
+<area shape="poly" id="edge17_Node000015_Node000006" title=" " alt="" coords="426,248,559,293,557,298,424,253"/>
+<area shape="rect" id="Node000017" href="$Stage_8h.html" title=" " alt="" coords="693,152,764,177"/>
+<area shape="poly" id="edge19_Node000016_Node000017" title=" " alt="" coords="703,103,720,139,715,141,698,105"/>
+<area shape="poly" id="edge20_Node000017_Node000006" title=" " alt="" coords="728,178,714,213,689,252,664,276,637,294,634,290,661,272,685,249,709,211,723,177"/>
+<area shape="poly" id="edge21_Node000017_Node000009" title=" " alt="" coords="734,177,760,285,755,286,729,178"/>
+<area shape="poly" id="edge22_Node000017_Node000018" title=" " alt="" coords="750,175,820,216,817,221,747,180"/>
+<area shape="poly" id="edge24_Node000018_Node000006" title=" " alt="" coords="811,253,644,301,642,295,809,248"/>
+<area shape="poly" id="edge25_Node000018_Node000009" title=" " alt="" coords="838,253,790,292,786,288,834,249"/>
+<area shape="rect" id="Node000019" title=" " alt="" coords="825,299,875,324"/>
+<area shape="poly" id="edge23_Node000018_Node000019" title=" " alt="" coords="853,251,853,285,847,285,847,251"/>
+</map>

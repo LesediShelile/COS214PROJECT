@@ -1,0 +1,5 @@
+<map id="TaskDecorator::getChildren" name="TaskDecorator::getChildren">
+<area shape="rect" id="Node000001" title="Children of this item, or an empty list for a leaf." alt="" coords="5,5,204,31"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#a3bf0e9f849e1e1b4abacdc3fdd13db34" title="Children of this item, or an empty list for a leaf." alt="" coords="252,5,420,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,15,238,15,238,21,204,21"/>
+</map>

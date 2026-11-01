@@ -1,0 +1,11 @@
+<map id="TaskDecorator" name="TaskDecorator">
+<area shape="rect" id="Node000001" title="Decorator base: wraps another WorkItem and forwards every call to it." alt="" coords="156,839,299,1144"/>
+<area shape="rect" id="Node000003" href="$classAuditedTask.html" title="Concrete Decorator: publishes a WorkflowEvent after every successful lifecycle operation on the wrapp..." alt="" coords="5,1192,140,1457"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="153,1158,137,1193,132,1191,148,1156"/>
+<area shape="rect" id="Node000004" href="$classPriorityTask.html" title="Concrete Decorator: gives a work item a priority (higher = more urgent)." alt="" coords="165,1242,290,1407"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="230,1158,230,1242,225,1242,225,1158"/>
+<area shape="rect" id="Node000005" href="$classValidatedTask.html" title="Concrete Decorator: refuses to complete a work item until every required data field has been filled i..." alt="" coords="314,1222,466,1427"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="307,1148,342,1220,338,1223,302,1151"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html" title="Component of the Composite pattern (also Component of Decorator, Aggregate of Iterator,..." alt="" coords="133,5,321,791"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,804,230,839,225,839,225,804"/>
+</map>

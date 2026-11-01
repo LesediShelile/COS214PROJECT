@@ -1,0 +1,7 @@
+<map id="AdapterOne::request" name="AdapterOne::request">
+<area shape="rect" id="Node000001" title="Executes a request through the external service." alt="" coords="5,31,161,56"/>
+<area shape="rect" id="Node000002" href="$classAPIOne.html#a50e2a221a694638a057753a0bdc13cc2" title="Adds an entry to the external service." alt="" coords="223,5,357,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,31,208,25,209,31,162,36"/>
+<area shape="rect" id="Node000003" href="$classAPIOne.html#ad1145fc856689439341f17a26c59fddb" title="Removes an entry from the external service." alt="" coords="209,55,371,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="162,50,196,54,195,59,161,55"/>
+</map>

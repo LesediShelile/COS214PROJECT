@@ -1,0 +1,28 @@
+var classTaskDecorator =
+[
+    [ "~TaskDecorator", "classTaskDecorator.html#a2a8f2a0f289af5d1b2647651c4d5e586", null ],
+    [ "TaskDecorator", "classTaskDecorator.html#ac87829de543e3bc5b4ce39f43553f05a", null ],
+    [ "TaskDecorator", "classTaskDecorator.html#ac27e90a05dc41334a2ae3ac392d0d91c", null ],
+    [ "activateChildren", "classTaskDecorator.html#a07452555413ffa1853545d6c0a9fb873", null ],
+    [ "assign", "classTaskDecorator.html#a72fef7d915f773909877475aca11dab8", null ],
+    [ "cancel", "classTaskDecorator.html#ad147a81e94dbd1a9b5d1e3d157a1de7a", null ],
+    [ "clone", "classTaskDecorator.html#a039016dc9a8b5c8a93b813fc9e013121", null ],
+    [ "complete", "classTaskDecorator.html#a750c27d210bc803debd210fe160a5138", null ],
+    [ "createMemento", "classTaskDecorator.html#a39e47c5d1eeb5f5a0a714b55a3e7ec06", null ],
+    [ "getAssignee", "classTaskDecorator.html#ae50ae3400511d08eff15956f45537759", null ],
+    [ "getChildren", "classTaskDecorator.html#a66c419296edd2b00021aa634e7f27b23", null ],
+    [ "getData", "classTaskDecorator.html#a55eabccf40f708c8d277d5a978e51bd8", null ],
+    [ "getItemID", "classTaskDecorator.html#a4057bd21921fa09d0298b6f23a507b17", null ],
+    [ "getName", "classTaskDecorator.html#ac3cab9fa487076e46ec2d7f55c2cfb2d", null ],
+    [ "getStateName", "classTaskDecorator.html#a40aeb8a1298f6e31a261bb63a16a3311", null ],
+    [ "getWrapped", "classTaskDecorator.html#a1c2105045b0e6277412c52e526854866", null ],
+    [ "hasData", "classTaskDecorator.html#a3778737d01e7171c8e1dc5b5ed409f6e", null ],
+    [ "isAvailable", "classTaskDecorator.html#a9c00614859899fb685b4c567a06e778a", null ],
+    [ "isFinished", "classTaskDecorator.html#a68bc03f7315dc2598e27d54ca0e73487", null ],
+    [ "makeAvailable", "classTaskDecorator.html#a4e32d1631389eba548864ebb70cda5a0", null ],
+    [ "reject", "classTaskDecorator.html#a86a6681140e3795b90297f57b44e000d", null ],
+    [ "restoreMemento", "classTaskDecorator.html#ae2fa927271db15938387bfb2e11821e5", null ],
+    [ "setData", "classTaskDecorator.html#ac165c23dbdc7e17e1f705f162bfe6dc2", null ],
+    [ "setPublisher", "classTaskDecorator.html#aec06e4b43f04c465a9e2879d58c00867", null ],
+    [ "start", "classTaskDecorator.html#a7716b5cb1f4f1b2559ea9b03411bef50", null ]
+];

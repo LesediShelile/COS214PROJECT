@@ -1,0 +1,15 @@
+<map id="AvailableItemsIterator::skipToAvailable" name="AvailableItemsIterator::skipToAvailable">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,91,172,131"/>
+<area shape="rect" id="Node000002" href="$classDepthFirstIterator.html#a0ebfa204fb805d9fe54de406ceb15ab2" title=" " alt="" coords="447,6,585,46"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,89,157,51,187,33,219,19,274,7,330,3,385,4,434,9,433,14,384,10,330,8,275,13,221,24,189,38,160,55,112,93"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a3bf0e9f849e1e1b4abacdc3fdd13db34" title="Children of this item, or an empty list for a leaf." alt="" coords="432,128,600,153"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="112,129,160,167,189,185,221,198,265,209,301,212,338,208,383,198,436,180,482,158,484,162,438,185,385,203,339,213,301,217,265,214,219,203,187,190,157,171,109,134"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a9905804d5629ed95af380e3735003e0d" title=" " alt="" coords="220,99,384,124"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,109,207,109,207,114,172,114"/>
+<area shape="rect" id="Node000005" href="$classDepthFirstIterator.html#a5859dfaa6531b1ac97ad5e21fb34e98f" title=" " alt="" coords="233,149,371,189"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="164,129,221,144,219,149,163,134"/>
+<area shape="rect" id="Node000006" href="$classDepthFirstIterator.html#a5a87b79bf2169da85eb3ca87fdf57085" title=" " alt="" coords="233,34,371,74"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="163,89,219,73,221,78,164,94"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="370,42,433,34,434,39,371,48"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="356,72,385,83,473,120,471,125,383,88,354,77"/>
+</map>

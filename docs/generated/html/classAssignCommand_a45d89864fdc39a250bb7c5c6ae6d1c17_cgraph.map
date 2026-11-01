@@ -1,0 +1,7 @@
+<map id="AssignCommand::getDescription" name="AssignCommand::getDescription">
+<area shape="rect" id="Node000001" title="Returns a descriptive string summarizing the command action." alt="" coords="5,31,240,56"/>
+<area shape="rect" id="Node000002" href="$classParticipant.html#a72d15f6c1f9c7a4d185f4e104ee164ce" title="Gets the participant&#39;s name." alt="" coords="288,5,447,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="240,29,274,25,275,30,240,34"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="291,55,444,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,52,277,56,277,61,240,57"/>
+</map>

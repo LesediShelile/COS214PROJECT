@@ -1,0 +1,11 @@
+<map id="ValidatedTask::getMissingFields" name="ValidatedTask::getMissingFields">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,23,196,63"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#a55eabccf40f708c8d277d5a978e51bd8" title=" " alt="" coords="245,5,420,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,30,231,26,232,32,197,36"/>
+<area shape="rect" id="Node000004" href="$classTaskDecorator.html#a3778737d01e7171c8e1dc5b5ed409f6e" title=" " alt="" coords="244,55,421,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="197,51,231,54,230,59,196,56"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a07f90d9342cb3413103703da2f64f3a8" title=" " alt="" coords="470,5,615,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="420,15,456,15,456,21,420,21"/>
+<area shape="rect" id="Node000005" href="$classWorkItem.html#a832fccc6b34774701672028c884cd70e" title=" " alt="" coords="469,55,616,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="422,65,456,65,456,70,422,70"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="TIVIDYFacade::startInstance" name="TIVIDYFacade::startInstance">
+<area shape="rect" id="Node000001" title="Starts execution of an existing workflow instance." alt="" coords="5,5,208,31"/>
+<area shape="rect" id="Node000002" href="$classWorkflowInstance.html#a02bc18c089fee46a354a1005c2de6707" title="Starts the workflow instance, transitioning from CREATED to RUNNING." alt="" coords="256,5,431,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,15,242,15,242,21,208,21"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a215d213d1c9653327eb5695cb3a06619" title=" " alt="" coords="479,5,668,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="431,15,465,15,465,21,431,21"/>
+</map>

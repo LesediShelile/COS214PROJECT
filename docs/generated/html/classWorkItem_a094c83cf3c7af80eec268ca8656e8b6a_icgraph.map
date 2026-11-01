@@ -1,0 +1,105 @@
+<map id="WorkItem::getName" name="WorkItem::getName">
+<area shape="rect" id="Node000001" title="Human readable name." alt="" coords="869,352,1023,377"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#a38519e3589346f130681fe2ba1b2cb2b" title="Assigns a participant to the task." alt="" coords="627,153,761,179"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="932,340,915,306,890,265,859,225,820,192,792,179,761,172,762,166,793,174,823,188,862,221,895,262,920,303,937,338"/>
+<area shape="rect" id="Node000011" href="$classTaskState.html#a23345140031e09f9bf6ad1663a008974" title="Cancels the task." alt="" coords="627,104,761,129"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="936,339,922,296,898,242,865,188,844,163,820,143,792,129,761,121,762,116,794,124,823,138,847,160,869,184,903,239,927,294,941,338"/>
+<area shape="rect" id="Node000013" href="$classTaskState.html#ad98305bdb5ed339e4b05902ca375c58b" title="Completes the task." alt="" coords="617,55,771,80"/>
+<area shape="poly" id="edge15_Node000001_Node000013" title=" " alt="" coords="938,339,927,286,906,219,890,184,871,151,847,120,820,93,797,80,771,73,772,67,799,75,823,89,851,116,875,148,895,182,911,217,932,285,944,338"/>
+<area shape="rect" id="Node000015" href="$classAssignCommand.html#a45d89864fdc39a250bb7c5c6ae6d1c17" title="Returns a descriptive string summarizing the command action." alt="" coords="577,403,811,428"/>
+<area shape="poly" id="edge20_Node000001_Node000015" title=" " alt="" coords="869,383,758,405,757,400,868,378"/>
+<area shape="rect" id="Node000017" href="$classCompleteCommand.html#a7e07cc763c98b4d28313f82b475a627d" title="Returns a descriptive string summarizing the command action." alt="" coords="567,452,821,477"/>
+<area shape="poly" id="edge22_Node000001_Node000017" title=" " alt="" coords="918,388,874,416,822,442,780,455,779,449,820,437,871,412,915,384"/>
+<area shape="rect" id="Node000019" href="$classRejectCommand.html#ad8f2839a45d83fcc648346a72cb2bff1" title="Returns a descriptive string summarizing the rejection action." alt="" coords="577,501,811,527"/>
+<area shape="poly" id="edge24_Node000001_Node000019" title=" " alt="" coords="930,390,886,442,856,469,823,491,791,504,789,499,820,486,853,465,882,438,926,387"/>
+<area shape="rect" id="Node000020" href="$classStartCommand.html#aa168f7bfe1b725d18dd6a3852da4cb57" title="Returns a descriptive string summarizing the command action." alt="" coords="583,551,805,576"/>
+<area shape="poly" id="edge26_Node000001_Node000020" title=" " alt="" coords="936,391,919,426,895,466,862,507,823,540,797,553,795,548,820,536,858,503,890,463,915,423,932,389"/>
+<area shape="rect" id="Node000021" href="$classTaskDecorator.html#ac3cab9fa487076e46ec2d7f55c2cfb2d" title="Human readable name." alt="" coords="603,600,785,625"/>
+<area shape="poly" id="edge28_Node000001_Node000021" title=" " alt="" coords="940,392,926,436,902,490,868,544,847,568,823,590,787,607,784,602,820,585,843,565,864,541,898,487,921,434,935,390"/>
+<area shape="rect" id="Node000023" href="$classTaskState.html#a8d7df5b147dbd89bfa5d68219664e849" title="Makes the task ready to be assigned." alt="" coords="599,301,789,327"/>
+<area shape="poly" id="edge30_Node000001_Node000023" title=" " alt="" coords="868,352,757,329,758,324,869,347"/>
+<area shape="rect" id="Node000026" href="$test__external__task_8cpp.html#adf42dc81e34db610baf0b39d3538d161" title=" " alt="" coords="164,403,263,428"/>
+<area shape="poly" id="edge63_Node000001_Node000026" title=" " alt="" coords="856,366,616,370,472,378,327,393,263,405,262,400,326,387,471,373,616,364,856,361"/>
+<area shape="rect" id="Node000027" href="$classTaskState.html#ac565a8ae8c1b571cec880100fd5ba2ea" title="Rejects the task." alt="" coords="629,252,759,277"/>
+<area shape="poly" id="edge40_Node000001_Node000027" title=" " alt="" coords="915,346,872,317,820,291,759,275,760,270,822,286,875,312,918,341"/>
+<area shape="rect" id="Node000029" href="$classWorkflowCommand.html#a48d4e82e955573b9262bde2627539745" title="Restores the target work item using the saved snapshot." alt="" coords="593,670,795,710"/>
+<area shape="poly" id="edge45_Node000001_Node000029" title=" " alt="" coords="942,391,929,442,906,508,871,577,849,610,823,639,798,658,769,672,767,667,795,653,820,635,845,606,867,574,901,506,924,441,937,390"/>
+<area shape="rect" id="Node000039" href="$classTaskState.html#a6fd89a16759c4741def5e17f1463356b" title="Starts work on the task." alt="" coords="633,203,755,228"/>
+<area shape="poly" id="edge55_Node000001_Node000039" title=" " alt="" coords="926,343,882,290,853,264,820,242,788,229,755,222,756,217,790,224,823,237,856,259,886,287,930,339"/>
+<area shape="rect" id="Node000003" href="$classTask.html#a24887c9b917151d5bb1300f543d9df6f" title=" " alt="" coords="372,104,473,129"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="612,154,473,128,474,123,613,149"/>
+<area shape="rect" id="Node000010" href="$test__task__state__defaults_8cpp.html#ad28c62bc8b7f2e93d9e648ef803c997c" title=" " alt="" coords="373,153,472,179"/>
+<area shape="poly" id="edge9_Node000002_Node000010" title=" " alt="" coords="613,169,472,169,472,163,613,163"/>
+<area shape="rect" id="Node000004" href="$classTask.html#a2a89b92343173d5a1d6f8b32a0a7efb7" title="Ask the strategy for a participant and assign the task to them." alt="" coords="148,104,279,129"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="358,119,279,119,279,114,358,114"/>
+<area shape="rect" id="Node000006" href="$test__state__strategy__chain_8cpp.html#aa25122209dd3aeeda9d7b2850770b1bb" title=" " alt="" coords="166,203,261,228"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="360,130,328,143,313,154,304,166,295,179,280,192,256,205,253,200,277,188,291,175,300,163,310,151,325,138,358,125"/>
+<area shape="rect" id="Node000007" href="$test__state__strategy__chain_8cpp.html#a7359452cf7884fa783823be4bcf12f99" title=" " alt="" coords="166,153,261,179"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="359,134,262,158,260,152,358,129"/>
+<area shape="rect" id="Node000008" href="$test__state__strategy__chain_8cpp.html#af71a4d2345a04ac8a902f39619ba60cb" title=" " alt="" coords="166,55,261,80"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="358,104,260,81,262,76,359,99"/>
+<area shape="rect" id="Node000009" href="$test__state__strategy__chain_8cpp.html#a5ceea80a3f9b49870045be0718a09582" title=" " alt="" coords="166,252,261,277"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="360,127,328,143,317,154,311,165,304,190,298,215,281,241,261,254,258,250,277,237,293,213,299,188,306,163,313,151,325,139,358,122"/>
+<area shape="rect" id="Node000005" href="$test__state__strategy__chain_8cpp.html#a065d9420065ff58be04719589ea93b1f" title=" " alt="" coords="5,228,100,253"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="159,137,150,143,123,164,99,187,65,230,61,226,95,184,120,160,146,138,156,133"/>
+<area shape="poly" id="edge14_Node000011_Node000010" title=" " alt="" coords="614,134,473,160,472,155,613,129"/>
+<area shape="rect" id="Node000012" href="$classTask.html#a1a9d9c69519c5b2c1769a76de6c95e69" title=" " alt="" coords="372,55,473,80"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="612,105,473,79,474,74,613,99"/>
+<area shape="poly" id="edge12_Node000012_Node000006" title=" " alt="" coords="360,77,328,93,317,105,311,116,304,140,298,166,281,192,261,205,258,200,277,188,293,164,299,139,306,114,313,101,325,89,358,73"/>
+<area shape="poly" id="edge13_Node000012_Node000008" title=" " alt="" coords="358,70,261,70,261,65,358,65"/>
+<area shape="poly" id="edge19_Node000013_Node000010" title=" " alt="" coords="604,80,568,94,553,105,545,117,535,130,520,143,497,154,473,161,471,156,495,149,517,138,532,127,540,114,550,101,565,89,602,75"/>
+<area shape="rect" id="Node000014" href="$classTask.html#a99921df21eb9f8f04a8816f045ac6206" title=" " alt="" coords="363,5,483,31"/>
+<area shape="poly" id="edge16_Node000013_Node000014" title=" " alt="" coords="609,55,482,31,483,26,610,50"/>
+<area shape="poly" id="edge17_Node000014_Node000007" title=" " alt="" coords="351,31,328,44,317,55,311,67,304,91,298,117,281,143,261,155,258,151,277,139,293,115,299,90,306,65,313,52,325,40,348,27"/>
+<area shape="poly" id="edge18_Node000014_Node000008" title=" " alt="" coords="355,36,261,59,260,54,354,31"/>
+<area shape="rect" id="Node000016" href="$test__commandMementoWorkflow_8cpp.html#aed7f70b4769ca84264cbeb3526872aed" title=" " alt="" coords="375,403,470,428"/>
+<area shape="poly" id="edge21_Node000015_Node000016" title=" " alt="" coords="563,418,470,418,470,413,563,413"/>
+<area shape="rect" id="Node000018" href="$test__commandMementoWorkflow_8cpp.html#af7f48925d2d8962cce434b820597439d" title=" " alt="" coords="375,501,470,527"/>
+<area shape="poly" id="edge23_Node000017_Node000018" title=" " alt="" coords="611,482,471,508,470,503,610,477"/>
+<area shape="poly" id="edge25_Node000019_Node000018" title=" " alt="" coords="563,517,471,517,471,511,563,511"/>
+<area shape="poly" id="edge27_Node000020_Node000018" title=" " alt="" coords="610,551,470,525,471,520,611,546"/>
+<area shape="rect" id="Node000022" href="$classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="332,579,513,604"/>
+<area shape="poly" id="edge29_Node000021_Node000022" title=" " alt="" coords="589,607,513,601,514,596,589,602"/>
+<area shape="poly" id="edge39_Node000023_Node000010" title=" " alt="" coords="585,303,565,291,553,279,546,266,540,240,534,215,528,203,517,192,496,180,472,173,473,167,498,175,520,188,532,200,539,213,545,239,551,264,557,276,568,287,587,298"/>
+<area shape="rect" id="Node000024" href="$classTask.html#acd0fdd09318cdb6d655fbfd1636d55b3" title=" " alt="" coords="345,301,500,327"/>
+<area shape="poly" id="edge31_Node000023_Node000024" title=" " alt="" coords="586,317,500,317,500,311,586,311"/>
+<area shape="poly" id="edge37_Node000024_Node000005" title=" " alt="" coords="376,333,327,347,269,356,207,355,176,350,147,340,118,323,93,299,59,255,64,252,97,296,121,318,149,336,178,345,207,350,268,350,326,341,374,328"/>
+<area shape="poly" id="edge32_Node000024_Node000006" title=" " alt="" coords="341,299,325,291,310,279,300,266,291,254,277,242,255,230,258,226,280,237,295,250,305,263,314,275,328,286,344,294"/>
+<area shape="poly" id="edge33_Node000024_Node000007" title=" " alt="" coords="334,297,325,291,313,278,306,266,299,241,294,216,287,204,277,192,260,181,263,176,280,188,292,201,299,214,305,239,311,264,317,275,328,287,337,293"/>
+<area shape="poly" id="edge34_Node000024_Node000008" title=" " alt="" coords="332,297,325,290,307,266,298,241,297,216,299,191,301,166,300,142,293,118,277,93,259,80,262,76,281,89,298,115,305,141,306,166,304,191,302,216,304,240,311,263,329,287,335,293"/>
+<area shape="poly" id="edge36_Node000024_Node000009" title=" " alt="" coords="354,301,260,278,261,273,355,296"/>
+<area shape="rect" id="Node000025" href="$test__state__strategy__chain_8cpp.html#a53d07c5420ce0993234d94d2257c6c5f" title=" " alt="" coords="166,301,261,327"/>
+<area shape="poly" id="edge35_Node000024_Node000025" title=" " alt="" coords="332,317,261,317,261,311,332,311"/>
+<area shape="poly" id="edge38_Node000024_Node000026" title=" " alt="" coords="362,334,328,348,304,366,280,386,245,405,242,400,277,381,301,362,325,344,359,329"/>
+<area shape="poly" id="edge44_Node000027_Node000010" title=" " alt="" coords="614,259,565,242,550,229,540,216,532,204,517,192,495,182,471,175,473,170,497,177,520,188,536,200,545,213,553,226,568,237,616,254"/>
+<area shape="rect" id="Node000028" href="$classTask.html#ad058cda4e8c3e252a050f9fde67f99bf" title=" " alt="" coords="375,252,471,277"/>
+<area shape="poly" id="edge41_Node000027_Node000028" title=" " alt="" coords="615,267,471,267,471,262,615,262"/>
+<area shape="poly" id="edge42_Node000028_Node000006" title=" " alt="" coords="361,253,260,229,262,224,362,248"/>
+<area shape="poly" id="edge43_Node000028_Node000009" title=" " alt="" coords="361,267,261,267,261,262,361,262"/>
+<area shape="rect" id="Node000030" href="$classAssignCommand.html#a14b0f7a134cbe4560d1d72f60a92a19d" title="Reverts the assignment command." alt="" coords="337,677,509,703"/>
+<area shape="poly" id="edge46_Node000029_Node000030" title=" " alt="" coords="579,693,509,693,509,687,579,687"/>
+<area shape="rect" id="Node000032" href="$classCompleteCommand.html#ad84f12f1703e18c06b7a7faa97808628" title="Reverts the completion command." alt="" coords="327,727,519,752"/>
+<area shape="poly" id="edge48_Node000029_Node000032" title=" " alt="" coords="580,713,494,729,493,724,579,708"/>
+<area shape="rect" id="Node000034" href="$classRejectCommand.html#ab0323b51e7b4e6fbb448f1ff0a6eb202" title="Reverts the rejection command." alt="" coords="337,776,508,801"/>
+<area shape="poly" id="edge50_Node000029_Node000034" title=" " alt="" coords="639,718,520,767,481,778,480,773,518,762,637,713"/>
+<area shape="rect" id="Node000036" href="$classStartCommand.html#a2531a736104515b0c6df1c01a68449a0" title="Reverts the start command." alt="" coords="343,628,503,653"/>
+<area shape="poly" id="edge52_Node000029_Node000036" title=" " alt="" coords="579,672,493,656,494,651,580,667"/>
+<area shape="rect" id="Node000031" href="$test__commandMementoWorkflow_8cpp.html#a8b6f74d385ab76cf93c76ed871258b41" title=" " alt="" coords="166,677,261,703"/>
+<area shape="poly" id="edge47_Node000030_Node000031" title=" " alt="" coords="323,693,261,693,261,687,323,687"/>
+<area shape="rect" id="Node000033" href="$test__commandMementoWorkflow_8cpp.html#aec4bc1e0a87a5187a13c194a8e93f3e1" title=" " alt="" coords="166,727,261,752"/>
+<area shape="poly" id="edge49_Node000032_Node000033" title=" " alt="" coords="313,742,261,742,261,737,313,737"/>
+<area shape="rect" id="Node000035" href="$test__commandMementoWorkflow_8cpp.html#a3bb5027daa3fd82ba5b391d8ec37474a" title=" " alt="" coords="166,776,261,801"/>
+<area shape="poly" id="edge51_Node000034_Node000035" title=" " alt="" coords="324,791,261,791,261,786,324,786"/>
+<area shape="rect" id="Node000037" href="$test__commandMementoWorkflow_8cpp.html#ad17f7e07792166cd6832e406a50211fb" title=" " alt="" coords="166,628,261,653"/>
+<area shape="poly" id="edge53_Node000036_Node000037" title=" " alt="" coords="329,643,261,643,261,638,329,638"/>
+<area shape="rect" id="Node000038" href="$test__commandMementoWorkflow_8cpp.html#ac3a14d6ebde6fa40c4c80f79523b75b1" title=" " alt="" coords="166,579,261,604"/>
+<area shape="poly" id="edge54_Node000036_Node000038" title=" " alt="" coords="354,627,260,605,261,600,355,622"/>
+<area shape="poly" id="edge62_Node000039_Node000010" title=" " alt="" coords="618,204,472,177,473,172,619,199"/>
+<area shape="rect" id="Node000040" href="$classTask.html#a5d6a1d3c6cd5b587d2414737fab9f3ed" title=" " alt="" coords="378,203,467,228"/>
+<area shape="poly" id="edge56_Node000039_Node000040" title=" " alt="" coords="619,218,467,218,467,213,619,213"/>
+<area shape="poly" id="edge57_Node000040_Node000006" title=" " alt="" coords="364,218,261,218,261,213,364,213"/>
+<area shape="poly" id="edge58_Node000040_Node000007" title=" " alt="" coords="364,204,260,180,262,174,365,199"/>
+<area shape="poly" id="edge59_Node000040_Node000008" title=" " alt="" coords="363,211,343,204,325,192,313,180,306,167,299,142,294,117,287,105,277,93,260,82,263,78,280,89,292,102,299,115,305,141,311,165,317,177,328,188,346,199,365,206"/>
+<area shape="poly" id="edge61_Node000040_Node000009" title=" " alt="" coords="365,231,262,256,260,251,364,226"/>
+<area shape="poly" id="edge60_Node000040_Node000025" title=" " alt="" coords="366,227,328,242,313,253,304,265,295,278,280,291,256,304,253,299,277,286,291,274,300,262,310,249,325,237,364,222"/>
+</map>

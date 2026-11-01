@@ -1,0 +1,9 @@
+<map id="include/WorkflowBuilder.h" name="include/WorkflowBuilder.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="46,5,237,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,85,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,33,74,72,71,68,124,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="110,79,173,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="144,31,144,65,139,65,139,31"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="197,79,256,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="157,29,204,68,201,72,153,33"/>
+</map>

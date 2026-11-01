@@ -1,0 +1,5 @@
+<map id="TaskDecorator::setPublisher" name="TaskDecorator::setPublisher">
+<area shape="rect" id="Node000001" title="Forwards the publisher to the wrapped item." alt="" coords="5,5,208,31"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#a57ff5217e6a39fefddc03d5ec0524200" title="Gives this item the publisher it reports events through (Observer)." alt="" coords="256,5,429,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,15,242,15,242,21,208,21"/>
+</map>

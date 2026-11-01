@@ -1,0 +1,9 @@
+<map id="Task::assign" name="Task::assign">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,107,56"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html#a38519e3589346f130681fe2ba1b2cb2b" title="Assigns a participant to the task." alt="" coords="155,31,289,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,41,141,41,141,46,107,46"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="337,5,491,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="289,32,323,27,324,33,290,37"/>
+<area shape="rect" id="Node000004" href="$classTaskState.html#a5c8b4898a3b8e3bc4a3099405fca1dd7" title="Gets the name of this state." alt="" coords="337,55,491,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="290,49,324,53,323,59,289,54"/>
+</map>

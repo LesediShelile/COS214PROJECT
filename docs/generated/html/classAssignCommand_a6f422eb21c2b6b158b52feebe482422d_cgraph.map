@@ -1,0 +1,9 @@
+<map id="AssignCommand::execute" name="AssignCommand::execute">
+<area shape="rect" id="Node000001" title="Executes the assignment command." alt="" coords="5,31,196,56"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#afeec29eef6ae5feb664573f06b0a81d3" title=" " alt="" coords="294,5,429,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,31,280,23,281,28,196,37"/>
+<area shape="rect" id="Node000003" href="$classWorkflowCommand.html#a6a9ea26fe4960a57137ae3c0db06b19e" title="Captures a fresh memento snapshot from the target work item." alt="" coords="244,55,479,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="196,49,230,53,230,58,196,55"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a8e2a00010a42896ad22f011bb2666a86" title="Memento operations." alt="" coords="527,55,723,80"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="479,65,513,65,513,70,479,70"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="TestDefaultTaskState::clone" name="TestDefaultTaskState::clone">
+<area shape="rect" id="Node000001" title="Creates a copy of this state (Prototype pattern)." alt="" coords="152,5,311,45"/>
+<area shape="rect" id="Node000002" href="$test__task__state__defaults_8cpp.html#ad28c62bc8b7f2e93d9e648ef803c997c" title=" " alt="" coords="5,13,104,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="138,28,104,28,104,23,138,23"/>
+</map>

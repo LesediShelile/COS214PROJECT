@@ -1,0 +1,19 @@
+<map id="TaskState::assign" name="TaskState::assign">
+<area shape="rect" id="Node000001" title="Assigns a participant to the task." alt="" coords="476,129,611,155"/>
+<area shape="rect" id="Node000002" href="$classTask.html#a24887c9b917151d5bb1300f543d9df6f" title=" " alt="" coords="327,104,428,129"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="462,132,428,127,428,122,462,127"/>
+<area shape="rect" id="Node000009" href="$test__task__state__defaults_8cpp.html#ad28c62bc8b7f2e93d9e648ef803c997c" title=" " alt="" coords="328,153,427,179"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="462,156,427,162,427,156,462,151"/>
+<area shape="rect" id="Node000003" href="$classTask.html#a2a89b92343173d5a1d6f8b32a0a7efb7" title="Ask the strategy for a participant and assign the task to them." alt="" coords="148,5,279,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="350,97,317,70,277,44,253,33,255,28,280,40,320,66,353,93"/>
+<area shape="rect" id="Node000005" href="$test__state__strategy__chain_8cpp.html#aa25122209dd3aeeda9d7b2850770b1bb" title=" " alt="" coords="166,55,261,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="321,103,256,83,257,78,322,97"/>
+<area shape="rect" id="Node000006" href="$test__state__strategy__chain_8cpp.html#a7359452cf7884fa783823be4bcf12f99" title=" " alt="" coords="166,104,261,129"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="313,119,261,119,261,114,313,114"/>
+<area shape="rect" id="Node000007" href="$test__state__strategy__chain_8cpp.html#af71a4d2345a04ac8a902f39619ba60cb" title=" " alt="" coords="166,153,261,179"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="322,136,257,156,256,151,321,131"/>
+<area shape="rect" id="Node000008" href="$test__state__strategy__chain_8cpp.html#a5ceea80a3f9b49870045be0718a09582" title=" " alt="" coords="166,203,261,228"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="335,138,328,143,314,155,305,167,295,180,280,192,256,205,253,200,277,188,292,176,301,164,310,152,325,139,332,134"/>
+<area shape="rect" id="Node000004" href="$test__state__strategy__chain_8cpp.html#a065d9420065ff58be04719589ea93b1f" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="134,21,100,21,100,15,134,15"/>
+</map>

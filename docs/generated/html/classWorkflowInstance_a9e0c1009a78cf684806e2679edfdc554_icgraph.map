@@ -1,0 +1,7 @@
+<map id="WorkflowInstance::getStatus" name="WorkflowInstance::getStatus">
+<area shape="rect" id="Node000001" title="Gets the current lifecycle execution status." alt="" coords="152,31,359,56"/>
+<area shape="rect" id="Node000002" href="$test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="5,5,104,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="141,32,104,27,104,22,141,26"/>
+<area shape="rect" id="Node000003" href="$test__engine__router_8cpp.html#a64a148f342e78f079933c9f1b1b04ab4" title=" " alt="" coords="5,55,104,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,60,105,64,104,59,138,55"/>
+</map>

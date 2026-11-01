@@ -1,0 +1,7 @@
+<map id="Director::construct" name="Director::construct">
+<area shape="rect" id="Node000001" title="Builds a workflow using a client&#45;supplied recipe." alt="" coords="5,31,148,56"/>
+<area shape="rect" id="Node000002" href="$classWorkflowBuilder.html#a9535b5fb398561e1996386196e50f0e7" title="returns the current workflow definition that has been created" alt="" coords="196,5,395,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="148,32,182,28,183,34,148,38"/>
+<area shape="rect" id="Node000003" href="$classWorkflowBuilder.html#aa7cc6bd8418dc16b8760aed7454ce127" title="resets the current workflow definition so a new one may be created" alt="" coords="211,55,380,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,48,197,54,196,59,148,54"/>
+</map>

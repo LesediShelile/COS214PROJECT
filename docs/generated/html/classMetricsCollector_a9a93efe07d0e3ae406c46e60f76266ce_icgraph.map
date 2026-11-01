@@ -1,0 +1,7 @@
+<map id="MetricsCollector::getSummary" name="MetricsCollector::getSummary">
+<area shape="rect" id="Node000001" title=" " alt="" coords="240,42,460,67"/>
+<area shape="rect" id="Node000002" href="$classTIVIDYFacade.html#a9a9c9d761a6ec09990ab0bf6f86b2a11" title="Retrieves the aggregate performance and execution metrics summary." alt="" coords="5,5,192,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="227,43,192,39,193,34,228,38"/>
+<area shape="rect" id="Node000003" href="$test__observer__integrations_8cpp.html#a25779ef275352b248f14f6b8a52afb19" title=" " alt="" coords="49,70,148,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="227,71,148,80,148,75,226,66"/>
+</map>

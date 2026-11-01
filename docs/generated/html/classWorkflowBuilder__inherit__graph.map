@@ -1,0 +1,5 @@
+<map id="WorkflowBuilder" name="WorkflowBuilder">
+<area shape="rect" id="Node000001" title="Builder: Provides an interface for the concrete builders." alt="" coords="5,5,187,311"/>
+<area shape="rect" id="Node000002" href="$classDefinitionBuilder.html" title="Builder Pattern: Concrete Builder This takes the interface defined by WorkflowBuilder and creates a w..." alt="" coords="5,359,187,664"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,325,99,359,93,359,93,325"/>
+</map>

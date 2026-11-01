@@ -1,0 +1,5 @@
+<map id="TestDefaultTaskState" name="TestDefaultTaskState">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,319,156,404"/>
+<area shape="rect" id="Node000002" href="$classTaskState.html" title="Abstract state of a Task (State pattern)." alt="" coords="13,5,148,271"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="83,284,83,319,78,319,78,284"/>
+</map>

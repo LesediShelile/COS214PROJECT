@@ -1,0 +1,5 @@
+<map id="RejectCommand::getDescription" name="RejectCommand::getDescription">
+<area shape="rect" id="Node000001" title="Returns a descriptive string summarizing the rejection action." alt="" coords="5,5,239,31"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="287,5,440,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,15,273,15,273,21,239,21"/>
+</map>

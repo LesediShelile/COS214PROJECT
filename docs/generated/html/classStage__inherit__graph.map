@@ -1,0 +1,9 @@
+<map id="Stage" name="Stage">
+<area shape="rect" id="Node000001" title="Composite of the Composite pattern: a WorkItem that owns child WorkItems (Tasks or other Stages)." alt="" coords="91,839,238,1244"/>
+<area shape="rect" id="Node000003" href="$classParallelStage.html" title="Composite whose children are all available at the same time." alt="" coords="5,1292,151,1437"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="109,1258,100,1292,95,1291,104,1257"/>
+<area shape="rect" id="Node000004" href="$classSequentialStage.html" title="Composite whose children run one after another: a child only becomes available once the previous chil..." alt="" coords="175,1292,331,1437"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="226,1257,235,1291,230,1292,221,1258"/>
+<area shape="rect" id="Node000002" href="$classWorkItem.html" title="Component of the Composite pattern (also Component of Decorator, Aggregate of Iterator,..." alt="" coords="71,5,259,791"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,804,167,838,162,838,162,804"/>
+</map>

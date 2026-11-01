@@ -1,0 +1,10 @@
+<map id="include/SecureWorkflowProxy.h" name="include/SecureWorkflowProxy.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,229,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="33,152,92,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,32,90,80,71,139,66,138,86,78,108,30"/>
+<area shape="rect" id="Node000003" href="$IWorkflowService_8h.html" title=" " alt="" coords="100,79,247,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="129,29,158,66,154,69,124,33"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="157,106,94,147,91,142,154,102"/>
+<area shape="rect" id="Node000004" href="$ApprovalStatus_8h.html" title=" " alt="" coords="116,152,249,177"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="178,104,182,138,177,139,172,105"/>
+</map>

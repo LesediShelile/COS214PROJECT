@@ -1,0 +1,11 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,80,100,105"/>
+<area shape="rect" id="Node000002" href="$classEventPublisher.html#a9543b9927782798b782414382784144b" title="Registers a listener." alt="" coords="148,5,316,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="73,78,147,40,167,32,168,37,149,44,76,82"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#aac5665bab435ede1470a1d9b278b2b81" title="Prototype operation: deep copy of this item and everything it owns." alt="" coords="168,55,296,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="100,83,154,76,155,81,101,89"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a832fccc6b34774701672028c884cd70e" title=" " alt="" coords="159,104,305,129"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="101,96,145,102,145,108,100,102"/>
+<area shape="rect" id="Node000005" href="$classWorkItem.html#a9c35d6c6acdfdbfc333b485d8ed612bf" title=" " alt="" coords="153,153,311,179"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="77,103,149,138,172,147,170,152,147,143,75,108"/>
+</map>

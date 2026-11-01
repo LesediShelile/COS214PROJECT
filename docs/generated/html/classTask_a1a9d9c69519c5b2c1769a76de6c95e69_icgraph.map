@@ -1,0 +1,7 @@
+<map id="Task::cancel" name="Task::cancel">
+<area shape="rect" id="Node000001" title=" " alt="" coords="148,31,249,56"/>
+<area shape="rect" id="Node000002" href="$test__state__strategy__chain_8cpp.html#aa25122209dd3aeeda9d7b2850770b1bb" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="134,35,100,29,101,24,135,30"/>
+<area shape="rect" id="Node000003" href="$test__state__strategy__chain_8cpp.html#af71a4d2345a04ac8a902f39619ba60cb" title=" " alt="" coords="5,55,100,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,57,101,62,100,57,134,51"/>
+</map>

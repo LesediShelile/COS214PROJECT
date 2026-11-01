@@ -1,0 +1,11 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,100,56"/>
+<area shape="rect" id="Node000002" href="$classStartCommand.html#a2531a736104515b0c6df1c01a68449a0" title="Reverts the start command." alt="" coords="148,31,308,56"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,41,134,41,134,46,100,46"/>
+<area shape="rect" id="Node000003" href="$classWorkflowCommand.html#a48d4e82e955573b9262bde2627539745" title="Restores the target work item using the saved snapshot." alt="" coords="356,23,559,63"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="309,41,342,41,342,46,309,46"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="631,5,784,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="559,30,617,24,617,30,559,36"/>
+<area shape="rect" id="Node000005" href="$classWorkItem.html#aee5a2f0484f289d5370682076370c599" title=" " alt="" coords="607,55,808,80"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="559,50,593,54,593,59,559,56"/>
+</map>

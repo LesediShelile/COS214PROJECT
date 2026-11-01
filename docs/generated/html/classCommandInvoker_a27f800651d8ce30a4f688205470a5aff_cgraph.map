@@ -1,0 +1,5 @@
+<map id="CommandInvoker::executeCommand" name="CommandInvoker::executeCommand">
+<area shape="rect" id="Node000001" title="Executes a command and stores it in history upon success." alt="" coords="5,5,268,31"/>
+<area shape="rect" id="Node000002" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="316,5,491,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="268,15,302,15,302,21,268,21"/>
+</map>

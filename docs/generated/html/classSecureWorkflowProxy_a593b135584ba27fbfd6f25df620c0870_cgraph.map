@@ -1,0 +1,9 @@
+<map id="SecureWorkflowProxy::startInstance" name="SecureWorkflowProxy::startInstance">
+<area shape="rect" id="Node000001" title="Starts a workflow instance after checking permission." alt="" coords="5,5,168,45"/>
+<area shape="rect" id="Node000002" href="$classTIVIDYFacade.html#a66fdc614fe57bc9107d3dc76e9835f09" title="Starts execution of an existing workflow instance." alt="" coords="216,13,419,38"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,23,202,23,202,28,168,28"/>
+<area shape="rect" id="Node000003" href="$classWorkflowInstance.html#a02bc18c089fee46a354a1005c2de6707" title="Starts the workflow instance, transitioning from CREATED to RUNNING." alt="" coords="467,13,641,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="419,23,453,23,453,28,419,28"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a215d213d1c9653327eb5695cb3a06619" title=" " alt="" coords="689,13,879,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="642,23,675,23,675,28,642,28"/>
+</map>

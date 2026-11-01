@@ -1,0 +1,11 @@
+<map id="TIVIDYFacade::createInstance" name="TIVIDYFacade::createInstance">
+<area shape="rect" id="Node000001" title="Instantiates a new workflow from a registered definition." alt="" coords="5,95,220,120"/>
+<area shape="rect" id="Node000002" href="$classEventPublisher.html#a9543b9927782798b782414382784144b" title="Registers a listener." alt="" coords="297,5,465,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,92,198,67,267,41,301,31,302,36,269,46,200,72,142,97"/>
+<area shape="rect" id="Node000003" href="$classWorkflowDefinition.html#afd3ce0cbb03b7091a4a84561d0e537c3" title="Instantiates a new WorkflowInstance using the Prototype pattern." alt="" coords="309,55,454,95"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="219,92,295,83,295,88,220,97"/>
+<area shape="rect" id="Node000004" href="$classWorkflowDefinition.html#aa5041d0fdba198b3d48ba0078767b289" title="Gets the head of the approval handler chain." alt="" coords="308,119,455,159"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="220,117,295,126,294,132,219,123"/>
+<area shape="rect" id="Node000005" href="$classWorkflowInstance.html#a2a142ac25ce41a0bb0a9a2eeccfb628c" title="Gets the instance&#45;specific EventPublisher." alt="" coords="268,184,495,209"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="142,118,200,143,269,169,302,178,301,183,267,174,198,148,140,123"/>
+</map>

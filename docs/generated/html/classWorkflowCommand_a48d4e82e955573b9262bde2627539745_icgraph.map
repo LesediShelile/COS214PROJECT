@@ -1,0 +1,21 @@
+<map id="WorkflowCommand::restoreBackup" name="WorkflowCommand::restoreBackup">
+<area shape="rect" id="Node000001" title="Restores the target work item using the saved snapshot." alt="" coords="388,73,591,113"/>
+<area shape="rect" id="Node000002" href="$classAssignCommand.html#a14b0f7a134cbe4560d1d72f60a92a19d" title="Reverts the assignment command." alt="" coords="158,5,330,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="419,71,339,45,298,33,299,28,341,39,421,66"/>
+<area shape="rect" id="Node000004" href="$classCompleteCommand.html#ad84f12f1703e18c06b7a7faa97808628" title="Reverts the completion command." alt="" coords="148,55,340,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="374,83,340,80,340,75,375,78"/>
+<area shape="rect" id="Node000006" href="$classRejectCommand.html#ab0323b51e7b4e6fbb448f1ff0a6eb202" title="Reverts the rejection command." alt="" coords="159,104,329,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="375,107,330,111,329,106,374,101"/>
+<area shape="rect" id="Node000008" href="$classStartCommand.html#a2531a736104515b0c6df1c01a68449a0" title="Reverts the start command." alt="" coords="164,153,324,179"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="416,120,341,143,296,156,294,151,339,138,415,114"/>
+<area shape="rect" id="Node000003" href="$test__commandMementoWorkflow_8cpp.html#a8b6f74d385ab76cf93c76ed871258b41" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="144,21,100,21,100,15,144,15"/>
+<area shape="rect" id="Node000005" href="$test__commandMementoWorkflow_8cpp.html#aec4bc1e0a87a5187a13c194a8e93f3e1" title=" " alt="" coords="5,55,100,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="134,70,100,70,100,65,134,65"/>
+<area shape="rect" id="Node000007" href="$test__commandMementoWorkflow_8cpp.html#a3bb5027daa3fd82ba5b391d8ec37474a" title=" " alt="" coords="5,104,100,129"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="145,119,100,119,100,114,145,114"/>
+<area shape="rect" id="Node000009" href="$test__commandMementoWorkflow_8cpp.html#ad17f7e07792166cd6832e406a50211fb" title=" " alt="" coords="5,153,100,179"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="150,169,100,169,100,163,150,163"/>
+<area shape="rect" id="Node000010" href="$test__commandMementoWorkflow_8cpp.html#ac3a14d6ebde6fa40c4c80f79523b75b1" title=" " alt="" coords="5,203,100,228"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="182,185,101,206,100,201,180,180"/>
+</map>

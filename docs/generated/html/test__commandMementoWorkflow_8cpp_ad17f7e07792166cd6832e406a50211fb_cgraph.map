@@ -1,0 +1,19 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,84,100,109"/>
+<area shape="rect" id="Node000002" href="$classStartCommand.html#a38aacdd6210d19d93833ab8447a980c1" title="Executes the start command on the target work item." alt="" coords="148,55,327,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,87,143,80,144,85,101,92"/>
+<area shape="rect" id="Node000006" href="$classStartCommand.html#a2531a736104515b0c6df1c01a68449a0" title="Reverts the start command." alt="" coords="157,108,317,133"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="101,100,144,106,144,111,100,105"/>
+<area shape="rect" id="Node000003" href="$classWorkflowCommand.html#a6a9ea26fe4960a57137ae3c0db06b19e" title="Captures a fresh memento snapshot from the target work item." alt="" coords="375,5,609,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="303,52,412,31,413,36,304,57"/>
+<area shape="rect" id="Node000005" href="$classWorkItem.html#a18435dde12f397de1dca31f9c0e803c6" title=" " alt="" coords="431,55,553,80"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="327,65,417,65,417,70,327,70"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#a8e2a00010a42896ad22f011bb2666a86" title="Memento operations." alt="" coords="660,5,856,31"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="610,15,646,15,646,21,610,21"/>
+<area shape="rect" id="Node000007" href="$classWorkflowCommand.html#a48d4e82e955573b9262bde2627539745" title="Restores the target work item using the saved snapshot." alt="" coords="391,105,593,145"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="317,119,377,120,377,126,317,125"/>
+<area shape="rect" id="Node000008" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="681,87,835,112"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="593,112,667,105,668,111,594,118"/>
+<area shape="rect" id="Node000009" href="$classWorkItem.html#aee5a2f0484f289d5370682076370c599" title=" " alt="" coords="657,136,859,161"/>
+<area shape="poly" id="edge8_Node000007_Node000009" title=" " alt="" coords="594,131,644,136,643,141,593,136"/>
+</map>

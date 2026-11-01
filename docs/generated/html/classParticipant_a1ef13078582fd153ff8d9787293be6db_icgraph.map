@@ -1,0 +1,8 @@
+<map id="Participant::getWorkload" name="Participant::getWorkload">
+<area shape="rect" id="Node000001" title="Gets how many tasks the participant is working on." alt="" coords="295,31,476,56"/>
+<area shape="rect" id="Node000002" href="$test__state__strategy__chain_8cpp.html#a80d2c30f9ec77ece987052c6e334c595" title=" " alt="" coords="148,5,247,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="281,32,246,27,247,22,281,27"/>
+<area shape="rect" id="Node000003" href="$test__state__strategy__chain_8cpp.html#a065d9420065ff58be04719589ea93b1f" title=" " alt="" coords="5,31,100,56"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="281,46,100,46,100,41,281,41"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,32,101,38,100,32,134,26"/>
+</map>

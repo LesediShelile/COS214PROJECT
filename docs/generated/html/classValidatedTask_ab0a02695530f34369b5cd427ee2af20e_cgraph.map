@@ -1,0 +1,21 @@
+<map id="ValidatedTask::complete" name="ValidatedTask::complete">
+<area shape="rect" id="Node000001" title="Completes the wrapped item only if validate() holds." alt="" coords="5,72,187,97"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#a750c27d210bc803debd210fe160a5138" title=" " alt="" coords="238,11,422,36"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,69,267,37,268,42,146,75"/>
+<area shape="rect" id="Node000004" href="$classValidatedTask.html#a039684bb33dcdea36d9ddb0f1a3660aa" title=" " alt="" coords="235,65,425,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="187,82,221,82,221,87,187,87"/>
+<area shape="rect" id="Node000009" href="$classTaskDecorator.html#ac3cab9fa487076e46ec2d7f55c2cfb2d" title="Human readable name." alt="" coords="239,137,421,163"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="143,95,271,131,270,136,142,100"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#ac8698c70972ea20ae8b2c40c76fa109e" title=" " alt="" coords="485,5,639,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="423,19,471,17,471,23,423,24"/>
+<area shape="rect" id="Node000005" href="$classTaskDecorator.html#a55eabccf40f708c8d277d5a978e51bd8" title=" " alt="" coords="475,55,649,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="426,75,461,72,461,78,426,80"/>
+<area shape="rect" id="Node000007" href="$classTaskDecorator.html#a3778737d01e7171c8e1dc5b5ed409f6e" title=" " alt="" coords="473,104,651,129"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="426,95,460,100,459,105,426,101"/>
+<area shape="rect" id="Node000006" href="$classWorkItem.html#a07f90d9342cb3413103703da2f64f3a8" title=" " alt="" coords="699,55,845,80"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="649,65,685,65,685,70,649,70"/>
+<area shape="rect" id="Node000008" href="$classWorkItem.html#a832fccc6b34774701672028c884cd70e" title=" " alt="" coords="699,104,845,129"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="651,114,685,114,685,119,651,119"/>
+<area shape="rect" id="Node000010" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="485,153,639,179"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="422,154,472,157,471,162,422,159"/>
+</map>

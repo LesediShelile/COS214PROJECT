@@ -1,0 +1,9 @@
+<map id="StartCommand::undo" name="StartCommand::undo">
+<area shape="rect" id="Node000001" title="Reverts the start command." alt="" coords="5,31,165,56"/>
+<area shape="rect" id="Node000002" href="$classWorkflowCommand.html#a48d4e82e955573b9262bde2627539745" title="Restores the target work item using the saved snapshot." alt="" coords="213,23,416,63"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,41,200,41,200,46,166,46"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="488,5,641,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="416,30,474,24,474,30,417,36"/>
+<area shape="rect" id="Node000004" href="$classWorkItem.html#aee5a2f0484f289d5370682076370c599" title=" " alt="" coords="464,55,665,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="417,50,451,54,450,59,416,56"/>
+</map>

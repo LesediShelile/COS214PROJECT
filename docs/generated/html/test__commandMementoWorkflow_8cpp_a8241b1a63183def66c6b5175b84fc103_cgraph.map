@@ -1,0 +1,20 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,104,100,129"/>
+<area shape="rect" id="Node000002" href="$classCommandInvoker.html#a997619b09faa33bc764cf5fb4c23de82" title="Checks if there are any commands currently available to undo." alt="" coords="178,55,381,80"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,101,147,89,190,80,191,85,149,94,99,107"/>
+<area shape="rect" id="Node000004" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="148,5,411,31"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="64,102,99,70,147,40,166,32,168,37,149,44,102,74,68,106"/>
+<area shape="rect" id="Node000006" href="$classCommandInvoker.html#aba2de4c9640347b60f686919599af212" title="Retrieves a pointer to the internal history stack." alt="" coords="173,104,386,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="100,114,159,114,159,119,100,119"/>
+<area shape="rect" id="Node000007" href="$classCommandHistory.html#a9bfa5bc62a40316761f71ccef7e984fe" title="Returns the total number of commands stored in history." alt="" coords="195,153,364,179"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="99,127,149,139,191,148,190,153,147,145,98,132"/>
+<area shape="rect" id="Node000008" href="$classCommandInvoker.html#a3e89f4fddc8f4f3991499e82b731b208" title="Undoes the most recently executed command in the history." alt="" coords="177,203,381,228"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="68,128,102,159,149,189,168,196,166,201,147,194,99,163,64,132"/>
+<area shape="rect" id="Node000003" href="$classCommandHistory.html#a1342b4ebb959d12ea96a25e6b0319864" title="Checks if the command history contains any commands." alt="" coords="459,104,655,129"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="352,77,472,99,471,104,351,83"/>
+<area shape="rect" id="Node000005" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="469,5,644,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="411,15,455,15,455,21,411,21"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="368,200,410,189,470,163,522,134,525,139,473,168,412,194,370,205"/>
+<area shape="rect" id="Node000009" href="$classCommandHistory.html#a3ec612d5d6fb40366d51554589ade50f" title="Removes the most recent command and transfers ownership to the caller." alt="" coords="473,203,640,228"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="381,213,460,213,460,218,381,218"/>
+</map>

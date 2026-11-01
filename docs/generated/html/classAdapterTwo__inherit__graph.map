@@ -1,0 +1,5 @@
+<map id="AdapterTwo" name="AdapterTwo">
+<area shape="rect" id="Node000001" title=" " alt="" coords="27,179,153,304"/>
+<area shape="rect" id="Node000002" href="$classExternalConnector.html" title="Defines the interface used to communicate with external services." alt="" coords="5,5,175,131"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="93,145,93,178,87,178,87,145"/>
+</map>

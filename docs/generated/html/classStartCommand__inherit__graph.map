@@ -1,0 +1,5 @@
+<map id="StartCommand" name="StartCommand">
+<area shape="rect" id="Node000001" title="Command that starts a work item, transitioning it from Assigned to Started." alt="" coords="20,299,168,444"/>
+<area shape="rect" id="Node000002" href="$classWorkflowCommand.html" title="Abstract base class representing an undoable action on a work item." alt="" coords="5,5,183,251"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,264,97,299,91,299,91,264"/>
+</map>

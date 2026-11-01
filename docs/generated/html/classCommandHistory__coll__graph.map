@@ -1,0 +1,3 @@
+<map id="CommandHistory" name="CommandHistory">
+<area shape="rect" id="Node000001" title="Stack of executed commands used to support undo operations." alt="" coords="5,5,169,211"/>
+</map>

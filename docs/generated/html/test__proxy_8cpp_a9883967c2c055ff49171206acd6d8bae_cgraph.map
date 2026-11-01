@@ -1,0 +1,13 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,42,104,67"/>
+<area shape="rect" id="Node000002" href="$classSecureWorkflowProxy.html#a593b135584ba27fbfd6f25df620c0870" title="Starts a workflow instance after checking permission." alt="" coords="152,5,315,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,44,138,38,139,44,105,49"/>
+<area shape="rect" id="Node000006" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="186,70,281,95"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="105,60,173,71,172,76,104,65"/>
+<area shape="rect" id="Node000003" href="$classTIVIDYFacade.html#a66fdc614fe57bc9107d3dc76e9835f09" title="Starts execution of an existing workflow instance." alt="" coords="363,13,565,38"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="315,23,349,23,349,28,315,28"/>
+<area shape="rect" id="Node000004" href="$classWorkflowInstance.html#a02bc18c089fee46a354a1005c2de6707" title="Starts the workflow instance, transitioning from CREATED to RUNNING." alt="" coords="613,13,788,38"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="566,23,600,23,600,28,566,28"/>
+<area shape="rect" id="Node000005" href="$classWorkItem.html#a215d213d1c9653327eb5695cb3a06619" title=" " alt="" coords="836,13,1025,38"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="789,23,822,23,822,28,789,28"/>
+</map>

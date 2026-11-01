@@ -1,0 +1,13 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,55,100,80"/>
+<area shape="rect" id="Node000002" href="$classCompleteCommand.html#a7e07cc763c98b4d28313f82b475a627d" title="Returns a descriptive string summarizing the command action." alt="" coords="148,5,403,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,52,147,39,188,31,189,36,149,45,99,57"/>
+<area shape="rect" id="Node000004" href="$classRejectCommand.html#ad8f2839a45d83fcc648346a72cb2bff1" title="Returns a descriptive string summarizing the rejection action." alt="" coords="159,55,392,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="100,65,145,65,145,70,100,70"/>
+<area shape="rect" id="Node000005" href="$classStartCommand.html#aa168f7bfe1b725d18dd6a3852da4cb57" title="Returns a descriptive string summarizing the command action." alt="" coords="164,104,387,129"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="101,77,149,89,194,99,193,104,147,94,100,82"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html#a094c83cf3c7af80eec268ca8656e8b6a" title="Human readable name." alt="" coords="451,55,604,80"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="345,28,403,39,452,49,451,55,402,45,344,33"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="392,65,437,65,437,70,392,70"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="340,101,448,80,449,85,341,107"/>
+</map>

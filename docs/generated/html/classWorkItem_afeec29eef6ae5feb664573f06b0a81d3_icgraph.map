@@ -1,0 +1,13 @@
+<map id="WorkItem::assign" name="WorkItem::assign">
+<area shape="rect" id="Node000001" title=" " alt="" coords="443,55,577,80"/>
+<area shape="rect" id="Node000002" href="$classTaskDecorator.html#a72fef7d915f773909877475aca11dab8" title=" " alt="" coords="217,5,382,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="441,54,354,33,355,28,443,49"/>
+<area shape="rect" id="Node000004" href="$classAssignCommand.html#a6f422eb21c2b6b158b52feebe482422d" title="Executes the assignment command." alt="" coords="204,55,395,80"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="429,70,395,70,395,65,429,65"/>
+<area shape="rect" id="Node000006" href="$test__external__task_8cpp.html#adf42dc81e34db610baf0b39d3538d161" title=" " alt="" coords="250,104,349,129"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="443,86,349,108,348,103,441,81"/>
+<area shape="rect" id="Node000003" href="$classAuditedTask.html#a430eb2d5d68aa0501ea5116a5c2f280c" title=" " alt="" coords="5,5,156,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="203,21,156,21,156,15,203,15"/>
+<area shape="rect" id="Node000005" href="$test__commandMementoWorkflow_8cpp.html#a8b6f74d385ab76cf93c76ed871258b41" title=" " alt="" coords="33,55,128,80"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="190,70,128,70,128,65,190,65"/>
+</map>

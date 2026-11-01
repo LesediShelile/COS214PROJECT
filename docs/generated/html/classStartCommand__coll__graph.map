@@ -1,0 +1,16 @@
+<map id="StartCommand" name="StartCommand">
+<area shape="rect" id="Node000001" title="Command that starts a work item, transitioning it from Assigned to Started." alt="" coords="120,1503,268,1648"/>
+<area shape="rect" id="Node000002" href="$classWorkflowCommand.html" title="Abstract base class representing an undoable action on a work item." alt="" coords="105,1228,283,1453"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="197,1467,197,1502,191,1502,191,1467"/>
+<area shape="rect" id="Node000003" href="$classWorkItem.html" title="Component of the Composite pattern (also Component of Decorator, Aggregate of Iterator,..." alt="" coords="5,420,193,1165"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="166,1165,174,1211,169,1212,161,1166"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="60,135,139,200"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="99,200,93,277,90,404,85,404,87,277,93,200"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="169,277,323,357"/>
+<area shape="poly" id="edge6_Node000006_Node000004" title=" " alt="" coords="133,198,198,264,194,267,129,202"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="34,5,165,85"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="102,99,102,134,97,134,97,99"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="232,359,209,421,201,443,196,441,203,419,227,357"/>
+<area shape="rect" id="Node000007" href="$classTaskMemento.html" title="Memento capturing a private snapshot of a Task prior to command execution." alt="" coords="218,740,359,845"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="283,846,222,1204,221,1213,215,1212,217,1204,278,845"/>
+</map>

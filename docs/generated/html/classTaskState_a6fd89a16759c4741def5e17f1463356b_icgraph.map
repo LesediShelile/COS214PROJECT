@@ -1,0 +1,17 @@
+<map id="TaskState::start" name="TaskState::start">
+<area shape="rect" id="Node000001" title="Starts work on the task." alt="" coords="295,129,417,155"/>
+<area shape="rect" id="Node000002" href="$classTask.html#a5d6a1d3c6cd5b587d2414737fab9f3ed" title=" " alt="" coords="153,104,242,129"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="281,133,242,126,243,121,282,127"/>
+<area shape="rect" id="Node000008" href="$test__task__state__defaults_8cpp.html#ad28c62bc8b7f2e93d9e648ef803c997c" title=" " alt="" coords="148,153,247,179"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="281,156,247,161,246,156,280,151"/>
+<area shape="rect" id="Node000003" href="$test__state__strategy__chain_8cpp.html#aa25122209dd3aeeda9d7b2850770b1bb" title=" " alt="" coords="5,5,100,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="169,97,99,44,79,33,82,29,101,40,172,93"/>
+<area shape="rect" id="Node000004" href="$test__state__strategy__chain_8cpp.html#a7359452cf7884fa783823be4bcf12f99" title=" " alt="" coords="5,55,100,80"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="146,102,90,83,92,78,147,97"/>
+<area shape="rect" id="Node000005" href="$test__state__strategy__chain_8cpp.html#af71a4d2345a04ac8a902f39619ba60cb" title=" " alt="" coords="5,104,100,129"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="139,119,100,119,100,114,139,114"/>
+<area shape="rect" id="Node000006" href="$test__state__strategy__chain_8cpp.html#a53d07c5420ce0993234d94d2257c6c5f" title=" " alt="" coords="5,153,100,179"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="147,136,92,156,90,151,146,131"/>
+<area shape="rect" id="Node000007" href="$test__state__strategy__chain_8cpp.html#a5ceea80a3f9b49870045be0718a09582" title=" " alt="" coords="5,203,100,228"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="156,138,150,143,126,167,102,192,82,205,79,200,98,188,122,163,146,139,153,134"/>
+</map>

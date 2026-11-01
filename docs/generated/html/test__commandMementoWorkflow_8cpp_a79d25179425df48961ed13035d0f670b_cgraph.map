@@ -1,0 +1,9 @@
+<map id="TEST_CASE" name="TEST_CASE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,77,100,102"/>
+<area shape="rect" id="Node000002" href="$classWorkflowDefinition.html#ab5ac5c8355eb5060f10779397cec59c7" title="Freezes the definition, locking it against further modifications." alt="" coords="148,5,293,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,74,154,48,156,53,88,79"/>
+<area shape="rect" id="Node000003" href="$classWorkflowDefinition.html#a9a3148890a0098d4816fe5ef5f961e7c" title="Gets the root WorkItem of the definition&#39;s composite structure." alt="" coords="148,69,293,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="100,87,134,87,134,92,100,92"/>
+<area shape="rect" id="Node000004" href="$classWorkflowDefinition.html#ade882c164e2dfaa33f759bac70da91fe" title="Sets the root WorkItem for the workflow tree." alt="" coords="148,133,293,173"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="88,100,156,126,154,131,86,105"/>
+</map>

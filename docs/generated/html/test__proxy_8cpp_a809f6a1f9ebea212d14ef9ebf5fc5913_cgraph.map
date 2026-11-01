@@ -1,0 +1,39 @@
+<map id="TEST_SUITE" name="TEST_SUITE">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,141,104,166"/>
+<area shape="rect" id="Node000002" href="$classSecureWorkflowProxy.html#a9bba8bb183b5f16e4876f9e81498abc8" title="Completes a task after checking permission and ownership." alt="" coords="152,5,315,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,139,100,98,150,55,160,49,163,54,154,59,103,102,68,142"/>
+<area shape="rect" id="Node000006" href="$classSecureWorkflowProxy.html#a192cab4044889a985cba2801a5840f8d" title="Rejects a task after checking permission and ownership." alt="" coords="152,69,315,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="90,138,163,112,165,117,92,143"/>
+<area shape="rect" id="Node000008" href="$classSecureWorkflowProxy.html#a731623a1da1d5326ecd9acdce74cda2f" title="Requests approval after checking permission and ownership." alt="" coords="152,197,315,237"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="92,164,165,190,163,195,90,169"/>
+<area shape="rect" id="Node000016" href="$classSecureWorkflowProxy.html#ac773d4931ba5660c1186477086e088e3" title="Starts a task after checking permission and ownership." alt="" coords="152,133,315,173"/>
+<area shape="poly" id="edge16_Node000001_Node000016" title=" " alt="" coords="104,151,138,151,138,156,104,156"/>
+<area shape="rect" id="Node000018" href="$test__commandMementoWorkflow_8cpp.html#a295682e6f1b152894c75192fed2f62af" title=" " alt="" coords="186,262,281,287"/>
+<area shape="poly" id="edge19_Node000001_Node000018" title=" " alt="" coords="68,165,103,205,127,228,153,247,174,257,172,262,151,252,123,232,99,209,64,168"/>
+<area shape="rect" id="Node000003" href="$classTIVIDYFacade.html#af1fc724732461f4a6eb8a941aba291e4" title="Marks a specific task item within an instance as completed." alt="" coords="371,17,579,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="315,24,358,25,358,30,315,29"/>
+<area shape="rect" id="Node000004" href="$classCommandInvoker.html#a27f800651d8ce30a4f688205470a5aff" title="Executes a command and stores it in history upon success." alt="" coords="636,58,899,83"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="566,39,664,53,663,59,565,45"/>
+<area shape="rect" id="Node000005" href="$classCommandHistory.html#a7446df1c37dfa802857eadb0f967e61d" title="Pushes a command onto the history stack and assumes ownership." alt="" coords="947,58,1121,83"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="899,68,933,68,933,73,899,73"/>
+<area shape="rect" id="Node000007" href="$classTIVIDYFacade.html#ade620f15d83fb861851f5653f00ed8a8" title="Rejects a specific task item within an instance with a stated reason." alt="" coords="383,73,567,98"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="315,85,369,84,369,90,315,91"/>
+<area shape="poly" id="edge7_Node000007_Node000004" title=" " alt="" coords="567,78,622,75,622,81,568,83"/>
+<area shape="rect" id="Node000009" href="$classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e" title="Submits a work item to an approval chain of responsibility." alt="" coords="363,222,588,247"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="315,220,349,223,349,228,315,226"/>
+<area shape="rect" id="Node000010" href="$classWorkflowDefinition.html#aa5041d0fdba198b3d48ba0078767b289" title="Gets the head of the approval handler chain." alt="" coords="694,108,841,148"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="499,219,560,189,635,157,680,144,681,149,637,163,562,194,502,224"/>
+<area shape="rect" id="Node000011" href="$classWorkItem.html#a07f90d9342cb3413103703da2f64f3a8" title=" " alt="" coords="695,173,840,198"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="551,219,680,197,681,203,552,225"/>
+<area shape="rect" id="Node000012" href="$classWorkflowInstance.html#a44b26e4fc1c64a18b0eb9c836079cae6" title="Gets the definition blueprint this instance was created from." alt="" coords="653,222,882,247"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="588,232,639,232,639,237,588,237"/>
+<area shape="rect" id="Node000013" href="$classApprovalRequest.html#a7b8b43adff3dccf6fa236bd787829af1" title="Gets the current status of the request." alt="" coords="666,271,869,297"/>
+<area shape="poly" id="edge13_Node000009_Node000013" title=" " alt="" coords="552,245,678,266,677,272,551,250"/>
+<area shape="rect" id="Node000014" href="$classApprovalHandler.html#a9b61062cec56f24ef59502c49a334b83" title="Handles an approval request or passes it on." alt="" coords="676,321,859,346"/>
+<area shape="poly" id="edge14_Node000009_Node000014" title=" " alt="" coords="501,245,561,275,637,305,672,315,671,320,635,311,559,280,499,250"/>
+<area shape="rect" id="Node000015" href="$classWorkItem.html#a832fccc6b34774701672028c884cd70e" title=" " alt="" coords="694,370,841,395"/>
+<area shape="poly" id="edge15_Node000009_Node000015" title=" " alt="" coords="491,246,550,300,592,331,637,356,681,370,680,376,635,361,589,335,547,304,487,250"/>
+<area shape="rect" id="Node000017" href="$classTIVIDYFacade.html#a213775747b590071d5bdb37e04287c1d" title="Creates and executes a StartCommand for a work item." alt="" coords="387,134,564,159"/>
+<area shape="poly" id="edge17_Node000016_Node000017" title=" " alt="" coords="315,148,373,147,373,152,315,154"/>
+<area shape="poly" id="edge18_Node000017_Node000004" title=" " alt="" coords="512,131,635,93,679,83,680,89,637,99,514,136"/>
+</map>
