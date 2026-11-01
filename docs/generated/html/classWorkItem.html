@@ -106,43 +106,12 @@ $(document).ready(function(){initNavTree('classWorkItem.html',''); initResizable
 <div class="dynheader">
 Inheritance diagram for WorkItem:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem__inherit__graph.png" border="0" usemap="#aWorkItem_inherit__map" alt="Inheritance graph"/></div>
-<map name="aWorkItem_inherit__map" id="aWorkItem_inherit__map">
-<area shape="rect" title="Component of the Composite pattern (also Component of Decorator, Aggregate of Iterator,..." alt="" coords="328,5,516,791"/>
-<area shape="rect" href="classStage.html" title="Composite of the Composite pattern: a WorkItem that owns child WorkItems (Tasks or other Stages)." alt="" coords="178,889,325,1294"/>
-<area shape="poly" title=" " alt="" coords="327,794,304,889,299,888,322,792"/>
-<area shape="rect" href="classTask.html" title="Leaf of the Composite, Context of State and Strategy, and ConcreteComponent of Decorator." alt="" coords="349,839,495,1344"/>
-<area shape="poly" title=" " alt="" coords="425,805,425,838,419,838,419,805"/>
-<area shape="rect" href="classTaskDecorator.html" title="Decorator base: wraps another WorkItem and forwards every call to it." alt="" coords="592,939,735,1244"/>
-<area shape="poly" title=" " alt="" coords="523,681,613,938,608,939,518,683"/>
-<area shape="rect" href="classParallelStage.html" title="Composite whose children are all available at the same time." alt="" coords="5,1452,151,1597"/>
-<area shape="poly" title=" " alt="" coords="175,1289,109,1452,104,1451,170,1287"/>
-<area shape="rect" href="classSequentialStage.html" title="Composite whose children run one after another: a child only becomes available once the previous chil..." alt="" coords="175,1452,331,1597"/>
-<area shape="poly" title=" " alt="" coords="255,1308,255,1452,250,1452,249,1308"/>
-<area shape="rect" href="classExternalTask.html" title="Represents a task that sends requests to an external service." alt="" coords="355,1442,489,1607"/>
-<area shape="poly" title=" " alt="" coords="425,1358,425,1442,419,1442,419,1358"/>
-<area shape="rect" href="classAuditedTask.html" title="Concrete Decorator: publishes a WorkflowEvent after every successful lifecycle operation on the wrapp..." alt="" coords="513,1392,648,1657"/>
-<area shape="poly" title=" " alt="" coords="634,1259,609,1392,603,1391,629,1258"/>
-<area shape="rect" href="classPriorityTask.html" title="Concrete Decorator: gives a work item a priority (higher = more urgent)." alt="" coords="673,1442,798,1607"/>
-<area shape="poly" title=" " alt="" coords="694,1257,724,1441,719,1442,688,1258"/>
-<area shape="rect" href="classValidatedTask.html" title="Concrete Decorator: refuses to complete a work item until every required data field has been filled i..." alt="" coords="822,1422,974,1627"/>
-<area shape="poly" title=" " alt="" coords="744,1234,845,1420,840,1423,739,1237"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem__inherit__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <div class="dynheader">
 Collaboration diagram for WorkItem:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem__coll__graph.png" border="0" usemap="#aWorkItem_coll__map" alt="Collaboration graph"/></div>
-<map name="aWorkItem_coll__map" id="aWorkItem_coll__map">
-<area shape="rect" title="Component of the Composite pattern (also Component of Decorator, Aggregate of Iterator,..." alt="" coords="5,420,193,1165"/>
-<area shape="rect" title=" " alt="" coords="60,135,139,200"/>
-<area shape="poly" title=" " alt="" coords="99,200,93,277,90,404,85,404,87,277,93,200"/>
-<area shape="rect" title=" " alt="" coords="169,277,323,357"/>
-<area shape="poly" title=" " alt="" coords="133,198,198,264,194,267,129,202"/>
-<area shape="rect" title=" " alt="" coords="34,5,165,85"/>
-<area shape="poly" title=" " alt="" coords="102,99,102,134,97,134,97,99"/>
-<area shape="poly" title=" " alt="" coords="237,358,201,473,196,472,231,357"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -362,28 +331,7 @@ Protected Attributes</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_af87da457ee3b0f665eba7d592faca22d_icgraph.png" border="0" usemap="#aclassWorkItem_af87da457ee3b0f665eba7d592faca22d_icgraph" alt=""/></div>
-<map name="aclassWorkItem_af87da457ee3b0f665eba7d592faca22d_icgraph" id="aclassWorkItem_af87da457ee3b0f665eba7d592faca22d_icgraph">
-<area shape="rect" title="Re&#45;evaluate which children should become available next." alt="" coords="641,112,841,137"/>
-<area shape="rect" href="classSequentialStage.html#a6609d38959b332ee11bb56fff2d4d496" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="383,47,573,87"/>
-<area shape="poly" title=" " alt="" coords="668,112,570,90,571,85,670,106"/>
-<area shape="rect" href="classTaskDecorator.html#a07452555413ffa1853545d6c0a9fb873" title="Re&#45;evaluate which children should become available next." alt="" coords="363,112,593,137"/>
-<area shape="poly" title=" " alt="" coords="627,127,593,127,593,122,627,122"/>
-<area shape="rect" href="classWorkflowInstance.html#a9e4c044672103c026fcf0f6f04163c8c" title="Progresses the workflow tree after a task completes." alt="" coords="363,161,593,187"/>
-<area shape="poly" title=" " alt="" coords="660,143,547,164,546,159,659,137"/>
-<area shape="rect" href="test__integration__work__items_8cpp.html#ab688d3af6d3ba12be86b0d74c0d7df0f" title=" " alt="" coords="186,5,281,31"/>
-<area shape="poly" title=" " alt="" coords="369,48,280,30,281,25,370,43"/>
-<area shape="rect" href="test__work__items_8cpp.html#a3a31b7c43784b1ae1d14834342509a22" title=" " alt="" coords="186,55,281,80"/>
-<area shape="poly" title=" " alt="" coords="369,70,281,70,281,65,369,65"/>
-<area shape="rect" href="test__work__items_8cpp.html#ab72a081ef1657128d1027b0facd81b00" title=" " alt="" coords="186,104,281,129"/>
-<area shape="poly" title=" " alt="" coords="370,92,281,110,280,105,369,87"/>
-<area shape="rect" href="classEngineRouter.html#aee8e26d7253e4d10e9c2d5f06f325239" title="Processes a workflow event." alt="" coords="152,161,315,187"/>
-<area shape="poly" title=" " alt="" coords="350,177,315,177,315,171,350,171"/>
-<area shape="rect" href="test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="5,136,104,161"/>
-<area shape="poly" title=" " alt="" coords="138,163,104,158,105,153,139,158"/>
-<area shape="rect" href="test__engine__router_8cpp.html#a64a148f342e78f079933c9f1b1b04ab4" title=" " alt="" coords="5,185,104,211"/>
-<area shape="poly" title=" " alt="" coords="139,189,105,194,104,189,138,184"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_af87da457ee3b0f665eba7d592faca22d_icgraph.svg" width="100%" height="462"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -416,20 +364,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_afeec29eef6ae5feb664573f06b0a81d3_icgraph.png" border="0" usemap="#aclassWorkItem_afeec29eef6ae5feb664573f06b0a81d3_icgraph" alt=""/></div>
-<map name="aclassWorkItem_afeec29eef6ae5feb664573f06b0a81d3_icgraph" id="aclassWorkItem_afeec29eef6ae5feb664573f06b0a81d3_icgraph">
-<area shape="rect" title=" " alt="" coords="443,55,577,80"/>
-<area shape="rect" href="classTaskDecorator.html#a72fef7d915f773909877475aca11dab8" title=" " alt="" coords="217,5,382,31"/>
-<area shape="poly" title=" " alt="" coords="441,54,354,33,355,28,443,49"/>
-<area shape="rect" href="classAssignCommand.html#a6f422eb21c2b6b158b52feebe482422d" title="Executes the assignment command." alt="" coords="204,55,395,80"/>
-<area shape="poly" title=" " alt="" coords="429,70,395,70,395,65,429,65"/>
-<area shape="rect" href="test__external__task_8cpp.html#adf42dc81e34db610baf0b39d3538d161" title=" " alt="" coords="250,104,349,129"/>
-<area shape="poly" title=" " alt="" coords="443,86,349,108,348,103,441,81"/>
-<area shape="rect" href="classAuditedTask.html#a430eb2d5d68aa0501ea5116a5c2f280c" title=" " alt="" coords="5,5,156,31"/>
-<area shape="poly" title=" " alt="" coords="203,21,156,21,156,15,203,15"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a8b6f74d385ab76cf93c76ed871258b41" title=" " alt="" coords="33,55,128,80"/>
-<area shape="poly" title=" " alt="" coords="190,70,128,70,128,65,190,65"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_afeec29eef6ae5feb664573f06b0a81d3_icgraph.svg" width="583" height="135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -461,18 +396,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_ab78ca83aa8b3e08914f0b3917eaceac6_icgraph.png" border="0" usemap="#aclassWorkItem_ab78ca83aa8b3e08914f0b3917eaceac6_icgraph" alt=""/></div>
-<map name="aclassWorkItem_ab78ca83aa8b3e08914f0b3917eaceac6_icgraph" id="aclassWorkItem_ab78ca83aa8b3e08914f0b3917eaceac6_icgraph">
-<area shape="rect" title=" " alt="" coords="439,55,573,80"/>
-<area shape="rect" href="classTaskDecorator.html#ad147a81e94dbd1a9b5d1e3d157a1de7a" title=" " alt="" coords="215,5,380,31"/>
-<area shape="poly" title=" " alt="" coords="438,54,351,33,353,28,439,49"/>
-<area shape="rect" href="classWorkflowInstance.html#a9a4b6380c98ee68a9c070fe20b9c6b77" title="Aborts all active items and transitions instance to CANCELLED." alt="" coords="204,55,391,80"/>
-<area shape="poly" title=" " alt="" coords="425,70,391,70,391,65,425,65"/>
-<area shape="rect" href="classWorkflowInstance.html#a1d9c3314b4cb9c595b46987c485a86fa" title="Halts all execution, records a failure reason, and marks as FAILED." alt="" coords="214,104,381,129"/>
-<area shape="poly" title=" " alt="" coords="439,86,353,107,351,101,438,81"/>
-<area shape="rect" href="classAuditedTask.html#a05a5305bf4485bf5cee85b80107cd46f" title=" " alt="" coords="5,5,156,31"/>
-<area shape="poly" title=" " alt="" coords="201,21,156,21,156,15,201,15"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_ab78ca83aa8b3e08914f0b3917eaceac6_icgraph.svg" width="579" height="135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -507,14 +431,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_aac5665bab435ede1470a1d9b278b2b81_icgraph.png" border="0" usemap="#aclassWorkItem_aac5665bab435ede1470a1d9b278b2b81_icgraph" alt=""/></div>
-<map name="aclassWorkItem_aac5665bab435ede1470a1d9b278b2b81_icgraph" id="aclassWorkItem_aac5665bab435ede1470a1d9b278b2b81_icgraph">
-<area shape="rect" title="Prototype operation: deep copy of this item and everything it owns." alt="" coords="259,35,387,60"/>
-<area shape="rect" href="test__decorators_8cpp.html#aa8ddf5d9105497498695c66586bf9c14" title=" " alt="" coords="61,5,155,31"/>
-<area shape="poly" title=" " alt="" coords="244,39,155,27,156,22,245,34"/>
-<area shape="rect" href="classWorkflowInstance.html#a8d06c347e5ed6987f8839adb50ba5561" title="Constructs an instance by cloning the definition&#39;s prototype tree." alt="" coords="5,55,211,95"/>
-<area shape="poly" title=" " alt="" coords="245,60,211,65,211,59,244,55"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_aac5665bab435ede1470a1d9b278b2b81_icgraph.svg" width="392" height="102"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -546,20 +463,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_ac8698c70972ea20ae8b2c40c76fa109e_icgraph.png" border="0" usemap="#aclassWorkItem_ac8698c70972ea20ae8b2c40c76fa109e_icgraph" alt=""/></div>
-<map name="aclassWorkItem_ac8698c70972ea20ae8b2c40c76fa109e_icgraph" id="aclassWorkItem_ac8698c70972ea20ae8b2c40c76fa109e_icgraph">
-<area shape="rect" title=" " alt="" coords="493,80,648,105"/>
-<area shape="rect" href="classTaskDecorator.html#a750c27d210bc803debd210fe160a5138" title=" " alt="" coords="248,55,432,80"/>
-<area shape="poly" title=" " alt="" coords="479,85,432,80,433,75,480,80"/>
-<area shape="rect" href="classCompleteCommand.html#a0d62e32c1e68f5515cfa5c9e5b256ba5" title="Executes the completion command on the target work item." alt="" coords="235,104,445,129"/>
-<area shape="poly" title=" " alt="" coords="480,105,446,108,445,103,479,99"/>
-<area shape="rect" href="classAuditedTask.html#ade86909039ec3ef411510ab1a003fb6d" title=" " alt="" coords="11,5,181,31"/>
-<area shape="poly" title=" " alt="" coords="263,55,159,33,160,28,264,49"/>
-<area shape="rect" href="classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="5,55,187,80"/>
-<area shape="poly" title=" " alt="" coords="234,70,187,70,187,65,234,65"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#aec4bc1e0a87a5187a13c194a8e93f3e1" title=" " alt="" coords="49,104,143,129"/>
-<area shape="poly" title=" " alt="" coords="221,119,144,119,144,114,221,114"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_ac8698c70972ea20ae8b2c40c76fa109e_icgraph.svg" width="654" height="135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -594,16 +498,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_ac92b7d3bbd7eef5775101b66b76a359b_icgraph.png" border="0" usemap="#aclassWorkItem_ac92b7d3bbd7eef5775101b66b76a359b_icgraph" alt=""/></div>
-<map name="aclassWorkItem_ac92b7d3bbd7eef5775101b66b76a359b_icgraph" id="aclassWorkItem_ac92b7d3bbd7eef5775101b66b76a359b_icgraph">
-<area shape="rect" title="Iterator over only the available leaf items." alt="" coords="280,63,475,103"/>
-<area shape="rect" href="classWorkflowInstance.html#aa7ce5d400a2a227a575c07b7a429e4c9" title="Retrieves all work items currently eligible for assignment." alt="" coords="5,5,232,45"/>
-<area shape="poly" title=" " alt="" coords="273,62,209,48,210,43,274,57"/>
-<area shape="rect" href="test__work__items_8cpp.html#a4db7b6e88dedb6bcd1374c7f0f60ab50" title=" " alt="" coords="71,70,166,95"/>
-<area shape="poly" title=" " alt="" coords="267,85,166,85,166,80,267,80"/>
-<area shape="rect" href="test__work__items_8cpp.html#a45b70c139f533c250b0f95ce3f7db254" title=" " alt="" coords="71,119,166,145"/>
-<area shape="poly" title=" " alt="" coords="267,106,167,126,166,121,266,101"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_ac92b7d3bbd7eef5775101b66b76a359b_icgraph.svg" width="480" height="151"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -638,12 +533,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a6a19389bec2dba729c4aba1a46969996_icgraph.png" border="0" usemap="#aclassWorkItem_a6a19389bec2dba729c4aba1a46969996_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a6a19389bec2dba729c4aba1a46969996_icgraph" id="aclassWorkItem_a6a19389bec2dba729c4aba1a46969996_icgraph">
-<area shape="rect" title="Iterator over this item and all descendants, depth first." alt="" coords="148,5,331,31"/>
-<area shape="rect" href="test__work__items_8cpp.html#a8f0b5905987a31ad9a20d3f30cf44b45" title=" " alt="" coords="5,5,100,31"/>
-<area shape="poly" title=" " alt="" coords="134,21,100,21,100,15,134,15"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_a6a19389bec2dba729c4aba1a46969996_icgraph.svg" width="336" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -678,30 +568,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a8e2a00010a42896ad22f011bb2666a86_icgraph.png" border="0" usemap="#aclassWorkItem_a8e2a00010a42896ad22f011bb2666a86_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a8e2a00010a42896ad22f011bb2666a86_icgraph" id="aclassWorkItem_a8e2a00010a42896ad22f011bb2666a86_icgraph">
-<area shape="rect" title="Memento operations." alt="" coords="689,56,885,81"/>
-<area shape="rect" href="classTaskDecorator.html#a39e47c5d1eeb5f5a0a714b55a3e7ec06" title="Memento operations." alt="" coords="411,31,637,56"/>
-<area shape="poly" title=" " alt="" coords="676,61,637,57,638,52,676,55"/>
-<area shape="rect" href="classWorkflowCommand.html#a6a9ea26fe4960a57137ae3c0db06b19e" title="Captures a fresh memento snapshot from the target work item." alt="" coords="407,80,641,105"/>
-<area shape="poly" title=" " alt="" coords="676,81,642,85,641,79,675,76"/>
-<area shape="rect" href="classAssignCommand.html#a6f422eb21c2b6b158b52feebe482422d" title="Executes the assignment command." alt="" coords="158,5,349,31"/>
-<area shape="poly" title=" " alt="" coords="436,79,406,70,381,57,358,44,321,33,322,28,360,40,384,52,408,65,438,74"/>
-<area shape="rect" href="classCompleteCommand.html#a0d62e32c1e68f5515cfa5c9e5b256ba5" title="Executes the completion command on the target work item." alt="" coords="148,55,359,80"/>
-<area shape="poly" title=" " alt="" coords="393,83,358,80,359,75,393,78"/>
-<area shape="rect" href="classRejectCommand.html#a6493c23689a21f7c5fc3d589594820f2" title="Executes the rejection command on the target work item." alt="" coords="159,104,348,129"/>
-<area shape="poly" title=" " alt="" coords="393,107,349,111,348,106,392,102"/>
-<area shape="rect" href="classStartCommand.html#a38aacdd6210d19d93833ab8447a980c1" title="Executes the start command on the target work item." alt="" coords="164,153,343,179"/>
-<area shape="poly" title=" " alt="" coords="469,112,359,143,309,156,308,151,358,138,467,107"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a8b6f74d385ab76cf93c76ed871258b41" title=" " alt="" coords="5,5,100,31"/>
-<area shape="poly" title=" " alt="" coords="144,21,100,21,100,15,144,15"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#aec4bc1e0a87a5187a13c194a8e93f3e1" title=" " alt="" coords="5,55,100,80"/>
-<area shape="poly" title=" " alt="" coords="134,70,100,70,100,65,134,65"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a3bb5027daa3fd82ba5b391d8ec37474a" title=" " alt="" coords="5,104,100,129"/>
-<area shape="poly" title=" " alt="" coords="144,119,100,119,100,114,144,114"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#ad17f7e07792166cd6832e406a50211fb" title=" " alt="" coords="5,153,100,179"/>
-<area shape="poly" title=" " alt="" coords="150,169,100,169,100,163,150,163"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a8e2a00010a42896ad22f011bb2666a86_icgraph.svg" width="100%" height="438"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -738,14 +605,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a0577e9de8be8a284cce967e9c61c6ab1_icgraph.png" border="0" usemap="#aclassWorkItem_a0577e9de8be8a284cce967e9c61c6ab1_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a0577e9de8be8a284cce967e9c61c6ab1_icgraph" id="aclassWorkItem_a0577e9de8be8a284cce967e9c61c6ab1_icgraph">
-<area shape="rect" title="Gets the participant assigned to this work item." alt="" coords="284,31,457,56"/>
-<area shape="rect" href="classTaskDecorator.html#ae50ae3400511d08eff15956f45537759" title="Gets the participant assigned to this work item." alt="" coords="19,5,222,31"/>
-<area shape="poly" title=" " alt="" coords="270,36,222,31,223,26,270,31"/>
-<area shape="rect" href="classTIVIDYFacade.html#a6063af865862f75bc4f93735470533b6" title="Checks whether a participant is assigned to a particular task." alt="" coords="5,55,236,80"/>
-<area shape="poly" title=" " alt="" coords="271,56,237,59,236,54,270,50"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_a0577e9de8be8a284cce967e9c61c6ab1_icgraph.svg" width="463" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -782,32 +642,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a3bf0e9f849e1e1b4abacdc3fdd13db34_icgraph.png" border="0" usemap="#aclassWorkItem_a3bf0e9f849e1e1b4abacdc3fdd13db34_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a3bf0e9f849e1e1b4abacdc3fdd13db34_icgraph" id="aclassWorkItem_a3bf0e9f849e1e1b4abacdc3fdd13db34_icgraph">
-<area shape="rect" title="Children of this item, or an empty list for a leaf." alt="" coords="904,171,1072,196"/>
-<area shape="rect" href="classTaskDecorator.html#a66c419296edd2b00021aa634e7f27b23" title="Children of this item, or an empty list for a leaf." alt="" coords="657,5,856,31"/>
-<area shape="poly" title=" " alt="" coords="969,161,922,103,890,72,855,46,826,33,829,28,857,41,894,68,926,99,973,158"/>
-<area shape="rect" href="classDepthFirstIterator.html#a5a87b79bf2169da85eb3ca87fdf57085" title=" " alt="" coords="688,55,825,95"/>
-<area shape="poly" title=" " alt="" coords="951,166,855,116,811,98,813,93,857,112,954,162"/>
-<area shape="rect" href="classAvailableItemsIterator.html#adee6bca64b641da0718ef8df768c8faa" title=" " alt="" coords="443,113,609,153"/>
-<area shape="poly" title=" " alt="" coords="911,171,856,162,726,148,609,140,610,134,727,143,856,157,911,165"/>
-<area shape="rect" href="test__integration__work__items_8cpp.html#a559c2a8f8be7d19a80b30c373bb6255c" title=" " alt="" coords="709,171,804,196"/>
-<area shape="poly" title=" " alt="" coords="890,186,804,186,804,181,890,181"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a217a5121b58af7d548e90f195da211f2" title=" " alt="" coords="709,220,804,245"/>
-<area shape="poly" title=" " alt="" coords="915,202,805,225,804,220,914,196"/>
-<area shape="rect" href="test__FacadeCoR_8cpp.html#a7163dbf93de270cba2207fbe765c6ca4" title=" " alt="" coords="707,269,806,295"/>
-<area shape="poly" title=" " alt="" coords="958,206,912,234,857,260,807,276,805,270,855,256,909,229,955,201"/>
-<area shape="rect" href="test__facade_8cpp.html#a9458c958231b26ea2461ce5adefb2533" title=" " alt="" coords="707,319,806,344"/>
-<area shape="poly" title=" " alt="" coords="971,208,923,260,892,287,857,310,832,320,807,327,805,322,831,315,855,305,889,283,920,256,967,205"/>
-<area shape="rect" href="classAvailableItemsIterator.html#afe64018b874dfc5e4812c1145a432997" title=" " alt="" coords="228,55,395,95"/>
-<area shape="poly" title=" " alt="" coords="674,78,395,78,395,73,674,73"/>
-<area shape="poly" title=" " alt="" coords="675,98,608,115,606,110,674,93"/>
-<area shape="poly" title=" " alt="" coords="437,112,386,98,387,93,438,106"/>
-<area shape="rect" href="classAvailableItemsIterator.html#ab51a0e3aa9f8d9783459ebf6813ed5a2" title=" " alt="" coords="228,119,395,159"/>
-<area shape="poly" title=" " alt="" coords="429,138,395,139,395,134,428,133"/>
-<area shape="rect" href="classAvailableItemsIterator.html#af7c250fe366ca8b6f7a820c0604236ed" title=" " alt="" coords="5,119,180,159"/>
-<area shape="poly" title=" " alt="" coords="214,142,180,142,180,137,214,137"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a3bf0e9f849e1e1b4abacdc3fdd13db34_icgraph.svg" width="100%" height="562"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -843,36 +678,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a07f90d9342cb3413103703da2f64f3a8_icgraph.png" border="0" usemap="#aclassWorkItem_a07f90d9342cb3413103703da2f64f3a8_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a07f90d9342cb3413103703da2f64f3a8_icgraph" id="aclassWorkItem_a07f90d9342cb3413103703da2f64f3a8_icgraph">
-<area shape="rect" title=" " alt="" coords="747,189,892,215"/>
-<area shape="rect" href="classTaskDecorator.html#a55eabccf40f708c8d277d5a978e51bd8" title=" " alt="" coords="499,79,673,104"/>
-<area shape="poly" title=" " alt="" coords="788,184,746,156,698,130,635,107,636,102,700,125,749,152,791,179"/>
-<area shape="rect" href="classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e" title="Submits a work item to an approval chain of responsibility." alt="" coords="473,140,699,165"/>
-<area shape="poly" title=" " alt="" coords="745,189,646,168,647,163,746,184"/>
-<area shape="rect" href="test__integration__work__items_8cpp.html#a559c2a8f8be7d19a80b30c373bb6255c" title=" " alt="" coords="539,189,633,215"/>
-<area shape="poly" title=" " alt="" coords="733,205,634,205,634,199,733,199"/>
-<area shape="rect" href="test__work__items_8cpp.html#a8575bbbbc33e8ce376019e375388a3f2" title=" " alt="" coords="539,239,633,264"/>
-<area shape="poly" title=" " alt="" coords="746,220,634,244,633,239,745,215"/>
-<area shape="rect" href="test__state__strategy__chain_8cpp.html#a5ceea80a3f9b49870045be0718a09582" title=" " alt="" coords="539,288,633,313"/>
-<area shape="poly" title=" " alt="" coords="792,225,749,252,700,278,635,296,633,291,698,273,747,248,789,221"/>
-<area shape="rect" href="classValidatedTask.html#a039684bb33dcdea36d9ddb0f1a3660aa" title=" " alt="" coords="235,47,425,87"/>
-<area shape="poly" title=" " alt="" coords="485,85,425,79,426,74,485,79"/>
-<area shape="rect" href="classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="5,5,187,31"/>
-<area shape="poly" title=" " alt="" coords="220,47,156,33,157,28,221,42"/>
-<area shape="rect" href="classValidatedTask.html#a943c9f09640df44eff4e82ba4b8da81c" title=" " alt="" coords="9,55,183,80"/>
-<area shape="poly" title=" " alt="" coords="221,70,183,70,183,65,221,65"/>
-<area shape="rect" href="classSecureWorkflowProxy.html#a731623a1da1d5326ecd9acdce74cda2f" title="Requests approval after checking permission and ownership." alt="" coords="249,146,411,186"/>
-<area shape="poly" title=" " alt="" coords="460,162,412,164,412,159,459,157"/>
-<area shape="rect" href="test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="47,104,145,129"/>
-<area shape="poly" title=" " alt="" coords="235,149,145,130,146,124,236,143"/>
-<area shape="rect" href="test__proxy_8cpp.html#aaf19d5f99495ffd1c276810ffaafdc1f" title=" " alt="" coords="47,153,145,179"/>
-<area shape="poly" title=" " alt="" coords="235,169,145,169,145,163,235,163"/>
-<area shape="rect" href="test__proxy_8cpp.html#a809f6a1f9ebea212d14ef9ebf5fc5913" title=" " alt="" coords="47,203,145,228"/>
-<area shape="poly" title=" " alt="" coords="236,189,146,208,145,202,235,183"/>
-<area shape="rect" href="test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="47,252,145,277"/>
-<area shape="poly" title=" " alt="" coords="284,195,238,219,188,242,147,255,145,250,186,237,236,214,281,190"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a07f90d9342cb3413103703da2f64f3a8_icgraph.svg" width="100%" height="539"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -908,14 +714,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_ab2c4bb4076f302a5e546be57feefbc1a_icgraph.png" border="0" usemap="#aclassWorkItem_ab2c4bb4076f302a5e546be57feefbc1a_icgraph" alt=""/></div>
-<map name="aclassWorkItem_ab2c4bb4076f302a5e546be57feefbc1a_icgraph" id="aclassWorkItem_ab2c4bb4076f302a5e546be57feefbc1a_icgraph">
-<area shape="rect" title="Unique id of this item inside its workflow." alt="" coords="241,31,400,56"/>
-<area shape="rect" href="classTaskDecorator.html#a4057bd21921fa09d0298b6f23a507b17" title="Unique id of this item inside its workflow." alt="" coords="5,5,193,31"/>
-<area shape="poly" title=" " alt="" coords="227,35,193,31,194,26,228,30"/>
-<area shape="rect" href="test__external__task_8cpp.html#adf42dc81e34db610baf0b39d3538d161" title=" " alt="" coords="50,55,149,80"/>
-<area shape="poly" title=" " alt="" coords="228,56,150,65,149,59,227,51"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_ab2c4bb4076f302a5e546be57feefbc1a_icgraph.svg" width="406" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -951,112 +750,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a094c83cf3c7af80eec268ca8656e8b6a_icgraph.png" border="0" usemap="#aclassWorkItem_a094c83cf3c7af80eec268ca8656e8b6a_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a094c83cf3c7af80eec268ca8656e8b6a_icgraph" id="aclassWorkItem_a094c83cf3c7af80eec268ca8656e8b6a_icgraph">
-<area shape="rect" title="Human readable name." alt="" coords="869,352,1023,377"/>
-<area shape="rect" href="classTaskState.html#a38519e3589346f130681fe2ba1b2cb2b" title="Assigns a participant to the task." alt="" coords="627,153,761,179"/>
-<area shape="poly" title=" " alt="" coords="932,340,915,306,890,265,859,225,820,192,792,179,761,172,762,166,793,174,823,188,862,221,895,262,920,303,937,338"/>
-<area shape="rect" href="classTaskState.html#a23345140031e09f9bf6ad1663a008974" title="Cancels the task." alt="" coords="627,104,761,129"/>
-<area shape="poly" title=" " alt="" coords="936,339,922,296,898,242,865,188,844,163,820,143,792,129,761,121,762,116,794,124,823,138,847,160,869,184,903,239,927,294,941,338"/>
-<area shape="rect" href="classTaskState.html#ad98305bdb5ed339e4b05902ca375c58b" title="Completes the task." alt="" coords="617,55,771,80"/>
-<area shape="poly" title=" " alt="" coords="938,339,927,286,906,219,890,184,871,151,847,120,820,93,797,80,771,73,772,67,799,75,823,89,851,116,875,148,895,182,911,217,932,285,944,338"/>
-<area shape="rect" href="classAssignCommand.html#a45d89864fdc39a250bb7c5c6ae6d1c17" title="Returns a descriptive string summarizing the command action." alt="" coords="577,403,811,428"/>
-<area shape="poly" title=" " alt="" coords="869,383,758,405,757,400,868,378"/>
-<area shape="rect" href="classCompleteCommand.html#a7e07cc763c98b4d28313f82b475a627d" title="Returns a descriptive string summarizing the command action." alt="" coords="567,452,821,477"/>
-<area shape="poly" title=" " alt="" coords="918,388,874,416,822,442,780,455,779,449,820,437,871,412,915,384"/>
-<area shape="rect" href="classRejectCommand.html#ad8f2839a45d83fcc648346a72cb2bff1" title="Returns a descriptive string summarizing the rejection action." alt="" coords="577,501,811,527"/>
-<area shape="poly" title=" " alt="" coords="930,390,886,442,856,469,823,491,791,504,789,499,820,486,853,465,882,438,926,387"/>
-<area shape="rect" href="classStartCommand.html#aa168f7bfe1b725d18dd6a3852da4cb57" title="Returns a descriptive string summarizing the command action." alt="" coords="583,551,805,576"/>
-<area shape="poly" title=" " alt="" coords="936,391,919,426,895,466,862,507,823,540,797,553,795,548,820,536,858,503,890,463,915,423,932,389"/>
-<area shape="rect" href="classTaskDecorator.html#ac3cab9fa487076e46ec2d7f55c2cfb2d" title="Human readable name." alt="" coords="603,600,785,625"/>
-<area shape="poly" title=" " alt="" coords="940,392,926,436,902,490,868,544,847,568,823,590,787,607,784,602,820,585,843,565,864,541,898,487,921,434,935,390"/>
-<area shape="rect" href="classTaskState.html#a8d7df5b147dbd89bfa5d68219664e849" title="Makes the task ready to be assigned." alt="" coords="599,301,789,327"/>
-<area shape="poly" title=" " alt="" coords="868,352,757,329,758,324,869,347"/>
-<area shape="rect" href="test__external__task_8cpp.html#adf42dc81e34db610baf0b39d3538d161" title=" " alt="" coords="164,403,263,428"/>
-<area shape="poly" title=" " alt="" coords="856,366,616,370,472,378,327,393,263,405,262,400,326,387,471,373,616,364,856,361"/>
-<area shape="rect" href="classTaskState.html#ac565a8ae8c1b571cec880100fd5ba2ea" title="Rejects the task." alt="" coords="629,252,759,277"/>
-<area shape="poly" title=" " alt="" coords="915,346,872,317,820,291,759,275,760,270,822,286,875,312,918,341"/>
-<area shape="rect" href="classWorkflowCommand.html#a48d4e82e955573b9262bde2627539745" title="Restores the target work item using the saved snapshot." alt="" coords="593,670,795,710"/>
-<area shape="poly" title=" " alt="" coords="942,391,929,442,906,508,871,577,849,610,823,639,798,658,769,672,767,667,795,653,820,635,845,606,867,574,901,506,924,441,937,390"/>
-<area shape="rect" href="classTaskState.html#a6fd89a16759c4741def5e17f1463356b" title="Starts work on the task." alt="" coords="633,203,755,228"/>
-<area shape="poly" title=" " alt="" coords="926,343,882,290,853,264,820,242,788,229,755,222,756,217,790,224,823,237,856,259,886,287,930,339"/>
-<area shape="rect" href="classTask.html#a24887c9b917151d5bb1300f543d9df6f" title=" " alt="" coords="372,104,473,129"/>
-<area shape="poly" title=" " alt="" coords="612,154,473,128,474,123,613,149"/>
-<area shape="rect" href="test__task__state__defaults_8cpp.html#ad28c62bc8b7f2e93d9e648ef803c997c" title=" " alt="" coords="373,153,472,179"/>
-<area shape="poly" title=" " alt="" coords="613,169,472,169,472,163,613,163"/>
-<area shape="rect" href="classTask.html#a2a89b92343173d5a1d6f8b32a0a7efb7" title="Ask the strategy for a participant and assign the task to them." alt="" coords="148,104,279,129"/>
-<area shape="poly" title=" " alt="" coords="358,119,279,119,279,114,358,114"/>
-<area shape="rect" href="test__state__strategy__chain_8cpp.html#aa25122209dd3aeeda9d7b2850770b1bb" title=" " alt="" coords="166,203,261,228"/>
-<area shape="poly" title=" " alt="" coords="360,130,328,143,313,154,304,166,295,179,280,192,256,205,253,200,277,188,291,175,300,163,310,151,325,138,358,125"/>
-<area shape="rect" href="test__state__strategy__chain_8cpp.html#a7359452cf7884fa783823be4bcf12f99" title=" " alt="" coords="166,153,261,179"/>
-<area shape="poly" title=" " alt="" coords="359,134,262,158,260,152,358,129"/>
-<area shape="rect" href="test__state__strategy__chain_8cpp.html#af71a4d2345a04ac8a902f39619ba60cb" title=" " alt="" coords="166,55,261,80"/>
-<area shape="poly" title=" " alt="" coords="358,104,260,81,262,76,359,99"/>
-<area shape="rect" href="test__state__strategy__chain_8cpp.html#a5ceea80a3f9b49870045be0718a09582" title=" " alt="" coords="166,252,261,277"/>
-<area shape="poly" title=" " alt="" coords="360,127,328,143,317,154,311,165,304,190,298,215,281,241,261,254,258,250,277,237,293,213,299,188,306,163,313,151,325,139,358,122"/>
-<area shape="rect" href="test__state__strategy__chain_8cpp.html#a065d9420065ff58be04719589ea93b1f" title=" " alt="" coords="5,228,100,253"/>
-<area shape="poly" title=" " alt="" coords="159,137,150,143,123,164,99,187,65,230,61,226,95,184,120,160,146,138,156,133"/>
-<area shape="poly" title=" " alt="" coords="614,134,473,160,472,155,613,129"/>
-<area shape="rect" href="classTask.html#a1a9d9c69519c5b2c1769a76de6c95e69" title=" " alt="" coords="372,55,473,80"/>
-<area shape="poly" title=" " alt="" coords="612,105,473,79,474,74,613,99"/>
-<area shape="poly" title=" " alt="" coords="360,77,328,93,317,105,311,116,304,140,298,166,281,192,261,205,258,200,277,188,293,164,299,139,306,114,313,101,325,89,358,73"/>
-<area shape="poly" title=" " alt="" coords="358,70,261,70,261,65,358,65"/>
-<area shape="poly" title=" " alt="" coords="604,80,568,94,553,105,545,117,535,130,520,143,497,154,473,161,471,156,495,149,517,138,532,127,540,114,550,101,565,89,602,75"/>
-<area shape="rect" href="classTask.html#a99921df21eb9f8f04a8816f045ac6206" title=" " alt="" coords="363,5,483,31"/>
-<area shape="poly" title=" " alt="" coords="609,55,482,31,483,26,610,50"/>
-<area shape="poly" title=" " alt="" coords="351,31,328,44,317,55,311,67,304,91,298,117,281,143,261,155,258,151,277,139,293,115,299,90,306,65,313,52,325,40,348,27"/>
-<area shape="poly" title=" " alt="" coords="355,36,261,59,260,54,354,31"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#aed7f70b4769ca84264cbeb3526872aed" title=" " alt="" coords="375,403,470,428"/>
-<area shape="poly" title=" " alt="" coords="563,418,470,418,470,413,563,413"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#af7f48925d2d8962cce434b820597439d" title=" " alt="" coords="375,501,470,527"/>
-<area shape="poly" title=" " alt="" coords="611,482,471,508,470,503,610,477"/>
-<area shape="poly" title=" " alt="" coords="563,517,471,517,471,511,563,511"/>
-<area shape="poly" title=" " alt="" coords="610,551,470,525,471,520,611,546"/>
-<area shape="rect" href="classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="332,579,513,604"/>
-<area shape="poly" title=" " alt="" coords="589,607,513,601,514,596,589,602"/>
-<area shape="poly" title=" " alt="" coords="585,303,565,291,553,279,546,266,540,240,534,215,528,203,517,192,496,180,472,173,473,167,498,175,520,188,532,200,539,213,545,239,551,264,557,276,568,287,587,298"/>
-<area shape="rect" href="classTask.html#acd0fdd09318cdb6d655fbfd1636d55b3" title=" " alt="" coords="345,301,500,327"/>
-<area shape="poly" title=" " alt="" coords="586,317,500,317,500,311,586,311"/>
-<area shape="poly" title=" " alt="" coords="376,333,327,347,269,356,207,355,176,350,147,340,118,323,93,299,59,255,64,252,97,296,121,318,149,336,178,345,207,350,268,350,326,341,374,328"/>
-<area shape="poly" title=" " alt="" coords="341,299,325,291,310,279,300,266,291,254,277,242,255,230,258,226,280,237,295,250,305,263,314,275,328,286,344,294"/>
-<area shape="poly" title=" " alt="" coords="334,297,325,291,313,278,306,266,299,241,294,216,287,204,277,192,260,181,263,176,280,188,292,201,299,214,305,239,311,264,317,275,328,287,337,293"/>
-<area shape="poly" title=" " alt="" coords="332,297,325,290,307,266,298,241,297,216,299,191,301,166,300,142,293,118,277,93,259,80,262,76,281,89,298,115,305,141,306,166,304,191,302,216,304,240,311,263,329,287,335,293"/>
-<area shape="poly" title=" " alt="" coords="354,301,260,278,261,273,355,296"/>
-<area shape="rect" href="test__state__strategy__chain_8cpp.html#a53d07c5420ce0993234d94d2257c6c5f" title=" " alt="" coords="166,301,261,327"/>
-<area shape="poly" title=" " alt="" coords="332,317,261,317,261,311,332,311"/>
-<area shape="poly" title=" " alt="" coords="362,334,328,348,304,366,280,386,245,405,242,400,277,381,301,362,325,344,359,329"/>
-<area shape="poly" title=" " alt="" coords="614,259,565,242,550,229,540,216,532,204,517,192,495,182,471,175,473,170,497,177,520,188,536,200,545,213,553,226,568,237,616,254"/>
-<area shape="rect" href="classTask.html#ad058cda4e8c3e252a050f9fde67f99bf" title=" " alt="" coords="375,252,471,277"/>
-<area shape="poly" title=" " alt="" coords="615,267,471,267,471,262,615,262"/>
-<area shape="poly" title=" " alt="" coords="361,253,260,229,262,224,362,248"/>
-<area shape="poly" title=" " alt="" coords="361,267,261,267,261,262,361,262"/>
-<area shape="rect" href="classAssignCommand.html#a14b0f7a134cbe4560d1d72f60a92a19d" title="Reverts the assignment command." alt="" coords="337,677,509,703"/>
-<area shape="poly" title=" " alt="" coords="579,693,509,693,509,687,579,687"/>
-<area shape="rect" href="classCompleteCommand.html#ad84f12f1703e18c06b7a7faa97808628" title="Reverts the completion command." alt="" coords="327,727,519,752"/>
-<area shape="poly" title=" " alt="" coords="580,713,494,729,493,724,579,708"/>
-<area shape="rect" href="classRejectCommand.html#ab0323b51e7b4e6fbb448f1ff0a6eb202" title="Reverts the rejection command." alt="" coords="337,776,508,801"/>
-<area shape="poly" title=" " alt="" coords="639,718,520,767,481,778,480,773,518,762,637,713"/>
-<area shape="rect" href="classStartCommand.html#a2531a736104515b0c6df1c01a68449a0" title="Reverts the start command." alt="" coords="343,628,503,653"/>
-<area shape="poly" title=" " alt="" coords="579,672,493,656,494,651,580,667"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a8b6f74d385ab76cf93c76ed871258b41" title=" " alt="" coords="166,677,261,703"/>
-<area shape="poly" title=" " alt="" coords="323,693,261,693,261,687,323,687"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#aec4bc1e0a87a5187a13c194a8e93f3e1" title=" " alt="" coords="166,727,261,752"/>
-<area shape="poly" title=" " alt="" coords="313,742,261,742,261,737,313,737"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a3bb5027daa3fd82ba5b391d8ec37474a" title=" " alt="" coords="166,776,261,801"/>
-<area shape="poly" title=" " alt="" coords="324,791,261,791,261,786,324,786"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#ad17f7e07792166cd6832e406a50211fb" title=" " alt="" coords="166,628,261,653"/>
-<area shape="poly" title=" " alt="" coords="329,643,261,643,261,638,329,638"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#ac3a14d6ebde6fa40c4c80f79523b75b1" title=" " alt="" coords="166,579,261,604"/>
-<area shape="poly" title=" " alt="" coords="354,627,260,605,261,600,355,622"/>
-<area shape="poly" title=" " alt="" coords="618,204,472,177,473,172,619,199"/>
-<area shape="rect" href="classTask.html#a5d6a1d3c6cd5b587d2414737fab9f3ed" title=" " alt="" coords="378,203,467,228"/>
-<area shape="poly" title=" " alt="" coords="619,218,467,218,467,213,619,213"/>
-<area shape="poly" title=" " alt="" coords="364,218,261,218,261,213,364,213"/>
-<area shape="poly" title=" " alt="" coords="364,204,260,180,262,174,365,199"/>
-<area shape="poly" title=" " alt="" coords="363,211,343,204,325,192,313,180,306,167,299,142,294,117,287,105,277,93,260,82,263,78,280,89,292,102,299,115,305,141,311,165,317,177,328,188,346,199,365,206"/>
-<area shape="poly" title=" " alt="" coords="365,231,262,256,260,251,364,226"/>
-<area shape="poly" title=" " alt="" coords="366,227,328,242,313,253,304,265,295,278,280,291,256,304,253,299,277,286,291,274,300,262,310,249,325,237,364,222"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a094c83cf3c7af80eec268ca8656e8b6a_icgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1089,16 +783,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_ae0b2832ad2b27b3d11f4e55bdd7ddd33_icgraph.png" border="0" usemap="#aclassWorkItem_ae0b2832ad2b27b3d11f4e55bdd7ddd33_icgraph" alt=""/></div>
-<map name="aclassWorkItem_ae0b2832ad2b27b3d11f4e55bdd7ddd33_icgraph" id="aclassWorkItem_ae0b2832ad2b27b3d11f4e55bdd7ddd33_icgraph">
-<area shape="rect" title=" " alt="" coords="271,55,457,80"/>
-<area shape="rect" href="classTaskDecorator.html#a40aeb8a1298f6e31a261bb63a16a3311" title=" " alt="" coords="5,5,223,31"/>
-<area shape="poly" title=" " alt="" coords="285,55,179,33,180,28,286,49"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#af695b6c3a0a7a12431e1a6dfbdeffbcd" title=" " alt="" coords="67,55,161,80"/>
-<area shape="poly" title=" " alt="" coords="257,70,161,70,161,65,257,65"/>
-<area shape="rect" href="test__external__task_8cpp.html#adf42dc81e34db610baf0b39d3538d161" title=" " alt="" coords="65,104,163,129"/>
-<area shape="poly" title=" " alt="" coords="286,85,164,110,163,104,285,80"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_ae0b2832ad2b27b3d11f4e55bdd7ddd33_icgraph.svg" width="463" height="135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1133,32 +818,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a832fccc6b34774701672028c884cd70e_icgraph.png" border="0" usemap="#aclassWorkItem_a832fccc6b34774701672028c884cd70e_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a832fccc6b34774701672028c884cd70e_icgraph" id="aclassWorkItem_a832fccc6b34774701672028c884cd70e_icgraph">
-<area shape="rect" title=" " alt="" coords="747,140,893,165"/>
-<area shape="rect" href="classTaskDecorator.html#a3778737d01e7171c8e1dc5b5ed409f6e" title=" " alt="" coords="497,79,675,104"/>
-<area shape="poly" title=" " alt="" coords="757,139,635,107,636,101,758,134"/>
-<area shape="rect" href="classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e" title="Submits a work item to an approval chain of responsibility." alt="" coords="473,140,699,165"/>
-<area shape="poly" title=" " alt="" coords="733,155,699,155,699,150,733,150"/>
-<area shape="rect" href="test__decorators_8cpp.html#aa8ddf5d9105497498695c66586bf9c14" title=" " alt="" coords="539,189,633,215"/>
-<area shape="poly" title=" " alt="" coords="746,171,634,195,633,190,745,166"/>
-<area shape="rect" href="classValidatedTask.html#a039684bb33dcdea36d9ddb0f1a3660aa" title=" " alt="" coords="235,47,425,87"/>
-<area shape="poly" title=" " alt="" coords="483,84,425,79,426,74,484,79"/>
-<area shape="rect" href="classValidatedTask.html#ab0a02695530f34369b5cd427ee2af20e" title="Completes the wrapped item only if validate() holds." alt="" coords="5,5,187,31"/>
-<area shape="poly" title=" " alt="" coords="220,47,156,33,157,28,221,42"/>
-<area shape="rect" href="classValidatedTask.html#a943c9f09640df44eff4e82ba4b8da81c" title=" " alt="" coords="9,55,183,80"/>
-<area shape="poly" title=" " alt="" coords="221,70,183,70,183,65,221,65"/>
-<area shape="rect" href="classSecureWorkflowProxy.html#a731623a1da1d5326ecd9acdce74cda2f" title="Requests approval after checking permission and ownership." alt="" coords="249,146,411,186"/>
-<area shape="poly" title=" " alt="" coords="460,162,412,164,412,159,459,157"/>
-<area shape="rect" href="test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="47,104,145,129"/>
-<area shape="poly" title=" " alt="" coords="235,149,145,130,146,124,236,143"/>
-<area shape="rect" href="test__proxy_8cpp.html#aaf19d5f99495ffd1c276810ffaafdc1f" title=" " alt="" coords="47,153,145,179"/>
-<area shape="poly" title=" " alt="" coords="235,169,145,169,145,163,235,163"/>
-<area shape="rect" href="test__proxy_8cpp.html#a809f6a1f9ebea212d14ef9ebf5fc5913" title=" " alt="" coords="47,203,145,228"/>
-<area shape="poly" title=" " alt="" coords="236,189,146,208,145,202,235,183"/>
-<area shape="rect" href="test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="47,252,145,277"/>
-<area shape="poly" title=" " alt="" coords="284,195,238,219,188,242,147,255,145,250,186,237,236,214,281,190"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a832fccc6b34774701672028c884cd70e_icgraph.svg" width="100%" height="512"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1191,20 +851,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a9905804d5629ed95af380e3735003e0d_icgraph.png" border="0" usemap="#aclassWorkItem_a9905804d5629ed95af380e3735003e0d_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a9905804d5629ed95af380e3735003e0d_icgraph" id="aclassWorkItem_a9905804d5629ed95af380e3735003e0d_icgraph">
-<area shape="rect" title=" " alt="" coords="685,35,849,60"/>
-<area shape="rect" href="classTaskDecorator.html#a9c00614859899fb685b4c567a06e778a" title=" " alt="" coords="443,5,637,31"/>
-<area shape="poly" title=" " alt="" coords="671,38,637,33,638,28,672,32"/>
-<area shape="rect" href="classAvailableItemsIterator.html#adee6bca64b641da0718ef8df768c8faa" title=" " alt="" coords="457,55,623,95"/>
-<area shape="poly" title=" " alt="" coords="672,62,624,68,623,62,671,56"/>
-<area shape="rect" href="classAvailableItemsIterator.html#ab51a0e3aa9f8d9783459ebf6813ed5a2" title=" " alt="" coords="228,23,395,63"/>
-<area shape="poly" title=" " alt="" coords="443,64,394,58,395,52,443,59"/>
-<area shape="rect" href="classAvailableItemsIterator.html#afe64018b874dfc5e4812c1145a432997" title=" " alt="" coords="228,87,395,127"/>
-<area shape="poly" title=" " alt="" coords="443,92,395,98,394,93,443,86"/>
-<area shape="rect" href="classAvailableItemsIterator.html#af7c250fe366ca8b6f7a820c0604236ed" title=" " alt="" coords="5,23,180,63"/>
-<area shape="poly" title=" " alt="" coords="214,46,180,46,180,41,214,41"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a9905804d5629ed95af380e3735003e0d_icgraph.svg" width="100%" height="400"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1237,24 +884,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a9c35d6c6acdfdbfc333b485d8ed612bf_icgraph.png" border="0" usemap="#aclassWorkItem_a9c35d6c6acdfdbfc333b485d8ed612bf_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a9c35d6c6acdfdbfc333b485d8ed612bf_icgraph" id="aclassWorkItem_a9c35d6c6acdfdbfc333b485d8ed612bf_icgraph">
-<area shape="rect" title=" " alt="" coords="640,105,799,131"/>
-<area shape="rect" href="classWorkflowInstance.html#a9e4c044672103c026fcf0f6f04163c8c" title="Progresses the workflow tree after a task completes." alt="" coords="363,31,592,56"/>
-<area shape="poly" title=" " alt="" coords="677,102,591,70,547,59,549,53,593,65,679,97"/>
-<area shape="rect" href="classTaskDecorator.html#a68bc03f7315dc2598e27d54ca0e73487" title=" " alt="" coords="383,80,571,105"/>
-<area shape="poly" title=" " alt="" coords="626,111,571,105,572,100,626,106"/>
-<area shape="rect" href="test__integration__work__items_8cpp.html#a559c2a8f8be7d19a80b30c373bb6255c" title=" " alt="" coords="430,129,525,155"/>
-<area shape="poly" title=" " alt="" coords="626,130,525,140,524,135,626,125"/>
-<area shape="rect" href="test__decorators_8cpp.html#aa8ddf5d9105497498695c66586bf9c14" title=" " alt="" coords="430,179,525,204"/>
-<area shape="poly" title=" " alt="" coords="677,138,593,169,525,185,524,180,591,163,675,133"/>
-<area shape="rect" href="classEngineRouter.html#aee8e26d7253e4d10e9c2d5f06f325239" title="Processes a workflow event." alt="" coords="152,31,315,56"/>
-<area shape="poly" title=" " alt="" coords="349,46,315,46,315,41,349,41"/>
-<area shape="rect" href="test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="5,5,104,31"/>
-<area shape="poly" title=" " alt="" coords="138,33,104,28,105,22,139,27"/>
-<area shape="rect" href="test__engine__router_8cpp.html#a64a148f342e78f079933c9f1b1b04ab4" title=" " alt="" coords="5,55,104,80"/>
-<area shape="poly" title=" " alt="" coords="139,59,105,63,104,58,138,53"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a9c35d6c6acdfdbfc333b485d8ed612bf_icgraph.svg" width="100%" height="457"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1286,42 +916,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a215d213d1c9653327eb5695cb3a06619_icgraph.png" border="0" usemap="#aclassWorkItem_a215d213d1c9653327eb5695cb3a06619_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a215d213d1c9653327eb5695cb3a06619_icgraph" id="aclassWorkItem_a215d213d1c9653327eb5695cb3a06619_icgraph">
-<area shape="rect" title=" " alt="" coords="883,153,1072,179"/>
-<area shape="rect" href="classSequentialStage.html#a6609d38959b332ee11bb56fff2d4d496" title="Release the next children according to the stage&#39;s ordering rule." alt="" coords="631,69,820,109"/>
-<area shape="poly" title=" " alt="" coords="921,152,791,111,792,106,923,147"/>
-<area shape="rect" href="classTaskDecorator.html#a4e32d1631389eba548864ebb70cda5a0" title=" " alt="" coords="616,153,835,179"/>
-<area shape="poly" title=" " alt="" coords="869,169,835,169,835,163,869,163"/>
-<area shape="rect" href="classWorkflowInstance.html#a02bc18c089fee46a354a1005c2de6707" title="Starts the workflow instance, transitioning from CREATED to RUNNING." alt="" coords="638,203,813,228"/>
-<area shape="poly" title=" " alt="" coords="899,184,792,205,791,200,898,179"/>
-<area shape="rect" href="test__integration__work__items_8cpp.html#ab688d3af6d3ba12be86b0d74c0d7df0f" title=" " alt="" coords="418,5,513,31"/>
-<area shape="poly" title=" " alt="" coords="647,67,567,45,512,31,513,26,569,39,648,62"/>
-<area shape="rect" href="test__work__items_8cpp.html#a3a31b7c43784b1ae1d14834342509a22" title=" " alt="" coords="418,55,513,80"/>
-<area shape="poly" title=" " alt="" coords="616,82,513,74,513,69,617,77"/>
-<area shape="rect" href="test__work__items_8cpp.html#ab72a081ef1657128d1027b0facd81b00" title=" " alt="" coords="418,104,513,129"/>
-<area shape="poly" title=" " alt="" coords="617,103,513,114,513,109,617,98"/>
-<area shape="rect" href="classAuditedTask.html#a803218c9d4f8484850d71e1f4d9c49fd" title=" " alt="" coords="363,153,568,179"/>
-<area shape="poly" title=" " alt="" coords="603,169,568,169,568,163,603,163"/>
-<area shape="rect" href="classTIVIDYFacade.html#a66fdc614fe57bc9107d3dc76e9835f09" title="Starts execution of an existing workflow instance." alt="" coords="364,203,567,228"/>
-<area shape="poly" title=" " alt="" coords="624,218,567,218,567,213,624,213"/>
-<area shape="rect" href="test__observer__integrations_8cpp.html#a8651ae8fe4bf73de6a81536239ba42ae" title=" " alt="" coords="416,252,515,277"/>
-<area shape="poly" title=" " alt="" coords="645,233,515,258,514,253,644,228"/>
-<area shape="rect" href="classSecureWorkflowProxy.html#a593b135584ba27fbfd6f25df620c0870" title="Starts a workflow instance after checking permission." alt="" coords="152,167,315,207"/>
-<area shape="poly" title=" " alt="" coords="350,204,314,200,315,194,351,199"/>
-<area shape="rect" href="test__facade_8cpp.html#ab9d19a82094e008646175820dd73c898" title=" " alt="" coords="184,232,283,257"/>
-<area shape="poly" title=" " alt="" coords="352,232,283,241,283,236,351,227"/>
-<area shape="rect" href="test__proxy_8cpp.html#a9883967c2c055ff49171206acd6d8bae" title=" " alt="" coords="5,76,104,101"/>
-<area shape="poly" title=" " alt="" coords="186,162,103,115,81,104,84,99,105,110,188,158"/>
-<area shape="rect" href="test__proxy_8cpp.html#a90dfdcaeb16f8246c456e2b3d1946623" title=" " alt="" coords="5,125,104,151"/>
-<area shape="poly" title=" " alt="" coords="146,166,101,153,102,148,148,161"/>
-<area shape="rect" href="test__proxy_8cpp.html#ae3dadaf13d96fbf05b029330c1b959d6" title=" " alt="" coords="5,175,104,200"/>
-<area shape="poly" title=" " alt="" coords="138,190,104,190,104,185,138,185"/>
-<area shape="rect" href="test__proxy_8cpp.html#a60c6fe3c4b1cf5ad5c78c874f6cb2ace" title=" " alt="" coords="5,224,104,249"/>
-<area shape="poly" title=" " alt="" coords="148,214,102,227,101,221,146,209"/>
-<area shape="rect" href="test__proxy_8cpp.html#ac0bfcf986f2d5b03d24216dadd094969" title=" " alt="" coords="5,273,104,299"/>
-<area shape="poly" title=" " alt="" coords="164,216,154,222,130,242,106,264,86,276,83,271,102,260,126,238,150,217,161,211"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a215d213d1c9653327eb5695cb3a06619_icgraph.svg" width="100%" height="528"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1354,18 +949,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_af123b04c261359ca971b60c3f5acbda6_icgraph.png" border="0" usemap="#aclassWorkItem_af123b04c261359ca971b60c3f5acbda6_icgraph" alt=""/></div>
-<map name="aclassWorkItem_af123b04c261359ca971b60c3f5acbda6_icgraph" id="aclassWorkItem_af123b04c261359ca971b60c3f5acbda6_icgraph">
-<area shape="rect" title=" " alt="" coords="437,31,568,56"/>
-<area shape="rect" href="classRejectCommand.html#a6493c23689a21f7c5fc3d589594820f2" title="Executes the rejection command on the target work item." alt="" coords="200,5,389,31"/>
-<area shape="poly" title=" " alt="" coords="423,36,389,32,390,27,424,31"/>
-<area shape="rect" href="classTaskDecorator.html#a86a6681140e3795b90297f57b44e000d" title=" " alt="" coords="215,55,375,80"/>
-<area shape="poly" title=" " alt="" coords="424,55,375,61,375,55,423,50"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a3bb5027daa3fd82ba5b391d8ec37474a" title=" " alt="" coords="31,5,126,31"/>
-<area shape="poly" title=" " alt="" coords="186,21,126,21,126,15,186,15"/>
-<area shape="rect" href="classAuditedTask.html#a35d60e285599f4c9ba20635656af9bb2" title=" " alt="" coords="5,55,152,80"/>
-<area shape="poly" title=" " alt="" coords="201,70,152,70,152,65,201,65"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_af123b04c261359ca971b60c3f5acbda6_icgraph.svg" width="574" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1398,32 +982,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_aee5a2f0484f289d5370682076370c599_icgraph.png" border="0" usemap="#aclassWorkItem_aee5a2f0484f289d5370682076370c599_icgraph" alt=""/></div>
-<map name="aclassWorkItem_aee5a2f0484f289d5370682076370c599_icgraph" id="aclassWorkItem_aee5a2f0484f289d5370682076370c599_icgraph">
-<area shape="rect" title=" " alt="" coords="667,109,868,135"/>
-<area shape="rect" href="classWorkflowCommand.html#a48d4e82e955573b9262bde2627539745" title="Restores the target work item using the saved snapshot." alt="" coords="402,73,605,113"/>
-<area shape="poly" title=" " alt="" coords="653,112,605,107,605,101,653,107"/>
-<area shape="rect" href="classTaskDecorator.html#ae2fa927271db15938387bfb2e11821e5" title=" " alt="" coords="388,137,619,163"/>
-<area shape="poly" title=" " alt="" coords="653,137,619,140,619,135,653,131"/>
-<area shape="rect" href="classAssignCommand.html#a14b0f7a134cbe4560d1d72f60a92a19d" title="Reverts the assignment command." alt="" coords="158,5,330,31"/>
-<area shape="poly" title=" " alt="" coords="427,71,339,45,297,33,298,28,341,39,429,66"/>
-<area shape="rect" href="classCompleteCommand.html#ad84f12f1703e18c06b7a7faa97808628" title="Reverts the completion command." alt="" coords="148,55,340,80"/>
-<area shape="poly" title=" " alt="" coords="388,84,340,79,340,74,389,79"/>
-<area shape="rect" href="classRejectCommand.html#ab0323b51e7b4e6fbb448f1ff0a6eb202" title="Reverts the rejection command." alt="" coords="159,104,329,129"/>
-<area shape="poly" title=" " alt="" coords="388,106,330,111,329,106,388,101"/>
-<area shape="rect" href="classStartCommand.html#a2531a736104515b0c6df1c01a68449a0" title="Reverts the start command." alt="" coords="164,153,324,179"/>
-<area shape="poly" title=" " alt="" coords="416,119,389,127,341,143,296,156,294,151,339,138,387,122,414,114"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a8b6f74d385ab76cf93c76ed871258b41" title=" " alt="" coords="5,5,100,31"/>
-<area shape="poly" title=" " alt="" coords="144,21,100,21,100,15,144,15"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#aec4bc1e0a87a5187a13c194a8e93f3e1" title=" " alt="" coords="5,55,100,80"/>
-<area shape="poly" title=" " alt="" coords="134,70,100,70,100,65,134,65"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#a3bb5027daa3fd82ba5b391d8ec37474a" title=" " alt="" coords="5,104,100,129"/>
-<area shape="poly" title=" " alt="" coords="145,119,100,119,100,114,145,114"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#ad17f7e07792166cd6832e406a50211fb" title=" " alt="" coords="5,153,100,179"/>
-<area shape="poly" title=" " alt="" coords="150,169,100,169,100,163,150,163"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#ac3a14d6ebde6fa40c4c80f79523b75b1" title=" " alt="" coords="5,203,100,228"/>
-<area shape="poly" title=" " alt="" coords="182,185,101,206,100,201,180,180"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_aee5a2f0484f289d5370682076370c599_icgraph.svg" width="100%" height="475"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1468,18 +1027,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_aebd5e2e10ccc3b0e677773f2d0fdddf5_icgraph.png" border="0" usemap="#aclassWorkItem_aebd5e2e10ccc3b0e677773f2d0fdddf5_icgraph" alt=""/></div>
-<map name="aclassWorkItem_aebd5e2e10ccc3b0e677773f2d0fdddf5_icgraph" id="aclassWorkItem_aebd5e2e10ccc3b0e677773f2d0fdddf5_icgraph">
-<area shape="rect" title=" " alt="" coords="459,55,603,80"/>
-<area shape="rect" href="classTaskDecorator.html#ac165c23dbdc7e17e1f705f162bfe6dc2" title=" " alt="" coords="236,29,411,55"/>
-<area shape="poly" title=" " alt="" coords="444,60,410,55,411,50,445,54"/>
-<area shape="rect" href="test__work__items_8cpp.html#adadabdfa2e28db0ddeec4b5a74f7d7af" title=" " alt="" coords="276,79,371,104"/>
-<area shape="poly" title=" " alt="" coords="445,80,371,89,371,83,445,75"/>
-<area shape="rect" href="classPriorityTask.html#a4e2b25ab67836e5cdb6b4cceb660d1fb" title=" " alt="" coords="5,5,188,31"/>
-<area shape="poly" title=" " alt="" coords="222,34,188,30,188,25,222,29"/>
-<area shape="rect" href="classPriorityTask.html#aef4c0cc87b042d7270ff607e87a029ff" title=" " alt="" coords="10,55,183,80"/>
-<area shape="poly" title=" " alt="" coords="222,56,184,60,183,55,222,51"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_aebd5e2e10ccc3b0e677773f2d0fdddf5_icgraph.svg" width="608" height="110"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -1517,14 +1065,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a57ff5217e6a39fefddc03d5ec0524200_icgraph.png" border="0" usemap="#aclassWorkItem_a57ff5217e6a39fefddc03d5ec0524200_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a57ff5217e6a39fefddc03d5ec0524200_icgraph" id="aclassWorkItem_a57ff5217e6a39fefddc03d5ec0524200_icgraph">
-<area shape="rect" title="Gives this item the publisher it reports events through (Observer)." alt="" coords="493,5,667,31"/>
-<area shape="rect" href="classTaskDecorator.html#aec06e4b43f04c465a9e2879d58c00867" title="Forwards the publisher to the wrapped item." alt="" coords="243,5,445,31"/>
-<area shape="poly" title=" " alt="" coords="480,21,446,21,446,15,480,15"/>
-<area shape="rect" href="classAuditedTask.html#abc634c9fed2549f41ab910f0d677c0b6" title="Replaces this decorator&#39;s publisher and the wrapped item&#39;s." alt="" coords="5,5,195,31"/>
-<area shape="poly" title=" " alt="" coords="229,21,195,21,195,15,229,15"/>
-</map>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classWorkItem_a57ff5217e6a39fefddc03d5ec0524200_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -1556,18 +1097,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classWorkItem_a18435dde12f397de1dca31f9c0e803c6_icgraph.png" border="0" usemap="#aclassWorkItem_a18435dde12f397de1dca31f9c0e803c6_icgraph" alt=""/></div>
-<map name="aclassWorkItem_a18435dde12f397de1dca31f9c0e803c6_icgraph" id="aclassWorkItem_a18435dde12f397de1dca31f9c0e803c6_icgraph">
-<area shape="rect" title=" " alt="" coords="419,31,541,56"/>
-<area shape="rect" href="classStartCommand.html#a38aacdd6210d19d93833ab8447a980c1" title="Executes the start command on the target work item." alt="" coords="192,5,371,31"/>
-<area shape="poly" title=" " alt="" coords="405,36,371,32,371,27,405,31"/>
-<area shape="rect" href="classTaskDecorator.html#a7716b5cb1f4f1b2559ea9b03411bef50" title=" " alt="" coords="205,55,358,80"/>
-<area shape="poly" title=" " alt="" coords="405,55,358,61,358,55,404,50"/>
-<area shape="rect" href="test__commandMementoWorkflow_8cpp.html#ad17f7e07792166cd6832e406a50211fb" title=" " alt="" coords="27,5,122,31"/>
-<area shape="poly" title=" " alt="" coords="178,21,122,21,122,15,178,15"/>
-<area shape="rect" href="classAuditedTask.html#a848503fd61dda9b7a0674439c1e91d7e" title=" " alt="" coords="5,55,144,80"/>
-<area shape="poly" title=" " alt="" coords="191,70,144,70,144,65,191,65"/>
-</map>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classWorkItem_a18435dde12f397de1dca31f9c0e803c6_icgraph.svg" width="547" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>

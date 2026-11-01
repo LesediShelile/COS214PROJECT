@@ -1,16 +1,16 @@
 var searchData=
 [
   ['data_5f_0',['data_',['../classWorkItem.html#a712669789a73110e041f3eb496137a9d',1,'WorkItem']]],
-  ['decorator_1',['Core structure: Composite, Prototype, Iterator, Decorator',['../md_README.html#autotoc_md11',1,'']]],
+  ['decorator_1',['Core structure: Composite, Prototype, Iterator, Decorator',['../md_README.html#autotoc_md24',1,'']]],
   ['decrementworkload_2',['decrementWorkload',['../classParticipant.html#a51188edad659ee27436f741b8f239246',1,'Participant']]],
   ['definitionbuilder_3',['definitionbuilder',['../classDefinitionBuilder.html',1,'DefinitionBuilder'],['../classDefinitionBuilder.html#a25f2ab019ec023b7882f1eb6cd127bf3',1,'DefinitionBuilder::DefinitionBuilder()']]],
   ['definitionbuilder_2ecpp_4',['DefinitionBuilder.cpp',['../DefinitionBuilder_8cpp.html',1,'']]],
   ['definitionbuilder_2eh_5',['DefinitionBuilder.h',['../DefinitionBuilder_8h.html',1,'']]],
-  ['demo_20scenarios_6',['🏥 The demo scenarios',['../md_README.html#autotoc_md17',1,'']]],
+  ['demo_20scenarios_6',['🏥 The demo scenarios',['../md_README.html#autotoc_md30',1,'']]],
   ['depthfirstiterator_7',['depthfirstiterator',['../classDepthFirstIterator.html',1,'DepthFirstIterator'],['../classDepthFirstIterator.html#a99d918b09649d35bdea62850b9180f45',1,'DepthFirstIterator::DepthFirstIterator()']]],
   ['depthfirstiterator_2ecpp_8',['DepthFirstIterator.cpp',['../DepthFirstIterator_8cpp.html',1,'']]],
   ['depthfirstiterator_2eh_9',['DepthFirstIterator.h',['../DepthFirstIterator_8h.html',1,'']]],
-  ['design_20patterns_20and_20where_20they_20live_10',['🧩 Design patterns and where they live',['../md_README.html#autotoc_md6',1,'']]],
+  ['design_20patterns_20and_20where_20they_20live_10',['🧩 Design patterns and where they live',['../md_README.html#autotoc_md19',1,'']]],
   ['desktop_11',['desktop',['../classDesktop.html',1,'Desktop'],['../classDesktop.html#a3ca0e893a424a19c4fa50ae940fc249a',1,'Desktop::Desktop()']]],
   ['desktop_2eh_12',['Desktop.h',['../Desktop_8h.html',1,'']]],
   ['detach_13',['detach',['../classEventPublisher.html#aff25c648ded5b9ba18237a3913f4fda4',1,'EventPublisher']]],
@@ -20,7 +20,7 @@ var searchData=
   ['director_2ecpp_17',['Director.cpp',['../Director_8cpp.html',1,'']]],
   ['director_2eh_18',['Director.h',['../Director_8h.html',1,'']]],
   ['dispatch_19',['dispatch',['../classAPITwo.html#a768fa936821fb3c69cf713b81cc435fb',1,'APITwo']]],
-  ['docker_20and_20ci_20',['🐳 Docker and CI',['../md_README.html#autotoc_md18',1,'']]],
+  ['docker_20and_20ci_20',['🐳 Docker and CI',['../md_README.html#autotoc_md31',1,'']]],
   ['doctest_5fconfig_5fimplement_5fwith_5fmain_21',['DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN',['../test__main_8cpp.html#a623b8690a262536536a43eab2d7df03d',1,'test_main.cpp']]],
-  ['documentation_22',['documentation',['../md_README.html#autotoc_md19',1,'📚 Documentation'],['..//home/lesedi/2026/COS214PROJECT/docs/mainpage.md#documentation',1,'Generating Documentation']]]
+  ['documentation_22',['documentation',['../md_README.html#autotoc_md32',1,'📚 Documentation'],['../index.html#autotoc_md11',1,'Exploring the Documentation'],['../index.html#autotoc_md10',1,'Generating Documentation']]]
 ];

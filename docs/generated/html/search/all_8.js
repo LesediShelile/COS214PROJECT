@@ -7,6 +7,6 @@ var searchData=
   ['haspermission_4',['hasPermission',['../classRole.html#a1cdb30b7d37d845fd5a14eef84a22578',1,'Role']]],
   ['hasrequiredrole_5',['hasRequiredRole',['../classRoleBasedAssignment.html#a6a5c69d023c8bca7a4f29da601759e68',1,'RoleBasedAssignment']]],
   ['hasrole_6',['hasRole',['../classParticipant.html#a5c9ef7f9701956c183017685d86bd6bd',1,'Participant']]],
-  ['history_3a_20builder_20command_20memento_7',['Building and history: Builder, Command, Memento',['../md_README.html#autotoc_md13',1,'']]],
-  ['how_20it_20works_8',['🔧 How it works',['../md_README.html#autotoc_md5',1,'']]]
+  ['history_3a_20builder_20command_20memento_7',['Building and history: Builder, Command, Memento',['../md_README.html#autotoc_md26',1,'']]],
+  ['how_20it_20works_8',['🔧 How it works',['../md_README.html#autotoc_md18',1,'']]]
 ];

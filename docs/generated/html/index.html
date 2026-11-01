@@ -93,9 +93,96 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">TIVIDY </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_docs_2mainpage"></a> cat &gt; docs/mainpage.dox &lt;&lt;'EOF' /**</p><ul>
-<li></li>
+<div class="textblock"><p><a class="anchor" id="md_docs_2mainpage"></a></p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Generic Workflow Management Engine</h2>
+<hr  />
+<h1><a class="anchor" id="autotoc_md3"></a>
+Welcome</h1>
+<p>TIVIDY is a generic C++11 workflow management engine developed as part of the COS214 Software Modelling project.</p>
+<p>It provides a flexible environment for constructing, managing and executing workflows through a menu-driven Terminal User Interface (TUI).</p>
+<p>The system is designed around reusable workflow components, extensible task definitions and object-oriented design principles.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+System Overview</h1>
+<p>TIVIDY allows users to interact with workflow definitions and independent workflow instances.</p>
+<p>Its functionality includes:</p>
+<ul>
+<li><b>Workflow Management</b> – Create, organise and manage workflow structures.</li>
+<li><b><a class="el" href="classTask.html" title="Leaf of the Composite, Context of State and Strategy, and ConcreteComponent of Decorator.">Task</a> Management</b> – Add, configure and manage individual workflow tasks.</li>
+<li><b>Workflow Execution</b> – Execute workflows while tracking task states and progress.</li>
+<li><b>Scenario Management</b> – Explore predefined industry scenarios and create custom scenarios.</li>
+<li><b>Instance Management</b> – Create and manage independent instances of workflow definitions.</li>
+<li><b>Workflow Inspection</b> – Examine workflow structures and their component relationships.</li>
+<li><b>Execution History</b> – Review recorded workflow operations.</li>
 </ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Architecture</h1>
+<p>The system follows an object-oriented architecture, emphasising:</p>
+<ul>
+<li>Modularity and separation of responsibilities.</li>
+<li>Reusable and extensible workflow components.</li>
+<li>Encapsulation and abstraction.</li>
+<li>Flexible task composition and execution.</li>
+<li>Application of established software design patterns.</li>
+</ul>
+<p>Explore the <b>Class Hierarchy</b>, <b>Class Index</b> and <b>File List</b> to understand the system's implementation.</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Project Structure</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Directory   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>include/</code>   </td><td class="markdownTableBodyNone">Header files, interfaces and class declarations.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>src/</code>   </td><td class="markdownTableBodyNone">Source files and system implementations.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>tests/</code>   </td><td class="markdownTableBodyNone">Automated tests and test-related utilities.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>docs/</code>   </td><td class="markdownTableBodyNone">Doxygen configuration and project documentation.   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Technology</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Technology   </th><th class="markdownTableHeadNone">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">C++11   </td><td class="markdownTableBodyNone">Core programming language.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Doxygen   </td><td class="markdownTableBodyNone">API and source-code documentation.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Graphviz   </td><td class="markdownTableBodyNone">Class, dependency and collaboration diagrams.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Doctest   </td><td class="markdownTableBodyNone">Automated testing framework.   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md8"></a>
+Building the Project</h1>
+<p>Build the project from the repository root using:</p>
+<div class="fragment"><div class="line">make</div>
+</div><!-- fragment --><p>Refer to the project README for the complete build instructions and available commands.</p>
+<h1><a class="anchor" id="autotoc_md9"></a>
+Running Tests</h1>
+<p>TIVIDY includes automated tests to verify system functionality.</p>
+<p>Refer to the project build configuration and README for instructions on building and running the test suite.</p>
+<h1><a class="anchor" id="autotoc_md10"></a>
+Generating Documentation</h1>
+<p>Documentation is generated using Doxygen.</p>
+<p>From the project root, execute:</p>
+<div class="fragment"><div class="line">doxygen Doxyfile</div>
+</div><!-- fragment --><p>Once generation is complete, open:</p>
+<div class="fragment"><div class="line">docs/generated/html/index.html</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md11"></a>
+Exploring the Documentation</h1>
+<p>Use the navigation panel to explore:</p>
+<ul>
+<li><b>Modules:</b> Related functionality grouped into logical components.</li>
+<li><b>Classes:</b> Class definitions, methods and attributes.</li>
+<li><b>Class Hierarchy:</b> Inheritance relationships between classes.</li>
+<li><b>Class Members:</b> <a class="el" href="classAvailable.html" title="State of a task that is ready to be assigned (State pattern).">Available</a> attributes and operations.</li>
+<li><b>Files:</b> Source and header files.</li>
+<li><b>File Members:</b> Functions, variables and definitions.</li>
+</ul>
+<hr  />
+<p><em>TIVIDY | COS214 Software Modelling Project | C++11</em> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

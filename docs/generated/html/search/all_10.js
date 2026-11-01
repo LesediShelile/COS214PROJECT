@@ -17,13 +17,13 @@ var searchData=
   ['rejecttask_14',['rejecttask',['../classTIVIDYFacade.html#ade620f15d83fb861851f5653f00ed8a8',1,'TIVIDYFacade::rejectTask()'],['../classSecureWorkflowProxy.html#a192cab4044889a985cba2801a5840f8d',1,'SecureWorkflowProxy::rejectTask()'],['../classIWorkflowService.html#a1e93935cb87559b7bf8b8224ef74c7cb',1,'IWorkflowService::rejectTask()']]],
   ['relayout_15',['relayout',['../classTheatreCanvas.html#a4985ebbd6393d99d076a240b1b20b4af',1,'TheatreCanvas']]],
   ['removeentry_16',['removeEntry',['../classAPIOne.html#ad1145fc856689439341f17a26c59fddb',1,'APIOne']]],
-  ['repository_20layout_17',['📁 Repository layout',['../md_README.html#autotoc_md9',1,'']]],
+  ['repository_20layout_17',['📁 Repository layout',['../md_README.html#autotoc_md22',1,'']]],
   ['request_18',['request',['../classAdapterTwo.html#aa9e161de7f82b157efdd652c6898bbcb',1,'AdapterTwo::request()'],['../classAdapterOne.html#ab56151653500d3a6445a6c0e9c77ee00',1,'AdapterOne::request()'],['../classExternalConnector.html#af46b6367d3dcf2eeae658cb52d83ab47',1,'ExternalConnector::request()']]],
   ['requestapproval_19',['requestapproval',['../classIWorkflowService.html#a4f69765f42ffa46a906a08fec2487f58',1,'IWorkflowService::requestApproval()'],['../classSecureWorkflowProxy.html#a731623a1da1d5326ecd9acdce74cda2f',1,'SecureWorkflowProxy::requestApproval()'],['../classTIVIDYFacade.html#a54673fed50205e9d8ab645ca01d01f7e',1,'TIVIDYFacade::requestApproval()']]],
   ['reset_20',['reset',['../classDefinitionBuilder.html#a31c5ce3dc2ac3321584976f1b012932d',1,'DefinitionBuilder::reset()'],['../classWorkflowBuilder.html#aa7cc6bd8418dc16b8760aed7454ce127',1,'WorkflowBuilder::reset()']]],
   ['resetdeadline_21',['resetDeadline',['../classApprovalRequest.html#ab6777c6338275d539f2103c981a81d10',1,'ApprovalRequest']]],
   ['resizeevent_22',['resizeEvent',['../classTheatreCanvas.html#a2fefdc0afb0f05ebd1eeafb03fde4a93',1,'TheatreCanvas']]],
-  ['responsibility_23',['Behaviour: State, Strategy, Chain of Responsibility',['../md_README.html#autotoc_md12',1,'']]],
+  ['responsibility_23',['Behaviour: State, Strategy, Chain of Responsibility',['../md_README.html#autotoc_md25',1,'']]],
   ['restorebackup_24',['restoreBackup',['../classWorkflowCommand.html#a48d4e82e955573b9262bde2627539745',1,'WorkflowCommand']]],
   ['restorememento_25',['restorememento',['../classStage.html#ad1a5f8d061af9845b4b572098632b949',1,'Stage::restoreMemento()'],['../classTask.html#a57a19a99141017f18e8b38effbdb8638',1,'Task::restoreMemento()'],['../classTaskDecorator.html#ae2fa927271db15938387bfb2e11821e5',1,'TaskDecorator::restoreMemento()'],['../classWorkItem.html#aee5a2f0484f289d5370682076370c599',1,'WorkItem::restoreMemento()']]],
   ['role_26',['role',['../classRole.html',1,'Role'],['../classRole.html#afb08a40692e158cda44ee1b18fec3c81',1,'Role::Role()']]],
@@ -35,7 +35,8 @@ var searchData=
   ['rulebasedassignment_32',['rulebasedassignment',['../classRuleBasedAssignment.html#ad02ef5e95160cc72d34c0dd52a3e6f43',1,'RuleBasedAssignment::RuleBasedAssignment()'],['../classRuleBasedAssignment.html',1,'RuleBasedAssignment']]],
   ['rulebasedassignment_2ecpp_33',['RuleBasedAssignment.cpp',['../RuleBasedAssignment_8cpp.html',1,'']]],
   ['rulebasedassignment_2eh_34',['RuleBasedAssignment.h',['../RuleBasedAssignment_8h.html',1,'']]],
-  ['rules_35',['Ownership rules',['../md_README.html#autotoc_md7',1,'']]],
+  ['rules_35',['Ownership rules',['../md_README.html#autotoc_md20',1,'']]],
   ['run_36',['run',['../classDesktop.html#a6d9f4088315f3d5e6e631f33345f253c',1,'Desktop']]],
-  ['running_37',['running',['../classDesktop.html#a39af9b802ecfaad4551538556e1cf37da7a352fc59686d79dc48493c65fa82754',1,'Desktop::Running'],['../WorkflowInstance_8h.html#a9e2a467935da57846ea7f541c7065cc9a43491564ebcfd38568918efbd6e840fd',1,'RUNNING:&#160;WorkflowInstance.h']]]
+  ['running_37',['running',['../classDesktop.html#a39af9b802ecfaad4551538556e1cf37da7a352fc59686d79dc48493c65fa82754',1,'Desktop::Running'],['../WorkflowInstance_8h.html#a9e2a467935da57846ea7f541c7065cc9a43491564ebcfd38568918efbd6e840fd',1,'RUNNING:&#160;WorkflowInstance.h']]],
+  ['running_20tests_38',['Running Tests',['../index.html#autotoc_md9',1,'']]]
 ];

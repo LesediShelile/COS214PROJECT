@@ -96,225 +96,33 @@ $(document).ready(function(){initNavTree('hierarchy.html',''); initResizable(); 
 <div class="textblock">
 <p><a href="hierarchy.html">Go to the textual class hierarchy</a></p>
 </div><table border="0" cellspacing="10" cellpadding="0">
-<tr><td><img src="inherit_graph_0.png" border="0" usemap="#aAPIOne" alt=""/>
-<map name="aAPIOne" id="aAPIOne">
-<area shape="rect" href="classAPIOne.html" title="Provides operations for managing external entries." alt="" coords="5,5,75,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_1.png" border="0" usemap="#aAPITwo" alt=""/>
-<map name="aAPITwo" id="aAPITwo">
-<area shape="rect" href="classAPITwo.html" title="Provides operations for sending information and triggering actions through an external service." alt="" coords="5,5,73,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_2.png" border="0" usemap="#aApprovalHandler" alt=""/>
-<map name="aApprovalHandler" id="aApprovalHandler">
-<area shape="rect" href="classApprovalHandler.html" title="Abstract handler in the approval chain (Chain of Responsibility)." alt="" coords="5,31,136,56"/>
-<area shape="rect" href="classApprovalLevel.html" title="Concrete handler in the approval chain (Chain of Responsibility)." alt="" coords="225,5,339,31"/>
-<area shape="poly" title=" " alt="" coords="149,31,224,22,225,27,150,37"/>
-<area shape="rect" href="classRecordingApprovalHandler.html" title=" " alt="" coords="184,55,380,80"/>
-<area shape="poly" title=" " alt="" coords="150,50,184,54,184,59,149,55"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_3.png" border="0" usemap="#aApprovalRequest" alt=""/>
-<map name="aApprovalRequest" id="aApprovalRequest">
-<area shape="rect" href="classApprovalRequest.html" title="A request for approval that is passed along the approval chain." alt="" coords="5,5,139,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_4.png" border="0" usemap="#aAssignmentStrategy" alt=""/>
-<map name="aAssignmentStrategy" id="aAssignmentStrategy">
-<area shape="rect" href="classAssignmentStrategy.html" title="Abstract strategy for choosing who a task is assigned to (Strategy pattern)." alt="" coords="5,55,160,80"/>
-<area shape="rect" href="classRoleBasedAssignment.html" title="Assigns a task to the first participant with the required role (Strategy pattern)." alt="" coords="208,5,376,31"/>
-<area shape="poly" title=" " alt="" coords="150,49,237,28,238,33,151,54"/>
-<area shape="rect" href="classRuleBasedAssignment.html" title="Assigns a task using a custom rule (Strategy pattern)." alt="" coords="208,55,376,80"/>
-<area shape="poly" title=" " alt="" coords="174,65,208,65,208,70,174,70"/>
-<area shape="rect" href="classWorkloadAssignment.html" title="Assigns a task to the least busy participant with the required role (Strategy pattern)." alt="" coords="212,104,372,129"/>
-<area shape="poly" title=" " alt="" coords="151,81,238,101,237,107,150,86"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_5.png" border="0" usemap="#aCommandHistory" alt=""/>
-<map name="aCommandHistory" id="aCommandHistory">
-<area shape="rect" href="classCommandHistory.html" title="Stack of executed commands used to support undo operations." alt="" coords="5,5,141,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_6.png" border="0" usemap="#aCommandInvoker" alt=""/>
-<map name="aCommandInvoker" id="aCommandInvoker">
-<area shape="rect" href="classCommandInvoker.html" title="Invoker in the Command pattern responsible for executing commands and managing rollback history." alt="" coords="5,5,143,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_7.png" border="0" usemap="#aDirector" alt=""/>
-<map name="aDirector" id="aDirector">
-<area shape="rect" href="classDirector.html" title="Builder&#45;pattern Director that coordinates construction without prescribing any particular workflow sc..." alt="" coords="5,5,80,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_8.png" border="0" usemap="#aEventPublisher" alt=""/>
-<map name="aEventPublisher" id="aEventPublisher">
-<area shape="rect" href="classEventPublisher.html" title="Publishes workflow events to registered listeners." alt="" coords="5,5,124,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_9.png" border="0" usemap="#aExternalConnector" alt=""/>
-<map name="aExternalConnector" id="aExternalConnector">
-<area shape="rect" href="classExternalConnector.html" title="Defines the interface used to communicate with external services." alt="" coords="5,31,148,56"/>
-<area shape="rect" href="classAdapterOne.html" title=" " alt="" coords="196,5,295,31"/>
-<area shape="poly" title=" " alt="" coords="162,28,195,23,196,28,162,33"/>
-<area shape="rect" href="classAdapterTwo.html" title=" " alt="" coords="196,55,295,80"/>
-<area shape="poly" title=" " alt="" coords="162,53,196,58,195,63,162,58"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_10.png" border="0" usemap="#aIWorkflowService" alt=""/>
-<map name="aIWorkflowService" id="aIWorkflowService">
-<area shape="rect" href="classIWorkflowService.html" title="Interface defining the workflow operations available to clients." alt="" coords="5,5,140,31"/>
-<area shape="rect" href="classSecureWorkflowProxy.html" title="Protection Proxy that controls access to TIVIDY workflow operations." alt="" coords="188,5,351,31"/>
-<area shape="poly" title=" " alt="" coords="154,15,188,15,188,21,154,21"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_11.png" border="0" usemap="#aParticipant" alt=""/>
-<map name="aParticipant" id="aParticipant">
-<area shape="rect" href="classParticipant.html" title="A person who can be assigned tasks." alt="" coords="5,5,96,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_12.png" border="0" usemap="#aQWidget" alt=""/>
-<map name="aQWidget" id="aQWidget">
-<area shape="rect" title=" " alt="" coords="5,80,84,105"/>
-<area shape="rect" href="classDesktop.html" title=" " alt="" coords="154,5,230,31"/>
-<area shape="poly" title=" " alt="" coords="76,71,131,40,156,28,158,33,133,44,78,75"/>
-<area shape="rect" href="classPlayground.html" title=" " alt="" coords="145,55,239,80"/>
-<area shape="poly" title=" " alt="" coords="97,81,144,73,145,78,98,86"/>
-<area shape="rect" href="classScenarioPage.html" title=" " alt="" coords="137,104,247,129"/>
-<area shape="poly" title=" " alt="" coords="98,99,138,105,137,110,97,104"/>
-<area shape="rect" href="classTheatreCanvas.html" title=" " alt="" coords="132,153,252,179"/>
-<area shape="poly" title=" " alt="" coords="81,110,133,138,160,151,158,156,131,143,78,115"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_13.png" border="0" usemap="#aRole" alt=""/>
-<map name="aRole" id="aRole">
-<area shape="rect" href="classRole.html" title="A job role with an authority level, e.g." alt="" coords="5,5,56,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_14.png" border="0" usemap="#astd_1_1exception" alt=""/>
-<map name="astd_1_1exception" id="astd_1_1exception">
-<area shape="rect" title=" " alt="" coords="5,5,120,31"/>
-<area shape="rect" title=" " alt="" coords="168,5,307,31"/>
-<area shape="poly" title=" " alt="" coords="134,15,168,15,168,21,134,21"/>
-<area shape="rect" href="classTestFailure.html" title=" " alt="" coords="355,5,445,31"/>
-<area shape="poly" title=" " alt="" coords="321,15,355,15,355,21,321,21"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_15.png" border="0" usemap="#aTaskMemento" alt=""/>
-<map name="aTaskMemento" id="aTaskMemento">
-<area shape="rect" href="classTaskMemento.html" title="Memento capturing a private snapshot of a Task prior to command execution." alt="" coords="5,5,119,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_16.png" border="0" usemap="#aTaskState" alt=""/>
-<map name="aTaskState" id="aTaskState">
-<area shape="rect" href="classTaskState.html" title="Abstract state of a Task (State pattern)." alt="" coords="5,179,91,204"/>
-<area shape="rect" href="classAssigned.html" title="State of a task that has a participant but has not been started (State pattern)." alt="" coords="177,5,259,31"/>
-<area shape="poly" title=" " alt="" coords="56,165,85,102,108,69,137,40,156,29,176,22,178,27,158,34,140,44,112,72,90,105,60,167"/>
-<area shape="rect" href="classAvailable.html" title="State of a task that is ready to be assigned (State pattern)." alt="" coords="177,55,259,80"/>
-<area shape="poly" title=" " alt="" coords="63,166,94,126,137,89,175,73,177,78,140,94,98,130,67,169"/>
-<area shape="rect" href="classCancelled.html" title="End state of a task that was cancelled (State pattern)." alt="" coords="175,104,261,129"/>
-<area shape="poly" title=" " alt="" coords="80,169,138,138,173,125,175,130,140,143,82,174"/>
-<area shape="rect" href="classCompleted.html" title="End state of a task that was finished successfully (State pattern)." alt="" coords="171,153,265,179"/>
-<area shape="poly" title=" " alt="" coords="104,180,171,170,171,176,105,186"/>
-<area shape="rect" href="classCreated.html" title="Starting state of every new task (State pattern)." alt="" coords="181,203,255,228"/>
-<area shape="poly" title=" " alt="" coords="105,197,181,208,181,213,104,202"/>
-<area shape="rect" href="classRejectedState.html" title="State of a task that was turned down (State pattern)." alt="" coords="161,252,275,277"/>
-<area shape="poly" title=" " alt="" coords="83,208,140,237,174,249,172,254,138,242,81,213"/>
-<area shape="rect" href="classStartedState.html" title="State of a task that is being worked on (State pattern)." alt="" coords="167,301,269,327"/>
-<area shape="poly" title=" " alt="" coords="68,213,99,251,140,286,168,300,166,304,137,291,95,255,63,217"/>
-<area shape="rect" href="classTestDefaultTaskState.html" title=" " alt="" coords="139,351,297,376"/>
-<area shape="poly" title=" " alt="" coords="61,216,90,276,113,308,140,336,162,348,159,353,137,340,109,312,86,279,56,218"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_17.png" border="0" usemap="#aTheatreStep" alt=""/>
-<map name="aTheatreStep" id="aTheatreStep">
-<area shape="rect" href="structTheatreStep.html" title=" " alt="" coords="5,5,107,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_18.png" border="0" usemap="#aTIVIDYFacade" alt=""/>
-<map name="aTIVIDYFacade" id="aTIVIDYFacade">
-<area shape="rect" href="classTIVIDYFacade.html" title="Facade providing a unified entry point to the TIVIDY workflow engine subsystem." alt="" coords="5,5,116,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_19.png" border="0" usemap="#aWorkflowBuilder" alt=""/>
-<map name="aWorkflowBuilder" id="aWorkflowBuilder">
-<area shape="rect" href="classWorkflowBuilder.html" title="Builder: Provides an interface for the concrete builders." alt="" coords="5,5,133,31"/>
-<area shape="rect" href="classDefinitionBuilder.html" title="Builder Pattern: Concrete Builder This takes the interface defined by WorkflowBuilder and creates a w..." alt="" coords="181,5,312,31"/>
-<area shape="poly" title=" " alt="" coords="147,15,181,15,181,21,147,21"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_20.png" border="0" usemap="#aWorkflowCommand" alt=""/>
-<map name="aWorkflowCommand" id="aWorkflowCommand">
-<area shape="rect" href="classWorkflowCommand.html" title="Abstract base class representing an undoable action on a work item." alt="" coords="5,80,155,105"/>
-<area shape="rect" href="classAssignCommand.html" title="Concrete command that assigns a work item to a participant." alt="" coords="213,5,345,31"/>
-<area shape="poly" title=" " alt="" coords="121,72,202,40,235,28,237,33,204,44,123,77"/>
-<area shape="rect" href="classCompleteCommand.html" title="Concrete command that transitions a work item to its completed state." alt="" coords="203,55,355,80"/>
-<area shape="poly" title=" " alt="" coords="168,79,202,74,202,80,169,84"/>
-<area shape="rect" href="classRejectCommand.html" title="Concrete command that transitions a work item to a rejected state with a reason." alt="" coords="213,104,344,129"/>
-<area shape="poly" title=" " alt="" coords="169,101,213,106,213,111,168,106"/>
-<area shape="rect" href="classStartCommand.html" title="Command that starts a work item, transitioning it from Assigned to Started." alt="" coords="219,153,339,179"/>
-<area shape="poly" title=" " alt="" coords="126,108,204,138,239,151,238,156,202,143,124,113"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_21.png" border="0" usemap="#aWorkflowDefinition" alt=""/>
-<map name="aWorkflowDefinition" id="aWorkflowDefinition">
-<area shape="rect" href="classWorkflowDefinition.html" title="Template blueprint describing the structure and behavior of a workflow process." alt="" coords="5,5,151,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_22.png" border="0" usemap="#aWorkflowEvent" alt=""/>
-<map name="aWorkflowEvent" id="aWorkflowEvent">
-<area shape="rect" href="classWorkflowEvent.html" title=" " alt="" coords="5,5,124,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_23.png" border="0" usemap="#aWorkflowInstance" alt=""/>
-<map name="aWorkflowInstance" id="aWorkflowInstance">
-<area shape="rect" href="classWorkflowInstance.html" title="Represents a running copy of a workflow definition." alt="" coords="5,5,143,31"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_24.png" border="0" usemap="#aWorkflowListener" alt=""/>
-<map name="aWorkflowListener" id="aWorkflowListener">
-<area shape="rect" href="classWorkflowListener.html" title="Interface for objects that receive workflow events." alt="" coords="5,80,140,105"/>
-<area shape="rect" href="classAuditLogger.html" title="Records details from workflow events." alt="" coords="202,5,302,31"/>
-<area shape="poly" title=" " alt="" coords="113,72,187,40,215,28,217,33,189,44,115,77"/>
-<area shape="rect" href="classEngineRouter.html" title="Routes workflow events to the appropriate handlers." alt="" coords="197,55,307,80"/>
-<area shape="poly" title=" " alt="" coords="153,79,197,72,198,78,154,84"/>
-<area shape="rect" href="classMetricsCollector.html" title=" " alt="" coords="188,104,316,129"/>
-<area shape="poly" title=" " alt="" coords="154,101,188,105,187,111,153,106"/>
-<area shape="rect" href="classNotifier.html" title=" " alt="" coords="217,153,287,179"/>
-<area shape="poly" title=" " alt="" coords="118,108,189,138,220,151,218,156,187,143,116,113"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_25.png" border="0" usemap="#aWorkItem" alt=""/>
-<map name="aWorkItem" id="aWorkItem">
-<area shape="rect" href="classWorkItem.html" title="Component of the Composite pattern (also Component of Decorator, Aggregate of Iterator,..." alt="" coords="5,104,91,129"/>
-<area shape="rect" href="classStage.html" title="Composite of the Composite pattern: a WorkItem that owns child WorkItems (Tasks or other Stages)." alt="" coords="167,55,225,80"/>
-<area shape="poly" title=" " alt="" coords="99,97,166,74,167,79,100,102"/>
-<area shape="rect" href="classTask.html" title="Leaf of the Composite, Context of State and Strategy, and ConcreteComponent of Decorator." alt="" coords="171,104,221,129"/>
-<area shape="poly" title=" " alt="" coords="105,114,170,114,170,119,105,119"/>
-<area shape="rect" href="classTaskDecorator.html" title="Decorator base: wraps another WorkItem and forwards every call to it." alt="" coords="139,177,253,203"/>
-<area shape="poly" title=" " alt="" coords="88,133,170,175,168,180,85,138"/>
-<area shape="rect" href="classParallelStage.html" title="Composite whose children are all available at the same time." alt="" coords="312,5,419,31"/>
-<area shape="poly" title=" " alt="" coords="238,53,320,28,322,33,239,58"/>
-<area shape="rect" href="classSequentialStage.html" title="Composite whose children run one after another: a child only becomes available once the previous chil..." alt="" coords="301,55,429,80"/>
-<area shape="poly" title=" " alt="" coords="239,65,301,65,301,70,239,70"/>
-<area shape="rect" href="classExternalTask.html" title="Represents a task that sends requests to an external service." alt="" coords="313,104,418,129"/>
-<area shape="poly" title=" " alt="" coords="236,114,313,114,313,119,236,119"/>
-<area shape="rect" href="classAuditedTask.html" title="Concrete Decorator: publishes a WorkflowEvent after every successful lifecycle operation on the wrapp..." alt="" coords="315,153,416,179"/>
-<area shape="poly" title=" " alt="" coords="267,177,314,171,315,176,268,183"/>
-<area shape="rect" href="classPriorityTask.html" title="Concrete Decorator: gives a work item a priority (higher = more urgent)." alt="" coords="316,203,415,228"/>
-<area shape="poly" title=" " alt="" coords="268,198,316,205,316,211,267,203"/>
-<area shape="rect" href="classValidatedTask.html" title="Concrete Decorator: refuses to complete a work item until every required data field has been filled i..." alt="" coords="309,252,421,277"/>
-<area shape="poly" title=" " alt="" coords="236,206,302,237,332,249,330,254,300,242,234,211"/>
-</map>
-</td></tr>
-<tr><td><img src="inherit_graph_26.png" border="0" usemap="#aWorkItemIterator" alt=""/>
-<map name="aWorkItemIterator" id="aWorkItemIterator">
-<area shape="rect" href="classWorkItemIterator.html" title=" " alt="" coords="5,31,139,56"/>
-<area shape="rect" href="classAvailableItemsIterator.html" title=" " alt="" coords="187,5,353,31"/>
-<area shape="poly" title=" " alt="" coords="152,30,186,26,187,31,153,36"/>
-<area shape="rect" href="classDepthFirstIterator.html" title=" " alt="" coords="201,55,339,80"/>
-<area shape="poly" title=" " alt="" coords="153,50,202,56,201,62,152,56"/>
-</map>
-</td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_0.svg" width="80" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_1.svg" width="79" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_2.svg" width="386" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_3.svg" width="144" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_4.svg" width="382" height="135"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_5.svg" width="147" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_6.svg" width="148" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_7.svg" width="86" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_8.svg" width="130" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_9.svg" width="300" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_10.svg" width="356" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_11.svg" width="102" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_12.svg" width="258" height="184"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_13.svg" width="62" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_14.svg" width="451" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_15.svg" width="124" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_16.svg" width="303" height="382"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_17.svg" width="112" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_18.svg" width="122" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_19.svg" width="318" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_20.svg" width="360" height="184"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_21.svg" width="156" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_22.svg" width="130" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_23.svg" width="148" height="36"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_24.svg" width="322" height="184"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_25.svg" width="435" height="283"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
+<tr><td><iframe scrolling="no" frameborder="0" src="inherit_graph_26.svg" width="359" height="86"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

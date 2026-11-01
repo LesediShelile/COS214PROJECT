@@ -6,26 +6,13 @@ USE_MDFILE_AS_MAINPAGE = docs/mainpage.md
 
 OUTPUT_DIRECTORY       = docs/generated
 
-INPUT                  = include \
-                         src \
-                         tests \
-                         docs \
-                         README.md
+INPUT = include src tests docs README.md
 
-FILE_PATTERNS          = *.h \
-                         *.hpp \
-                         *.cpp \
-                         *.dox \
-                         *.md
+FILE_PATTERNS = *.h *.hpp *.cpp *.dox *.md
 
-RECURSIVE              = YES
+RECURSIVE = YES
 
-EXCLUDE                = docs/generated \
-                         html \
-                         latex \
-                         build \
-                         tests/third_party \
-                         stubs
+EXCLUDE = docs/generated html latex build tests/third_party stubs
 
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = NO
@@ -46,15 +33,26 @@ GENERATE_HTML          = YES
 HTML_OUTPUT            = html
 GENERATE_TREEVIEW      = YES
 
+HTML_DYNAMIC_MENUS     = YES
+DISABLE_INDEX          = NO
+
 SOURCE_BROWSER         = YES
 INLINE_SOURCES         = NO
 
 HAVE_DOT               = YES
 UML_LOOK               = YES
+CLASS_DIAGRAMS         = YES
 INCLUDE_GRAPH          = YES
 INCLUDED_BY_GRAPH      = YES
 CALL_GRAPH             = YES
 CALLER_GRAPH           = YES
 
+DOT_IMAGE_FORMAT       = svg
+INTERACTIVE_SVG        = YES
+
 GENERATE_LATEX         = NO
 GENERATE_XML           = NO
+
+CLASS_DIAGRAMS         = YES
+DOT_IMAGE_FORMAT       = svg
+INTERACTIVE_SVG        = YES
