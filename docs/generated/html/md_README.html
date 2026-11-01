@@ -93,14 +93,14 @@ $(document).ready(function(){initNavTree('md_README.html',''); initResizable(); 
   <div class="headertitle"><div class="title">README</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div align="center"></div><div align="center"></div><h1><a class="anchor" id="autotoc_md0"></a>
+<div class="textblock"><div align="center"></div><div align="center"></div><h1><a class="anchor" id="autotoc_md13"></a>
 🗂️ TIVIDY</h1>
-<div align="center"></div><div align="center"></div><h3><a class="anchor" id="autotoc_md1"></a>
+<div align="center"></div><div align="center"></div><h3><a class="anchor" id="autotoc_md14"></a>
 A generic workflow management system in C++11</h3>
 <div align="center"></div><div align="center"><em>One reusable engine. Any industry. Fourteen GoF design patterns.</em></div><div align="center"><a href="https://github.com/LesediShelile/COS214PROJECT/actions/workflows/ci.yml"><img src="https://github.com/LesediShelile/COS214PROJECT/actions/workflows/ci.yml/badge.svg" alt="CI" style="pointer-events: none;" class="inline"/></a> <img src="https://img.shields.io/badge/C%2B%2B-11-blue?logo=cplusplus" alt="C++11" class="inline"/> <img src="https://img.shields.io/badge/build-CMake%203.16%2B-064F8C?logo=cmake" alt="CMake" class="inline"/> <img src="https://img.shields.io/badge/tests-295%20passing-brightgreen" alt="Tests" class="inline"/> <img src="https://img.shields.io/badge/GoF%20patterns-14-orange" alt="Patterns" class="inline"/> <img src="https://img.shields.io/badge/docker-ready-2496ED?logo=docker&amp;logoColor=white" alt="Docker" class="inline"/></div><div align="center">COS 214 final project · University of Pretoria</div><div align="center"><b><a href="https://github.com/LesediShelile/COS214PROJECT">📦 Repository</a></b></div><div align="center"></div><hr  />
 <p>TIVIDY stores workflow <em>definitions</em>, creates independent running <em>instances</em> from them, routes work to participants, enforces multi-level approvals, reacts to events, talks to external systems and keeps a full history that can be undone.</p>
 <p>The engine is generic: <b>nothing in the core mentions an industry.</b> We prove it by running two completely different industries on the same engine: a hospital <b>emergency patient admission</b> and a <b>legal case</b>. Only the workflow definition, the roles and the data change.</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 📑 Table of Contents</h2>
 <ul>
 <li>🚀 Quick start</li>
@@ -115,7 +115,7 @@ A generic workflow management system in C++11</h3>
 <li>🌿 Git workflow</li>
 <li>🙌 The team</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 🚀 Quick start</h2>
 <p>You need a C++11 compiler (g++ or clang++) and CMake 3.16 or newer. The engine and its tests need nothing else, because <a href="https://github.com/doctest/doctest">doctest</a> is included in <code>tests/third_party/</code>.</p>
 <div class="fragment"><div class="line">git clone https://github.com/LesediShelile/COS214PROJECT.git</div>
@@ -144,7 +144,7 @@ A generic workflow management system in C++11</h3>
 <blockquote class="doxtable">
 <p>&zwj;The GUI is optional and is never part of the engine library, so the engine builds and tests without Qt. </p>
 </blockquote>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 🔧 How it works</h2>
 <div class="fragment"><div class="line">client / GUI</div>
 <div class="line">     |</div>
@@ -171,7 +171,7 @@ A generic workflow management system in C++11</h3>
 <li><b>History and recovery.</b> Every action is a Command with <code>undo()</code>, and each keeps a Memento of the work item taken beforehand.</li>
 <li><b>External systems.</b> The engine only knows <code><a class="el" href="classExternalConnector.html" title="Defines the interface used to communicate with external services.">ExternalConnector</a></code>. Adapters translate it to each external system.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 🧩 Design patterns and where they live</h2>
 <p>All paths are inside <code>include/</code> (headers) and <code>src/</code> (implementations).</p>
 <table class="markdownTable">
@@ -206,7 +206,7 @@ A generic workflow management system in C++11</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">🛡️ <b>Proxy</b>   </td><td class="markdownTableBodyNone">Permission and ownership checks in front of the facade   </td><td class="markdownTableBodyNone"><code><a class="el" href="classIWorkflowService.html" title="Interface defining the workflow operations available to clients.">IWorkflowService</a></code>, <code><a class="el" href="classSecureWorkflowProxy.html" title="Protection Proxy that controls access to TIVIDY workflow operations.">SecureWorkflowProxy</a></code>   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md7"></a>
+<h3><a class="anchor" id="autotoc_md20"></a>
 Ownership rules</h3>
 <ul>
 <li>A <code><a class="el" href="classStage.html" title="Composite of the Composite pattern: a WorkItem that owns child WorkItems (Tasks or other Stages).">Stage</a></code> owns its children, and a <code><a class="el" href="classTaskDecorator.html" title="Decorator base: wraps another WorkItem and forwards every call to it.">TaskDecorator</a></code> owns the item it wraps.</li>
@@ -214,7 +214,7 @@ Ownership rules</h3>
 <li><code>clone()</code> copies work state, data and children. Shared configuration (roles, strategies, participants, the event publisher) is pointed to, not copied.</li>
 <li><code><a class="el" href="classStage.html#a6afbc55edbc0b0bc4d133b2c15598ffb">Stage::assign</a>/start/complete/reject</code> throw <code>std::logic_error</code>, because those only make sense on a task. <code>makeAvailable()</code> and <code>cancel()</code> act on the children.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 👥 Who built what</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -230,7 +230,7 @@ Ownership rules</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><b>Ajba Patel</b>   </td><td class="markdownTableBodyNone">Composite, Prototype, Decorator, their unit and integration tests, README, pamphlet   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md9"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 📁 Repository layout</h2>
 <div class="fragment"><div class="line">include/      all headers (.h); include/ui/ holds the optional GUI header</div>
 <div class="line">src/          all implementations (.cpp)</div>
@@ -240,11 +240,11 @@ Ownership rules</h3>
 <div class="line">main.cpp      desktop GUI demo (optional, needs Qt)</div>
 <div class="line">CMakeLists.txt, Makefile, Dockerfile</div>
 <div class="line">.github/workflows/ci.yml</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md23"></a>
 🧪 Testing</h2>
 <p>Tests use <a href="https://github.com/doctest/doctest">doctest</a>. Run them as shown in Quick start.</p>
 <p><b>295 test cases and 1098 assertions, all passing.</b> Every test file below is compiled into one executable, <code>tividy_tests</code>.</p>
-<h3><a class="anchor" id="autotoc_md11"></a>
+<h3><a class="anchor" id="autotoc_md24"></a>
 Core structure: Composite, Prototype, Iterator, Decorator</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -256,7 +256,7 @@ Core structure: Composite, Prototype, Iterator, Decorator</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code><a class="el" href="test__integration__work__items_8cpp.html">tests/test_integration_work_items.cpp</a></code>   </td><td class="markdownTableBodyRight">5   </td><td class="markdownTableBodyNone">Composite, Prototype and Decorators together with Commands, undo, Observer and iterators   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md12"></a>
+<h3><a class="anchor" id="autotoc_md25"></a>
 Behaviour: State, Strategy, Chain of Responsibility</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -268,7 +268,7 @@ Behaviour: State, Strategy, Chain of Responsibility</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code><a class="el" href="test__cancelledState_8cpp.html">tests/test_cancelledState.cpp</a></code>   </td><td class="markdownTableBodyRight">3   </td><td class="markdownTableBodyNone">The final <a class="el" href="classCancelled.html" title="End state of a task that was cancelled (State pattern).">Cancelled</a> state   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<h3><a class="anchor" id="autotoc_md26"></a>
 Building and history: Builder, Command, Memento</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -278,7 +278,7 @@ Building and history: Builder, Command, Memento</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code><a class="el" href="test__commandMementoWorkflow_8cpp.html">tests/test_commandMementoWorkflow.cpp</a></code>   </td><td class="markdownTableBodyRight">25   </td><td class="markdownTableBodyNone">Commands, undo, mementos, workflow definition and instance   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md14"></a>
+<h3><a class="anchor" id="autotoc_md27"></a>
 Events and outside systems: Observer, Adapter</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -294,7 +294,7 @@ Events and outside systems: Observer, Adapter</h3>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"><code><a class="el" href="test__external__task_8cpp.html">tests/test_external_task.cpp</a></code>   </td><td class="markdownTableBodyRight">11   </td><td class="markdownTableBodyNone">External tasks and connectors   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md15"></a>
+<h3><a class="anchor" id="autotoc_md28"></a>
 Entry points: Facade and Proxy</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -308,22 +308,22 @@ Entry points: Facade and Proxy</h3>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><code><a class="el" href="test__proxy_8cpp.html">tests/test_proxy.cpp</a></code>   </td><td class="markdownTableBodyRight">41   </td><td class="markdownTableBodyNone"><code><a class="el" href="classSecureWorkflowProxy.html" title="Protection Proxy that controls access to TIVIDY workflow operations.">SecureWorkflowProxy</a></code> permission and ownership checks   </td></tr>
 </table>
-<h3><a class="anchor" id="autotoc_md16"></a>
+<h3><a class="anchor" id="autotoc_md29"></a>
 Coverage</h3>
 <p>The CMake build is compiled with <code>--coverage</code>, and a generated lcov HTML report is committed in <a href="coverage_report/index.html"><code>coverage_report/</code></a>. Open <code>coverage_report/index.html</code> in a browser to see line and function coverage per file.</p>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 🏥 The demo scenarios</h2>
 <p><b>Hospital emergency admission.</b> Paramedic pickup and transport, patient registration, room preparation in parallel with transport, handover, nurse intake, doctor acceptance (with a deadline and reroute), assessment and treatment, room allocation (ICU and surgery need approval) and cleaning. Failure paths cover a delayed ambulance, a doctor who does not respond and a deteriorating patient. The outcome is a patient admitted, transferred, discharged or recorded as deceased, with the full history archived.</p>
 <p><b>Legal case.</b> Client intake, conflict check, parallel discovery (evidence and legal research), drafting, partner review, filing, hearing, judgment, invoicing and archiving. It includes a rejected-pleadings exception path and a cancelled filing.</p>
 <p><b>Participants:</b> paramedics, secretary, nursing staff, doctors, cleaning staff, lawyers, partners. <b>External systems:</b> ambulance dispatch and hospital patient records, reached through adapters.</p>
 <p>Only the definitions, the adapters and their APIs know about an industry. The engine runs both processes without changes. The desktop GUI also has a <b><a class="el" href="classPlayground.html">Playground</a></b> tab where you build your own tasks and stages and drive them yourself.</p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 🐳 Docker and CI</h2>
 <ul>
 <li><b>Docker.</b> The <code>Dockerfile</code> starts from Ubuntu 24.04, installs the compiler, CMake and Qt 6, builds only the desktop target and launches <code>tividy_desktop</code> with the <code>xcb</code> display platform. Tests are not part of the image.</li>
 <li><b>CI.</b> The GitHub Actions workflow in <code>.github/workflows/ci.yml</code> runs on every push and pull request to <code>development</code> and <code>main</code>. It starts from a clean Ubuntu 24.04 machine, installs the dependencies, configures the project and builds the desktop application.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md19"></a>
+<h2><a class="anchor" id="autotoc_md32"></a>
 📚 Documentation</h2>
 <p>Design documents and diagrams are in <a href="docs/"><code>docs/</code></a>:</p>
 <ul>
@@ -331,7 +331,7 @@ Coverage</h3>
 <li><a href="docs/COS214Project%20(2).pdf">Project report</a></li>
 <li>Activity diagrams: <a href="docs/Activity%20Diagram1.jpg">1</a> and <a href="docs/Activity%20Diagram%203.png">3</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 🌿 Git workflow</h2>
 <ul>
 <li><code>main</code> holds stable, reviewed work only. Nobody pushes to it directly.</li>
@@ -339,7 +339,7 @@ Coverage</h3>
 <li>Each pattern or task is built on its own branch (<code>feature/&lt;name&gt;</code>, <code>test/&lt;name&gt;</code>, <code>fix/&lt;name&gt;</code>, <code>docs/&lt;name&gt;</code>) cut from <code>development</code> and merged back by a pull request with base <code>development</code>.</li>
 <li>Commits are small and describe one change each.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 🙌 The team</h2>
 <p>Group Council, COS 214, University of Pretoria:</p>
 <ul>
