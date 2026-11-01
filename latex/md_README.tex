@@ -1,0 +1,301 @@
+\chapter{README}
+\hypertarget{md_README}{}\label{md_README}\index{README@{README}}
+
+
+\hypertarget{md_README_autotoc_md0}{}\doxysection{\texorpdfstring{🗂️ TIVIDY}{🗂️ TIVIDY}}\label{md_README_autotoc_md0}
+
+
+\hypertarget{md_README_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{A generic workflow management system in C++11}{A generic workflow management system in C++11}}\label{md_README_autotoc_md1}
+
+
+{\itshape One reusable engine. Any industry. Fourteen GoF design patterns.}
+
+\href{https://github.com/LesediShelile/COS214PROJECT/actions/workflows/ci.yml}{\texttt{ }}     
+
+COS 214 final project · University of Pretoria
+
+{\bfseries{\href{https://github.com/LesediShelile/COS214PROJECT}{\texttt{ 📦 Repository}}}}
+
+
+
+\DoxyHorRuler{0}
+
+
+TIVIDY stores workflow {\itshape definitions}, creates independent running {\itshape instances} from them, routes work to participants, enforces multi-\/level approvals, reacts to events, talks to external systems and keeps a full history that can be undone.
+
+The engine is generic\+: {\bfseries{nothing in the core mentions an industry.}} We prove it by running two completely different industries on the same engine\+: a hospital {\bfseries{emergency patient admission}} and a {\bfseries{legal case}}. Only the workflow definition, the roles and the data change.\hypertarget{md_README_autotoc_md3}{}\doxysubsection{\texorpdfstring{📑 Table of Contents}{📑 Table of Contents}}\label{md_README_autotoc_md3}
+
+\begin{DoxyItemize}
+\item 🚀 Quick start
+\item 🔧 How it works
+\item 🧩 Design patterns and where they live
+\item 👥 Who built what
+\item 📁 Repository layout
+\item 🧪 Testing
+\item 🏥 The demo scenarios
+\item 🐳 Docker and CI
+\item 📚 Documentation
+\item 🌿 Git workflow
+\item 🙌 The team
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md4}{}\doxysubsection{\texorpdfstring{🚀 Quick start}{🚀 Quick start}}\label{md_README_autotoc_md4}
+You need a C++11 compiler (g++ or clang++) and CMake 3.\+16 or newer. The engine and its tests need nothing else, because \href{https://github.com/doctest/doctest}{\texttt{ doctest}} is included in {\ttfamily tests/third\+\_\+party/}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/LesediShelile/COS214PROJECT.git}
+\DoxyCodeLine{cd\ COS214PROJECT}
+\DoxyCodeLine{git\ checkout\ development}
+\DoxyCodeLine{}
+\DoxyCodeLine{cmake\ -\/S\ .\ -\/B\ build}
+\DoxyCodeLine{cmake\ -\/-\/build\ build}
+\DoxyCodeLine{./build/tividy\_tests\ \ \ \ \ \ \ \ \ \ \ \ \#\ Windows:\ .\(\backslash\)build\(\backslash\)tividy\_tests.exe}
+
+\end{DoxyCode}
+
+
+Expected result\+: {\ttfamily test cases\+: 295 \texorpdfstring{$\vert$}{|} 295 passed \texorpdfstring{$\vert$}{|} 0 failed}.
+
+Other ways to build and run\+:
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ How    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ How    }\\\cline{1-2}
+\endhead
+Engine and tests with plain {\ttfamily make}   &{\ttfamily make test} (output goes to {\ttfamily build\+\_\+make/})    \\\cline{1-2}
+Skip the tests   &{\ttfamily cmake -\/S . -\/B build -\/DTIVIDY\+\_\+\+BUILD\+\_\+\+TESTS=OFF}    \\\cline{1-2}
+Desktop GUI demo (needs Qt 6 Widgets)   &{\ttfamily cmake -\/S . -\/B build -\/DTIVIDY\+\_\+\+BUILD\+\_\+\+DESKTOP=ON} then {\ttfamily cmake -\/-\/build build -\/-\/target tividy\+\_\+desktop}    \\\cline{1-2}
+Desktop GUI demo in Docker   &{\ttfamily docker build -\/t tividy .} then run the image (it starts {\ttfamily tividy\+\_\+desktop})    \\\cline{1-2}
+Memory and undefined-\/behaviour checks   &{\ttfamily cmake -\/S . -\/B build -\/DCMAKE\+\_\+\+BUILD\+\_\+\+TYPE=Debug -\/DCMAKE\+\_\+\+CXX\+\_\+\+FLAGS="{}-\/fsanitize=address,undefined"{}}   \\\cline{1-2}
+\end{longtabu}
+
+
+\begin{quote}
+The GUI is optional and is never part of the engine library, so the engine builds and tests without Qt. \end{quote}
+\hypertarget{md_README_autotoc_md5}{}\doxysubsection{\texorpdfstring{🔧 How it works}{🔧 How it works}}\label{md_README_autotoc_md5}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{client\ /\ GUI}
+\DoxyCodeLine{\ \ \ \ \ |}
+\DoxyCodeLine{SecureWorkflowProxy\ ──>\ TIVIDYFacade\ \ \ \ \ \ \ \ \ \ one\ simple\ entry\ point,\ with\ access\ checks}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ ┌─────────────────────┼──────────────────────────┐}
+\DoxyCodeLine{WorkflowDefinition\ \ \ \ \ WorkflowInstance\ \ \ \ \ \ \ \ \ \ CommandInvoker\ +\ CommandHistory}
+\DoxyCodeLine{(built\ by\ Director,\ \ \ \ (own\ cloned\ work-\/item\ \ \ \ \ \ (undoable\ actions,\ each\ with}
+\DoxyCodeLine{\ frozen,\ versioned)\ \ \ \ \ tree,\ own\ history)\ \ \ \ \ \ \ \ \ a\ TaskMemento\ snapshot)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ WorkItem\ tree:\ Stage\ (Sequential\ /\ Parallel)\ ──\ Task}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Iterators\ walk\ it\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TaskState,\ decorators,\ assignment}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strategy,\ approval\ chain}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ EventPublisher\ ──>\ AuditLogger,\ Notifier,\ EngineRouter,\ MetricsCollector}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ ExternalTask\ ──>\ ExternalConnector\ ──>\ adapters\ ──>\ external\ APIs}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Definition vs instance.}} A {\ttfamily Workflow\+Definition} is frozen once built and owns the root of a {\ttfamily Work\+Item} tree. Creating an instance clones that tree, so every {\ttfamily Workflow\+Instance} has its own state, assignees and data. Running instances keep the definition version they started with.
+\item {\bfseries{Nested work.}} {\ttfamily Task} is the leaf and {\ttfamily Sequential\+Stage} and {\ttfamily Parallel\+Stage} are composites. The engine treats every {\ttfamily Work\+Item} the same way and never checks types.
+\item {\bfseries{Changing behaviour.}} {\ttfamily Task\+State} controls the task lifecycle, assignment is a Strategy, approval and escalation are a Chain of Responsibility, and Decorators add validation, auditing and priority.
+\item {\bfseries{Reacting to events.}} Tasks publish {\ttfamily Workflow\+Event}s and independent listeners handle routing, audit, notification and metrics.
+\item {\bfseries{History and recovery.}} Every action is a Command with {\ttfamily undo()}, and each keeps a Memento of the work item taken beforehand.
+\item {\bfseries{External systems.}} The engine only knows {\ttfamily External\+Connector}. Adapters translate it to each external system.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md6}{}\doxysubsection{\texorpdfstring{🧩 Design patterns and where they live}{🧩 Design patterns and where they live}}\label{md_README_autotoc_md6}
+All paths are inside {\ttfamily include/} (headers) and {\ttfamily src/} (implementations).
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Pattern   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Role in TIVIDY   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Main classes    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Pattern   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Role in TIVIDY   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Main classes    }\\\cline{1-3}
+\endhead
+🌳 {\bfseries{Composite}}   &Tasks nested in stages   &{\ttfamily Work\+Item}, {\ttfamily Task}, {\ttfamily Stage}, {\ttfamily Sequential\+Stage}, {\ttfamily Parallel\+Stage}    \\\cline{1-3}
+🧬 {\bfseries{Prototype}}   &Each instance gets its own copy of the definition\textquotesingle{}s tree   &{\ttfamily Work\+Item\+::clone()} on every work item, {\ttfamily Workflow\+Definition}    \\\cline{1-3}
+🔁 {\bfseries{Iterator}}   &Walk the tree; find work that is available now   &{\ttfamily Work\+Item\+Iterator}, {\ttfamily Depth\+First\+Iterator}, {\ttfamily Available\+Items\+Iterator}    \\\cline{1-3}
+🎁 {\bfseries{Decorator}}   &Extra behaviour on a task without new task types   &{\ttfamily Task\+Decorator}, {\ttfamily Validated\+Task}, {\ttfamily Audited\+Task}, {\ttfamily Priority\+Task}    \\\cline{1-3}
+🚦 {\bfseries{State}}   &Task lifecycle   &{\ttfamily Task\+State}, {\ttfamily Created\+State}, {\ttfamily Available\+State}, {\ttfamily Assigned\+State}, {\ttfamily Started\+State}, {\ttfamily Completed\+State}, {\ttfamily Rejected\+State}, {\ttfamily Cancelled\+State}    \\\cline{1-3}
+🎯 {\bfseries{Strategy}}   &Who gets the next task   &{\ttfamily Assignment\+Strategy}, {\ttfamily Role\+Based\+Assignment}, {\ttfamily Workload\+Assignment}, {\ttfamily Rule\+Based\+Assignment}    \\\cline{1-3}
+🔗 {\bfseries{Chain of Responsibility}}   &Approval levels and escalation   &{\ttfamily Approval\+Handler}, {\ttfamily Approval\+Level}, {\ttfamily Approval\+Request}, {\ttfamily Approval\+Status}    \\\cline{1-3}
+📡 {\bfseries{Observer}}   &Events, audit, notifications, metrics   &{\ttfamily Event\+Publisher}, {\ttfamily Workflow\+Listener}, {\ttfamily Workflow\+Event}, {\ttfamily Event\+Type}, {\ttfamily Audit\+Logger}, {\ttfamily Notifier}, {\ttfamily Engine\+Router}, {\ttfamily Metrics\+Collector}    \\\cline{1-3}
+⌨️ {\bfseries{Command}}   &Recorded, undoable actions   &{\ttfamily Workflow\+Command}, {\ttfamily Assign\+Command}, {\ttfamily Start\+Command}, {\ttfamily Complete\+Command}, {\ttfamily Reject\+Command}, {\ttfamily Command\+Invoker}, {\ttfamily Command\+History}    \\\cline{1-3}
+💾 {\bfseries{Memento}}   &Snapshots used by undo   &{\ttfamily Task\+Memento}    \\\cline{1-3}
+🏗️ {\bfseries{Builder}}   &Constructing a definition step by step   &{\ttfamily Workflow\+Builder}, {\ttfamily Definition\+Builder}, {\ttfamily Director}    \\\cline{1-3}
+🔌 {\bfseries{Adapter}}   &External systems   &{\ttfamily External\+Connector}, {\ttfamily Adapter\+One}, {\ttfamily Adapter\+Two}, {\ttfamily APIOne}, {\ttfamily APITwo}, {\ttfamily External\+Task}    \\\cline{1-3}
+🏛️ {\bfseries{Facade}}   &Single client entry point   &{\ttfamily TIVIDYFacade}    \\\cline{1-3}
+🛡️ {\bfseries{Proxy}}   &Permission and ownership checks in front of the facade   &{\ttfamily IWorkflow\+Service}, {\ttfamily Secure\+Workflow\+Proxy}   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{Ownership rules}{Ownership rules}}\label{md_README_autotoc_md7}
+
+\begin{DoxyItemize}
+\item A {\ttfamily Stage} owns its children, and a {\ttfamily Task\+Decorator} owns the item it wraps.
+\item Iterators and mementos returned by {\ttfamily create...()} functions belong to the caller, who must {\ttfamily delete} them. {\ttfamily Command\+Invoker} takes ownership of the commands passed to {\ttfamily execute\+Command()}.
+\item {\ttfamily clone()} copies work state, data and children. Shared configuration (roles, strategies, participants, the event publisher) is pointed to, not copied.
+\item {\ttfamily Stage\+::assign/start/complete/reject} throw {\ttfamily std\+::logic\+\_\+error}, because those only make sense on a task. {\ttfamily make\+Available()} and {\ttfamily cancel()} act on the children.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md8}{}\doxysubsection{\texorpdfstring{👥 Who built what}{👥 Who built what}}\label{md_README_autotoc_md8}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Member   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Patterns and areas    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Member   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Patterns and areas    }\\\cline{1-2}
+\endhead
+{\bfseries{Kiara Ajodhaparsadh}}   &System design, UML, CI pipeline, Command, Memento, Facade, Proxy, workflow definition and instance classes, integration    \\\cline{1-2}
+{\bfseries{Cameron Ambraal}}   &State, Strategy, Chain of Responsibility, scenario write-\/ups, presentation    \\\cline{1-2}
+{\bfseries{Lesedi Shelile}}   &Observer, Adapter, Docker, desktop GUI    \\\cline{1-2}
+{\bfseries{Taya Govender}}   &Builder, Iterator, UML diagram    \\\cline{1-2}
+{\bfseries{Ajba Patel}}   &Composite, Prototype, Decorator, their unit and integration tests, README, pamphlet   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md9}{}\doxysubsection{\texorpdfstring{📁 Repository layout}{📁 Repository layout}}\label{md_README_autotoc_md9}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{include/\ \ \ \ \ \ all\ headers\ (.h);\ include/ui/\ holds\ the\ optional\ GUI\ header}
+\DoxyCodeLine{src/\ \ \ \ \ \ \ \ \ \ all\ implementations\ (.cpp)}
+\DoxyCodeLine{tests/\ \ \ \ \ \ \ \ doctest\ suites;\ tests/third\_party/\ holds\ doctest\ itself}
+\DoxyCodeLine{docs/\ \ \ \ \ \ \ \ \ design\ documents\ and\ diagrams}
+\DoxyCodeLine{coverage\_report/\ \ \ generated\ lcov\ HTML\ coverage\ report}
+\DoxyCodeLine{main.cpp\ \ \ \ \ \ desktop\ GUI\ demo\ (optional,\ needs\ Qt)}
+\DoxyCodeLine{CMakeLists.txt,\ Makefile,\ Dockerfile}
+\DoxyCodeLine{.github/workflows/ci.yml}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md10}{}\doxysubsection{\texorpdfstring{🧪 Testing}{🧪 Testing}}\label{md_README_autotoc_md10}
+Tests use \href{https://github.com/doctest/doctest}{\texttt{ doctest}}. Run them as shown in Quick start.
+
+{\bfseries{295 test cases and 1098 assertions, all passing.}} Every test file below is compiled into one executable, {\ttfamily tividy\+\_\+tests}.\hypertarget{md_README_autotoc_md11}{}\doxysubsubsection{\texorpdfstring{Core structure\+: Composite, Prototype, Iterator, Decorator}{Core structure: Composite, Prototype, Iterator, Decorator}}\label{md_README_autotoc_md11}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endhead
+{\ttfamily tests/test\+\_\+work\+\_\+items.\+cpp}   &\PBS\raggedleft 16   &Stages, cloning, cancel, mementos, decorator base, iterators    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+decorators.\+cpp}   &\PBS\raggedleft 7   &{\ttfamily Validated\+Task}, {\ttfamily Audited\+Task}, {\ttfamily Priority\+Task}, stacking and cloning    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+integration\+\_\+work\+\_\+items.\+cpp}   &\PBS\raggedleft 5   &Composite, Prototype and Decorators together with Commands, undo, Observer and iterators   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md12}{}\doxysubsubsection{\texorpdfstring{Behaviour\+: State, Strategy, Chain of Responsibility}{Behaviour: State, Strategy, Chain of Responsibility}}\label{md_README_autotoc_md12}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endhead
+{\ttfamily tests/test\+\_\+state\+\_\+strategy\+\_\+chain.\+cpp}   &\PBS\raggedleft 8   &Task lifecycle, assignment strategies, approval levels    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+task\+\_\+state\+\_\+defaults.\+cpp}   &\PBS\raggedleft 7   &Default {\ttfamily Task\+State} rejects illegal transitions    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+cancelled\+State.\+cpp}   &\PBS\raggedleft 3   &The final Cancelled state   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{Building and history\+: Builder, Command, Memento}{Building and history: Builder, Command, Memento}}\label{md_README_autotoc_md13}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endhead
+{\ttfamily tests/test\+\_\+director.\+cpp}   &\PBS\raggedleft 5   &Building workflow definitions step by step    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+command\+Memento\+Workflow.\+cpp}   &\PBS\raggedleft 25   &Commands, undo, mementos, workflow definition and instance   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md14}{}\doxysubsubsection{\texorpdfstring{Events and outside systems\+: Observer, Adapter}{Events and outside systems: Observer, Adapter}}\label{md_README_autotoc_md14}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endhead
+{\ttfamily tests/test\+\_\+observer\+\_\+integrations.\+cpp}   &\PBS\raggedleft 29   &Event publishing, listeners, audit and metrics    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+notifier.\+cpp}   &\PBS\raggedleft 6   &Notification text for every event type    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+engine\+\_\+router.\+cpp}   &\PBS\raggedleft 4   &Timeouts forwarded to the approval chain    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+adapter.\+cpp}   &\PBS\raggedleft 12   &Adapters and their APIs    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+external\+\_\+task.\+cpp}   &\PBS\raggedleft 11   &External tasks and connectors   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md15}{}\doxysubsubsection{\texorpdfstring{Entry points\+: Facade and Proxy}{Entry points: Facade and Proxy}}\label{md_README_autotoc_md15}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ File   }&\PBS\raggedleft \cellcolor{\tableheadbgcolor}\textbf{ Tests   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ What it checks    }\\\cline{1-3}
+\endhead
+{\ttfamily tests/test\+\_\+facade.\+cpp}   &\PBS\raggedleft 70   &{\ttfamily TIVIDYFacade}\+: definitions, instances, task actions    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+facade\+Command.\+cpp}   &\PBS\raggedleft 18   &Command and Memento undo reached through the Facade    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+\+Facade\+Co\+R.\+cpp}   &\PBS\raggedleft 28   &Approval chain reached through the Facade    \\\cline{1-3}
+{\ttfamily tests/test\+\_\+proxy.\+cpp}   &\PBS\raggedleft 41   &{\ttfamily Secure\+Workflow\+Proxy} permission and ownership checks   \\\cline{1-3}
+\end{longtabu}
+\hypertarget{md_README_autotoc_md16}{}\doxysubsubsection{\texorpdfstring{Coverage}{Coverage}}\label{md_README_autotoc_md16}
+The CMake build is compiled with {\ttfamily -\/-\/coverage}, and a generated lcov HTML report is committed in \href{coverage_report/index.html}{\texttt{ {\ttfamily coverage\+\_\+report/}}}. Open {\ttfamily coverage\+\_\+report/index.\+html} in a browser to see line and function coverage per file.\hypertarget{md_README_autotoc_md17}{}\doxysubsection{\texorpdfstring{🏥 The demo scenarios}{🏥 The demo scenarios}}\label{md_README_autotoc_md17}
+{\bfseries{Hospital emergency admission.}} Paramedic pickup and transport, patient registration, room preparation in parallel with transport, handover, nurse intake, doctor acceptance (with a deadline and reroute), assessment and treatment, room allocation (ICU and surgery need approval) and cleaning. Failure paths cover a delayed ambulance, a doctor who does not respond and a deteriorating patient. The outcome is a patient admitted, transferred, discharged or recorded as deceased, with the full history archived.
+
+{\bfseries{Legal case.}} Client intake, conflict check, parallel discovery (evidence and legal research), drafting, partner review, filing, hearing, judgment, invoicing and archiving. It includes a rejected-\/pleadings exception path and a cancelled filing.
+
+{\bfseries{Participants\+:}} paramedics, secretary, nursing staff, doctors, cleaning staff, lawyers, partners. {\bfseries{External systems\+:}} ambulance dispatch and hospital patient records, reached through adapters.
+
+Only the definitions, the adapters and their APIs know about an industry. The engine runs both processes without changes. The desktop GUI also has a {\bfseries{Playground}} tab where you build your own tasks and stages and drive them yourself.\hypertarget{md_README_autotoc_md18}{}\doxysubsection{\texorpdfstring{🐳 Docker and CI}{🐳 Docker and CI}}\label{md_README_autotoc_md18}
+
+\begin{DoxyItemize}
+\item {\bfseries{Docker.}} The {\ttfamily Dockerfile} starts from Ubuntu 24.\+04, installs the compiler, CMake and Qt 6, builds only the desktop target and launches {\ttfamily tividy\+\_\+desktop} with the {\ttfamily xcb} display platform. Tests are not part of the image.
+\item {\bfseries{CI.}} The Git\+Hub Actions workflow in {\ttfamily .github/workflows/ci.\+yml} runs on every push and pull request to {\ttfamily development} and {\ttfamily main}. It starts from a clean Ubuntu 24.\+04 machine, installs the dependencies, configures the project and builds the desktop application.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md19}{}\doxysubsection{\texorpdfstring{📚 Documentation}{📚 Documentation}}\label{md_README_autotoc_md19}
+Design documents and diagrams are in \href{docs/}{\texttt{ {\ttfamily docs/}}}\+:
+
+
+\begin{DoxyItemize}
+\item \href{docs/UML\%20class\%20diagram.pdf}{\texttt{ UML class diagram}}
+\item \href{docs/COS214Project\%20(2).pdf}{\texttt{ Project report}}
+\item Activity diagrams\+: \href{docs/Activity\%20Diagram1.jpg}{\texttt{ 1}} and \href{docs/Activity\%20Diagram\%203.png}{\texttt{ 3}}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md20}{}\doxysubsection{\texorpdfstring{🌿 Git workflow}{🌿 Git workflow}}\label{md_README_autotoc_md20}
+
+\begin{DoxyItemize}
+\item {\ttfamily main} holds stable, reviewed work only. Nobody pushes to it directly.
+\item {\ttfamily development} is the integration branch. All work is merged here through pull requests.
+\item Each pattern or task is built on its own branch ({\ttfamily feature/\texorpdfstring{$<$}{<}name\texorpdfstring{$>$}{>}}, {\ttfamily test/\texorpdfstring{$<$}{<}name\texorpdfstring{$>$}{>}}, {\ttfamily fix/\texorpdfstring{$<$}{<}name\texorpdfstring{$>$}{>}}, {\ttfamily docs/\texorpdfstring{$<$}{<}name\texorpdfstring{$>$}{>}}) cut from {\ttfamily development} and merged back by a pull request with base {\ttfamily development}.
+\item Commits are small and describe one change each.
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md21}{}\doxysubsection{\texorpdfstring{🙌 The team}{🙌 The team}}\label{md_README_autotoc_md21}
+Group Council, COS 214, University of Pretoria\+:
+
+
+\begin{DoxyItemize}
+\item Kiara Ajodhaparsadh
+\item Cameron Ambraal
+\item Lesedi Shelile
+\item Taya Govender
+\item Ajba Patel
+\end{DoxyItemize}
+
+
+
+Made for COS 214 · University of Pretoria
+
+ 
