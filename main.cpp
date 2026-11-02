@@ -1,6 +1,7 @@
 /**
  * @file main.cpp
  * @brief Interactive, Menu-Driven Terminal User Interface (TUI) for TIVIDY.
+ * @author TIVIDY Workflow Engine Architecture Team
  * 
  * Replicates the full scenario demonstrations without hardcoded configurations.
  * Allows users to dynamically configure personnel quantities, select or create custom tasks,
@@ -1689,6 +1690,16 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
                 }
             }
 
+            // Hint about tasks still waiting in the Created state
+            int createdCount = 0;
+            for (const auto& pair : taskMap) {
+                if (pair.second->getStateName() == "Created") createdCount++;
+            }
+            if (createdCount > 0) {
+                std::cout << "  " << DIM << createdCount << " task(s) still in Created state. "
+                          << "Use option 2 -> 5 to release one manually." << RESET << "\n\n";
+            }
+
             // Actionable tasks
             std::vector<WorkItem*> actionable = getActionableTasks(rootStage, taskMap);
 
@@ -1712,7 +1723,7 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
 
             std::cout << "\n  Interactive Controls:\n";
             std::cout << "    1) Step & Advance next available task\n";
-            std::cout << "    2) Pick specific task and execute action (Assign / Start / Complete / Reject)\n";
+            std::cout << "    2) Pick specific task and execute action (Assign / Start / Complete / Reject / Make Available)\n";
             std::cout << "    3) Run Approval Chain check (Chain of Responsibility)\n";
             std::cout << "    4) Undo last command (Command & Memento) [" << (invoker.canUndo() ? (GREEN + std::string("Available") + RESET) : (DIM + std::string("Empty") + RESET)) << "]\n";
             std::cout << "    5) Fast-forward all remaining tasks to completion\n";
@@ -1748,9 +1759,10 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
                 std::cout << "    2) Start task\n";
                 std::cout << "    3) Complete task (enter validation payload)\n";
                 std::cout << "    4) Reject task (record rejection reason)\n";
+                std::cout << "    5) Make available\n";
                 std::cout << "    0) Cancel\n";
 
-                int aChoice = promptChoice("  Action choice [0-4]: ", 0, 4);
+                int aChoice = promptChoice("  Action choice [0-5]: ", 0, 5);
                 if (aChoice == 1) {
                     std::cout << "\n  Select participant:\n";
                     for (std::size_t i = 0; i < participants.size(); ++i) {
@@ -1796,6 +1808,15 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
                         target->reject(reason);
                         rootStage->activateChildren();
                         std::cout << "  " << YELLOW << "Task rejected with reason: " << reason << RESET << "\n";
+                    } catch (const std::exception& ex) {
+                        std::cout << "  " << RED << "Error: " << ex.what() << RESET << "\n";
+                    }
+                    pause();
+                } else if (aChoice == 5) {
+                    try {
+                        target->makeAvailable();
+                        rootStage->activateChildren();
+                        std::cout << "  " << GREEN << "Task state is now: " << target->getStateName() << RESET << "\n";
                     } catch (const std::exception& ex) {
                         std::cout << "  " << RED << "Error: " << ex.what() << RESET << "\n";
                     }
