@@ -1,3 +1,4 @@
+
 /**
  * @file main.cpp
  * @brief Interactive, Menu-Driven Terminal User Interface (TUI) for TIVIDY.
@@ -1349,7 +1350,7 @@ bool step5ReviewScenario(ScenarioModel& model, int& outExecutionMode) {
 }
 
 // ===========================================================================
-// Workflow Execution Engine (Composite, Decorators, Observers, Commands)
+// Assignment Strategy Validation and Execution Logic
 // ===========================================================================
 std::string currentTimestamp() {
     char buf[32];
@@ -1358,8 +1359,201 @@ std::string currentTimestamp() {
     return buf;
 }
 
+// Validates whether the chosen candidate strictly satisfies the chosen strategy rules
+bool validateParticipantForStrategy(
+    const std::string& strategyType,
+    Role* reqRole,
+    Participant* candidate,
+    const std::vector<Participant*>& allParticipants,
+    std::string& outErrorMsg
+) {
+    if (!candidate) {
+        outErrorMsg = "No participant selected.";
+        return false;
+    }
+
+    // Role verification: fundamental check across all strategies
+    if (reqRole && !candidate->hasRole(reqRole)) {
+        std::string candRole = candidate->getRole() ? candidate->getRole()->getName() : "None";
+        outErrorMsg = "Role Mismatch: Participant '" + candidate->getName() + "' has role '" +
+                      candRole + "', but the task requires '" + reqRole->getName() + "'.";
+        return false;
+    }
+
+    if (strategyType == "RoleBased") {
+        return true;
+    }
+
+    if (strategyType == "Workload") {
+        // Find minimum workload among all qualified candidates holding the required role
+        int minWorkload = 999999;
+        std::string minCandidates;
+        for (const auto* p : allParticipants) {
+            if (!reqRole || p->hasRole(reqRole)) {
+                if (p->getWorkload() < minWorkload) {
+                    minWorkload = p->getWorkload();
+                    minCandidates = p->getName();
+                }
+            }
+        }
+        if (candidate->getWorkload() > minWorkload) {
+            outErrorMsg = "Workload Strategy Violation: Participant '" + candidate->getName() +
+                          "' has a workload of " + std::to_string(candidate->getWorkload()) +
+                          ", but '" + minCandidates + "' has a lower workload of " +
+                          std::to_string(minWorkload) +
+                          ". The Workload strategy requires selecting the candidate with the lowest active workload.";
+            return false;
+        }
+        return true;
+    }
+
+    if (strategyType == "RuleBased") {
+        // Business Rule: Requires matching role AND active workload < 3
+        if (candidate->getWorkload() >= 3) {
+            outErrorMsg = "Rule-Based Strategy Violation: Participant '" + candidate->getName() +
+                          "' has a workload of " + std::to_string(candidate->getWorkload()) +
+                          ". The business rule strictly mandates that workload must be < 3.";
+            return false;
+        }
+        return true;
+    }
+
+    return true;
+}
+
+// Interactive helper to select strategy, select participant, and enforce validation
+bool performTaskAssignment(
+    WorkItem* task,
+    const ScenarioModel& model,
+    const std::map<std::string, Role*>& roles,
+    const std::vector<Participant*>& participants,
+    RoleBasedAssignment& byRoleStrategy,
+    WorkloadAssignment& byWorkloadStrategy,
+    RuleBasedAssignment& ruleStrategy,
+    CommandInvoker& invoker,
+    ApprovalLevel* headApproval
+) {
+    if (!task) return false;
+
+    if (task->getStateName() != "Available") {
+        std::cout << "\n  " << RED << BOLD << "❌ ASSIGNMENT ERROR: " << RESET
+                  << "Task \"" << task->getName() << "\" is currently in state ["
+                  << task->getStateName() << "]." << "\n"
+                  << "  A task must be in the [Available] state to be assigned.\n";
+        if (task->getStateName() == "Created") {
+            std::cout << "  " << DIM << "Tip: Use action 5 ('Make available') to release it into the Available pool." << RESET << "\n";
+        }
+        return false;
+    }
+
+    const TaskConfig* tc = model.findTask(task->getItemID());
+    Role* reqRole = nullptr;
+    if (tc && roles.count(tc->roleName)) {
+        reqRole = roles.at(tc->roleName);
+    }
+    std::string defaultStrat = tc ? tc->strategyType : "RoleBased";
+
+    std::cout << "\n  " << BOLD << "╔══════════════════════════════════════════════════════════════════╗" << RESET << "\n";
+    std::cout << "  " << BOLD << "║ 🎯 TASK ASSIGNMENT: " << pad(task->getName(), 44) << " ║" << RESET << "\n";
+    std::cout << "  " << BOLD << "╚══════════════════════════════════════════════════════════════════╝" << RESET << "\n";
+    std::cout << "  Required Role: " << CYAN << BOLD << (reqRole ? reqRole->getName() : "Any Role") << RESET
+              << "  |  Default Strategy: " << YELLOW << defaultStrat << RESET << "\n\n";
+
+    std::cout << "  " << BOLD << "Choose Assignment Strategy to use:" << RESET << "\n";
+    std::cout << "    1) Role-Based Assignment     (Requires matching role: " << (reqRole ? reqRole->getName() : "Any") << ")\n";
+    std::cout << "    2) Workload-Based Assignment (Requires matching role & lowest active workload)\n";
+    std::cout << "    3) Rule-Based Assignment     (Requires matching role & workload < 3)\n";
+    std::cout << "    0) Cancel Assignment\n";
+
+    int sOpt = promptChoice("\n  Select strategy choice [0-3]: ", 0, 3);
+    if (sOpt == 0) return false;
+
+    std::string chosenStrategyType;
+    AssignmentStrategy* chosenStrategy = nullptr;
+
+    if (sOpt == 1) {
+        chosenStrategyType = "RoleBased";
+        chosenStrategy = &byRoleStrategy;
+    } else if (sOpt == 2) {
+        chosenStrategyType = "Workload";
+        chosenStrategy = &byWorkloadStrategy;
+    } else {
+        chosenStrategyType = "RuleBased";
+        chosenStrategy = &ruleStrategy;
+    }
+
+    std::cout << "\n  Selected Strategy: " << CYAN << BOLD << chosenStrategyType << RESET << "\n";
+    std::cout << "  How would you like to assign the participant?\n";
+    std::cout << "    1) Automatically select the best participant using " << chosenStrategyType << "\n";
+    std::cout << "    2) Manually pick a participant (strictly validated against " << chosenStrategyType << ")\n";
+    std::cout << "    0) Cancel\n";
+
+    int mOpt = promptChoice("\n  Select method [0-2]: ", 0, 2);
+    if (mOpt == 0) return false;
+
+    Participant* candidate = nullptr;
+
+    if (mOpt == 1) {
+        Task dummyTask(task->getItemID(), task->getName(), reqRole, chosenStrategy);
+        candidate = chosenStrategy->selectParticipant(&dummyTask, participants);
+        if (!candidate) {
+            std::cout << "\n  " << RED << BOLD << "❌ STRATEGY ASSIGNMENT FAILED: " << RESET
+                      << "No participant qualifies under " << chosenStrategyType << " strategy!\n";
+            if (chosenStrategyType == "RuleBased") {
+                std::cout << "  " << RED << "Reason: All personnel with role '"
+                          << (reqRole ? reqRole->getName() : "None") << "' have a workload >= 3." << RESET << "\n";
+            } else {
+                std::cout << "  " << RED << "Reason: No personnel found possessing the role '"
+                          << (reqRole ? reqRole->getName() : "None") << "'." << RESET << "\n";
+            }
+            return false;
+        }
+    } else {
+        std::cout << "\n  " << BOLD << "Available Personnel Pool:" << RESET << "\n";
+        for (std::size_t i = 0; i < participants.size(); ++i) {
+            std::string rName = participants[i]->getRole() ? participants[i]->getRole()->getName() : "Staff";
+            int wload = participants[i]->getWorkload();
+            std::cout << "    " << std::setw(2) << (i + 1) << ") " << pad(participants[i]->getName(), 28)
+                      << " [Role: " << pad(rName, 18) << " | Workload: " << wload << "]\n";
+        }
+        int pChoice = promptChoice("\n  Select participant [1-" + std::to_string(participants.size()) + "]: ",
+                                   1, static_cast<int>(participants.size()));
+        candidate = participants[pChoice - 1];
+    }
+
+    // STRICT VALIDATION AGAINST CHOSEN STRATEGY
+    std::string valErr;
+    if (!validateParticipantForStrategy(chosenStrategyType, reqRole, candidate, participants, valErr)) {
+        std::cout << "\n  " << RED << BOLD << "╔══════════════════════════════════════════════════════════════════════════════════╗" << RESET << "\n";
+        std::cout << "  " << RED << BOLD << "║ ❌ ASSIGNMENT REJECTED: PARTICIPANT DOES NOT SATISFY STRATEGY REQUIREMENTS       ║" << RESET << "\n";
+        std::cout << "  " << RED << BOLD << "╚══════════════════════════════════════════════════════════════════════════════════╝" << RESET << "\n";
+        std::cout << "  " << RED << "  " << valErr << RESET << "\n\n";
+        std::cout << "  " << YELLOW << "The assignment was aborted to preserve workflow integrity." << RESET << "\n";
+        return false;
+    }
+
+    // Validation successful: execute command
+    try {
+        invoker.executeCommand(new AssignCommand(task, candidate));
+        std::cout << "\n  " << GREEN << BOLD << "✔ [ASSIGNED] " << RESET << "\"" << task->getName()
+                  << "\" successfully assigned to " << BOLD << candidate->getName() << RESET
+                  << " (" << CYAN << chosenStrategyType << " verified" << RESET << ")!\n";
+
+        // Trigger approval chain if task is Priority 1
+        if (tc && tc->decorators.hasPriority && tc->decorators.priorityLevel == 1 && headApproval) {
+            std::cout << "     " << MAGENTA << "✦ Triggering Approval Chain (Priority 1)..." << RESET << "\n";
+            ApprovalRequest req(task, 3, std::time(nullptr) + 1800);
+            headApproval->handle(&req);
+            std::cout << "     " << (req.getStatus() == ApprovalStatus::Approved ? GREEN + std::string("✔ Approved by Authority") : YELLOW + std::string("✦ Escalated in Chain")) << RESET << "\n";
+        }
+        return true;
+    } catch (const std::exception& ex) {
+        std::cout << "  " << RED << "Error during AssignCommand: " << ex.what() << RESET << "\n";
+        return false;
+    }
+}
+
 // Returns all tasks in the workflow that are currently in an actionable state:
-// Available (ready to be assigned), Assigned (ready to start), Started (ready to complete), or Rejected (ready to retry)
 std::vector<WorkItem*> getActionableTasks(Stage* root, const std::map<std::string, WorkItem*>& taskMap) {
     std::vector<WorkItem*> out;
     if (!root) return out;
@@ -1494,7 +1688,7 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
 
     CommandInvoker invoker;
 
-    // Helper to drive a single lifecycle transition for a task
+    // Helper to drive single task lifecycle transitions (Start, Complete, Re-activate)
     auto stepSingleTask = [&](WorkItem* task, Participant* chosenAssignee) {
         if (!task) return;
         const TaskConfig* tc = model.findTask(task->getItemID());
@@ -1507,31 +1701,33 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
 
         if (st == "Available") {
             Participant* who = chosenAssignee;
-            if (!who) {
-                AssignmentStrategy* strat = &byRoleStrategy;
-                if (tc && tc->strategyType == "Workload") strat = &byWorkloadStrategy;
-                else if (tc && tc->strategyType == "RuleBased") strat = &ruleStrategy;
+            std::string stratType = tc ? tc->strategyType : "RoleBased";
+            AssignmentStrategy* strat = &byRoleStrategy;
+            if (stratType == "Workload") strat = &byWorkloadStrategy;
+            else if (stratType == "RuleBased") strat = &ruleStrategy;
 
-                Role* req = (tc && roles.count(tc->roleName)) ? roles[tc->roleName] : nullptr;
+            Role* req = (tc && roles.count(tc->roleName)) ? roles[tc->roleName] : nullptr;
+
+            if (!who) {
                 Task dummyTask(task->getItemID(), task->getName(), req, strat);
                 who = strat->selectParticipant(&dummyTask, participants);
-                if (!who) {
-                    for (auto* p : participants) {
-                        if (!req || p->hasRole(req)) { who = p; break; }
-                    }
-                    if (!who && !participants.empty()) who = participants[0];
-                }
             }
+
+            std::string valErr;
+            if (!who || !validateParticipantForStrategy(stratType, req, who, participants, valErr)) {
+                std::cout << "  " << RED << "❌ Assignment Error: " << (who ? valErr : "No eligible participant found.") << RESET << "\n";
+                return;
+            }
+
             invoker.executeCommand(new AssignCommand(task, who));
             std::cout << "  " << GREEN << "✔ [ASSIGNED]" << RESET << " \"" << task->getName() << "\" -> "
-                      << (who ? who->getName() : "Unknown") << "\n";
+                      << who->getName() << " (" << stratType << ")\n";
 
-            // Trigger approval chain if Priority 1
             if (tc && tc->decorators.hasPriority && tc->decorators.priorityLevel == 1 && headApproval) {
                 std::cout << "     " << MAGENTA << "✦ Triggering Approval Chain (Priority 1)..." << RESET << "\n";
-                ApprovalRequest req(task, 3, std::time(nullptr) + 1800);
-                headApproval->handle(&req);
-                std::cout << "     " << (req.getStatus() == ApprovalStatus::Approved ? GREEN + std::string("✔ Approved by Authority") : YELLOW + std::string("✦ Escalated in Chain")) << RESET << "\n";
+                ApprovalRequest reqApp(task, 3, std::time(nullptr) + 1800);
+                headApproval->handle(&reqApp);
+                std::cout << "     " << (reqApp.getStatus() == ApprovalStatus::Approved ? GREEN + std::string("✔ Approved by Authority") : YELLOW + std::string("✦ Escalated in Chain")) << RESET << "\n";
             }
         } else if (st == "Assigned") {
             invoker.executeCommand(new StartCommand(task));
@@ -1555,7 +1751,6 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
         }
     };
 
-    // Helper to drive a task through all transitions to completion
     auto driveTaskToCompletion = [&](WorkItem* task, Participant* assignee) {
         if (!task) return;
         while (!task->isFinished() && task->getStateName() != "Rejected") {
@@ -1584,12 +1779,13 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
                 const TaskConfig* tc = model.findTask(item->getItemID());
                 if (tc && roles.count(tc->roleName)) {
                     Role* req = roles[tc->roleName];
-                    for (auto* p : participants) {
-                        if (p->hasRole(req)) { who = p; break; }
-                    }
-                }
-                if (!who && !participants.empty()) who = participants[0];
+                    AssignmentStrategy* strat = &byRoleStrategy;
+                    if (tc->strategyType == "Workload") strat = &byWorkloadStrategy;
+                    else if (tc->strategyType == "RuleBased") strat = &ruleStrategy;
 
+                    Task dummyTask(item->getItemID(), item->getName(), req, strat);
+                    who = strat->selectParticipant(&dummyTask, participants);
+                }
                 driveTaskToCompletion(item, who);
                 rootStage->activateChildren();
             }
@@ -1607,7 +1803,6 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
         while (true) {
             rootStage->activateChildren();
 
-            // Count completed
             int completedCount = 0;
             int totalTasks = static_cast<int>(model.tasks.size());
             for (const auto& pair : taskMap) {
@@ -1671,7 +1866,7 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
 
                 int endOpt = promptChoice("\n  Select action [0-3]: ", 0, 3);
                 if (endOpt == 0) break;
-                if (endOpt == 1) break; // proceeds to Telemetry display below
+                if (endOpt == 1) break;
                 if (endOpt == 2) {
                     if (invoker.canUndo() && invoker.undoLast()) {
                         std::cout << "  " << GREEN << "Undid last command." << RESET << "\n";
@@ -1690,7 +1885,6 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
                 }
             }
 
-            // Hint about tasks still waiting in the Created state
             int createdCount = 0;
             for (const auto& pair : taskMap) {
                 if (pair.second->getStateName() == "Created") createdCount++;
@@ -1722,7 +1916,7 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
             }
 
             std::cout << "\n  Interactive Controls:\n";
-            std::cout << "    1) Step & Advance next available task\n";
+            std::cout << "    1) Step & Advance next available task (choose strategy & assign if available)\n";
             std::cout << "    2) Pick specific task and execute action (Assign / Start / Complete / Reject / Make Available)\n";
             std::cout << "    3) Run Approval Chain check (Chain of Responsibility)\n";
             std::cout << "    4) Undo last command (Command & Memento) [" << (invoker.canUndo() ? (GREEN + std::string("Available") + RESET) : (DIM + std::string("Empty") + RESET)) << "]\n";
@@ -1738,8 +1932,14 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
                     pause();
                     continue;
                 }
-                std::cout << "\n";
-                stepSingleTask(actionable[0], nullptr);
+                WorkItem* nextTask = actionable[0];
+                if (nextTask->getStateName() == "Available") {
+                    performTaskAssignment(nextTask, model, roles, participants,
+                                          byRoleStrategy, byWorkloadStrategy, ruleStrategy,
+                                          invoker, headApproval);
+                } else {
+                    stepSingleTask(nextTask, nullptr);
+                }
                 rootStage->activateChildren();
                 pause("Press ENTER to continue...");
             } else if (c == 2) {
@@ -1755,7 +1955,7 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
                 WorkItem* target = allTasksList[tChoice - 1];
 
                 std::cout << "\n  Actions for \"" << target->getName() << "\" (Current: " << target->getStateName() << "):\n";
-                std::cout << "    1) Assign task to participant\n";
+                std::cout << "    1) Assign task to participant (select strategy & validate)\n";
                 std::cout << "    2) Start task\n";
                 std::cout << "    3) Complete task (enter validation payload)\n";
                 std::cout << "    4) Reject task (record rejection reason)\n";
@@ -1764,18 +1964,10 @@ void executeScenarioWorkflow(const ScenarioModel& model, int initialMode = 0) {
 
                 int aChoice = promptChoice("  Action choice [0-5]: ", 0, 5);
                 if (aChoice == 1) {
-                    std::cout << "\n  Select participant:\n";
-                    for (std::size_t i = 0; i < participants.size(); ++i) {
-                        std::cout << "    " << (i + 1) << ") " << participants[i]->getName()
-                                  << " [" << (participants[i]->getRole() ? participants[i]->getRole()->getName() : "Staff") << "]\n";
-                    }
-                    int pChoice = promptChoice("  Participant choice: ", 1, static_cast<int>(participants.size()));
-                    try {
-                        invoker.executeCommand(new AssignCommand(target, participants[pChoice - 1]));
-                        std::cout << "  " << GREEN << "Assigned to " << participants[pChoice - 1]->getName() << RESET << "\n";
-                    } catch (const std::exception& ex) {
-                        std::cout << "  " << RED << "Error: " << ex.what() << RESET << "\n";
-                    }
+                    performTaskAssignment(target, model, roles, participants,
+                                          byRoleStrategy, byWorkloadStrategy, ruleStrategy,
+                                          invoker, headApproval);
+                    rootStage->activateChildren();
                     pause();
                 } else if (aChoice == 2) {
                     try {
@@ -2021,7 +2213,6 @@ void handleCreateCustomScenario() {
 
     executeScenarioWorkflow(model, execMode);
 }
-
 
 void handleSavedScenariosMenu() {
     while (true) {
